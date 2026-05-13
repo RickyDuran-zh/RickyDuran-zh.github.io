@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-12T14:10:07.000Z">
-<meta property="article:modified_time" content="2026-05-13T02:22:02.665Z">
+<meta property="article:modified_time" content="2026-05-13T13:37:53.767Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -328,7 +328,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          4.2k 字
         
       </span>
     
@@ -339,7 +339,7 @@
         
         
         
-          34 分钟
+          36 分钟
         
       </span>
     
@@ -391,8 +391,7 @@
 <p>一个辅助宏，封装了module_init()和module_exit()，简化标准I2C驱动模板的初始化和推出代码。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : __i2c_driver</span><br><br>module_i2c_driver(my_i2c_driver);<br><span class="hljs-comment">// module_init(my_i2c_driver_init);</span><br><span class="hljs-comment">// module_exit(my_i2c_driver_exit);</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="i2c相关"><a href="#i2c相关" class="headerlink" title="i2c相关"></a>i2c相关</h3><h4 id="i2c-set-clientdata"><a href="#i2c-set-clientdata" class="headerlink" title="i2c_set_clientdata()"></a>i2c_set_clientdata()</h4><blockquote>
+<h4 id="module-platform-driver"><a href="#module-platform-driver" class="headerlink" title="module_platform_driver()"></a>module_platform_driver()</h4><h3 id="i2c子系统"><a href="#i2c子系统" class="headerlink" title="i2c子系统"></a>i2c子系统</h3><h4 id="i2c-set-clientdata"><a href="#i2c-set-clientdata" class="headerlink" title="i2c_set_clientdata()"></a>i2c_set_clientdata()</h4><blockquote>
 <p>将自定义的私有数据结构指针保存到 i2c_client 当中，在驱动的probe函数中常被用来保存设备上下文。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : client data</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">pdata</span> =</span> devm_kzalloc(&amp;client-&gt;dev, <span class="hljs-keyword">sizeof</span>(*pdata), GFP_KERNEL);<br>i2c_set_clientdata(client, pdata);<br></code></pre></td></tr></table></figure>
@@ -413,7 +412,7 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : i2c_adapter functionality(功能掩码) : I2C_FUNC_SMBUS_BYTE_DATA / I2C_FUNC_I2C</span><br><span class="hljs-meta"># return ： 适配器支持指定功能返回true 否则返回false</span><br><br><span class="hljs-keyword">if</span> (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_SMBUS_BYTE_DATA)) &#123;<br>    dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Required features not supported\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> -ENXIO;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="gpio相关"><a href="#gpio相关" class="headerlink" title="gpio相关"></a>gpio相关</h3><h4 id="devm-gpid-get"><a href="#devm-gpid-get" class="headerlink" title="devm_gpid_get()"></a>devm_gpid_get()</h4><blockquote>
+<h3 id="gpio子系统"><a href="#gpio子系统" class="headerlink" title="gpio子系统"></a>gpio子系统</h3><h4 id="devm-gpid-get"><a href="#devm-gpid-get" class="headerlink" title="devm_gpid_get()"></a>devm_gpid_get()</h4><blockquote>
 <p>从设备树或固件中获取指定的 GPIO 引脚，并返回一个 struct gpio_desc 描述符。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev con_id : 用于在设备树中匹配具体GPIO属性的连接标识符  flags : 初始化标志 GPIOD_OUT_HIG / GPIOD_OUT_LOW / GPIOD_IN</span><br><span class="hljs-meta"># output : 成功返回struct gpio_desc * 失败返回ERR_PTR错误码 </span><br>    <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">reset_desc</span>;</span><br>reset_desc = devm_gpiod_get(dev, <span class="hljs-string">&quot;reset&quot;</span>, GPIOD_OUT_HIGH);<br><span class="hljs-keyword">if</span> (IS_ERR(reset_desc)) &#123;<br>    dev_err(dev, <span class="hljs-string">&quot;Failed to get reset GPIO: %ld\n&quot;</span>, PTR_ERR(reset_desc));<br>    <span class="hljs-keyword">return</span> PTR_ERR(reset_desc);<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -447,7 +446,7 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : ptr ： 指向子成员的指针 type 父结构体的类型名称 member 子成员在父结构体中定义的名称</span><br><span class="hljs-meta"># output : type : 父结构体指针</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> container_of(ptr, type, member) (&#123; \</span><br><span class="hljs-meta">    const typeof( ((type *)0)-&gt;member ) *__mptr = (ptr); \</span><br><span class="hljs-meta">    (type *)( (char *)__mptr - offsetof(type, member) ); &#125;)</span><br><span class="hljs-comment">// 示例</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> &#123;</span><br>    <span class="hljs-type">int</span> id;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">work_struct</span> <span class="hljs-title">work</span>;</span><br>&#125;;<br><span class="hljs-type">void</span> <span class="hljs-title function_">work_handler</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> work_struct *w)</span> &#123;<br>    <span class="hljs-comment">// 通过 work 成员找到包含它的 my_data</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">data</span> =</span> container_of(w, <span class="hljs-keyword">struct</span> my_data, work);<br>    printk(<span class="hljs-string">&quot;ID: %d\n&quot;</span>, data-&gt;id);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="锁相关"><a href="#锁相关" class="headerlink" title="锁相关"></a>锁相关</h3>
+<h3 id="锁相关"><a href="#锁相关" class="headerlink" title="锁相关"></a>锁相关</h3><h3 id="input子系统"><a href="#input子系统" class="headerlink" title="input子系统"></a>input子系统</h3><h4 id="devm-input-allocate-device"><a href="#devm-input-allocate-device" class="headerlink" title="devm_input_allocate_device()"></a>devm_input_allocate_device()</h4><h4 id="input-set-capability"><a href="#input-set-capability" class="headerlink" title="input_set_capability()"></a>input_set_capability()</h4><h4 id="input-register-device-input-unregister-device"><a href="#input-register-device-input-unregister-device" class="headerlink" title="input_register_device() &amp;&amp; input_unregister_device()"></a>input_register_device() &amp;&amp; input_unregister_device()</h4><h4 id="input-event-input-report-key-input-sync"><a href="#input-event-input-report-key-input-sync" class="headerlink" title="input_event() &amp;&amp; input_report_key() &amp;&amp; input_sync()"></a>input_event() &amp;&amp; input_report_key() &amp;&amp; input_sync()</h4><h3 id="中断相关"><a href="#中断相关" class="headerlink" title="中断相关"></a>中断相关</h3><h4 id="gpiod-to-irq"><a href="#gpiod-to-irq" class="headerlink" title="gpiod_to_irq()"></a>gpiod_to_irq()</h4><h4 id="devm-request-threaded-irq"><a href="#devm-request-threaded-irq" class="headerlink" title="devm_request_threaded_irq()"></a>devm_request_threaded_irq()</h4>
                 
               </div>
             
