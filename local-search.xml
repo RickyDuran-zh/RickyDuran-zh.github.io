@@ -4,13 +4,27 @@
   
   
   <entry>
-    <title>并发与竞态</title>
-    <link href="/2026/05/14/%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E6%80%81/"/>
-    <url>/2026/05/14/%E5%B9%B6%E5%8F%91%E4%B8%8E%E7%AB%9E%E6%80%81/</url>
+    <title>Linux 驱动开发中的核心机制：并发竞态、同步互斥、中断上下文与阻塞 I/O</title>
+    <link href="/2026/05/14/Linux-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%AB%9E%E6%80%81%E3%80%81%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E9%98%BB%E5%A1%9E-I-O/"/>
+    <url>/2026/05/14/Linux-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%AB%9E%E6%80%81%E3%80%81%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E9%98%BB%E5%A1%9E-I-O/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="并发与竞态"><a href="#并发与竞态" class="headerlink" title="并发与竞态"></a>并发与竞态</h2><h2 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h2>]]></content>
     
     
+    <categories>
+      
+      <category>IMX6ULL</category>
+      
+      <category>OS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+    </tags>
     
   </entry>
   
@@ -106,6 +120,8 @@
     <categories>
       
       <category>xv6</category>
+      
+      <category>OS</category>
       
     </categories>
     
