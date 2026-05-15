@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="并发与竞态同步机制">
+    <meta name="description" content="1.并发与竞态 并发(concurreny)是指多个执行流在同一时间段内交替前进(单核 cpu)。多核 cpu 才有可能并行(parallelism)。竞态条件(race condition)是指程序的结果依赖于多个执行流的执行顺序，而这个顺序是不确定的。  2.同步机制 同步(synchronization)是指在多个执行流之间建立正确的访问顺序和互斥关系。三类目标：互斥(同一时间只能有一个执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 驱动开发中的核心机制：并发竞态、同步互斥、中断上下文与阻塞 I&#x2F;O">
 <meta property="og:url" content="http://example.com/2026/05/14/Linux-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%AB%9E%E6%80%81%E3%80%81%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E9%98%BB%E5%A1%9E-I-O/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="并发与竞态同步机制">
+<meta property="og:description" content="1.并发与竞态 并发(concurreny)是指多个执行流在同一时间段内交替前进(单核 cpu)。多核 cpu 才有可能并行(parallelism)。竞态条件(race condition)是指程序的结果依赖于多个执行流的执行顺序，而这个顺序是不确定的。  2.同步机制 同步(synchronization)是指在多个执行流之间建立正确的访问顺序和互斥关系。三类目标：互斥(同一时间只能有一个执行">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/os.png">
 <meta property="article:published_time" content="2026-05-14T08:38:07.000Z">
-<meta property="article:modified_time" content="2026-05-14T08:47:55.406Z">
+<meta property="article:modified_time" content="2026-05-15T01:42:42.640Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -328,7 +328,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9 字
+          1.1k 字
         
       </span>
     
@@ -339,7 +339,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -383,7 +383,33 @@
             
               <div class="markdown-body">
                 
-                <h2 id="并发与竞态"><a href="#并发与竞态" class="headerlink" title="并发与竞态"></a>并发与竞态</h2><h2 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h2>
+                <h2 id="1-并发与竞态"><a href="#1-并发与竞态" class="headerlink" title="1.并发与竞态"></a>1.并发与竞态</h2><blockquote>
+<p>并发(concurreny)是指多个执行流在同一时间段内交替前进(单核 cpu)。多核 cpu 才有可能并行(parallelism)。<br>竞态条件(race condition)是指程序的结果依赖于多个执行流的执行顺序，而这个顺序是不确定的。</p>
+</blockquote>
+<h2 id="2-同步机制"><a href="#2-同步机制" class="headerlink" title="2.同步机制"></a>2.同步机制</h2><blockquote>
+<p>同步(synchronization)是指在多个执行流之间建立正确的访问顺序和互斥关系。<br>三类目标：互斥(同一时间只能有一个执行流访问共享数据)、顺序(A发生后B才能继续)、条件等待(没有数据就睡眠，有数据再唤醒)</p>
+</blockquote>
+<p><img src="/../img/concurrency/1.png" srcset="/img/loading.gif" lazyload alt="同步机制"></p>
+<h3 id="spinlock-自旋锁"><a href="#spinlock-自旋锁" class="headerlink" title="spinlock(自旋锁)"></a>spinlock(自旋锁)</h3><p>忙等，不睡眠，拿不到锁 cpu 会一直循环等待。适合临界区(访问共享资源的那段代码)极短&#x2F;中断(原子)上下文。</p>
+<h3 id="mutex-互斥锁"><a href="#mutex-互斥锁" class="headerlink" title="mutex(互斥锁)"></a>mutex(互斥锁)</h3><p>拿不到锁就睡眠，临界区代码可以睡眠。适合进程上下文，不适合用于中断处理函数。</p>
+<h2 id="3-同步与异步"><a href="#3-同步与异步" class="headerlink" title="3.同步与异步"></a>3.同步与异步</h2><blockquote>
+<p>同步调用(synchronous call)指调用者发起操作后，要等这个操作完成，才能继续向下执行。<br>异步调用(asynchronous call)指调用者发起操作后，不必等待任务完成，可以继续执行。任务完成后通过回调、事件、信号、队列等方式通知调用者。<br>同步与异步关注的是”完成通知方式”, 调用者是否要等待任务完成？ 阻塞与非阻塞关注的则是等待时是否睡眠，进程睡眠还是立即返回错误码？</p>
+</blockquote>
+<h2 id="4-阻塞与非阻塞"><a href="#4-阻塞与非阻塞" class="headerlink" title="4.阻塞与非阻塞"></a>4.阻塞与非阻塞</h2><blockquote>
+<p>阻塞I&#x2F;O，read是典型的阻塞行为，在没有读到数据时，当前进程会睡眠，等待数据到来在中断或其他执行流中唤醒当前进程。此行为 cpu 占用较低，适合简单设备和同步流程。<br>非阻塞I&#x2F;O，通过 O_NONBLOCK 打开设备，没有数据立即返回。此行为 cpu 占用可能较高，需要轮询或者配合 epoll 使用。适合多设备事件循环。</p>
+</blockquote>
+<h2 id="5-进程上下文和中断上下文"><a href="#5-进程上下文和中断上下文" class="headerlink" title="5.进程上下文和中断上下文"></a>5.进程上下文和中断上下文</h2><blockquote>
+<p>进程上下文: 代码中出现系统调用时，陷入内核态，这时代码运行在进程上下文中。<br>中断上下文: 硬件事件发生，cpu 会暂停当前执行流，跳转到中断处理函数，这时代码运行在中断上下文。</p>
+</blockquote>
+<h2 id="6-中断上下半部"><a href="#6-中断上下半部" class="headerlink" title="6.中断上下半部"></a>6.中断上下半部</h2><blockquote>
+<p>上半部 top half：真正的硬件中断处理函数<br>下半部 bottom half：延后执行的处理逻辑</p>
+</blockquote>
+<p><img src="/../img/concurrency/2.png" srcset="/img/loading.gif" lazyload alt="常见底半部机制"></p>
+<h2 id="7-I-O"><a href="#7-I-O" class="headerlink" title="7.I&#x2F;O"></a>7.I&#x2F;O</h2><blockquote>
+<p>阻塞 I&#x2F;O、非阻塞 I&#x2F;O、 I&#x2F;O 多路复用(一个线程同时等待多个 fd, 哪个 fd 就绪了就处理哪个)。</p>
+</blockquote>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8.总结"></a>8.总结</h2><p>并发带来竞态，竞态需要同步；I&#x2F;O 速度差异带来等待，等待方式形成阻塞&#x2F;非阻塞；任务完成通知方式形成同步&#x2F;异步；硬件事件引入中断上下文，系统调用进入进程上下文；Linux 驱动开发的核心，就是在正确的上下文中，用正确的同步机制，实现正确的 I&#x2F;O 语义。</p>
+
                 
               </div>
             
