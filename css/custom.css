@@ -191,3 +191,267 @@ figure.highlight .code {
 .btn {
   border-radius: 6px;
 }
+
+/* ===================================
+   Banner 文字阴影
+   =================================== */
+
+.banner-text {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.banner-text h1,
+.banner-text h2 {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* ===================================
+   标签/分类徽章
+   =================================== */
+
+/* 文章 meta 区标签 */
+a.print-no-link {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  font-size: 0.82rem;
+  border-radius: 20px;
+  background-color: rgba(48, 169, 222, 0.08);
+  color: var(--link-hover-color);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+a.print-no-link:hover {
+  background-color: rgba(48, 169, 222, 0.18);
+  transform: translateY(-1px);
+}
+
+/* 深色模式标签 */
+[data-user-color-scheme="dark"] a.print-no-link {
+  background-color: rgba(48, 169, 222, 0.12);
+}
+
+[data-user-color-scheme="dark"] a.print-no-link:hover {
+  background-color: rgba(48, 169, 222, 0.22);
+}
+
+/* ===================================
+   引用块 blockquote
+   =================================== */
+
+.markdown-body blockquote {
+  border-left: 4px solid #30a9de;
+  background-color: rgba(48, 169, 222, 0.04);
+  padding: 0.8rem 1rem 0.8rem 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+  color: #5a6a7a;
+}
+
+[data-user-color-scheme="dark"] .markdown-body blockquote {
+  background-color: rgba(48, 169, 222, 0.06);
+  color: #b0b8c0;
+}
+
+/* ===================================
+   分页器
+   =================================== */
+
+.pagination {
+  gap: 0.3rem;
+}
+
+.pagination .page-number,
+.pagination .extend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.4rem;
+  height: 2.4rem;
+  padding: 0 0.6rem;
+  border-radius: 6px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.pagination .page-number:hover,
+.pagination .extend:hover {
+  background-color: rgba(48, 169, 222, 0.08);
+  border-color: rgba(48, 169, 222, 0.2);
+  color: var(--link-hover-color);
+}
+
+.pagination .current {
+  background-color: #30a9de;
+  color: #fff;
+  border-color: #30a9de;
+}
+
+.pagination .current:hover {
+  background-color: #2b9acb;
+  color: #fff;
+}
+
+/* ===================================
+   上一篇 / 下一篇 导航
+   =================================== */
+
+.post-prevnext {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-prev,
+.post-next {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--line-color, #eaecef);
+  transition: all 0.2s ease;
+}
+
+.post-prev:hover,
+.post-next:hover {
+  border-color: rgba(48, 169, 222, 0.25);
+  background-color: rgba(48, 169, 222, 0.03);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.post-prev a,
+.post-next a {
+  color: var(--text-color, #3c4858);
+  font-weight: 500;
+}
+
+.post-prev a:hover,
+.post-next a:hover {
+  color: var(--link-hover-color);
+}
+
+.post-prev .post-prev-title small,
+.post-next .post-next-title small {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+/* ===================================
+   正文图片悬浮放大
+   =================================== */
+
+.markdown-body img {
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.markdown-body img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+[data-user-color-scheme="dark"] .markdown-body img:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   表格斑马纹
+   =================================== */
+
+.markdown-body table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line-color, #eaecef);
+}
+
+.markdown-body thead th {
+  background-color: rgba(48, 169, 222, 0.08);
+  color: var(--post-heading-color, #1a202c);
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  border-bottom: 2px solid rgba(48, 169, 222, 0.15);
+}
+
+.markdown-body tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.markdown-body tbody tr:hover {
+  background-color: rgba(48, 169, 222, 0.04);
+}
+
+.markdown-body td {
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--line-color, #eaecef);
+}
+
+[data-user-color-scheme="dark"] .markdown-body thead th {
+  background-color: rgba(48, 169, 222, 0.1);
+}
+
+[data-user-color-scheme="dark"] .markdown-body tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+[data-user-color-scheme="dark"] .markdown-body tbody tr:hover {
+  background-color: rgba(48, 169, 222, 0.06);
+}
+
+/* ===================================
+   水平线渐变
+   =================================== */
+
+.markdown-body hr {
+  height: 2px;
+  border: none;
+  border-radius: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(48, 169, 222, 0.3) 15%,
+    rgba(48, 169, 222, 0.45) 50%,
+    rgba(48, 169, 222, 0.3) 85%,
+    transparent
+  );
+  margin: 2.5rem 0;
+}
+
+/* ===================================
+   页面载入淡入动画
+   =================================== */
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-content,
+.index-card,
+.category-lists,
+.tag-cloud,
+#archive,
+#category,
+#tag {
+  animation: contentFadeIn 0.5s ease both;
+}
+
+/* 卡片瀑布延迟 */
+.index-card:nth-child(1) { animation-delay: 0.05s; }
+.index-card:nth-child(2) { animation-delay: 0.10s; }
+.index-card:nth-child(3) { animation-delay: 0.15s; }
+.index-card:nth-child(4) { animation-delay: 0.20s; }
+.index-card:nth-child(5) { animation-delay: 0.25s; }
+.index-card:nth-child(6) { animation-delay: 0.30s; }
+.index-card:nth-child(7) { animation-delay: 0.35s; }
+.index-card:nth-child(8) { animation-delay: 0.40s; }
+.index-card:nth-child(9) { animation-delay: 0.45s; }
+.index-card:nth-child(10) { animation-delay: 0.50s; }
