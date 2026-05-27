@@ -19,25 +19,25 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 起因在于楼主这段时间在用 IMX6ULL 开发板做项目，受限于交叉编译工具链的版本，VMware 安装了 Ubuntu18.04.4 的版本。系统版本比较老，vscode 没有 claude 的插件支持，要在命令行安装 claude 的话，可能装个 node.js 或者 npm 都费劲；codex 的话也没有去进行尝试配置。总之一直没找到合适的方法，此前一直是 codex 给我压缩包，我再把">
+    <meta name="description" content="概述 Notion真的好垃圾啊，一点都不想用，超级笨重，页面加载超久，内存占用还多，真的好垃圾，但是我的一些常用指令都放在了 Notion 中，现在立刻做一个相关工作流和常用指令的移植。  开发环境 windows PC安装虚拟机 linux版本：ubuntu18.04.4 通过镜像加载 下载vscode nettools 交叉编译工具链 NFS服务器设置 vim git等 （ubuntu日历乱码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu18.04.4如何vibecoding?">
-<meta property="og:url" content="http://example.com/2026/05/23/ubuntu18-04-4%E5%A6%82%E4%BD%95vibecoding/index.html">
+<meta property="og:title" content="日常开发工作流和常用指令">
+<meta property="og:url" content="http://example.com/2026/05/27/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%92%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 起因在于楼主这段时间在用 IMX6ULL 开发板做项目，受限于交叉编译工具链的版本，VMware 安装了 Ubuntu18.04.4 的版本。系统版本比较老，vscode 没有 claude 的插件支持，要在命令行安装 claude 的话，可能装个 node.js 或者 npm 都费劲；codex 的话也没有去进行尝试配置。总之一直没找到合适的方法，此前一直是 codex 给我压缩包，我再把">
+<meta property="og:description" content="概述 Notion真的好垃圾啊，一点都不想用，超级笨重，页面加载超久，内存占用还多，真的好垃圾，但是我的一些常用指令都放在了 Notion 中，现在立刻做一个相关工作流和常用指令的移植。  开发环境 windows PC安装虚拟机 linux版本：ubuntu18.04.4 通过镜像加载 下载vscode nettools 交叉编译工具链 NFS服务器设置 vim git等 （ubuntu日历乱码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/embed.png">
-<meta property="article:published_time" content="2026-05-23T12:25:47.000Z">
-<meta property="article:modified_time" content="2026-05-27T09:57:59.312Z">
+<meta property="og:image" content="http://example.com/img/daily.png">
+<meta property="article:published_time" content="2026-05-27T09:53:07.000Z">
+<meta property="article:modified_time" content="2026-05-27T11:54:31.368Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="工作流分享">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/embed.png">
+<meta name="twitter:image" content="http://example.com/img/daily.png">
   
   
   
-  <title>ubuntu18.04.4如何vibecoding? - RickyDuran&#39;s Blog</title>
+  <title>日常开发工作流和常用指令 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -304,13 +304,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/embed.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/daily.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ubuntu18.04.4如何vibecoding?"></span>
+            <span id="subtitle" data-typed-text="日常开发工作流和常用指令"></span>
           
         </div>
 
@@ -321,8 +321,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-23 20:25" pubdate>
-          2026年5月23日 晚上
+        <time datetime="2026-05-27 17:53" pubdate>
+          2026年5月27日 下午
         </time>
       </span>
     
@@ -333,7 +333,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          1.3k 字
         
       </span>
     
@@ -344,7 +344,7 @@
         
         
         
-          29 分钟
+          11 分钟
         
       </span>
     
@@ -383,19 +383,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">ubuntu18.04.4如何vibecoding?</h1>
+            <h1 id="seo-header">日常开发工作流和常用指令</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>起因在于楼主这段时间在用 IMX6ULL 开发板做项目，受限于交叉编译工具链的版本，VMware 安装了 Ubuntu18.04.4 的版本。系统版本比较老，vscode 没有 claude 的插件支持，要在命令行安装 claude 的话，可能装个 node.js 或者 npm 都费劲；codex 的话也没有去进行尝试配置。总之一直没找到合适的方法，此前一直是 codex 给我压缩包，我再把压缩包 scp 到虚拟机或者手动 CV，效率之低下，可想而知。最近想到了一个曲线救国的方法可以比较好的实现所谓”vibecoding”的理念。</p>
+<p>Notion真的好垃圾啊，一点都不想用，超级笨重，页面加载超久，内存占用还多，真的好垃圾，但是我的一些常用指令都放在了 Notion 中，现在立刻做一个相关工作流和常用指令的移植。</p>
 </blockquote>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="整体工作流"><a href="#整体工作流" class="headerlink" title="整体工作流"></a>整体工作流</h3><p>大致工作流的话，楼主 vibecoding 用的是 Claudecode + Deepseek V4 pro + CC-switch(具体配置非常简单，网上一搜就有一堆)的方式。刚好今天 Deepseek V4 pro 的 TOKEN 费用永久2.5折，这边还是支持一下国产大模型。<br>宿主机这一侧主要就是去 vibecoding，实现一些驱动，UI 的编写，以及修改设备树。编译以及板卡部署还是在虚拟机里面去完成。<br>原理的话也是比较简单，宿主机和虚拟机中都有项目文件夹，区别在于宿主机这边不放完整的内核源码，只准备一个文件夹 dts 放 IMX6ULL 适配的设备树 imx6ull-mmc-npi.dts，然后通过一个 sync_to_vm.sh 的同步脚本把新增或者改动的代码全部覆盖到虚拟机中，然后在 CLAUDE.md 文件中给 CC 说清楚限制和规定就行了。<br>每次日常开发完调用一次 .&#x2F;scripts&#x2F;sync_to_vm.sh 即可实现代码的同步。</p>
-<h3 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h3><p>通过 SSH 通道 + tar 流式传输实现代码同步，通过 exclude 去过滤掉不需要的文件，DTS 单独同步。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/usr/bin/env bash</span><br><span class="hljs-built_in">set</span> -euo pipefail<br><br><span class="hljs-comment"># ====== VM Login Info ======</span><br>VM_USER=<span class="hljs-string">&quot;rickyduran&quot;</span><br>VM_HOST=<span class="hljs-string">&quot;192.168.3.210&quot;</span><br>VM=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;VM_USER&#125;</span>@<span class="hljs-variable">$&#123;VM_HOST&#125;</span>&quot;</span><br><br><span class="hljs-comment"># ====== Local Project Info ======</span><br>LOCAL_PROJECT=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>)</span>/..&quot;</span> &amp;&amp; pwd)</span>&quot;</span><br><br><span class="hljs-comment"># 本地主机中的 DTS 文件</span><br>LOCAL_DTS=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;LOCAL_PROJECT&#125;</span>/dts/imx6ull-mmc-npi.dts&quot;</span><br><br><span class="hljs-comment"># ====== Remote Project Info ======</span><br>REMOTE_PROJECT=<span class="hljs-string">&quot;/home/rickyduran/Desktop/EdgeGuard-6ULL/EdgeGard-6ULL&quot;</span><br><br><span class="hljs-comment"># 虚拟机内核源码中的 DTS 文件路径</span><br>REMOTE_KERNEL_DTS=<span class="hljs-string">&quot;/home/rickyduran/Desktop/EdgeGuard-6ULL/EdgeGard-6ULL/kernel/ebf_linux_kernel_6ull_depth1/arch/arm/boot/dts/imx6ull-mmc-npi.dts&quot;</span><br><br>REMOTE_KERNEL_DTS_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">$REMOTE_KERNEL_DTS</span>&quot;</span>)</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Local project ===&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_PROJECT</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Remote VM ===&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Remote project ===&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$REMOTE_PROJECT</span>&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Step 1: Create remote project directory ===&quot;</span><br>ssh <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>&quot;</span> <span class="hljs-string">&quot;mkdir -p &#x27;<span class="hljs-variable">$REMOTE_PROJECT</span>&#x27;&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Step 2: Sync project by tar + ssh ===&quot;</span><br><span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_PROJECT</span>&quot;</span><br><br>tar \<br>  --exclude=<span class="hljs-string">&quot;.git&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;build&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;.vscode&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;.claude&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;node_modules&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;*.o&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;*.ko&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;*.mod&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;*.mod.c&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;*.cmd&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;.tmp_versions&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;Module.symvers&quot;</span> \<br>  --exclude=<span class="hljs-string">&quot;modules.order&quot;</span> \<br>  -czf - . | ssh <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>&quot;</span> <span class="hljs-string">&quot;tar -xzf - -C &#x27;<span class="hljs-variable">$REMOTE_PROJECT</span>&#x27;&quot;</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Step 3: Sync DTS to kernel source ===&quot;</span><br><br><span class="hljs-keyword">if</span> [ -f <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_DTS</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Local DTS found:&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_DTS</span>&quot;</span><br><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Creating remote DTS directory if needed...&quot;</span><br>    ssh <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>&quot;</span> <span class="hljs-string">&quot;mkdir -p &#x27;<span class="hljs-variable">$REMOTE_KERNEL_DTS_DIR</span>&#x27;&quot;</span><br><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Backup old remote DTS if it exists...&quot;</span><br>    ssh <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>&quot;</span> <span class="hljs-string">&quot;if [ -f &#x27;<span class="hljs-variable">$REMOTE_KERNEL_DTS</span>&#x27; ]; then cp &#x27;<span class="hljs-variable">$REMOTE_KERNEL_DTS</span>&#x27; &#x27;<span class="hljs-variable">$&#123;REMOTE_KERNEL_DTS&#125;</span>.bak_&#x27;\$(date +%Y%m%d_%H%M%S); fi&quot;</span><br><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Copy local DTS to remote kernel source...&quot;</span><br>    scp <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_DTS</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$VM</span>:<span class="hljs-variable">$REMOTE_KERNEL_DTS</span>&quot;</span><br><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;DTS synced to:&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$REMOTE_KERNEL_DTS</span>&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;WARNING: Local DTS file not found:&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LOCAL_DTS</span>&quot;</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Skip DTS sync.&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== Sync finished ===&quot;</span><br></code></pre></td></tr></table></figure>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>可以实现”vibecoding for embedded”的闭环。其实编译也可以让 agent 去干，但这一部分由于要在板子上部署，工具链版本还是比较严苛的。让 agent 进入虚拟机进行交叉编译理论上可行，但是不是很放心，可以仅仅让 agent 去写 Makefile，至于编译还是得自己把关(高风险操作还是不要交给 agent 了)。<br><img src="/../img/vibecoding.png" srcset="/img/loading.gif" lazyload alt="vibecoding 效果"></p>
-
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ol>
+<li>windows PC安装虚拟机 linux版本：ubuntu18.04.4 通过镜像加载 下载vscode nettools 交叉编译工具链 NFS服务器设置 vim git等 （ubuntu日历乱码 无法正常显示 终端无法正常打开）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install make gcc-arm-linux-gnueabihf gcc bison flex libssl-dev dpkg-dev lzop<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://gitee.com/Embedfire/ebf_linux_kernel_6ull_depth1">https://gitee.com/Embedfire/ebf_linux_kernel_6ull_depth1</a>  <strong>4.19.35-imx6对应版本的linux内核源码</strong> \</li>
+<li>imx6ull开发板 SD卡烧录系统镜像 SD卡启动 fire-config烧录固件到emmc 再次通过emmc启动 fire-config连接wifi 置于同一个局域网内 下载并设置好nfs客户端 挂载好共享文件夹码(系统重置重新烧录板卡镜像)</li>
+</ol>
+<h2 id="挂载、编译、烧录快捷指令"><a href="#挂载、编译、烧录快捷指令" class="headerlink" title="挂载、编译、烧录快捷指令"></a>挂载、编译、烧录快捷指令</h2><h3 id="NFS服务挂载"><a href="#NFS服务挂载" class="headerlink" title="NFS服务挂载"></a>NFS服务挂载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">showmount -e <span class="hljs-comment"># 命令查看当前NFS服务器的加载情况</span><br><span class="hljs-built_in">sudo</span> mount -t nfs 192.168.3.222:/home/rickyduran/sharedir /mnt -o nolock <span class="hljs-comment"># NFS 服务器挂载</span><br><span class="hljs-built_in">sudo</span> umount /mnt <span class="hljs-comment"># 取消挂载</span><br></code></pre></td></tr></table></figure>
+<h3 id="设备树编译和替换"><a href="#设备树编译和替换" class="headerlink" title="设备树编译和替换"></a>设备树编译和替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1 只编译设备树</span><br>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- dtbs <br><span class="hljs-comment"># 2 如果make distclean清理了内核 执行以下的命令重新配置内核</span><br>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- npi_v7_defconfig<br>make ARCH=arm -j4 CROSS_COMPILE=arm-linux-gnueabihf- dtbs<br><span class="hljs-comment"># 3 将生成的设备树拷贝到共享文件夹</span><br><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/arm/boot/dts/imx6ull-mmc-npi.dtb /home/rickyduran/sharedir<br><span class="hljs-comment"># 4 挂载nfs共享文件夹(在开发板上)</span><br><span class="hljs-built_in">sudo</span> mount -t nfs 192.168.3.222:/home/rickyduran/sharedir /mnt -o nolock<br><span class="hljs-comment"># 5 复制设备树到共享文件夹(在开发板上)</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /mnt/imx6ull-mmc-npi.dtb  /usr/lib/linux-image-4.19.35-imx6/<br><span class="hljs-comment"># 6 重启开发板 观察/proc/device-tree是否出现新的节点</span><br><span class="hljs-built_in">sudo</span> reboot<br></code></pre></td></tr></table></figure>
+<h3 id="UI-编译"><a href="#UI-编译" class="headerlink" title="UI 编译"></a>UI 编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1 生成 Makefile 文件</span><br>/opt/qt-everywhere-src-5.11.3/bin/qmake EdgeGuardUI.pro <br><span class="hljs-comment"># 2 编译 UI</span><br>make -j4  <br><span class="hljs-comment"># 3 编译后检查　ELF 32-bit LSB executable, ARM, EABI5</span><br>file edgeguard-ui <br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -442,8 +448,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ubuntu18.04.4如何vibecoding?</div>
-      <div>http://example.com/2026/05/23/ubuntu18-04-4如何vibecoding/</div>
+      <div>日常开发工作流和常用指令</div>
+      <div>http://example.com/2026/05/27/日常开发工作流和常用指令/</div>
     </div>
     <div class="license-meta">
       
@@ -455,7 +461,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年5月23日</div>
+          <div>2026年5月27日</div>
         </div>
       
       
@@ -487,18 +493,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/27/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day6/" title="IMX6ULL-项目开发-Day6">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IMX6ULL-项目开发-Day6</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/23/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day5/" title="IMX6ULL-项目开发-Day5">
-                        <span class="hidden-mobile">IMX6ULL-项目开发-Day5</span>
+                      <a href="/2026/05/27/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day6/" title="IMX6ULL-项目开发-Day6">
+                        <span class="hidden-mobile">IMX6ULL-项目开发-Day6</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
