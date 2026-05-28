@@ -9,21 +9,70 @@
   var likedKey = 'blog_like_' + storageId;
   var countKey = 'blog_like_count_' + storageId;
   var legacyLikedKey = 'blog_like_' + legacySlug;
+  var likeTarget = 'like:' + path.toLowerCase().replace(/\/+$/, '') + '/';
 
-  function readCount() {
+  var liked = localStorage.getItem(likedKey) === '1' || localStorage.getItem(legacyLikedKey) === '1';
+
+  // --- Supabase helpers ---
+  function getSupabaseConfig() {
+    try {
+      var analytics = (typeof CONFIG !== 'undefined' && CONFIG.web_analytics) || {};
+      var sb = analytics.supabase || {};
+      if (sb.url && sb.anon_key) return sb;
+    } catch (e) {}
+    return null;
+  }
+
+  var sbCfg = getSupabaseConfig();
+
+  function sbFetch(method, path, data) {
+    var headers = {
+      'apikey': sbCfg.anon_key,
+      'Authorization': 'Bearer ' + sbCfg.anon_key,
+      'Content-Type': 'application/json'
+    };
+    return fetch(sbCfg.url + path, {
+      method: method,
+      headers: headers,
+      body: data ? JSON.stringify(data) : undefined
+    }).then(function(resp) {
+      if (!resp.ok) throw new Error('Supabase error: ' + resp.status);
+      return resp.json();
+    });
+  }
+
+  function fetchLikeCount() {
+    if (!sbCfg) return Promise.resolve(null);
+    return sbFetch('GET', '/rest/v1/likes?select=count&target=eq.' + encodeURIComponent(likeTarget))
+      .then(function(data) {
+        if (data && data.length > 0) return data[0].count || 0;
+        return 0;
+      })
+      .catch(function() {
+        return null; // fallback to localStorage
+      });
+  }
+
+  function incrementLike() {
+    if (!sbCfg) return Promise.resolve();
+    return sbFetch('POST', '/rest/v1/rpc/increment_like', { target_text: likeTarget })
+      .then(function(data) {
+        return data;
+      })
+      .catch(function() {
+        return null;
+      });
+  }
+  // --- End Supabase helpers ---
+
+  function readLocalCount() {
     var value = parseInt(localStorage.getItem(countKey), 10);
     return Number.isFinite(value) && value > 0 ? value : 0;
   }
 
-  var liked = localStorage.getItem(likedKey) === '1' || localStorage.getItem(legacyLikedKey) === '1';
-  var count = readCount();
+  var count = 0;
 
-  if (liked && count === 0) {
-    count = 1;
-    localStorage.setItem(likedKey, '1');
-    localStorage.setItem(countKey, String(count));
-  }
-
+  // --- Build DOM ---
   var wrap = document.createElement('div');
   wrap.className = 'blog-like-wrap';
   wrap.style.cssText = 'text-align:center;padding:2.5rem 0 1.5rem;';
@@ -31,7 +80,7 @@
   var btn = document.createElement('button');
   btn.type = 'button';
   btn.className = liked ? 'blog-like-btn liked' : 'blog-like-btn';
-  btn.setAttribute('aria-label', liked ? '\u5df2\u70b9\u8d5e' : '\u70b9\u8d5e');
+  btn.setAttribute('aria-label', '加载中...');
   btn.style.cssText = [
     'display:inline-flex;align-items:center;gap:0.55rem;',
     'min-width:8.5rem;justify-content:center;',
@@ -49,6 +98,7 @@
   var text = document.createElement('span');
   text.className = 'blog-like-text';
   text.style.cssText = 'font-weight:600;white-space:nowrap;';
+  text.textContent = '加载中...';
 
   var burst = document.createElement('span');
   burst.setAttribute('aria-hidden', 'true');
@@ -70,9 +120,9 @@
 
   function render() {
     var dark = isDarkMode();
-    text.textContent = (liked ? '\u5df2\u8d5e' : '\u70b9\u8d5e') + ' \u00b7 ' + count;
+    text.textContent = (liked ? '已赞' : '点赞') + ' · ' + count;
     heart.innerHTML = liked ? '&#9829;' : '&#9825;';
-    btn.setAttribute('aria-label', (liked ? '\u5df2\u70b9\u8d5e\uff0c\u5171 ' : '\u70b9\u8d5e\uff0c\u5f53\u524d ') + count + ' \u4e2a\u8d5e');
+    btn.setAttribute('aria-label', (liked ? '已点赞，共 ' : '点赞，当前 ') + count + ' 个赞');
 
     if (liked) {
       btn.style.borderColor = '#e74c3c';
@@ -105,7 +155,7 @@
     for (var i = 0; i < particleCount; i += 1) {
       var particle = document.createElement('i');
       var angle = (360 / particleCount) * i;
-      particle.textContent = '\u2665';
+      particle.textContent = '♥';
       particle.style.cssText = [
         'position:absolute;left:0;top:0;font-style:normal;font-size:0.72rem;',
         'color:#e74c3c;opacity:0;transform:translate(-50%,-50%) scale(0.4);',
@@ -142,15 +192,43 @@
 
     liked = true;
     count += 1;
+
+    // Persist liked state locally
     localStorage.setItem(likedKey, '1');
     localStorage.setItem(countKey, String(count));
+
+    // Push to Supabase asynchronously
+    incrementLike().catch(function() {
+      // Silently fail – count cached in localStorage
+    });
+
     btn.classList.add('liked');
     pulse();
     showBurst();
     render();
   });
 
-  render();
+  // --- Init: fetch count from Supabase, fall back to localStorage ---
+  fetchLikeCount().then(function(remoteCount) {
+    if (remoteCount !== null && remoteCount > 0) {
+      count = remoteCount;
+    } else {
+      count = readLocalCount();
+    }
+
+    // If user already liked but count is 0, bootstrap with 1
+    if (liked && count === 0) {
+      count = 1;
+      localStorage.setItem(countKey, String(count));
+    }
+
+    // Sync localStorage cache with remote
+    if (count > 0 && readLocalCount() < count) {
+      localStorage.setItem(countKey, String(count));
+    }
+
+    render();
+  });
 
   new MutationObserver(render).observe(document.documentElement, {
     attributes: true,

@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/os.png">
 <meta property="article:published_time" content="2026-05-14T08:38:07.000Z">
-<meta property="article:modified_time" content="2026-05-15T03:49:03.140Z">
+<meta property="article:modified_time" content="2026-05-28T03:30:24.383Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -78,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.8k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          23 分钟
+          24 分钟
         
       </span>
     
@@ -421,7 +421,7 @@
 <p><img src="/../img/concurrency/2.png" srcset="/img/loading.gif" lazyload alt="常见底半部机制"></p>
 <h2 id="7-I-O"><a href="#7-I-O" class="headerlink" title="7.I&#x2F;O"></a>7.I&#x2F;O</h2><blockquote>
 <p>阻塞 I&#x2F;O、非阻塞 I&#x2F;O、 I&#x2F;O 多路复用(一个线程同时等待多个 fd, 哪个 fd 就绪了就处理哪个)。</p>
-</blockquote>
+<h3 id="I-O-多路复用"><a href="#I-O-多路复用" class="headerlink" title="I&#x2F;O 多路复用"></a>I&#x2F;O 多路复用</h3><h4 id="select"><a href="#select" class="headerlink" title="select"></a>select</h4><h4 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h4><h4 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h4></blockquote>
 <h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8.总结"></a>8.总结</h2><p>并发带来竞态，竞态需要同步；I&#x2F;O 速度差异带来等待，等待方式形成阻塞&#x2F;非阻塞；任务完成通知方式形成同步&#x2F;异步；硬件事件引入中断上下文，系统调用进入进程上下文；Linux 驱动开发的核心，就是在正确的上下文中，用正确的同步机制，实现正确的 I&#x2F;O 语义。</p>
 
                 

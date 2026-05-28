@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述脚本自动配置 Systemd 服务。">
+    <meta name="description" content="概述网络配置服务。 MQTTSQLiteCREATE TABLE likes (  target TEXT PRIMARY KEY,  count  BIGINT NOT NULL DEFAULT 1);ALTER TABLE likes ENABLE ROW LEVEL SECURITY; CREATE POLICY “允许匿名读取” ON likes FOR SELECT USING (tru">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IMX6ULL-项目开发-Day6">
 <meta property="og:url" content="http://example.com/2026/05/27/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day6/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述脚本自动配置 Systemd 服务。">
+<meta property="og:description" content="概述网络配置服务。 MQTTSQLiteCREATE TABLE likes (  target TEXT PRIMARY KEY,  count  BIGINT NOT NULL DEFAULT 1);ALTER TABLE likes ENABLE ROW LEVEL SECURITY; CREATE POLICY “允许匿名读取” ON likes FOR SELECT USING (tru">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-27T09:52:25.000Z">
-<meta property="article:modified_time" content="2026-05-27T14:37:51.849Z">
+<meta property="article:modified_time" content="2026-05-28T06:34:23.116Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -333,7 +333,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 字
+          513 字
         
       </span>
     
@@ -344,7 +344,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -388,7 +388,10 @@
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>脚本自动配置 Systemd 服务。</p>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>网络配置服务。</p>
+<h3 id="MQTT"><a href="#MQTT" class="headerlink" title="MQTT"></a>MQTT</h3><h3 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h3><p>CREATE TABLE likes (<br>  target TEXT PRIMARY KEY,<br>  count  BIGINT NOT NULL DEFAULT 1<br>);<br>ALTER TABLE likes ENABLE ROW LEVEL SECURITY;</p>
+<p>CREATE POLICY “允许匿名读取” ON likes FOR SELECT USING (true);<br>CREATE POLICY “允许匿名插入” ON likes FOR INSERT WITH CHECK (true);<br>CREATE POLICY “允许匿名更新” ON likes FOR UPDATE USING (true);</p>
+<p>CREATE OR REPLACE FUNCTION increment_like(target_text TEXT)<br>RETURNS SETOF likes AS $$<br>BEGIN<br>  RETURN QUERY<br>  INSERT INTO likes (target, count)<br>  VALUES (target_text, 1)<br>  ON CONFLICT (target)<br>  DO UPDATE SET count &#x3D; likes.count + 1<br>  RETURNING *;<br>END;<br>$$ LANGUAGE plpgsql SECURITY DEFINER;</p>
 
                 
               </div>
