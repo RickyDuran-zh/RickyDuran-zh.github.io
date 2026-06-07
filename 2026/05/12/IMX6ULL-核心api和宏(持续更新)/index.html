@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[] &#x3D; &#123;    &#123; &quot;device_name&amp;quo">
+    <meta name="description" content="概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IMX6ULL-核心api和宏(持续更新)">
 <meta property="og:url" content="http://example.com/2026/05/12/IMX6ULL-%E6%A0%B8%E5%BF%83api%E5%92%8C%E5%AE%8F(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[] &#x3D; &#123;    &#123; &quot;device_name&amp;quo">
+<meta property="og:description" content="概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-12T14:10:07.000Z">
-<meta property="article:modified_time" content="2026-05-15T01:46:24.823Z">
+<meta property="article:modified_time" content="2026-06-05T08:20:30.466Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k 字
+          8.4k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          70 分钟
+          71 分钟
         
       </span>
     
@@ -387,7 +387,10 @@
             
               <div class="markdown-body">
                 
-                <h2 id="核心api和宏"><a href="#核心api和宏" class="headerlink" title="核心api和宏"></a>核心api和宏</h2><h3 id="模块注册注销出入口"><a href="#模块注册注销出入口" class="headerlink" title="模块注册注销出入口"></a>模块注册注销出入口</h3><h4 id="MODULE-DEVICE-TABLE"><a href="#MODULE-DEVICE-TABLE" class="headerlink" title="MODULE_DEVICE_TABLE"></a>MODULE_DEVICE_TABLE</h4><blockquote>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。</p>
+</blockquote>
+<h2 id="核心api和宏"><a href="#核心api和宏" class="headerlink" title="核心api和宏"></a>核心api和宏</h2><h3 id="模块注册注销出入口"><a href="#模块注册注销出入口" class="headerlink" title="模块注册注销出入口"></a>模块注册注销出入口</h3><h4 id="MODULE-DEVICE-TABLE"><a href="#MODULE-DEVICE-TABLE" class="headerlink" title="MODULE_DEVICE_TABLE"></a>MODULE_DEVICE_TABLE</h4><blockquote>
 <p>声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : type name</span><br><br><span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">i2c_device_id</span> <span class="hljs-title">mydev_id</span>[] =</span> &#123;<br>    &#123; <span class="hljs-string">&quot;device_name&quot;</span>, <span class="hljs-number">0</span> &#125;,<br>    &#123; &#125;<br>&#125;;<br>MODULE_DEVICE_TABLE(i2c, mydev_id);<br></code></pre></td></tr></table></figure>
@@ -441,7 +444,7 @@
 <p>标准的设备驱动日志输出接口。它们会打印带有设备前缀的信息，便于调试和定位问题。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : device* dev fmt ...</span><br><span class="hljs-meta"># output : 成功返回0 失败返回负的错误码</span><br><br>dev_info(&amp;client-&gt;dev, <span class="hljs-string">&quot;Device initialized successfully\n&quot;</span>);<br>dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Failed to read data: %d\n&quot;</span>, ret);<br></code></pre></td></tr></table></figure>
-<h4 id="scnprintf"><a href="#scnprintf" class="headerlink" title="scnprintf()"></a>scnprintf()</h4><blockquote>
+<h4 id="printf-fprint"><a href="#printf-fprint" class="headerlink" title="printf &amp;&amp; fprint"></a>printf &amp;&amp; fprint</h4><h4 id="scnprintf-snprintf"><a href="#scnprintf-snprintf" class="headerlink" title="scnprintf() &amp;&amp; snprintf()"></a>scnprintf() &amp;&amp; snprintf()</h4><blockquote>
 <p>将格式化字符串输出到指定缓冲区，并保证结果是 NULL 结尾的。用于安全地拼接字符串，避免了 sprintf 可能导致的缓冲区溢出风险。</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : buf size fmt ...</span><br><span class="hljs-meta"># output : 实际写入缓冲区的字符数 若返回值等于size, 说明输出被截断了</span><br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">64</span>];<br><span class="hljs-type">int</span> len = scnprintf(buf, <span class="hljs-keyword">sizeof</span>(buf), <span class="hljs-string">&quot;Value: %d\n&quot;</span>, val);<br></code></pre></td></tr></table></figure>

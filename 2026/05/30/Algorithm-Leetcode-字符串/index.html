@@ -19,24 +19,24 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言">
+    <meta name="description" content="概述 这一辑是字符串专题。  题号3 无重复字符的最长子串20 有效的括号(栈) 值得记录3 无重复字符的最长子串 12345678910111213141516171819class Solution &#123;public:    int lengthOfLongestSubstring(string s) &#123;        if(s.empty()) return 0;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="八股">
-<meta property="og:url" content="http://example.com/2026/06/03/%E5%85%AB%E8%82%A1/index.html">
+<meta property="og:title" content="Algorithm-Leetcode-字符串">
+<meta property="og:url" content="http://example.com/2026/05/30/Algorithm-Leetcode-%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言">
+<meta property="og:description" content="概述 这一辑是字符串专题。  题号3 无重复字符的最长子串20 有效的括号(栈) 值得记录3 无重复字符的最长子串 12345678910111213141516171819class Solution &#123;public:    int lengthOfLongestSubstring(string s) &#123;        if(s.empty()) return 0;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/bagu.png">
-<meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-06-04T08:15:43.240Z">
+<meta property="og:image" content="http://example.com/img/algorithm.png">
+<meta property="article:published_time" content="2026-05-30T02:33:02.000Z">
+<meta property="article:modified_time" content="2026-06-07T06:17:14.317Z">
 <meta property="article:author" content="RickyDuran">
-<meta property="article:tag" content="八股">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/bagu.png">
+<meta name="twitter:image" content="http://example.com/img/algorithm.png">
   
   
   
-  <title>八股 - RickyDuran&#39;s Blog</title>
+  <title>Algorithm-Leetcode-字符串 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -303,13 +303,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/bagu.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/algorithm.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="八股"></span>
+            <span id="subtitle" data-typed-text="Algorithm-Leetcode-字符串"></span>
           
         </div>
 
@@ -320,8 +320,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-06-03 20:30" pubdate>
-          2026年6月3日 晚上
+        <time datetime="2026-05-30 10:33" pubdate>
+          2026年5月30日 上午
         </time>
       </span>
     
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          64 字
+          512 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -382,13 +382,17 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">八股</h1>
+            <h1 id="seo-header">Algorithm-Leetcode-字符串</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。</p>
-<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>这一辑是字符串专题。</p>
+</blockquote>
+<h2 id="题号"><a href="#题号" class="headerlink" title="题号"></a>题号</h2><p>3 无重复字符的最长子串<br>20 有效的括号(栈)</p>
+<h2 id="值得记录"><a href="#值得记录" class="headerlink" title="值得记录"></a>值得记录</h2><p>3 无重复字符的最长子串</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(s.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> ans = INT_MIN;<br>        <span class="hljs-comment">// 窗口滑动维持一个没有重复字符的子串 统计以每一个位置为结尾的无重复字符子串的长度</span><br>        <span class="hljs-comment">// 哈希表记录上一次出现该字符的位置索引</span><br>        unordered_map&lt;<span class="hljs-type">char</span>,<span class="hljs-type">int</span>&gt; map;<br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> r = <span class="hljs-number">0</span>; r &lt; s.<span class="hljs-built_in">length</span>(); r++)&#123;<br>            <span class="hljs-comment">// 更新左边界 条件1 当前位置字符之前出现过 条件2 当前位置字符的上一个索引值在左边界右侧</span><br>            <span class="hljs-comment">// 左右边界都不回退的 时间复杂度O(n)</span><br>            <span class="hljs-keyword">if</span>(map.<span class="hljs-built_in">find</span>(s[r]) != map.<span class="hljs-built_in">end</span>() &amp;&amp; map[s[r]] &gt;= l) l = map[s[r]] + <span class="hljs-number">1</span>;<br>            map[s[r]] = r;<br>            ans = <span class="hljs-built_in">max</span>(ans, r - l + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -406,7 +410,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%89%AB%E7%9B%B2/" class="category-chain-item">扫盲</a>
+  <a href="/categories/%E5%88%B7%E9%A2%98/" class="category-chain-item">刷题</a>
   
   
 
@@ -421,7 +425,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%85%AB%E8%82%A1/" class="print-no-link">#八股</a>
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
       
     </div>
   
@@ -433,8 +437,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>八股</div>
-      <div>http://example.com/2026/06/03/八股/</div>
+      <div>Algorithm-Leetcode-字符串</div>
+      <div>http://example.com/2026/05/30/Algorithm-Leetcode-字符串/</div>
     </div>
     <div class="license-meta">
       
@@ -446,7 +450,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年6月3日</div>
+          <div>2026年5月30日</div>
         </div>
       
       
@@ -478,9 +482,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/06/07/Algorithm-Leetcode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92DP/" title="Algorithm-Leetcode-动态规划DP">
+                      <a href="/2026/06/01/Algorithm-Leetcode-%E4%BA%8C%E5%8F%89%E6%A0%91/" title="Algorithm-Leetcode-二叉树">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Algorithm-Leetcode-动态规划DP</span>
+                        <span class="hidden-mobile">Algorithm-Leetcode-二叉树</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -488,8 +492,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/06/01/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%BA%94%E6%9C%88%E6%80%BB%E7%BB%93-%E8%B5%B6ppt%E7%89%88/" title="久违的五月总结(赶ppt版)">
-                        <span class="hidden-mobile">久违的五月总结(赶ppt版)</span>
+                      <a href="/2026/05/29/Algorithm-Leetcode-%E9%93%BE%E8%A1%A8/" title="Algorithm-Leetcode-链表">
+                        <span class="hidden-mobile">Algorithm-Leetcode-链表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

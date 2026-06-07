@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-23T06:49:44.000Z">
-<meta property="article:modified_time" content="2026-05-29T01:50:51.154Z">
+<meta property="article:modified_time" content="2026-06-04T03:51:06.813Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -412,7 +412,7 @@
   当前浏览器不支持 video 标签。
 </video>
 
-<h3 id="3-Systemed-服务配置"><a href="#3-Systemed-服务配置" class="headerlink" title="3. Systemed 服务配置"></a>3. Systemed 服务配置</h3><p>Sensor-hubd 已经配置成了开机自启动服务，现在配置 UI 服务为开机自启动。</p>
+<h3 id="3-Systemd-服务配置"><a href="#3-Systemd-服务配置" class="headerlink" title="3. Systemd 服务配置"></a>3. Systemd 服务配置</h3><p>Sensor-hubd 已经配置成了开机自启动服务，现在配置 UI 服务为开机自启动。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Unit]<br>Description=EdgeGuard Qt UI<br>After=multi-user.target<br>Conflicts=ebf-qtdemo.service<br><br>[Service]<br>Type=simple<br>WorkingDirectory=/imx6ull/ui<br>ExecStart=/imx6ull/ui/run_linuxfb.sh<br>Restart=always<br>RestartSec=3<br>User=root<br><br>[Install]<br>WantedBy=multi-user.target<br><br><span class="hljs-comment"># 启动服务</span><br><span class="hljs-comment"># sudo systemctl daemon-reload</span><br><span class="hljs-comment"># sudo systemctl enable edgeguard.service</span><br><span class="hljs-comment"># sudo systemctl start edgeguard.service</span><br></code></pre></td></tr></table></figure>
 
                 
