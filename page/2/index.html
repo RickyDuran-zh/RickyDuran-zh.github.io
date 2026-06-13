@@ -492,7 +492,7 @@
       
       <a class="index-excerpt " href="/2026/05/23/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day5/" target="_self">
         <div>
-          概述 QT 环境搭建，UI 界面显示。显示走 linuxfb 直接刷 &#x2F;dev&#x2F;fb0，触控走原生 evdev + QSocketNotifier 自己解析 input_event，不依赖任何第三方插件。  一、环境搭建1. 交叉编译工具链使用野火提供的 build-gcc.sh 脚本安装 arm-linux-gnueabihf-gcc 8.3.0 版本编译器，路径为 &#x2
+          概述 EdgeGuard-6ULL QT 环境搭建，UI 界面显示。显示走 linuxfb 直接刷 &#x2F;dev&#x2F;fb0，触控走原生 evdev + QSocketNotifier 自己解析 input_event，不依赖任何第三方插件。  一、环境搭建1. 交叉编译工具链使用野火提供的 build-gcc.sh 脚本安装 arm-linux-gnueabihf-gcc 8.3.0
         </div>
       </a>
 
@@ -561,7 +561,7 @@
       
       <a class="index-excerpt " href="/2026/05/20/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day4/" target="_self">
         <div>
-          概述 RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(本质就是一块物理内存)。 (a
+          概述 EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(
         </div>
       </a>
 
@@ -630,7 +630,7 @@
       
       <a class="index-excerpt " href="/2026/05/18/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day3/" target="_self">
         <div>
-          概述 Sensor_hubd 进行周期采集 + 状态判断。LED 显示系统状态；Buzzer 执行警告；Key 清除告警或切换状态。Systemd 管理开机自启动将 Sensor_hubd 设置为守护进程。  一、Sensor_hubd 实现周期性读取传感器数据，根据阈值判断状态。正常状态：LED 绿灯，蜂鸣器关闭光照(als)异常&#x2F;接近异常(ps)：LED 黄灯 LED 蓝灯剧烈晃动异
+          概述 EdgeGuard-6ULL Sensor_hubd 进行周期采集 + 状态判断。LED 显示系统状态；Buzzer 执行警告；Key 清除告警或切换状态。Systemd 管理开机自启动将 Sensor_hubd 设置为守护进程。  一、Sensor_hubd 实现周期性读取传感器数据，根据阈值判断状态。正常状态：LED 绿灯，蜂鸣器关闭光照(als)异常&#x2F;接近异常(ps)：LED
         </div>
       </a>
 

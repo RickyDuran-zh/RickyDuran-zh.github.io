@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(本质就是一块物理内存)。 (a">
+    <meta name="description" content="概述 EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IMX6ULL-项目开发-Day4">
 <meta property="og:url" content="http://example.com/2026/05/20/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day4/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(本质就是一块物理内存)。 (a">
+<meta property="og:description" content="概述 EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-20T14:38:16.000Z">
-<meta property="article:modified_time" content="2026-06-08T14:49:40.486Z">
+<meta property="article:modified_time" content="2026-06-13T13:59:53.066Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -389,7 +389,7 @@
               <div class="markdown-body">
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。</p>
+<p>EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。</p>
 </blockquote>
 <h2 id="一、RGB-5寸电容触摸屏"><a href="#一、RGB-5寸电容触摸屏" class="headerlink" title="一、RGB 5寸电容触摸屏"></a>一、RGB 5寸电容触摸屏</h2><h3 id="1-硬件相关"><a href="#1-硬件相关" class="headerlink" title="1.硬件相关"></a>1.硬件相关</h3><p><img src="/../img/Day4/hardware.png" srcset="/img/loading.gif" lazyload alt="引脚图"></p>
 <h3 id="2-显示链路"><a href="#2-显示链路" class="headerlink" title="2.显示链路"></a>2.显示链路</h3><p>24位数据流，<strong>LCD data 引脚和 LCD 相关控制引脚，背光引脚</strong>。PWM 子系统 + FrameBuffer(本质就是一块物理内存)。</p>
