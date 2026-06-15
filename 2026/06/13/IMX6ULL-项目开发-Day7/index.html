@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志   P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)USB 摄像头连接，硬件确认 1234lsusb                 # Bus 001 Device 005: ID 046d:0836 Logitech, Inc. B525 HD Webcam">
+    <meta name="description" content="概述 EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志   P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion) 目标：拍照并检测物体运动  USB 摄像头连接，硬件确认1234lsusb                 # Bus 001 Device 005: ID 046d:0836 Logitech, Inc.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IMX6ULL-项目开发-Day7">
 <meta property="og:url" content="http://example.com/2026/06/13/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day7/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志   P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)USB 摄像头连接，硬件确认 1234lsusb                 # Bus 001 Device 005: ID 046d:0836 Logitech, Inc. B525 HD Webcam">
+<meta property="og:description" content="概述 EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志   P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion) 目标：拍照并检测物体运动  USB 摄像头连接，硬件确认1234lsusb                 # Bus 001 Device 005: ID 046d:0836 Logitech, Inc.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-06-13T13:24:39.000Z">
-<meta property="article:modified_time" content="2026-06-15T07:33:02.663Z">
+<meta property="article:modified_time" content="2026-06-15T14:02:21.009Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -333,7 +333,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          469 字
+          1.7k 字
         
       </span>
     
@@ -344,7 +344,7 @@
         
         
         
-          4 分钟
+          15 分钟
         
       </span>
     
@@ -392,10 +392,18 @@
 <p>EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志</p>
 </blockquote>
 <p><img src="/../img/Day7/architecture.png" srcset="/img/loading.gif" lazyload alt="视觉与状态逻辑架构图"></p>
-<h3 id="P1-USB摄像头-运动检测-拍照-检测画面变化-Motion"><a href="#P1-USB摄像头-运动检测-拍照-检测画面变化-Motion" class="headerlink" title="P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)"></a>P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)</h3><p>USB 摄像头连接，硬件确认</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsusb                 <span class="hljs-comment"># Bus 001 Device 005: ID 046d:0836 Logitech, Inc. B525 HD Webcam</span><br>dmesg | grep uvc      <span class="hljs-comment"># Found UVC 1.00 device B525 HD Webcam (046d:0836)</span><br><span class="hljs-built_in">ls</span> /dev/video*        <span class="hljs-comment"># /dev/video0 + /dev/video1</span><br>zcat /proc/config.gz  <span class="hljs-comment"># CONFIG_USB_VIDEO_CLASS=m (已加载)</span><br></code></pre></td></tr></table></figure>
-<p>V4L2 MJPEG 捕获实现：mmap 双缓冲、VIDIOC_DQBUF&#x2F;QBUF 轮转 <br>运动检测原理：JPEG 文件大小启发式:<br>第 N 帧:   54,300 字节<br>第 N+1 帧: 62,100 字节  →  变化 14.3%  &gt;  15% 阈值  →  MOTION!<br>优点: 零解码, 零模型, CPU ~10ms<br>局限: 分不清是人还是猫还是风吹窗帘</p>
-<h3 id="P2-ncnn-人脸检测"><a href="#P2-ncnn-人脸检测" class="headerlink" title="P2 ncnn 人脸检测"></a>P2 ncnn 人脸检测</h3><h3 id="P3-人脸识别登陆系统"><a href="#P3-人脸识别登陆系统" class="headerlink" title="P3 人脸识别登陆系统"></a>P3 人脸识别登陆系统</h3><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day7/camera.png" srcset="/img/loading.gif" lazyload alt="P1 Web 界面实时快照显示"></p>
+<h3 id="P1-USB摄像头-运动检测-拍照-检测画面变化-Motion"><a href="#P1-USB摄像头-运动检测-拍照-检测画面变化-Motion" class="headerlink" title="P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)"></a>P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)</h3><blockquote>
+<p>目标：拍照并检测物体运动</p>
+</blockquote>
+<h4 id="USB-摄像头连接，硬件确认"><a href="#USB-摄像头连接，硬件确认" class="headerlink" title="USB 摄像头连接，硬件确认"></a>USB 摄像头连接，硬件确认</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsusb                 <span class="hljs-comment"># Bus 001 Device 005: ID 046d:0836 Logitech, Inc. B525 HD Webcam</span><br>dmesg | grep uvc      <span class="hljs-comment"># Found UVC 1.00 device B525 HD Webcam (046d:0836)</span><br><span class="hljs-built_in">ls</span> /dev/video*        <span class="hljs-comment"># /dev/video0 + /dev/video1</span><br>zcat /proc/config.gz  <span class="hljs-comment"># CONFIG_USB_VIDEO_CLASS=m (已加载)</span><br></code></pre></td></tr></table></figure>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>V4L2 MJPEG 捕获实现：mmap 双缓冲、VIDIOC_DQBUF&#x2F;QBUF 轮转 <br>运动检测原理：JPEG 文件大小启发式:<br>第 N 帧:   54,300 字节<br>第 N+1 帧: 62,100 字节  →  变化 14.3%  &gt;  15% 阈值  →  MOTION!<br>优点: 零解码, 零模型, CPU ~10ms<br>局限: 分不清是人还是猫还是风吹窗帘</p>
+<h3 id="P2-ncnn-人脸检测"><a href="#P2-ncnn-人脸检测" class="headerlink" title="P2 ncnn 人脸检测"></a>P2 ncnn 人脸检测</h3><blockquote>
+<p>目标：P1 运动触发后 ——&gt; P2 ncnn 神经网络判断画面中是否存在人脸</p>
+</blockquote>
+<p><img src="/../img/Day7/p2.png" srcset="/img/loading.gif" lazyload alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
+<h4 id="安装部署流程"><a href="#安装部署流程" class="headerlink" title="安装部署流程"></a>安装部署流程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 安装 g++ 交叉编译器（和已有的 gcc 7.5 配套）编译 CPP 文件</span><br><span class="hljs-built_in">sudo</span> apt install -y g++-arm-linux-gnueabihf<br><span class="hljs-comment"># 2 clone ncnn 腾讯 神经网络推理框架 优化神经网络模型在嵌入式等 ARM 设备上占用更少内存的同时更快运行</span><br><span class="hljs-built_in">cd</span> ~<br>git <span class="hljs-built_in">clone</span> https://gitee.com/nihui/ncnn.git<br><span class="hljs-built_in">cd</span> ncnn<br><span class="hljs-built_in">mkdir</span> build-arm &amp;&amp; <span class="hljs-built_in">cd</span> build-arm<br>cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake \<br>      -DCMAKE_BUILD_TYPE=Release \<br>      -DNCNN_VULKAN=OFF \<br>      -DNCNN_BUILD_TOOLS=OFF \<br>      -DNCNN_BUILD_EXAMPLES=OFF \<br>      -DNCNN_BUILD_BENCHMARK=OFF \<br>        ..<br>make -j4<br><span class="hljs-built_in">ls</span> -la src/libncnn.a <span class="hljs-comment"># 静态链接库</span><br><span class="hljs-comment"># 3 获取依赖的头文件 stb_image.h（单头文件 JPEG 解码器）</span><br><span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">mkdir</span> stb<br><span class="hljs-built_in">cd</span> stb<br>wget https://raw.githubusercontent.com/nothings/stb/master/stb_image.h<br><span class="hljs-comment"># 4 编译</span><br><span class="hljs-built_in">cd</span> app &amp;&amp; make edgeguard_visiond_face NCNN_DIR=~/ncnn STB_DIR=~/stb<br><span class="hljs-comment"># 5 clone 人脸检测模型</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/edgeguard/models/ <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ./RFB-320.param RFB-320.bin /etc/edgeguard/models/<br><span class="hljs-comment"># 6 重启服务</span><br>systemctl daemon-reload<br>systemctl restart edgeguard-visiond<br></code></pre></td></tr></table></figure>
+<h4 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="实现原理"></a>实现原理</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Text"># face_detect.cpp 新增<br>① face_detect_init()<br>     → 打开 RFB-320.param（网络结构）<br>     → 打开 RFB-320.bin（训练好的权重）<br>     → ncnn::Net::load_param() + load_model()<br>     → 模型常驻内存<br><br>② face_detect_run(jpeg, len, &amp;count)<br>     → stb_image JPEG解码 → RGB像素数组<br>     → ncnn::Mat::from_pixels() 包装<br>     → resize_bilinear() 缩放到 320×240<br>     → 归一化 [0,255] → [-1,1]<br>     → ncnn 神经网络前向推理（~400ms）<br>     → 得到 scores（置信度）+ boxes（边框坐标）<br>     → NMS 去重（IoU&gt;0.4 的框合并）<br>     → 统计 conf≥0.7 的框数 → *count<br></code></pre></td></tr></table></figure>
+<h3 id="P3-人脸识别登陆系统"><a href="#P3-人脸识别登陆系统" class="headerlink" title="P3 人脸识别登陆系统"></a>P3 人脸识别登陆系统</h3><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day7/p1_camera.png" srcset="/img/loading.gif" lazyload alt="P1 Web 界面实时快照显示"></p>
 
                 
               </div>
