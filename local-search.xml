@@ -135,7 +135,7 @@
     <link href="/2026/06/03/%E5%85%AB%E8%82%A1/"/>
     <url>/2026/06/03/%E5%85%AB%E8%82%A1/</url>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。</p><h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><h3 id="Static-关键字"><a href="#Static-关键字" class="headerlink" title="Static 关键字"></a>Static 关键字</h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。</p><h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><h3 id="Static-关键字"><a href="#Static-关键字" class="headerlink" title="Static 关键字"></a>Static 关键字</h3><h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts→dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开dtb uboot将dtb文件所在的内存地址传递给Linux内核 内核解析dtb文件将其中的每一个设备节点都转换成一个对应的device_node结构体</em></p><p><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体</em> </p><p><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible       匹配(match函数)成功后执行probe函数 相关的硬件初始化代码</em></p>]]></content>
     
     
     <categories>
