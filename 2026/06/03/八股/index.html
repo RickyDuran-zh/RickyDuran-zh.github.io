@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/bagu.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-06-17T09:04:12.302Z">
+<meta property="article:modified_time" content="2026-06-22T02:27:57.220Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.3k 字
         
       </span>
     
@@ -391,7 +391,7 @@
 <h2 id="语言-C-C"><a href="#语言-C-C" class="headerlink" title="语言(C&#x2F;C++)"></a>语言(C&#x2F;C++)</h2><h3 id="Static-关键字"><a href="#Static-关键字" class="headerlink" title="Static 关键字"></a>Static 关键字</h3><h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="inode和cdev之间的关系？"><a href="#inode和cdev之间的关系？" class="headerlink" title="inode和cdev之间的关系？"></a>inode和cdev之间的关系？</h3><p><em>inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。</em></p>
 <p><em>在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。</em></p>
 <p><em>cdev 是驱动层面的概念 代表内核中一个具体的字符设备对象包含了设备号、操作函数集。</em></p>
-<h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts→dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开dtb uboot将dtb文件所在的内存地址传递给Linux内核 内核解析dtb文件将其中的每一个设备节点都转换成一个对应的device_node结构体</em></p>
+<h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体</em></p>
 <p><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体</em> </p>
 <p><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible       匹配(match函数)成功后执行probe函数 相关的硬件初始化代码</em></p>
 <h3 id="怎么理解-Pinctrl-子系统和-GPIO-子系统？"><a href="#怎么理解-Pinctrl-子系统和-GPIO-子系统？" class="headerlink" title="怎么理解 Pinctrl 子系统和 GPIO 子系统？"></a>怎么理解 Pinctrl 子系统和 GPIO 子系统？</h3><p><em>管理引脚并自动完成初始化</em></p>
@@ -403,7 +403,7 @@
 <h3 id="fd-文件描述符-？"><a href="#fd-文件描述符-？" class="headerlink" title="fd(文件描述符)？"></a>fd(文件描述符)？</h3><p><em>Linux 的哲学在于一切皆文件。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364617329">https://zhuanlan.zhihu.com/p/364617329</a></em></p>
 <p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/bagu/fd.png" srcset="/img/loading.gif" lazyload alt="什么是 fd？"></p>
 <h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/bagu/process.png" srcset="/img/loading.gif" lazyload alt="进程在内存中的结构"></p>
-<h3 id="生产者消费者模型"><a href="#生产者消费者模型" class="headerlink" title="生产者消费者模型"></a>生产者消费者模型</h3><h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><strong>Makefile: <em><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/makefile/complete/index.html">https://liaoxuefeng.com/books/makefile/complete/index.html</a></em></strong></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><strong>Makefile: <em><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/makefile/complete/index.html">https://liaoxuefeng.com/books/makefile/complete/index.html</a></em></strong></p>
 
                 
               </div>
