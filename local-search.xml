@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>嵌入式音视频相关基础知识</title>
+    <link href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <url>/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。<br>飞书链接-音视频项目：<a href="https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink">https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink</a>  订单号： P783047098217319231<br>飞书链接-嵌入式八股：<a href="https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc">https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc</a>  订单号：P797066400674319891</p></blockquote><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>IMX6ULL</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>IMX6ULL-项目开发-Day8</title>
     <link href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/"/>
     <url>/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/</url>

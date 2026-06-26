@@ -19,25 +19,24 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 EdgeGuard-6ULL: 支持网络与远程访问、数据持久化、消息上报。  P1 Http edgeguard_httpd.c 实现了 PC 浏览器(网线直连)直接访问板子 IP 读取实时状态。本地端口访问，http:&#x2F;&#x2F;192.168.10.2:8080。1 为网卡 eth2 手动配置静态 ip 地址  12345# &#x2F;etc&#x2F;network&#x2F;interfaces 追加以下信息auto">
+    <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IMX6ULL-项目开发-Day6">
-<meta property="og:url" content="http://example.com/2026/05/27/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day6/index.html">
+<meta property="og:title" content="嵌入式音视频相关基础知识">
+<meta property="og:url" content="http://example.com/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 EdgeGuard-6ULL: 支持网络与远程访问、数据持久化、消息上报。  P1 Http edgeguard_httpd.c 实现了 PC 浏览器(网线直连)直接访问板子 IP 读取实时状态。本地端口访问，http:&#x2F;&#x2F;192.168.10.2:8080。1 为网卡 eth2 手动配置静态 ip 地址  12345# &#x2F;etc&#x2F;network&#x2F;interfaces 追加以下信息auto">
+<meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/imx6ull.png">
-<meta property="article:published_time" content="2026-05-27T09:52:25.000Z">
-<meta property="article:modified_time" content="2026-06-26T08:26:15.135Z">
+<meta property="og:image" content="http://example.com/img/audio.png">
+<meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
+<meta property="article:modified_time" content="2026-06-26T09:04:41.680Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
-<meta property="article:tag" content="项目开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/imx6ull.png">
+<meta name="twitter:image" content="http://example.com/img/audio.png">
   
   
   
-  <title>IMX6ULL-项目开发-Day6 - RickyDuran&#39;s Blog</title>
+  <title>嵌入式音视频相关基础知识 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -304,13 +303,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/imx6ull.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/audio.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="IMX6ULL-项目开发-Day6"></span>
+            <span id="subtitle" data-typed-text="嵌入式音视频相关基础知识"></span>
           
         </div>
 
@@ -321,8 +320,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-27 17:52" pubdate>
-          2026年5月27日 下午
+        <time datetime="2026-06-26 16:24" pubdate>
+          2026年6月26日 下午
         </time>
       </span>
     
@@ -333,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          260 字
         
       </span>
     
@@ -344,7 +343,7 @@
         
         
         
-          30 分钟
+          3 分钟
         
       </span>
     
@@ -383,43 +382,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">IMX6ULL-项目开发-Day6</h1>
+            <h1 id="seo-header">嵌入式音视频相关基础知识</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>EdgeGuard-6ULL: 支持网络与远程访问、数据持久化、消息上报。<br><img src="/../img/Day6/architecture.png" srcset="/img/loading.gif" lazyload alt="整体架构图"></p>
+<p>第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。<br>飞书链接-音视频项目：<a target="_blank" rel="noopener" href="https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink">https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink</a>  订单号： P783047098217319231<br>飞书链接-嵌入式八股：<a target="_blank" rel="noopener" href="https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc">https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc</a>  订单号：P797066400674319891</p>
 </blockquote>
-<h3 id="P1-Http"><a href="#P1-Http" class="headerlink" title="P1 Http"></a>P1 Http</h3><blockquote>
-<p>edgeguard_httpd.c 实现了 PC 浏览器(网线直连)直接访问板子 IP 读取实时状态。本地端口访问，<a href="http://192.168.10.2:8080。">http://192.168.10.2:8080。</a><br>1 为网卡 eth2 手动配置静态 ip 地址</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># /etc/network/interfaces 追加以下信息</span><br>auto eth2<br>iface eth2 inet static<br>    address 192.168.10.2<br>    netmask 255.255.255.0<br></code></pre></td></tr></table></figure>
-<p>2 <strong>sudo systemctl restart networking</strong> 读取配置文件 应用静态 ip<br>3 <strong>ip addr show eth2</strong> 查看 ip 地址</p>
-<h3 id="P2-SQLite-嵌入式数据库"><a href="#P2-SQLite-嵌入式数据库" class="headerlink" title="P2 SQLite(嵌入式数据库)"></a>P2 SQLite(嵌入式数据库)</h3><blockquote>
-<p><strong>轻量级的、零配置的、单文件的嵌入式数据库引擎</strong>。不是一个独立的服务器进程，可以直接嵌入到应用程序中的代码库(sqlite3.c)，程序可以直接调用 SQLite 读写数据，不需要像 MySQL 那样单独部署数据库服务。整个数据库就是一个普通的磁盘文件，备份、复制、移动都很简单。\</p>
-</blockquote>
-<ol>
-<li>初始化数据库 : 创建 alarm_events 表和相关索引</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">db_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-type">int</span> rc = sqlite3_open(ALARM_DB_PATH, &amp;g_db);<br>    <span class="hljs-keyword">if</span> (rc != SQLITE_OK) &#123;<br>        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;[ERR] sqlite3_open: %s\n&quot;</span>, sqlite3_errmsg(g_db));<br>        g_db = <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *sql =<br>        <span class="hljs-string">&quot;CREATE TABLE IF NOT EXISTS alarm_events (&quot;</span><br>        <span class="hljs-string">&quot;  id INTEGER PRIMARY KEY AUTOINCREMENT,&quot;</span><br>        <span class="hljs-string">&quot;  timestamp TEXT NOT NULL,&quot;</span><br>        <span class="hljs-string">&quot;  state TEXT NOT NULL,&quot;</span><br>        <span class="hljs-string">&quot;  reason TEXT,&quot;</span><br>        <span class="hljs-string">&quot;  motion_delta INTEGER,&quot;</span><br>        <span class="hljs-string">&quot;  ps INTEGER, als INTEGER,&quot;</span><br>        <span class="hljs-string">&quot;  mpu_temp REAL,&quot;</span><br>        <span class="hljs-string">&quot;  acknowledged INTEGER DEFAULT 0&quot;</span><br>        <span class="hljs-string">&quot;);&quot;</span><br>        <span class="hljs-string">&quot;CREATE INDEX IF NOT EXISTS idx_ts ON alarm_events(timestamp);&quot;</span>;<br>    <span class="hljs-type">char</span> *err = <span class="hljs-literal">NULL</span>;<br>    rc = sqlite3_exec(g_db, sql, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, &amp;err);<br>    <span class="hljs-keyword">if</span> (rc != SQLITE_OK) &#123;<br>        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;[ERR] db create table: %s\n&quot;</span>, err);<br>        sqlite3_free(err);<br>    &#125;<br>    <span class="hljs-comment">// 执行不返回结果的 SQL</span><br>    sqlite3_exec(g_db, <span class="hljs-string">&quot;PRAGMA journal_mode=WAL;&quot;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;[INFO] alarm database opened: %s\n&quot;</span>, ALARM_DB_PATH);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>插入告警记录</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">db_log_alarm</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *state_str, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *reason,</span><br><span class="hljs-params">                          <span class="hljs-type">int</span> motion_delta, <span class="hljs-type">int</span> ps, <span class="hljs-type">int</span> als,</span><br><span class="hljs-params">                          <span class="hljs-type">double</span> mpu_temp, <span class="hljs-type">int</span> acknowledged)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (!g_db) <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">char</span> ts[<span class="hljs-number">32</span>];<br>    <span class="hljs-type">time_t</span> now = time(<span class="hljs-literal">NULL</span>);<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tm</span> <span class="hljs-title">tm_buf</span>;</span><br>    localtime_r(&amp;now, &amp;tm_buf);<br>    strftime(ts, <span class="hljs-keyword">sizeof</span>(ts), <span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, &amp;tm_buf);<br><br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *sql =<br>        <span class="hljs-string">&quot;INSERT INTO alarm_events &quot;</span><br>        <span class="hljs-string">&quot;(timestamp, state, reason, motion_delta, ps, als, mpu_temp, acknowledged) &quot;</span><br>        <span class="hljs-string">&quot;VALUES (?, ?, ?, ?, ?, ?, ?, ?);&quot;</span>;<br>    sqlite3_stmt *stmt = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">if</span> (sqlite3_prepare_v2(g_db, sql, <span class="hljs-number">-1</span>, &amp;stmt, <span class="hljs-literal">NULL</span>) != SQLITE_OK) <span class="hljs-keyword">return</span>;<br>    sqlite3_bind_text(stmt,  <span class="hljs-number">1</span>, ts, <span class="hljs-number">-1</span>, SQLITE_STATIC);<br>    sqlite3_bind_text(stmt,  <span class="hljs-number">2</span>, state_str, <span class="hljs-number">-1</span>, SQLITE_STATIC);<br>    sqlite3_bind_text(stmt,  <span class="hljs-number">3</span>, reason, <span class="hljs-number">-1</span>, SQLITE_STATIC);<br>    sqlite3_bind_int(stmt,   <span class="hljs-number">4</span>, motion_delta);<br>    sqlite3_bind_int(stmt,   <span class="hljs-number">5</span>, ps);<br>    sqlite3_bind_int(stmt,   <span class="hljs-number">6</span>, als);<br>    sqlite3_bind_double(stmt,<span class="hljs-number">7</span>, mpu_temp);<br>    sqlite3_bind_int(stmt,   <span class="hljs-number">8</span>, acknowledged);<br>    sqlite3_step(stmt);<br>    sqlite3_finalize(stmt);<br>&#125;<br></code></pre></td></tr></table></figure>
-<ol start="3">
-<li>关闭数据库连接</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">db_close</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (g_db) &#123;<br>        sqlite3_close(g_db);<br>        g_db = <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;[INFO] alarm database closed\n&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="P3-MQTT-消息队列遥测传输协议"><a href="#P3-MQTT-消息队列遥测传输协议" class="headerlink" title="P3 MQTT(消息队列遥测传输协议)"></a>P3 MQTT(消息队列遥测传输协议)</h3><blockquote>
-<p>基于发布&#x2F;订阅模式的、极其轻量的消息传输协议(特别适合物联网场景)。客户端（传感器、手机App等边缘设备）不直接发送消息给特定接收者，而是发送到代理（Broker，服务器）。接收者向同一个Broker“订阅”自己感兴趣的消息主题。<strong>发送者和接收者完全解耦，无需知道对方的存在</strong>。</p>
-</blockquote>
-<h3 id="Systemd-服务配置"><a href="#Systemd-服务配置" class="headerlink" title="Systemd 服务配置"></a>Systemd 服务配置</h3><p>edgeguard-httpd.service</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Unit]<br>Description=EdgeGuard HTTP Remote Access Service<br>After=edgeguard.service network-online.target<br>Wants=edgeguard.service network-online.target<br><br>[Service]<br>Type=simple<br>ExecStart=/usr/local/bin/edgeguard_httpd --port 8080 --status /tmp/edgeguard_status.json --cmd /tmp/edgeguard_cmd.json<br>Restart=always<br>RestartSec=3<br>User=root<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
-<p>edgeguard-mqttd.service</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Unit]<br>Description=EdgeGuard MQTT Telemetry Service<br>After=edgeguard.service network-online.target<br>Wants=edgeguard.service network-online.target<br><br>[Service]<br>Type=simple<br>ExecStart=/usr/local/bin/edgeguard_mqttd --broker 192.168.10.1:1883 --status /tmp/edgeguard_status.json --topic edgeguard<br>Restart=always<br>RestartSec=10<br>User=root<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day6/http.png" srcset="/img/loading.gif" lazyload alt="PC 上位机 http UI 远程控制界面"></p>
-
+<h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2>
                 
               </div>
             
@@ -454,8 +425,6 @@
       
         <a href="/tags/%E6%8A%80%E6%9C%AF/" class="print-no-link">#技术</a>
       
-        <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="print-no-link">#项目开发</a>
-      
     </div>
   
 </div>
@@ -466,8 +435,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>IMX6ULL-项目开发-Day6</div>
-      <div>http://example.com/2026/05/27/IMX6ULL-项目开发-Day6/</div>
+      <div>嵌入式音视频相关基础知识</div>
+      <div>http://example.com/2026/06/26/嵌入式音视频相关基础知识/</div>
     </div>
     <div class="license-meta">
       
@@ -479,7 +448,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年5月27日</div>
+          <div>2026年6月26日</div>
         </div>
       
       
@@ -511,18 +480,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/27/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%92%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" title="日常开发工作流和常用指令">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">日常开发工作流和常用指令</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/23/ubuntu18-04-4%E5%A6%82%E4%BD%95vibecoding/" title="ubuntu18.04.4如何vibecoding?">
-                        <span class="hidden-mobile">ubuntu18.04.4如何vibecoding?</span>
+                      <a href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" title="IMX6ULL-项目开发-Day8">
+                        <span class="hidden-mobile">IMX6ULL-项目开发-Day8</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
