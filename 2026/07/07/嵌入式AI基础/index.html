@@ -19,24 +19,24 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
+    <meta name="description" content="概述 包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm  LubanCat-4 RK3588S2 基本配置信息(https:&#x2F;&#x2F;doc.embedfire.com&#x2F;linux&#x2F;rk3588&#x2F;quick_start&#x2F;zh&#x2F;la">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式音视频相关基础知识">
-<meta property="og:url" content="http://example.com/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="嵌入式 AI 基础">
+<meta property="og:url" content="http://example.com/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
+<meta property="og:description" content="概述 包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm  LubanCat-4 RK3588S2 基本配置信息(https:&#x2F;&#x2F;doc.embedfire.com&#x2F;linux&#x2F;rk3588&#x2F;quick_start&#x2F;zh&#x2F;la">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/audio.png">
-<meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
-<meta property="article:modified_time" content="2026-07-10T09:33:18.772Z">
+<meta property="og:image" content="http://example.com/img/ai.png">
+<meta property="article:published_time" content="2026-07-07T11:44:10.000Z">
+<meta property="article:modified_time" content="2026-07-13T03:30:17.515Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/audio.png">
+<meta name="twitter:image" content="http://example.com/img/ai.png">
   
   
   
-  <title>嵌入式音视频相关基础知识 - RickyDuran&#39;s Blog</title>
+  <title>嵌入式 AI 基础 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -303,13 +303,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/audio.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/ai.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="嵌入式音视频相关基础知识"></span>
+            <span id="subtitle" data-typed-text="嵌入式 AI 基础"></span>
           
         </div>
 
@@ -320,8 +320,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-06-26 16:24" pubdate>
-          2026年6月26日 下午
+        <time datetime="2026-07-07 19:44" pubdate>
+          2026年7月7日 晚上
         </time>
       </span>
     
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          1.9k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          25 分钟
+          16 分钟
         
       </span>
     
@@ -382,73 +382,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">嵌入式音视频相关基础知识</h1>
+            <h1 id="seo-header">嵌入式 AI 基础</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。<br>飞书链接-音视频项目：<a target="_blank" rel="noopener" href="https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink">https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink</a>  订单号： P783047098217319231<br>飞书链接-嵌入式八股：<a target="_blank" rel="noopener" href="https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc">https://dcn7p0jfzncn.feishu.cn/wiki/BmuvweNj0isho2kCFRPcHTxEnQc</a>  订单号：P797066400674319891</p>
+<p>包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署<br>官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm</p>
 </blockquote>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="1、视频基础"><a href="#1、视频基础" class="headerlink" title="1、视频基础"></a>1、视频基础</h3><blockquote>
-<p><strong>宏块</strong> - 视频编码处理的基本单元，通常由一个 16x16 亮度像素和附加的一个 8x8 Cb 和一个 8x8 Cr 彩色像素块组成 。</p>
+<h2 id="LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html"><a href="#LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html" class="headerlink" title="LubanCat-4 RK3588S2 基本配置信息(https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html)"></a>LubanCat-4 RK3588S2 基本配置信息(<a target="_blank" rel="noopener" href="https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html">https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html</a>)</h2><p>电源接口: Type-C5V@4A 直流输入<br>主芯片: RK3588S(四核 A76 +四核 A55、Mali-G610、6T 算力)<br>内存: LPDDR4X-4GB<br>存储: eMMC-32GB</p>
+<h2 id="扫盲"><a href="#扫盲" class="headerlink" title="扫盲"></a>扫盲</h2><p><strong>什么是量化？</strong> FP32 -&gt; INT8 大幅缩减模型体积 NPU 更适合处理 INT8 运算，提升推理速度，降低功耗。PTQ(训练后量化，直接把训练好的模型进行量化); QAT(在训练过程中就去模拟量化，模型自适应精度损失); 混合精度量化。量化会带来精度损失。</p>
+<h2 id="1-rknn-toolkit2-开发环境搭建"><a href="#1-rknn-toolkit2-开发环境搭建" class="headerlink" title="1 rknn-toolkit2 开发环境搭建"></a>1 rknn-toolkit2 开发环境搭建</h2><blockquote>
+<p>ubuntu20 + miniconda(安装 + 换源) + 安装 toolkit 需要的软件包</p>
 </blockquote>
-<blockquote>
-<p><strong>I 帧 &#x2F; P 帧 &#x2F; B 帧</strong> - I 帧(关键帧&#x2F;帧内编码帧)是完整的独立画面，不依赖其他帧就能独立解码显示。P 帧(前向预测帧)，只记录变化部分，需要利用前面的 I 帧或 P 帧。B 帧(双向预测帧)，提供了最高的压缩比，既需要参考见面的 P 帧或 I 帧、也需要参考后面的 P 帧、I 帧。</p>
-</blockquote>
-<blockquote>
-<p><strong>YUV、YCbCr</strong> - 指亮度参量和色度参量分开表示的像素格式。YUV 采样和 YUV 与 RGB 之间的转换。利用了人眼对亮度敏感，对颜色不敏感的特征，将 RGB 转换成 YUV 并进行采样，扔掉一半甚至更多的色彩数据，但同时能做到压缩体积的作用。一个是为了显示(RGB)，一个是为了传输和存储(YUV)。</p>
-</blockquote>
-<blockquote>
-<p><strong>Profile 编码等级</strong> - 相同画质下更复杂的算法可以大幅压缩体积。66 Baseline(只支持 I&#x2F;P 帧，无交错场景)、77 Main Profile(提供 I&#x2F;P&#x2F;B 帧，支持无交错和交错模式)、100 High Profile。(在 Main 的基础上添加了 8x8 预测，并支持自定义量化)</p>
-</blockquote>
-<blockquote>
-<p><strong>QP 量化参数</strong> - 控制量化步长。QP 每增加6，量化步长翻倍，量化步长越大意味着损失的细节越多，文件大小也越小。QP 值越小量化程度越高，画面质量越好，直接决定了码率的大小。minnqp &#x2F; maxqp 编码器的最小 &#x2F; 最大量化步长，分别限制最好和最差的图像质量，分别针对静止和运动画面。参数控制：QStep、MinQp、MaxQp</p>
+<h2 id="2-设备端-NPU-环境准备"><a href="#2-设备端-NPU-环境准备" class="headerlink" title="2 设备端 NPU 环境准备"></a>2 设备端 NPU 环境准备</h2><p>驱动版本确认： RKNPU driver xxx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">dmesg | grep -i rknpu<br><span class="hljs-built_in">cat</span> /sys/kernel/debug/rknpu/version<br></code></pre></td></tr></table></figure>
+<h2 id="3-查看-设置-CPU、NPU、DDR-的频率"><a href="#3-查看-设置-CPU、NPU、DDR-的频率" class="headerlink" title="3 查看 &amp; 设置 CPU、NPU、DDR 的频率"></a>3 查看 &amp; 设置 CPU、NPU、DDR 的频率</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /sys/devices/system/cpu/cpux/cpufreq/scaling_cur_freq <span class="hljs-comment"># 查看 CPU 当前运行的频率 </span><br><span class="hljs-built_in">cat</span> /sys/class/devfreq/fdab0000.npu/cur_freq <span class="hljs-comment"># 查看 NPU 频率</span><br><span class="hljs-built_in">cat</span> /sys/kernel/debug/clk/clk_summary | grep ddr <span class="hljs-comment"># 查看当前 DDR 实际运行频率</span><br></code></pre></td></tr></table></figure>
+<h2 id="4-RKNN-模型转换"><a href="#4-RKNN-模型转换" class="headerlink" title="4 RKNN 模型转换"></a>4 RKNN 模型转换</h2><blockquote>
+<p>a. <strong>模型转换流程</strong> 创建 RKNN 对象 -&gt; 配置 RKNN 模型 -&gt; 加载对应的模型 -&gt; 构建 RKNN 模型 -&gt; 导出 RKNN 模型 -&gt; 释放 RKNN 对象</p>
 </blockquote>
 <blockquote>
-<p><strong>GOP 编码模式</strong> - GOP(Group of Pictures) 实质就是两个 I 帧的间隔，它是一组连续的图片，是编解码器存储的基本单元。在码率不变的情况，GOP 的值越大，P、B 帧的数量就会越多，画面质量就会相对较好。可以分为普通 GOP 模式(每隔一段 GOP_SIZE 就会插入一个 I 帧)、智能编码 GOP 模式(这种模式下，分成两种I帧。一种是普通 I 帧，另外一种是虚拟 I 帧。普通 I 帧主要是检测画面的静止区域，降低码率，防止呼吸效应。在运动区域利用短期参考帧进行运动估计，并插入虚拟 I 帧)。</p>
+<p>b. <strong>RKNN-ToolKit2 API</strong></p>
 </blockquote>
-<blockquote>
-<p><strong>码率控制模式</strong> - 码率指的是数据传输的单位时间的数据位数如 kbps。码率的设定应该大于对应分辨率的最低码率要求，小于网络带宽。<br>CBR(固定编码模式) 比特率在传输过程中基本上保持恒定并接近目标比特率。参数控制：u32StatTime(码率统计时间)、u32RowQpDeltaI、u32RowQpDeltaIP(行级码率控制调节幅度) <br>VBR(动态码率控制模式) 编码器会根据画面的复杂程度调整编码码率。简单部分较小的码率，复杂部分较高的码率。参数控制：MaxBitrate、ChangePos、MaxQp、MinQp<br>AVBR(平均可变码率) 属于 VBR 可变码率方式的一种，运用在<strong>静止画面和动态画面</strong>频繁切换的场景。参数控制：MaxBitrate、ChangePos、MaxQp、MinQp、MinStillPercent</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1 导包并创建对象</span><br><span class="hljs-keyword">from</span> rknn.api <span class="hljs-keyword">import</span> RKNN<br>rknn = RKNN(verbose = <span class="hljs-literal">True</span>, verbose_file = ...) <span class="hljs-comment"># 日志信息重定位到终端或文件</span><br>rknn.release()<br><br><span class="hljs-comment"># 2 调用 config 接口配置要生成的 RKNN 模型</span><br>rknn.config(mean_values, std_values, quantized_algorithm = <span class="hljs-string">&quot;normal&quot;</span>, target_platform = <span class="hljs-string">&quot;rk3588&quot;</span>) <span class="hljs-comment"># 参数众多，对模型进行通道均值，量化图片 RGB2BGR 配置，量化类型</span><br><br><span class="hljs-comment"># 3 加载</span><br>ret = rknn.load_tensorflow()<br>ret = rknn.load_onnx()<br>ret = rknn.load_pytorch(model = <span class="hljs-string">&quot;./xxx.pt&quot;</span>, input_size_list)<br><br><span class="hljs-comment"># 4 构建</span><br>rknn.build(do_quantization = <span class="hljs-literal">True</span>, dataset, rknn_batch_size, auto_hybrid)<br><br><span class="hljs-comment"># 5 导出并释放</span><br>rknn.export_rknn(export_path)<br>rknn.release()<br></code></pre></td></tr></table></figure>
+<h2 id="5-模型转换工具-rknn-convert"><a href="#5-模型转换工具-rknn-convert" class="headerlink" title="5 模型转换工具 rknn_convert"></a>5 模型转换工具 rknn_convert</h2><blockquote>
+<p>常用模型转换工具，只需要编辑对应的 yml 配置文件，就可以通过指令转换模型</p>
 </blockquote>
-<h3 id="2、音频基础"><a href="#2、音频基础" class="headerlink" title="2、音频基础"></a>2、音频基础</h3><blockquote>
-<p><strong>PCM</strong> - 脉冲编码调制数据，由模拟信号经过采样、编码等步骤转换成标准的未经过压缩的<strong>数字信号</strong>。比特率 &#x3D; 采样率 * 采样深度(多少个比特位) * 通道数(单双四声道)。\</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">models:</span><br>    <span class="hljs-string">name</span><br>    <span class="hljs-string">platform</span><br>    <span class="hljs-string">model_file_path</span><br>    <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+<p>python -m rknn.api.rknn_convert -t rk3588 -i .&#x2F;model_config.yml -o .&#x2F;output_path</p>
+<h2 id="6-Netron-的基本使用"><a href="#6-Netron-的基本使用" class="headerlink" title="6 Netron 的基本使用"></a>6 Netron 的基本使用</h2><blockquote>
+<p>微软推出的可视化模型结构工具，支持查看多种深度学习框架导出的模型。</p>
 </blockquote>
-<blockquote>
-<p><strong>WAV</strong> - 波形音频文件，不是一种编码格式，本质是在 PCM 裸数据外面套上了一个文件头(Header)\</p>
+<h2 id="7-rknn-toolkit2-模型推理"><a href="#7-rknn-toolkit2-模型推理" class="headerlink" title="7 rknn-toolkit2 模型推理"></a>7 rknn-toolkit2 模型推理</h2><blockquote>
+<p>a. API 介绍</p>
 </blockquote>
-<blockquote>
-<p><strong>AAC</strong> - 高级音频编码技术，基于 MPEG-2 的一种全新音频编码技术，取代了之前的 mp3 格式。对原始的 PCM 信号进行压缩，具有更高压缩率，更高音频品质和更高的解码效率(CPU使用率更低)。有两种表现形式，ADIF(可以确定音频数据的开始位置，不需要在中间位置进行解码) 和 ADTS(每一帧都具有头部信息 &#x3D; 头部信息(fixed + variable) + 裸流数据 ES)，数据结构不一样。</p>
-</blockquote>
-<h3 id="3、流媒体"><a href="#3、流媒体" class="headerlink" title="3、流媒体"></a>3、流媒体</h3><blockquote>
-<p><strong>TS 流 &#x2F; PS 流</strong> - 传输流 &#x2F; 节目流，复合流的一种(一条音视频数据流中同时包含视频 ES 和音频 ES 数据)。ES 就是裸流数据(H.264 AAC)。PES，ES 无时间信息，编码器会把 ES 数据拆分成 packet 并加包头，附上 PTS(显示时间戳) 和 DTS(解码时间戳)。TS &#x3D; Transport Stream + Packet Element Stream + Element Stream。</p>
-</blockquote>
-<blockquote>
-<p><strong>FLV</strong> - 专为网络流媒体设计的视频封装格式。由Adobe 公司推出的流媒体协议，支持的网络传输协议有限如 RTMP、HTTP-FLV。FLV &#x3D; Header + Tag(video tag, audio tag, script tag)。</p>
-</blockquote>
-<blockquote>
-<p><strong>RTMP</strong> - 实时消息传输协议(基于 TCP 开发 把音视频数据打包成 FLV 格式)，用于音视频推流，实时交互语音和数据交互。消息协议分为三种，消息，消息块，消息分块。</p>
-</blockquote>
-<blockquote>
-<p><strong>协议关系</strong> - RTP(实时传输协议 基于 UDP) RTCP(RTP 控制协议 周期性发送网络质量报告丢包率、延迟、帧同步信息 接收端接受报告后可以动态调整编码码率活 FEC 强度)  RTSP(实时流传输协议 控制用 TCP 数据用 RTP 类似于遥控器 只下命令不传输视频) SIP(会话初始协议) GB&#x2F;T 28181(公共安全视频监控联网系统信息传输协议 SIP + RTP)</p>
-</blockquote>
-<h3 id="4、编解码"><a href="#4、编解码" class="headerlink" title="4、编解码"></a>4、编解码</h3><blockquote>
-<p><strong>H.264</strong> - 采用了 16x16 的分块大小和对视频帧图像进行相似比较和压缩编码。视频压缩可以分为帧内压缩和帧间压缩。帧内压缩是生成 I 帧的算法，仅考虑本帧的数据，压缩率一般不高。帧间压缩则是生成 P 帧和 B 帧的算法。H.264 原始码流是编码后的基本数据流不包含任何封装信息，由 NAL 单元组成，每个 NALU 是一个基本的数据编码单元。RBSP(NAL Payload 有效负载)，提供实际编码数据，去除对解码无意义的字节填充，添加必要的终止位。VCL 和 NAL。</p>
-</blockquote>
-<p><img src="/../img/audio/nal.png" srcset="/img/loading.gif" lazyload alt="ES 中的基本 NAL 单元"></p>
-<blockquote>
-<p><strong>H.265</strong> - HEVC，压缩率高达 1：200。采用了最小 8x8 到最大 64x64 编码宏块，在相同的分辨率下，H265 编码能够以更低的码率进行传输。一样遵循 VCL + VAL，结构上多了一个 VPS。</p>
-</blockquote>
-<h3 id="5、推拉流"><a href="#5、推拉流" class="headerlink" title="5、推拉流"></a>5、推拉流</h3><h3 id="6、其他工具"><a href="#6、其他工具" class="headerlink" title="6、其他工具"></a>6、其他工具</h3><blockquote>
-<p><strong>FFmpeg</strong> - 开源、跨平台的命令行工具。格式转换(改变编码格式，调整分辨率、帧率、码率)，采集录制(从摄像头、麦克风或电脑屏幕抓取数据)，编辑处理，播放解码。</p>
-</blockquote>
-<blockquote>
-<p><strong>MPP</strong> - Media Process Platform(媒体处理平台)。Rockchip 为旗下芯片提供的一个底层软件库，核心目的是屏蔽不同芯片的硬件差异，提供一套统一的视频处理接口，具有视频编解码的能力。</p>
-</blockquote>
-<blockquote>
-<p><strong>RKNN</strong> - Rockchip Neural Network。Rockchip 为它的芯片专门打造的一套“AI 推理引擎”和“模型格式”。</p>
-</blockquote>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.load_rknn()<br>ret = rknn.init_runtime(target, device_id, perf_debug, eval_mem, async_mode, core_mask, fallback_prior_device)<br>ret = rknn.inference(inputs, data_format, inputs_pass_through) <span class="hljs-comment"># 模型推理</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -493,8 +461,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>嵌入式音视频相关基础知识</div>
-      <div>http://example.com/2026/06/26/嵌入式音视频相关基础知识/</div>
+      <div>嵌入式 AI 基础</div>
+      <div>http://example.com/2026/07/07/嵌入式AI基础/</div>
     </div>
     <div class="license-meta">
       
@@ -506,7 +474,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年6月26日</div>
+          <div>2026年7月7日</div>
         </div>
       
       
@@ -538,9 +506,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结">
+                      <a href="/2026/07/10/%E9%9F%B3%E8%A7%86%E9%A2%91%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/" title="音视频项目代码学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">久违的六月总结</span>
+                        <span class="hidden-mobile">音视频项目代码学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -548,8 +516,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" title="IMX6ULL-项目开发-Day8">
-                        <span class="hidden-mobile">IMX6ULL-项目开发-Day8</span>
+                      <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结">
+                        <span class="hidden-mobile">久违的六月总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
