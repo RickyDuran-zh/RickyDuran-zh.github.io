@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/ai.png">
 <meta property="article:published_time" content="2026-07-07T11:44:10.000Z">
-<meta property="article:modified_time" content="2026-07-13T03:30:17.515Z">
+<meta property="article:modified_time" content="2026-07-17T08:23:20.845Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.2k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          16 分钟
+          19 分钟
         
       </span>
     
@@ -391,7 +391,7 @@
 <p>包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署<br>官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm</p>
 </blockquote>
 <h2 id="LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html"><a href="#LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html" class="headerlink" title="LubanCat-4 RK3588S2 基本配置信息(https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html)"></a>LubanCat-4 RK3588S2 基本配置信息(<a target="_blank" rel="noopener" href="https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html">https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html</a>)</h2><p>电源接口: Type-C5V@4A 直流输入<br>主芯片: RK3588S(四核 A76 +四核 A55、Mali-G610、6T 算力)<br>内存: LPDDR4X-4GB<br>存储: eMMC-32GB</p>
-<h2 id="扫盲"><a href="#扫盲" class="headerlink" title="扫盲"></a>扫盲</h2><p><strong>什么是量化？</strong> FP32 -&gt; INT8 大幅缩减模型体积 NPU 更适合处理 INT8 运算，提升推理速度，降低功耗。PTQ(训练后量化，直接把训练好的模型进行量化); QAT(在训练过程中就去模拟量化，模型自适应精度损失); 混合精度量化。量化会带来精度损失。</p>
+<h2 id="扫盲"><a href="#扫盲" class="headerlink" title="扫盲"></a>扫盲</h2><p><strong>什么是量化？</strong> 量化指把模型中的浮点参数和操作转换为定点表示。FP32 -&gt; INT8 大幅缩减模型体积 NPU 更适合处理 INT8 运算，提升推理速度，降低功耗。PTQ(训练后量化，直接把训练好的模型进行量化); QAT(在训练过程中就去模拟量化，模型自适应精度损失); 混合精度量化。量化会带来精度损失。</p>
 <h2 id="1-rknn-toolkit2-开发环境搭建"><a href="#1-rknn-toolkit2-开发环境搭建" class="headerlink" title="1 rknn-toolkit2 开发环境搭建"></a>1 rknn-toolkit2 开发环境搭建</h2><blockquote>
 <p>ubuntu20 + miniconda(安装 + 换源) + 安装 toolkit 需要的软件包</p>
 </blockquote>
@@ -404,7 +404,7 @@
 <blockquote>
 <p>b. <strong>RKNN-ToolKit2 API</strong></p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1 导包并创建对象</span><br><span class="hljs-keyword">from</span> rknn.api <span class="hljs-keyword">import</span> RKNN<br>rknn = RKNN(verbose = <span class="hljs-literal">True</span>, verbose_file = ...) <span class="hljs-comment"># 日志信息重定位到终端或文件</span><br>rknn.release()<br><br><span class="hljs-comment"># 2 调用 config 接口配置要生成的 RKNN 模型</span><br>rknn.config(mean_values, std_values, quantized_algorithm = <span class="hljs-string">&quot;normal&quot;</span>, target_platform = <span class="hljs-string">&quot;rk3588&quot;</span>) <span class="hljs-comment"># 参数众多，对模型进行通道均值，量化图片 RGB2BGR 配置，量化类型</span><br><br><span class="hljs-comment"># 3 加载</span><br>ret = rknn.load_tensorflow()<br>ret = rknn.load_onnx()<br>ret = rknn.load_pytorch(model = <span class="hljs-string">&quot;./xxx.pt&quot;</span>, input_size_list)<br><br><span class="hljs-comment"># 4 构建</span><br>rknn.build(do_quantization = <span class="hljs-literal">True</span>, dataset, rknn_batch_size, auto_hybrid)<br><br><span class="hljs-comment"># 5 导出并释放</span><br>rknn.export_rknn(export_path)<br>rknn.release()<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1 导包并创建对象</span><br><span class="hljs-keyword">from</span> rknn.api <span class="hljs-keyword">import</span> RKNN<br>rknn = RKNN(verbose = <span class="hljs-literal">True</span>, verbose_file = ...) <span class="hljs-comment"># 日志信息重定位到终端或文件</span><br><br><span class="hljs-comment"># 2 调用 config 接口配置要生成的 RKNN 模型</span><br>rknn.config(mean_values, std_values, quantized_algorithm = <span class="hljs-string">&quot;normal&quot;</span>, target_platform = <span class="hljs-string">&quot;rk3588&quot;</span>) <span class="hljs-comment"># 参数众多，对模型进行通道均值，量化图片 RGB2BGR 配置，量化类型</span><br><br><span class="hljs-comment"># 3 加载</span><br>ret = rknn.load_tensorflow()<br>ret = rknn.load_onnx()<br>ret = rknn.load_pytorch(model = <span class="hljs-string">&quot;./xxx.pt&quot;</span>, input_size_list)<br><br><span class="hljs-comment"># 4 构建</span><br>rknn.build(do_quantization = <span class="hljs-literal">True</span>, dataset, rknn_batch_size, auto_hybrid)<br><br><span class="hljs-comment"># 5 导出并释放</span><br>rknn.export_rknn(export_path)<br>rknn.release()<br></code></pre></td></tr></table></figure>
 <h2 id="5-模型转换工具-rknn-convert"><a href="#5-模型转换工具-rknn-convert" class="headerlink" title="5 模型转换工具 rknn_convert"></a>5 模型转换工具 rknn_convert</h2><blockquote>
 <p>常用模型转换工具，只需要编辑对应的 yml 配置文件，就可以通过指令转换模型</p>
 </blockquote>
@@ -417,6 +417,11 @@
 <p>a. API 介绍</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.load_rknn()<br>ret = rknn.init_runtime(target, device_id, perf_debug, eval_mem, async_mode, core_mask, fallback_prior_device)<br>ret = rknn.inference(inputs, data_format, inputs_pass_through) <span class="hljs-comment"># 模型推理</span><br></code></pre></td></tr></table></figure>
+<h2 id="8-模型量化精度分析-性能、内存评估"><a href="#8-模型量化精度分析-性能、内存评估" class="headerlink" title="8 模型量化精度分析 性能、内存评估"></a>8 模型量化精度分析 性能、内存评估</h2><p>Rknn-toolkit2 提供两种量化方式(Layer, Channel)和三种量化算法(Normal, MMSE, KL-Divergence)。常规量化和混合量化(权重和激活值可以采用不止一种量化精度类型)。<br><img src="/../img/7-16/eval.png" srcset="/img/loading.gif" lazyload alt="性能评估"></p>
+<h2 id="9-模型剪枝"><a href="#9-模型剪枝" class="headerlink" title="9 模型剪枝"></a>9 模型剪枝</h2><p>可以分为有损剪枝和无损剪枝，Rknn-toolkit2 的模型剪枝为无损剪枝。结构化剪枝 + 微调，需要在 PyTorch 训练阶段主动介入。</p>
+<h2 id="10-模型加密"><a href="#10-模型加密" class="headerlink" title="10 模型加密"></a>10 模型加密</h2><p>export_encrypted_rknn_model()  </p>
+<h2 id="11-多-batch-多输入模型"><a href="#11-多-batch-多输入模型" class="headerlink" title="11 多 batch &amp; 多输入模型"></a>11 多 batch &amp; 多输入模型</h2><p>开启多 batch 推理时，内部会调用 rknn_dup_context() 将 context 进行拷贝。</p>
+<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2>
                 
               </div>
             
