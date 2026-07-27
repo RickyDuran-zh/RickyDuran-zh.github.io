@@ -498,11 +498,10 @@
 
   <!--
   首页右侧 Widget 信息面板
-  参考 Diaspora 持久侧边栏的设计理念
-  仅在大屏首页显示
+  嵌入页面内部，随页面一起滚动
+  仅在大屏非文章页显示
 -->
 <div class="widget-panel" id="widget-panel">
-<!-- 文章页不显示（已有 TOC 侧栏），JS 在此检测并隐藏 -->
   <div class="widget-panel-inner">
 
     <!-- 博主信息卡片 -->
@@ -515,23 +514,24 @@
       />
       <div class="widget-profile-info">
         <p class="widget-name">RickyDuran</p>
-        <p class="widget-bio">To know yourself.</p>
+        <p class="widget-bio">An elegant theme for Hexo</p>
       </div>
       
       <div class="widget-social">
         
+          
+            <a href="https://github.com" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
         
-          <a href="https://hexo.fluid-dev.com/" title="" target="_blank" rel="noopener" class="widget-social-link">
-            <i class="fa-solid fa-link"></i>
-          </a>
+          
+            <a href="https://douban.com" title="豆瓣" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-solid fa-book"></i>
+            </a>
+          
         
-          <a href="https://hexo.fluid-dev.com/docs/" title="" target="_blank" rel="noopener" class="widget-social-link">
-            <i class="fa-solid fa-link"></i>
-          </a>
-        
-          <a href="https://github.com/fluid-dev/hexo-theme-fluid" title="" target="_blank" rel="noopener" class="widget-social-link">
-            <i class="fa-solid fa-link"></i>
-          </a>
+          
         
       </div>
       
@@ -648,8 +648,8 @@
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/%E6%89%AB%E7%9B%B2/">
+              <span class="widget-cat-name">扫盲</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -714,19 +714,30 @@
   // 文章页不显示（已有 TOC 侧边栏）
   var isPost = document.querySelector('.markdown-body');
   if (isPost) {
-    panel.style.display = 'none';
+    panel.remove();
     return;
   }
 
   // 小屏不显示
   function checkScreen() {
     if (window.innerWidth >= 1200) {
+      // 将面板移入页面容器内，使其嵌入页面流，随页面滚动
+      var container = document.querySelector('.container.nopadding-x-md');
+      if (container && panel.parentNode !== container) {
+        container.style.position = 'relative';
+        container.appendChild(panel);
+      }
       panel.style.display = 'block';
     } else {
       panel.style.display = 'none';
     }
   }
-  checkScreen();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkScreen);
+  } else {
+    checkScreen();
+  }
   window.addEventListener('resize', checkScreen, { passive: true });
 })();
 </script>
