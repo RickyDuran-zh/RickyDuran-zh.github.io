@@ -36,8 +36,11 @@
 }
 
 .index-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.06),      /* 顶部紧贴的微阴影 */
+    0 6px 14px rgba(0, 0, 0, 0.10),      /* 中部过渡 */
+    0 14px 32px rgba(0, 0, 0, 0.14);     /* 底部大范围扩散 */
 }
 
 /* 卡片封面图悬浮放大 */
@@ -82,7 +85,10 @@
 
 /* 深色模式卡片悬浮 */
 [data-user-color-scheme="dark"] .index-card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    0 6px 14px rgba(0, 0, 0, 0.35),
+    0 14px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* ===================================
@@ -1533,7 +1539,9 @@ footer a:hover {
 
 /* 首页卡片深色阴影 */
 [data-user-color-scheme="dark"] .index-card {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 搜索弹窗深色适配 */
