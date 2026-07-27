@@ -897,21 +897,33 @@
   首页右侧 Widget 信息面板
   嵌入页面内部，随页面一起滚动
   仅在大屏非文章页显示
+
+  卡片顺序:
+    1. 博主信息
+    2. 公告 (编辑公告文字请修改下方 ANNOUNCEMENT 变量)
+    3. 最新文章
+    4. 分类
+    5. 标签云
+    6. 归档
+    7. 网站资讯
+
+  头像/名称/简介/社交链接: 修改 _config.fluid.yml 中 about 段落
 -->
+
 <div class="widget-panel" id="widget-panel">
   <div class="widget-panel-inner">
 
-    <!-- 博主信息卡片 -->
+    <!-- 1. 博主信息卡片 -->
     <div class="widget-card widget-profile">
       <img
         class="widget-avatar"
-        src="/img/avatar.png" srcset="/img/loading.gif" lazyload
+        src="/img/2026-7-27/rickyduran.png" srcset="/img/loading.gif" lazyload
         alt="avatar"
         onerror="this.style.display='none'"
       />
       <div class="widget-profile-info">
         <p class="widget-name">RickyDuran</p>
-        <p class="widget-bio">An elegant theme for Hexo</p>
+        <p class="widget-bio">To know yourself.</p>
       </div>
       
       <div class="widget-social">
@@ -934,7 +946,17 @@
       
     </div>
 
-    <!-- 最新文章 -->
+    <!-- 2. 公告 -->
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bullhorn"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        欢迎来到我的博客！这里记录了我的学习笔记和技术分享，希望能对你有所帮助。
+      </div>
+    </div>
+
+    <!-- 3. 最新文章 -->
     <div class="widget-card widget-recent-posts">
       <h4 class="widget-title">
         <i class="fa-solid fa-clock"></i> 最新文章
@@ -987,7 +1009,7 @@
       </ul>
     </div>
 
-    <!-- 分类 -->
+    <!-- 4. 分类 -->
     
     <div class="widget-card widget-categories">
       <h4 class="widget-title">
@@ -1045,8 +1067,8 @@
           </li>
         
           <li>
-            <a href="/categories/%E6%89%AB%E7%9B%B2/">
-              <span class="widget-cat-name">扫盲</span>
+            <a href="/categories/xv6/">
+              <span class="widget-cat-name">xv6</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1055,7 +1077,7 @@
     </div>
     
 
-    <!-- 标签云（迷你版） -->
+    <!-- 5. 标签云（迷你版） -->
     
     <div class="widget-card widget-tags">
       <h4 class="widget-title">
@@ -1099,6 +1121,80 @@
     </div>
     
 
+    <!-- 6. 归档 -->
+    <div class="widget-card widget-archives">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-box-archive"></i> 归档
+      </h4>
+      <ul class="widget-list">
+        
+        
+        
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 07 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 06 月</span>
+              <span class="widget-archive-count">10 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 05 月</span>
+              <span class="widget-archive-count">14 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 04 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+      </ul>
+      <a href="/archives" class="widget-more-link">
+        查看全部归档 <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </div>
+
+    <!-- 7. 网站资讯 -->
+    <div class="widget-card widget-site-info">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-chart-simple"></i> 网站资讯
+      </h4>
+      <div class="widget-info-grid">
+        <div class="widget-info-item">
+          <span class="widget-info-value">30</span>
+          <span class="widget-info-label">文章</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">8</span>
+          <span class="widget-info-label">标签</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">10</span>
+          <span class="widget-info-label">分类</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value widget-info-running" id="site-running-days">--</span>
+          <span class="widget-info-label">运行天数</span>
+        </div>
+      </div>
+      
+      <div class="widget-info-footer">
+        <span>最后更新：2026-07-24</span>
+      </div>
+      
+    </div>
+
   </div>
 </div>
 
@@ -1118,7 +1214,6 @@
   // 小屏不显示
   function checkScreen() {
     if (window.innerWidth >= 1200) {
-      // 将面板移入页面容器内，使其嵌入页面流，随页面滚动
       var container = document.querySelector('.container.nopadding-x-md');
       if (container && panel.parentNode !== container) {
         container.style.position = 'relative';
@@ -1136,6 +1231,29 @@
     checkScreen();
   }
   window.addEventListener('resize', checkScreen, { passive: true });
+
+  // 计算网站运行天数（从第一篇文章发布日期算起）
+  (function() {
+    var el = document.getElementById('site-running-days');
+    if (!el) return;
+
+    // 从第一篇文章的日期开始计算
+    var firstPostDate = '2026-04-28';
+    if (!firstPostDate) { el.textContent = '--'; return; }
+
+    var start = new Date(firstPostDate);
+    var now = new Date();
+    var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    if (days >= 365) {
+      var years = Math.floor(days / 365);
+      var remain = days % 365;
+      el.textContent = years + '年' + (remain > 30 ? Math.floor(remain / 30) + '月' : '');
+    } else if (days >= 30) {
+      el.textContent = Math.floor(days / 30) + '月';
+    } else {
+      el.textContent = days + '天';
+    }
+  })();
 })();
 </script>
 
