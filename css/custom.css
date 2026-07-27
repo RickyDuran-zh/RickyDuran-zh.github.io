@@ -951,6 +951,32 @@ a.print-no-link:hover {
   transform: translateY(-2px);
 }
 
+/* ---- GitHub 图标：深黑色 + 悬浮上下翻转 ---- */
+.widget-social-link:has(.fa-github) {
+  color: #24292e;
+  background: rgba(36, 41, 46, 0.06);
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.2s ease,
+              background 0.2s ease;
+}
+
+.widget-social-link:has(.fa-github):hover {
+  color: #24292e;
+  background: rgba(36, 41, 46, 0.12);
+  transform: rotateX(180deg);
+}
+
+/* 暗色模式 GitHub 图标亮色 */
+[data-user-color-scheme="dark"] .widget-social-link:has(.fa-github) {
+  color: #f0f6fc;
+  background: rgba(240, 246, 252, 0.08);
+}
+
+[data-user-color-scheme="dark"] .widget-social-link:has(.fa-github):hover {
+  color: #f0f6fc;
+  background: rgba(240, 246, 252, 0.15);
+}
+
 /* ---- 文章/标签/分类 统计行 ---- */
 .widget-profile-stats {
   display: flex;
@@ -1233,6 +1259,42 @@ a.print-no-link:hover {
 }
 
 /* ---- 公告 ---- */
+
+/* 红色铃铛图标 + 摇铃动画 */
+.widget-announce-icon {
+  color: #ef4444;
+  animation: bell-ring 2s ease-in-out infinite;
+  transform-origin: top center;
+  display: inline-block;
+}
+
+@keyframes bell-ring {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(15deg);
+  }
+  15% {
+    transform: rotate(-15deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  35% {
+    transform: rotate(-10deg);
+  }
+  45% {
+    transform: rotate(5deg);
+  }
+  55% {
+    transform: rotate(-5deg);
+  }
+  65% {
+    transform: rotate(0deg);
+  }
+}
+
 .widget-announcement-text {
   font-size: 0.82rem;
   color: #667788;
@@ -1888,4 +1950,54 @@ footer a:hover {
 
 [data-user-color-scheme="dark"] .list-group-item time {
   color: #6a7a8a;
+}
+
+/* ===================================
+   页面切换动画：上下挤压效果
+   使用 CSS View Transitions API
+   点击任意内部链接均有平滑过渡
+   兼容 Chrome 126+, Edge 126+
+   =================================== */
+
+/* 全局启用跨页面过渡 */
+@view-transition {
+  navigation: auto;
+}
+
+/* 旧页面：向上挤压消失 */
+::view-transition-old(root) {
+  animation: squeeze-out 0.25s cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+
+/* 新页面：向下展开出现 */
+::view-transition-new(root) {
+  animation: squeeze-in 0.3s 0.1s cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+@keyframes squeeze-out {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes squeeze-in {
+  0% {
+    transform: scaleY(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* 图片/媒体在过渡期间保持稳定 */
+::view-transition-old(root) img,
+::view-transition-new(root) img {
+  animation: none;
 }
