@@ -841,7 +841,7 @@ a.print-no-link:hover {
 .widget-panel {
   display: none;                    /* JS 按条件显示 */
   position: absolute;               /* 相对于 .container 定位，嵌入页面流 */
-  top: 2.5rem;                      /* 与内容区 padding-top 对齐 */
+  top: 3rem;                        /* 与容器 padding-top 对齐 */
   right: -275px;                    /* 紧贴内容区右侧 */
   width: 265px;
   z-index: 10;
@@ -1639,25 +1639,43 @@ footer a:hover {
 }
 
 /* ===================================
-   内容区整体下移 + 左移
-   让 banner/cover 和文章板有明显的分隔
+   内容区与 Cover 真正隔离
+   banner 在上，内容+侧栏严格在下方，永不重叠
    =================================== */
 
+/* 给 banner 底部加一条视觉分界线 */
+.header-inner {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 内容容器与 banner 完全分离 */
 @media (min-width: 768px) {
-  /* 内容区与 banner 分离，向下移动 */
   .container.nopadding-x-md {
-    padding-top: 2.5rem;
+    padding-top: 3rem;
+    position: relative;
   }
 
-  /* 首页卡片区域下移更多 */
+  /* 内容板不再位移，紧贴容器顶部 */
   #board {
-    margin-top: 1rem;
-    transform: translateX(-15px);   /* 整体左移，露出更多 cover */
+    margin-top: 0;
+    transform: none;
   }
 
-  /* 归档页、分类页、标签页等也同步左移 */
+  /* 归档/分类/标签页同理 */
   .list-group {
-    transform: translateX(-15px);
+    transform: none;
+  }
+}
+
+/* 移动端间距缩小 */
+@media (max-width: 767px) {
+  .container.nopadding-x-md {
+    padding-top: 1.5rem;
+  }
+
+  #board, .list-group {
+    transform: none;
   }
 }
 
