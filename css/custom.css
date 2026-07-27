@@ -731,8 +731,8 @@ a.print-no-link:hover {
 .widget-panel {
   display: none;                    /* JS 按条件显示 */
   position: absolute;               /* 相对于 .container 定位，嵌入页面流 */
-  top: 0;
-  right: -275px;                    /* 紧贴内容区右侧，间隔约 15px */
+  top: 2.5rem;                      /* 与内容区 padding-top 对齐 */
+  right: -275px;                    /* 紧贴内容区右侧 */
   width: 265px;
   z-index: 10;
   font-size: 0.88rem;               /* 15px 级，清晰舒适 */
@@ -1438,4 +1438,238 @@ footer a:hover {
 [data-user-color-scheme="dark"] .post-next:hover {
   border-color: rgba(48, 169, 222, 0.25);
   background-color: rgba(48, 169, 222, 0.04);
+}
+
+/* ===================================
+   内容区整体下移 + 左移
+   让 banner/cover 和文章板有明显的分隔
+   =================================== */
+
+@media (min-width: 768px) {
+  /* 内容区与 banner 分离，向下移动 */
+  .container.nopadding-x-md {
+    padding-top: 2.5rem;
+  }
+
+  /* 首页卡片区域下移更多 */
+  #board {
+    margin-top: 1rem;
+    transform: translateX(-15px);   /* 整体左移，露出更多 cover */
+  }
+
+  /* 归档页、分类页、标签页等也同步左移 */
+  .list-group {
+    transform: translateX(-15px);
+  }
+}
+
+/* ===================================
+   归档页时间线 Timeline 样式
+   垂直时间轴 + 年份标记 + 文章条目
+   =================================== */
+
+/* 时间线容器 */
+.list-group {
+  position: relative;
+  padding-left: 2.8rem !important;
+  border: 0;
+}
+
+/* 垂直时间线主轴（渐变） */
+.list-group::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 3.5rem;
+  bottom: 1rem;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    #c084fc 0%,
+    #30a9de 40%,
+    #06b6d4 70%,
+    rgba(48, 169, 222, 0.15) 100%
+  );
+}
+
+/* 文章总数标题美化 */
+.list-group > .h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--post-heading-color, #1a202c);
+  margin-bottom: 0.3rem;
+}
+
+/* 年份标题 —— 时间线节点 */
+.list-group > .h5 {
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #30a9de;
+  margin: 2.2rem 0 0.8rem;
+  padding: 0;
+  letter-spacing: 0.03em;
+}
+
+/* 年份前方的圆形节点 */
+.list-group > .h5::before {
+  content: "";
+  position: absolute;
+  left: -2.7rem;
+  top: 0.4rem;
+  width: 14px;
+  height: 14px;
+  background: #30a9de;
+  border-radius: 50%;
+  border: 3px solid var(--board-bg-color, #fff);
+  box-shadow: 0 0 0 4px rgba(48, 169, 222, 0.18);
+  z-index: 2;
+}
+
+/* 第一条年份用主题色更鲜艳 */
+.list-group > .h5:first-of-type::before {
+  background: #c084fc;
+  box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.2);
+}
+
+/* 文章条目 */
+.list-group-item {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  padding: 0.5rem 0.8rem !important;
+  margin-left: 0;
+  border: 0 !important;
+  border-radius: 6px;
+  background: transparent !important;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+/* 文章条目前方的小圆点 */
+.list-group-item::before {
+  content: "";
+  position: absolute;
+  left: -2.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  background: #c0c8d4;
+  border-radius: 50%;
+  border: 2px solid var(--board-bg-color, #fff);
+  z-index: 1;
+  transition: background 0.2s ease, width 0.2s ease, height 0.2s ease,
+    left 0.2s ease;
+}
+
+.list-group-item:hover {
+  background: rgba(48, 169, 222, 0.04) !important;
+  padding-left: 1.3rem !important;
+  border-radius: 6px;
+}
+
+.list-group-item:hover::before {
+  background: #30a9de;
+  width: 10px;
+  height: 10px;
+  left: -2.5rem;
+}
+
+/* 日期样式 */
+.list-group-item time {
+  flex: 0 0 3.5rem !important;
+  font-size: 0.82rem;
+  color: #8899aa;
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  letter-spacing: 0.02em;
+}
+
+/* 文章标题 */
+.list-group-item-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-group-item-action {
+  color: var(--text-color, #3c4858) !important;
+  text-decoration: none;
+}
+
+.list-group-item-action:hover {
+  color: #30a9de !important;
+  text-decoration: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 767px) {
+  .list-group {
+    padding-left: 2rem !important;
+  }
+
+  .list-group::before {
+    left: 0.2rem;
+  }
+
+  .list-group > .h5 {
+    font-size: 1.15rem;
+  }
+
+  .list-group > .h5::before {
+    left: -2rem;
+    width: 11px;
+    height: 11px;
+  }
+
+  .list-group-item::before {
+    left: -1.7rem;
+    width: 5px;
+    height: 5px;
+  }
+
+  .list-group-item:hover::before {
+    left: -1.8rem;
+    width: 8px;
+    height: 8px;
+  }
+
+  .list-group-item time {
+    flex: 0 0 2.8rem !important;
+    font-size: 0.75rem;
+  }
+
+  .list-group-item-title {
+    font-size: 0.88rem;
+  }
+
+  /* 移动端不需要左移 */
+  #board,
+  .list-group {
+    transform: none;
+  }
+
+  .container.nopadding-x-md {
+    padding-top: 1rem;
+  }
+}
+
+/* 暗色模式时间线 */
+[data-user-color-scheme="dark"] .list-group > .h5::before {
+  border-color: #252d38;
+  box-shadow: 0 0 0 4px rgba(48, 169, 222, 0.25);
+}
+
+[data-user-color-scheme="dark"] .list-group-item::before {
+  border-color: #252d38;
+}
+
+[data-user-color-scheme="dark"] .list-group-item:hover {
+  background: rgba(48, 169, 222, 0.06) !important;
+}
+
+[data-user-color-scheme="dark"] .list-group-item time {
+  color: #6a7a8a;
 }
