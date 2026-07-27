@@ -354,7 +354,7 @@
       
       <a class="index-excerpt " href="/2026/05/23/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day5/" target="_self">
         <div>
-          概述 EdgeGuard-6ULL QT 环境搭建，UI 界面显示。显示走 linuxfb 直接刷 &#x2F;dev&#x2F;fb0，触控走原生 evdev + QSocketNotifier 自己解析 input_event，不依赖任何第三方插件。  一、环境搭建1. 交叉编译工具链使用野火提供的 build-gcc.sh 脚本安装 arm-linux-gnueabihf-gcc 8.3.0
+          概述 EdgeGuard-6ULL QT 环境搭建，UI 界面显示。显示走 linuxfb 直接刷 &#x2F;dev&#x2F;fb0，触控走原生 evdev + QSocketNotifier 自
         </div>
       </a>
 
@@ -423,7 +423,7 @@
       
       <a class="index-excerpt " href="/2026/05/20/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day4/" target="_self">
         <div>
-          概述 EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入 qt UI 进行页面的切换。  一、RGB 5寸电容触摸屏1.硬件相关 2.显示链路24位数据流，LCD data 引脚和 LCD 相关控制引脚，背光引脚。PWM 子系统 + FrameBuffer(
+          概述 EdgeGuard-6ULL RGB 5寸(分辨率 800 * 480)电容触摸屏，分别打通了显示和触摸的逻辑链路，可以捕获触摸点的坐标位置上报内核，并在 LCD 屏幕上刷新显示。后续考虑加入
         </div>
       </a>
 
@@ -492,7 +492,7 @@
       
       <a class="index-excerpt " href="/2026/05/18/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day3/" target="_self">
         <div>
-          概述 EdgeGuard-6ULL Sensor_hubd 进行周期采集 + 状态判断。LED 显示系统状态；Buzzer 执行警告；Key 清除告警或切换状态。Systemd 管理开机自启动将 Sensor_hubd 设置为守护进程。  一、Sensor_hubd 实现周期性读取传感器数据，根据阈值判断状态。正常状态：LED 绿灯，蜂鸣器关闭光照(als)异常&#x2F;接近异常(ps)：LED
+          概述 EdgeGuard-6ULL Sensor_hubd 进行周期采集 + 状态判断。LED 显示系统状态；Buzzer 执行警告；Key 清除告警或切换状态。Systemd 管理开机自启动将 Se
         </div>
       </a>
 
@@ -561,7 +561,7 @@
       
       <a class="index-excerpt " href="/2026/05/15/Easy-Tutorial-vi-vim-tmux/" target="_self">
         <div>
-          1.vi &#x2F; vim vi 是 Unix 系统中经典的终端文本编辑器，几乎所有 Linux 系统都会默认提供。vim 可以理解为 vi 的增强版。  普通模式光标移动，复制，粘贴，删除，搜索，跳转，进入其他模式等。 插入模式12345678# 从普通模式进入插入模式i    在光标前插入a    在光标后插入o    在当前行下方新建一行并插入I    在当前行行首插入A    在当前行
+          1.vi &#x2F; vim vi 是 Unix 系统中经典的终端文本编辑器，几乎所有 Linux 系统都会默认提供。vim 可以理解为 vi 的增强版。  普通模式光标移动，复制，粘贴，删除，搜索
         </div>
       </a>
 
@@ -628,7 +628,7 @@
       
       <a class="index-excerpt " href="/2026/05/14/Linux-%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%EF%BC%9A%E5%B9%B6%E5%8F%91%E7%AB%9E%E6%80%81%E3%80%81%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E9%98%BB%E5%A1%9E-I-O/" target="_self">
         <div>
-          1.并发与竞态 并发(concurreny)是指多个执行流在同一时间段内交替前进(单核 cpu)。多核 cpu 才有可能并行(parallelism)。竞态条件(race condition)是指程序的结果依赖于多个执行流的执行顺序，而这个顺序是不确定的。  2.同步机制 同步(synchronization)是指在多个执行流之间建立正确的访问顺序和互斥关系。三类目标：互斥(同一时间只能有一个执行
+          1.并发与竞态 并发(concurreny)是指多个执行流在同一时间段内交替前进(单核 cpu)。多核 cpu 才有可能并行(parallelism)。竞态条件(race condition)是指程序
         </div>
       </a>
 
@@ -702,7 +702,7 @@
       
       <a class="index-excerpt " href="/2026/05/13/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day2/" target="_self">
         <div>
-          一、GPIO和Input子系统篇 Led、Buzzer、Key1.GPIO子系统 需要注册字符设备(函数接口)1.设备树修改(用户led 彩色led buzzer)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849edge_leds &#123;	compatible =
+          一、GPIO和Input子系统篇 Led、Buzzer、Key1.GPIO子系统 需要注册字符设备(函数接口)1.设备树修改(用户led 彩色led buzzer)123456789101112131
         </div>
       </a>
 
@@ -771,7 +771,7 @@
       
       <a class="index-excerpt " href="/2026/05/12/IMX6ULL-%E6%A0%B8%E5%BF%83api%E5%92%8C%E5%AE%8F(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/" target="_self">
         <div>
-          概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[
+          概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 ude
         </div>
       </a>
 
@@ -838,7 +838,7 @@
       
       <a class="index-excerpt " href="/2026/05/09/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day1/" target="_self">
         <div>
-          一、i2c子系统篇 MPU6050和AP3216C外设驱动1.根据硬件原理图确认硬件相关信息外设挂在哪一条I2C总线上? 设备的7-bit I2C地址是多少? 物理引脚是什么，引脚复用怎么设置?  MPU6050:  总线：I2C1  地址：0x68(0xD0 &gt;&gt; 1)  功能：三轴加速度 + 三轴陀螺仪 + 温度  引脚复用配置：MX6UL_PAD_UART4_RX_DATA__I
+          一、i2c子系统篇 MPU6050和AP3216C外设驱动1.根据硬件原理图确认硬件相关信息外设挂在哪一条I2C总线上? 设备的7-bit I2C地址是多少? 物理引脚是什么，引脚复用怎么设置?  M
         </div>
       </a>
 
@@ -907,7 +907,7 @@
       
       <a class="index-excerpt " href="/2026/05/08/xv6%E5%AE%9E%E9%AA%8C%E9%85%8D%E7%BD%AE-Mac/" target="_self">
         <div>
-          整体搭建思路 Mac本地负责存代码和写代码 Docker容器负责提供Linux编译运行环境将本地的文件夹和xv6具体实验代码建立映射关系~&#x2F;code&#x2F;xv6_labs  &lt;&#x3D;&gt;  &#x2F;root&#x2F;xv6-labs-2021在Mac上用vscode修改代码，容器里会同步看到代码变化  具体流程1、创建Docker镜像（已经准备好了ubuntu
+          整体搭建思路 Mac本地负责存代码和写代码 Docker容器负责提供Linux编译运行环境将本地的文件夹和xv6具体实验代码建立映射关系~&#x2F;code&#x2F;xv6_labs  &lt;&
         </div>
       </a>
 
@@ -981,7 +981,7 @@
       
       <a class="index-excerpt " href="/2026/04/28/hello-world/" target="_self">
         <div>
-          前言就像每个刚开始学习coding的人一样，第一个手写的程序恐怕就是helloword.c了。DevC++的大蓝图标，白底的编辑器，纯黑的命令行成了我对coding的initial impression。此篇博客的目的便是如此。Motivation有很多，但是我想主要还是以下的几个。 分享欲许久没有写文字整理自己的思路了(上次写这种大段碎碎念恐怕得追溯到大一大二了，想来真是一段十分自由的时光)，我
+          前言就像每个刚开始学习coding的人一样，第一个手写的程序恐怕就是helloword.c了。DevC++的大蓝图标，白底的编辑器，纯黑的命令行成了我对coding的initial impressio
         </div>
       </a>
 
@@ -1227,7 +1227,7 @@
         <i class="fa-solid fa-bullhorn"></i> 公告
       </h4>
       <div class="widget-announcement-text">
-        欢迎来到我的博客！这里记录了我的学习笔记和技术分享，希望能对你有所帮助。
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
       </div>
     </div>
 
@@ -1369,15 +1369,15 @@
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/Tools/">
-              <span class="widget-cat-name">Tools</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
