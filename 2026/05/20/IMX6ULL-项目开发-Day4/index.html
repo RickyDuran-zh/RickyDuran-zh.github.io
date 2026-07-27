@@ -877,6 +877,7 @@
 
   
 <script src="/js/like-button.js"></script>
+<script src="/js/reading-progress.js"></script>
 
 
 
@@ -885,7 +886,241 @@
 <script  src="/js/boot.js" ></script>
 
 
-  
+  <!--
+  首页右侧 Widget 信息面板
+  参考 Diaspora 持久侧边栏的设计理念
+  仅在大屏首页显示
+-->
+<div class="widget-panel" id="widget-panel">
+<!-- 文章页不显示（已有 TOC 侧栏），JS 在此检测并隐藏 -->
+  <div class="widget-panel-inner">
+
+    <!-- 博主信息卡片 -->
+    <div class="widget-card widget-profile">
+      <img
+        class="widget-avatar"
+        src="/img/avatar.png" srcset="/img/loading.gif" lazyload
+        alt="avatar"
+        onerror="this.style.display='none'"
+      />
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+      
+      <div class="widget-social">
+        
+        
+          <a href="https://hexo.fluid-dev.com/" title="" target="_blank" rel="noopener" class="widget-social-link">
+            <i class="fa-solid fa-link"></i>
+          </a>
+        
+          <a href="https://hexo.fluid-dev.com/docs/" title="" target="_blank" rel="noopener" class="widget-social-link">
+            <i class="fa-solid fa-link"></i>
+          </a>
+        
+          <a href="https://github.com/fluid-dev/hexo-theme-fluid" title="" target="_blank" rel="noopener" class="widget-social-link">
+            <i class="fa-solid fa-link"></i>
+          </a>
+        
+      </div>
+      
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-clock"></i> 最新文章
+      </h4>
+      <ul class="widget-list">
+        
+        
+          <li>
+            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结">
+              <span class="widget-post-title">久违的七月总结</span>
+            </a>
+            <span class="widget-post-date">07-24</span>
+          </li>
+        
+          <li>
+            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载">
+              <span class="widget-post-title">C++ 运算符重载</span>
+            </a>
+            <span class="widget-post-date">07-13</span>
+          </li>
+        
+          <li>
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测">
+              <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
+            </a>
+            <span class="widget-post-date">07-10</span>
+          </li>
+        
+          <li>
+            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI%E5%9F%BA%E7%A1%80/" title="嵌入式 AI 基础">
+              <span class="widget-post-title">嵌入式 AI 基础</span>
+            </a>
+            <span class="widget-post-date">07-07</span>
+          </li>
+        
+          <li>
+            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结">
+              <span class="widget-post-title">久违的六月总结</span>
+            </a>
+            <span class="widget-post-date">07-02</span>
+          </li>
+        
+          <li>
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="嵌入式音视频相关基础知识">
+              <span class="widget-post-title">嵌入式音视频相关基础知识</span>
+            </a>
+            <span class="widget-post-date">06-26</span>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- 分类 -->
+    
+    <div class="widget-card widget-categories">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-layer-group"></i> 分类
+      </h4>
+      <ul class="widget-list">
+        
+          <li>
+            <a href="/categories/IMX6ULL/">
+              <span class="widget-cat-name">IMX6ULL</span>
+              <span class="widget-cat-count">12</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E5%88%B7%E9%A2%98/">
+              <span class="widget-cat-name">刷题</span>
+              <span class="widget-cat-count">7</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E9%9A%8F%E7%AC%94/">
+              <span class="widget-cat-name">随笔</span>
+              <span class="widget-cat-count">4</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/RK3588S2/">
+              <span class="widget-cat-name">RK3588S2</span>
+              <span class="widget-cat-count">3</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/IMX6ULL/OS/">
+              <span class="widget-cat-name">OS</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/xv6/">
+              <span class="widget-cat-name">xv6</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+    
+
+    <!-- 标签云（迷你版） -->
+    
+    <div class="widget-card widget-tags">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-tags"></i> 标签
+      </h4>
+      <div class="widget-tag-cloud">
+        
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+            #技术
+          </a>
+        
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+            #项目开发
+          </a>
+        
+          <a href="/tags/%E7%AE%97%E6%B3%95/" class="widget-tag-item" style="font-size: 0.9199999999999999rem">
+            #算法
+          </a>
+        
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+            #生活
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #Tutorial
+          </a>
+        
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #工作流分享
+          </a>
+        
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #八股
+          </a>
+        
+      </div>
+    </div>
+    
+
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var panel = document.getElementById('widget-panel');
+  if (!panel) return;
+
+  // 文章页不显示（已有 TOC 侧边栏）
+  var isPost = document.querySelector('.markdown-body');
+  if (isPost) {
+    panel.style.display = 'none';
+    return;
+  }
+
+  // 小屏不显示
+  function checkScreen() {
+    if (window.innerWidth >= 1200) {
+      panel.style.display = 'block';
+    } else {
+      panel.style.display = 'none';
+    }
+  }
+  checkScreen();
+  window.addEventListener('resize', checkScreen, { passive: true });
+})();
+</script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
