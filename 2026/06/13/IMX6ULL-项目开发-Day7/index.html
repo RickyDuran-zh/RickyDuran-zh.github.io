@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -391,7 +391,7 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志</p>
 </blockquote>
-<p><img src="/../img/Day7/architecture.png" srcset="/img/loading.gif" lazyload alt="视觉与状态逻辑架构图"></p>
+<p><img src="/../img/Day7/architecture.png" alt="视觉与状态逻辑架构图"></p>
 <h3 id="P1-USB摄像头-运动检测-拍照-检测画面变化-Motion"><a href="#P1-USB摄像头-运动检测-拍照-检测画面变化-Motion" class="headerlink" title="P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)"></a>P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)</h3><blockquote>
 <p>目标：拍照并检测物体运动</p>
 </blockquote>
@@ -400,15 +400,15 @@
 <h3 id="P2-ncnn-人脸检测"><a href="#P2-ncnn-人脸检测" class="headerlink" title="P2 ncnn 人脸检测"></a>P2 ncnn 人脸检测</h3><blockquote>
 <p>目标：P1 运动触发后 ——&gt; P2 ncnn 神经网络判断画面中是否存在人脸</p>
 </blockquote>
-<p><img src="/../img/Day7/p2.png" srcset="/img/loading.gif" lazyload alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
+<p><img src="/../img/Day7/p2.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
 <h4 id="安装部署流程"><a href="#安装部署流程" class="headerlink" title="安装部署流程"></a>安装部署流程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 安装 g++ 交叉编译器（和已有的 gcc 7.5 配套）编译 CPP 文件</span><br><span class="hljs-built_in">sudo</span> apt install -y g++-arm-linux-gnueabihf<br><span class="hljs-comment"># 2 clone ncnn 腾讯 神经网络推理框架 优化神经网络模型在嵌入式等 ARM 设备上占用更少内存的同时更快运行</span><br><span class="hljs-built_in">cd</span> ~<br>git <span class="hljs-built_in">clone</span> https://gitee.com/nihui/ncnn.git<br><span class="hljs-built_in">cd</span> ncnn<br><span class="hljs-built_in">mkdir</span> build-arm &amp;&amp; <span class="hljs-built_in">cd</span> build-arm<br>cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake \<br>      -DCMAKE_BUILD_TYPE=Release \<br>      -DNCNN_VULKAN=OFF \<br>      -DNCNN_BUILD_TOOLS=OFF \<br>      -DNCNN_BUILD_EXAMPLES=OFF \<br>      -DNCNN_BUILD_BENCHMARK=OFF \<br>        ..<br>make -j4<br><span class="hljs-built_in">ls</span> -la src/libncnn.a <span class="hljs-comment"># 静态链接库</span><br><span class="hljs-comment"># 3 获取依赖的头文件 stb_image.h（单头文件 JPEG 解码器）</span><br><span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">mkdir</span> stb<br><span class="hljs-built_in">cd</span> stb<br>wget https://raw.githubusercontent.com/nothings/stb/master/stb_image.h<br><span class="hljs-comment"># 4 编译</span><br><span class="hljs-built_in">cd</span> app &amp;&amp; make edgeguard_visiond_face NCNN_DIR=~/ncnn STB_DIR=~/stb<br><span class="hljs-comment"># 5 clone 人脸检测模型</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/edgeguard/models/ <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ./RFB-320.param RFB-320.bin /etc/edgeguard/models/<br><span class="hljs-comment"># 6 重启服务</span><br>systemctl daemon-reload<br>systemctl restart edgeguard-visiond<br></code></pre></td></tr></table></figure>
 <h4 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="实现原理"></a>实现原理</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Text"># face_detect.cpp 新增<br>① face_detect_init()<br>     → 打开 RFB-320.param（网络结构）<br>     → 打开 RFB-320.bin（训练好的权重）<br>     → ncnn::Net::load_param() + load_model()<br>     → 模型常驻内存<br><br>② face_detect_run(jpeg, len, &amp;count)<br>     → stb_image JPEG解码 → RGB像素数组<br>     → ncnn::Mat::from_pixels() 包装<br>     → resize_bilinear() 缩放到 320×240<br>     → 归一化 [0,255] → [-1,1]<br>     → ncnn 神经网络前向推理（~400ms）<br>     → 得到 scores（置信度）+ boxes（边框坐标）<br>     → NMS 去重（IoU&gt;0.4 的框合并）<br>     → 统计 conf≥0.7 的框数 → *count<br></code></pre></td></tr></table></figure>
 <h3 id="P3-人脸识别登陆系统"><a href="#P3-人脸识别登陆系统" class="headerlink" title="P3 人脸识别登陆系统"></a>P3 人脸识别登陆系统</h3><blockquote>
 <p>目标：在 P2 基础上叠加人脸识别，实现“刷脸自动登录</p>
 </blockquote>
-<p><img src="/../img/Day7/p3_architecture.png" srcset="/img/loading.gif" lazyload alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
+<p><img src="/../img/Day7/p3_architecture.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
 <h4 id="安装部署流程-1"><a href="#安装部署流程-1" class="headerlink" title="安装部署流程"></a>安装部署流程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 clone 人脸识别模型 模型结构和权重 模型来源于 ncnn 官方 assets</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /mnt/mobilefacenet.param mobilefacenet.bin /etc/edgeguard/models/<br><span class="hljs-comment"># 2 编译人脸识别和检测的 visiond 服务以及人脸注册工具</span><br>make edgeguard_visiond_face NCNN_DIR=/home/rickyduran/ncnn JPEG_DIR=/opt/libjpeg-arm<br>make face_register NCNN_DIR=/home/rickyduran/ncnn JPEG_DIR=/opt/libjpeg-arm<br><span class="hljs-comment"># 3 注册人脸</span><br>./face_register rickyduran /tmp/myface.jpg <br><span class="hljs-comment"># 输出: [face_register] SUCCESS — &#x27;rickyduran&#x27; enrolled</span><br><span class="hljs-comment">#       [face_register] database: /etc/edgeguard/face_db.json</span><br></code></pre></td></tr></table></figure>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day7/p1_camera.png" srcset="/img/loading.gif" lazyload alt="P1 Web 界面实时快照显示"></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day7/p1_camera.png" alt="P1 Web 界面实时快照显示"></p>
 
                 
               </div>
@@ -525,7 +525,7 @@
             
   
   
-    <article id="comments" lazyload>
+    <article id="comments">
       
     <div id="giscus" class="giscus"></div>
     <script type="text/javascript">
@@ -707,7 +707,9 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -910,7 +912,7 @@
     <div class="widget-card widget-profile">
       <img
         class="widget-avatar"
-        src="/img/rickyduran.png" srcset="/img/loading.gif" lazyload
+        src="/img/rickyduran.png"
         alt="avatar"
         onerror="this.style.display='none'"
       />
@@ -978,7 +980,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -993,7 +995,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1008,7 +1010,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1023,7 +1025,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1038,7 +1040,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1049,15 +1051,15 @@
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="嵌入式音视频相关基础知识" class="widget-recent-link">
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频相关基础知识</span>
+                <span class="widget-post-title">嵌入式音视频</span>
                 <span class="widget-post-date">06-26</span>
               </span>
             </a>

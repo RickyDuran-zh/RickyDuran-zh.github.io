@@ -78,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -401,8 +401,8 @@
 <p><em>僵尸进程和孤儿进程：僵尸进程是说子进程退出了但是资源并没有被父进程正确地释放 僵尸进程的积累会导致内存不足 孤儿进程是说一个进程的父进程先行退出了 相关概念涉及到进程的状态转换和资源调度。</em></p>
 <p><em>如何创建对象：通过 pipe这个系统调用可以去创建一个特殊的流式字符对象——匿名管道 这个系统调用会返回两个fd 一个指向管道的读口 一个指向管道的写口 进程同时拥有读口和写口 通过配合fork命令和fd的闪转腾挪可以实现进程之间的通信   mount命令可以创建文件系统的对象</em></p>
 <h3 id="fd-文件描述符-？"><a href="#fd-文件描述符-？" class="headerlink" title="fd(文件描述符)？"></a>fd(文件描述符)？</h3><p><em>Linux 的哲学在于一切皆文件。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364617329">https://zhuanlan.zhihu.com/p/364617329</a></em></p>
-<p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/bagu/fd.png" srcset="/img/loading.gif" lazyload alt="什么是 fd？"></p>
-<h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/bagu/process.png" srcset="/img/loading.gif" lazyload alt="进程在内存中的结构"></p>
+<p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/bagu/fd.png" alt="什么是 fd？"></p>
+<h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/bagu/process.png" alt="进程在内存中的结构"></p>
 <h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><strong>Makefile: <em><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/makefile/complete/index.html">https://liaoxuefeng.com/books/makefile/complete/index.html</a></em></strong></p>
 
                 
@@ -518,7 +518,7 @@
             
   
   
-    <article id="comments" lazyload>
+    <article id="comments">
       
     <div id="giscus" class="giscus"></div>
     <script type="text/javascript">
@@ -700,7 +700,9 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -903,7 +905,7 @@
     <div class="widget-card widget-profile">
       <img
         class="widget-avatar"
-        src="/img/rickyduran.png" srcset="/img/loading.gif" lazyload
+        src="/img/rickyduran.png"
         alt="avatar"
         onerror="this.style.display='none'"
       />
@@ -971,7 +973,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -986,7 +988,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1001,7 +1003,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1016,7 +1018,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1031,7 +1033,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1042,15 +1044,15 @@
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="嵌入式音视频相关基础知识" class="widget-recent-link">
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频相关基础知识</span>
+                <span class="widget-post-title">嵌入式音视频</span>
                 <span class="widget-post-date">06-26</span>
               </span>
             </a>

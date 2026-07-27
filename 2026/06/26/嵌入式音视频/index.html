@@ -21,14 +21,14 @@
   
     <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式音视频相关基础知识">
-<meta property="og:url" content="http://example.com/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="嵌入式音视频">
+<meta property="og:url" content="http://example.com/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
 <meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https:&#x2F;&#x2F;dcn7p0jfzncn.feishu.cn&#x2F;wiki&#x2F;VfdAw2DrTi8SsbkbHk7ct0cGnqc?from&#x3D;from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https:&#x2F;&#x2F;dcn7p0jfzncn.f">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/2026-7-27/2.png">
 <meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
-<meta property="article:modified_time" content="2026-07-27T05:58:39.468Z">
+<meta property="article:modified_time" content="2026-07-27T06:12:41.808Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
   
   
   
-  <title>嵌入式音视频相关基础知识 - RickyDuran&#39;s Blog</title>
+  <title>嵌入式音视频 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -78,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -309,7 +309,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="嵌入式音视频相关基础知识"></span>
+            <span id="subtitle" data-typed-text="嵌入式音视频"></span>
           
         </div>
 
@@ -382,7 +382,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">嵌入式音视频相关基础知识</h1>
+            <h1 id="seo-header">嵌入式音视频</h1>
             
             
               <div class="markdown-body">
@@ -435,7 +435,7 @@
 <h3 id="4、编解码"><a href="#4、编解码" class="headerlink" title="4、编解码"></a>4、编解码</h3><blockquote>
 <p><strong>H.264</strong> - 采用了 16x16 的分块大小和对视频帧图像进行相似比较和压缩编码。视频压缩可以分为帧内压缩和帧间压缩。帧内压缩是生成 I 帧的算法，仅考虑本帧的数据，压缩率一般不高。帧间压缩则是生成 P 帧和 B 帧的算法。H.264 原始码流是编码后的基本数据流不包含任何封装信息，由 NAL 单元组成，每个 NALU 是一个基本的数据编码单元。RBSP(NAL Payload 有效负载)，提供实际编码数据，去除对解码无意义的字节填充，添加必要的终止位。VCL 和 NAL。</p>
 </blockquote>
-<p><img src="/../img/audio/nal.png" srcset="/img/loading.gif" lazyload alt="ES 中的基本 NAL 单元"></p>
+<p><img src="/../img/audio/nal.png" alt="ES 中的基本 NAL 单元"></p>
 <blockquote>
 <p><strong>H.265</strong> - HEVC，压缩率高达 1：200。采用了最小 8x8 到最大 64x64 编码宏块，在相同的分辨率下，H265 编码能够以更低的码率进行传输。一样遵循 VCL + VAL，结构上多了一个 VPS。</p>
 </blockquote>
@@ -493,8 +493,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>嵌入式音视频相关基础知识</div>
-      <div>http://example.com/2026/06/26/嵌入式音视频相关基础知识/</div>
+      <div>嵌入式音视频</div>
+      <div>http://example.com/2026/06/26/嵌入式音视频/</div>
     </div>
     <div class="license-meta">
       
@@ -562,7 +562,7 @@
             
   
   
-    <article id="comments" lazyload>
+    <article id="comments">
       
     <div id="giscus" class="giscus"></div>
     <script type="text/javascript">
@@ -744,7 +744,9 @@
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
   
 
 
@@ -947,7 +949,7 @@
     <div class="widget-card widget-profile">
       <img
         class="widget-avatar"
-        src="/img/rickyduran.png" srcset="/img/loading.gif" lazyload
+        src="/img/rickyduran.png"
         alt="avatar"
         onerror="this.style.display='none'"
       />
@@ -1015,7 +1017,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1030,7 +1032,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1045,7 +1047,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1060,7 +1062,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1075,7 +1077,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1086,15 +1088,15 @@
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="嵌入式音视频相关基础知识" class="widget-recent-link">
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" srcset="/img/loading.gif" lazyload alt="" loading="lazy" />
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频相关基础知识</span>
+                <span class="widget-post-title">嵌入式音视频</span>
                 <span class="widget-post-date">06-26</span>
               </span>
             </a>
