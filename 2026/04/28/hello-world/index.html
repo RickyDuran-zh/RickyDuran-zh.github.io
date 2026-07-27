@@ -1078,15 +1078,15 @@
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/Tools/">
-              <span class="widget-cat-name">Tools</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1252,15 +1252,43 @@
         container.appendChild(panel);
       }
       panel.style.display = 'block';
+      syncContainerHeight();
     } else {
       panel.style.display = 'none';
+      resetContainerHeight();
+    }
+  }
+
+  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
+  function syncContainerHeight() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container || panel.style.display === 'none') return;
+    // 等待渲染完成后计算
+    requestAnimationFrame(function() {
+      var panelBottom = panel.offsetTop + panel.offsetHeight;
+      var containerHeight = container.offsetHeight;
+      if (panelBottom > containerHeight) {
+        container.style.minHeight = panelBottom + 'px';
+      }
+    });
+  }
+
+  function resetContainerHeight() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (container) {
+      container.style.minHeight = '';
     }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkScreen);
+    document.addEventListener('DOMContentLoaded', function() {
+      checkScreen();
+      // DOM 和图片加载后再次同步高度
+      setTimeout(syncContainerHeight, 500);
+    });
   } else {
     checkScreen();
+    setTimeout(syncContainerHeight, 500);
   }
   window.addEventListener('resize', checkScreen, { passive: true });
 

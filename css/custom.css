@@ -63,6 +63,23 @@
   transform: scale(1.08);
 }
 
+/* ---- 偶数卡片：封面在右，交错排列 ---- */
+@media (min-width: 768px) {
+  .index-card:nth-child(even) .index-img {
+    order: 2;
+    border-radius: 0 10px 10px 0;       /* 右侧圆角 */
+  }
+
+  .index-card:nth-child(even) .index-info {
+    order: 1;
+  }
+
+  /* 奇数卡片：封面在左（默认）确保圆角正确 */
+  .index-card:nth-child(odd) .index-img {
+    border-radius: 10px 0 0 10px;       /* 左侧圆角 */
+  }
+}
+
 /* 深色模式卡片悬浮 */
 [data-user-color-scheme="dark"] .index-card:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
@@ -1039,9 +1056,9 @@ a.print-no-link:hover {
 
 .widget-recent-cover {
   flex-shrink: 0;
-  width: 42px;
-  height: 42px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1056,6 +1073,7 @@ a.print-no-link:hover {
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
+  cursor: pointer;
 }
 
 /* 悬浮时封面轻微放大 */
