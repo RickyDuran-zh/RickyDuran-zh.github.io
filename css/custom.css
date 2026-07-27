@@ -40,6 +40,29 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
+/* 卡片封面图悬浮放大 */
+.index-img {
+  overflow: hidden;
+  border-radius: 10px 0 0 10px;
+}
+
+.index-img a {
+  display: block;
+  overflow: hidden;
+}
+
+.index-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.index-card:hover .index-img img {
+  transform: scale(1.08);
+}
+
 /* 深色模式卡片悬浮 */
 [data-user-color-scheme="dark"] .index-card:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
@@ -791,11 +814,13 @@ a.print-no-link:hover {
   border: 2px solid rgba(48, 169, 222, 0.2);
   padding: 2px;
   margin-bottom: 0.6rem;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease;
+  /* 3D 翻转视角 */
+  perspective: 600px;
 }
 
 .widget-avatar:hover {
-  transform: scale(1.06);
+  transform: rotateY(180deg) scale(1.08);
   border-color: rgba(48, 169, 222, 0.5);
 }
 
@@ -994,6 +1019,91 @@ a.print-no-link:hover {
   white-space: nowrap;
   flex: 1;
   min-width: 0;
+}
+
+/* ---- 最新文章封面缩略图 ---- */
+.widget-recent-list li {
+  padding: 0.3rem 0;
+}
+
+.widget-recent-link {
+  display: flex !important;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.15rem 0 !important;
+}
+
+.widget-recent-link:hover {
+  padding-left: 0 !important;       /* 取消默认左移，改用封面放大 */
+}
+
+.widget-recent-cover {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--line-color, #eef0f2);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.widget-recent-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* 悬浮时封面轻微放大 */
+.widget-recent-link:hover .widget-recent-cover {
+  transform: scale(1.12);
+}
+
+.widget-recent-link:hover .widget-recent-cover img {
+  transform: scale(1.05);
+}
+
+/* 无封面时的占位图标 */
+.widget-recent-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #b0bec5;
+  font-size: 0.85rem;
+}
+
+/* 标题 + 日期堆叠 */
+.widget-recent-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  gap: 0.15rem;
+}
+
+.widget-recent-info .widget-post-title {
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.widget-recent-info .widget-post-date {
+  font-size: 0.68rem;
+  margin-left: 0;
+}
+
+/* 暗色模式封面占位 */
+[data-user-color-scheme="dark"] .widget-recent-cover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-user-color-scheme="dark"] .widget-recent-cover-placeholder {
+  color: #5a6a7a;
 }
 
 /* 分类计数 badge */
