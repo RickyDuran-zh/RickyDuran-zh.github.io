@@ -1089,13 +1089,6 @@
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
-            </a>
-          </li>
-        
-          <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
@@ -1103,8 +1096,8 @@
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1112,6 +1105,13 @@
           <li>
             <a href="/categories/xv6/">
               <span class="widget-cat-name">xv6</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/IMX6ULL/OS/">
+              <span class="widget-cat-name">OS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1266,10 +1266,10 @@
       container.classList.add('has-widget');
       panel.style.display = '';
     } else {
-      // 小屏：移回 body 末尾 → CSS Grid 降级为底部卡片
+      // 小屏：放在主内容容器之后、页脚之前
       container.classList.remove('has-widget');
-      if (panel.parentNode === container) {
-        document.body.appendChild(panel);
+      if (panel.previousElementSibling !== container) {
+        container.insertAdjacentElement('afterend', panel);
       }
       panel.style.display = '';
     }

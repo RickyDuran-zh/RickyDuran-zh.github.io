@@ -842,16 +842,20 @@ a.print-no-link:hover {
 .widget-panel {
   display: none;           /* 默认隐藏，JS 移入容器后显示 */
   width: 280px;
+  min-width: 0;
+  box-sizing: border-box;
   flex-shrink: 0;
   font-size: 0.88rem;
   line-height: 1.6;
 }
 
-/* 大屏：Flex 双栏 */
+/* 大屏：正文与侧栏各占一条网格轨道，互不覆盖 */
 @media (min-width: 1200px) {
   .container.nopadding-x-md.has-widget {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    column-gap: 2rem;
+    box-sizing: border-box;
     align-items: flex-start;
     max-width: 1140px;
     margin: 0 auto;
@@ -863,14 +867,25 @@ a.print-no-link:hover {
 
   .container.nopadding-x-md.has-widget #board,
   .container.nopadding-x-md.has-widget > .list-group {
-    flex: 1;
+    grid-column: 1;
     min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 0;
     transform: none;
   }
 
   .container.nopadding-x-md.has-widget .widget-panel {
     display: block;
+    grid-column: 2;
+    position: sticky;
+    top: 5.25rem;
+    max-height: calc(100vh - 6.5rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    isolation: isolate;
   }
 }
 
@@ -904,15 +919,101 @@ a.print-no-link:hover {
   z-index: auto !important;
 }
 
-/* 确保 header/cover 与内容区完全隔离不重叠 */
+/* Cover、内容区和侧栏建立独立绘制层，禁止跨区域覆盖 */
 header {
   position: relative;
-  z-index: 1;
+  z-index: auto;
+  isolation: isolate;
+}
+
+.header-inner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.header-inner > .banner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.header-inner > .navbar {
+  z-index: 1030;
 }
 
 main {
   position: relative;
-  z-index: 2;
+  z-index: auto;
+  isolation: isolate;
+  background: var(--body-bg-color, #f5f6f8);
+}
+
+/* 文章页三轨布局：左留白 / 正文 / TOC，不依赖外部栅格样式 */
+@media (min-width: 992px) {
+  main > .container-fluid.nopadding-x > .row.nomargin-x {
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) minmax(0, 820px) minmax(220px, 1fr);
+    column-gap: 2rem;
+    align-items: start;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 !important;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+
+  main > .container-fluid.nopadding-x > .row.nomargin-x > .side-col {
+    display: block !important;
+    align-self: stretch;
+    min-width: 0;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  main > .container-fluid.nopadding-x > .row.nomargin-x > .col-lg-8 {
+    min-width: 0;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  main #board-ctn.container.nopadding-x-md {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  main .side-col .sidebar {
+    position: sticky;
+    top: 5.25rem !important;
+    box-sizing: border-box;
+    width: 100%;
+    max-height: calc(100vh - 6.5rem);
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  main .side-col .toc-body {
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (max-width: 991px) {
+  main > .container-fluid.nopadding-x > .row.nomargin-x > .side-col {
+    display: none !important;
+  }
+
+  main > .container-fluid.nopadding-x > .row.nomargin-x > .col-lg-8 {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
 }
 
 #board:hover {
@@ -1789,6 +1890,7 @@ footer a:hover {
 
 /* 整体页面流：header + main 自然排列 */
 body {
+  margin: 0;
   overflow-x: hidden;
 }
 
@@ -2441,6 +2543,7 @@ body {
     position: static !important;
     width: 100% !important;
     max-width: 100% !important;
+    box-sizing: border-box;
     right: auto !important;
     top: auto !important;
     margin-top: 2rem;
