@@ -2003,111 +2003,26 @@ footer a:hover {
 }
 
 /* ===================================
-   首页 Banner 增强：头像 + 简介 + 社交 + 滚动提示
+   首页 Banner 增强：向下滚动提示
    注入位置在 <header> 内部，banner 之后
-   用绝对定位浮动在 banner 底部中央
+   绝对定位浮动在 banner 底部中央
    =================================== */
 
-/* Header 需要 relative 作为定位参考 */
 header {
   position: relative;
 }
 
-/* 整体容器：绝对定位，浮动在 banner 底部 */
-.banner-hero-content {
+/* 向下滚动提示 */
+.banner-scroll-indicator {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
-  animation: bannerFadeUp 0.7s 0.15s cubic-bezier(0, 0, 0.2, 1) both;
-}
-
-@keyframes bannerFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 头像 —— 圆形，带光环 */
-.banner-avatar {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.12),
-              0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.3s ease;
-}
-
-.banner-avatar:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2),
-              0 6px 28px rgba(0, 0, 0, 0.4);
-}
-
-/* 简介文字 */
-.banner-bio {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.88);
-  margin: 0;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-  max-width: 480px;
-  text-align: center;
-  line-height: 1.5;
-}
-
-/* 社交图标行 */
-.banner-social {
-  display: flex;
-  gap: 0.6rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.banner-social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.12);
-  font-size: 1.05rem;
-  text-decoration: none;
-  backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
-}
-
-.banner-social-link:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  text-decoration: none;
-}
-
-/* 向下滚动提示 */
-.banner-scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 0.3rem;
-  margin-top: 1rem;
   opacity: 0.7;
   animation: bannerScrollPulse 2s ease-in-out infinite;
   cursor: default;
@@ -2128,34 +2043,21 @@ header {
 @keyframes bannerScrollPulse {
   0%, 100% {
     opacity: 0.5;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
   50% {
     opacity: 0.9;
-    transform: translateY(6px);
+    transform: translateX(-50%) translateY(6px);
   }
 }
 
-/* 移动端 Banner 适配 */
 @media (max-width: 767px) {
-  .banner-avatar {
-    width: 65px;
-    height: 65px;
-  }
-
-  .banner-bio {
-    font-size: 0.88rem;
-    max-width: 300px;
-  }
-
-  .banner-social-link {
-    width: 2.1rem;
-    height: 2.1rem;
-    font-size: 0.9rem;
-  }
-
   .banner-scroll-indicator {
-    margin-top: 0.5rem;
+    bottom: 1rem;
+  }
+
+  .banner-scroll-text {
+    font-size: 0.68rem;
   }
 }
 
