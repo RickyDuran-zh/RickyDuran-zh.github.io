@@ -834,22 +834,31 @@ a.print-no-link:hover {
 
 /* ===================================
    首页右侧 Widget 信息面板
-   大屏：Flexbox 侧边栏，与内容并排
+   大屏：fixed 定位，紧贴内容区右侧，与容器对齐
    小屏：底部内联卡片
-   文章页不显示（已有 TOC 侧边栏）
+   文章页：JS 移除（已有 TOC 侧边栏）
    =================================== */
 
 .widget-panel {
-  display: none;                    /* JS 按条件显示 */
   width: 280px;
-  flex-shrink: 0;
   font-size: 0.88rem;
   line-height: 1.6;
-  position: sticky;
-  top: 5rem;
-  align-self: flex-start;
-  max-height: calc(100vh - 6rem);
-  overflow-y: auto;
+  display: block;
+}
+
+/* 大屏：固定定位在居中容器右侧 */
+/* 容器 820px 居中 → 容器右边缘 = 50vw + 410px */
+/* 侧边栏左边缘 = 容器右边缘 + 2rem 间距 = 50vw + 410px + 2rem */
+@media (min-width: 1200px) {
+  .widget-panel {
+    position: fixed;
+    top: 5rem;
+    left: calc(50vw + 410px + 2rem);
+    width: 280px;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    z-index: 5;
+  }
 }
 
 .widget-panel-inner {
@@ -1714,10 +1723,10 @@ body {
   overflow-x: hidden;
 }
 
-/* 主容器自适应宽度 + Flex 侧边栏 */
+/* 主容器：居中，宽度为内容区，侧边栏固定在其右侧 */
 @media (min-width: 1200px) {
   .container.nopadding-x-md {
-    max-width: 1140px;
+    max-width: 820px;
     margin: 0 auto;
     padding-top: 2.5rem;
     padding-bottom: 2rem;
@@ -1725,24 +1734,12 @@ body {
     padding-right: 1rem;
   }
 
-  /* 有 Widget 时启用 Flex 双栏 */
-  .container.nopadding-x-md.has-widget {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-  }
-
-  .container.nopadding-x-md.has-widget #board {
-    flex: 1;
-    min-width: 0;
+  #board {
     margin-top: 0;
     transform: none;
   }
 
-  /* 归档/分类/标签页同理 */
-  .container.nopadding-x-md.has-widget .list-group {
-    flex: 1;
-    min-width: 0;
+  .list-group {
     transform: none;
   }
 }
