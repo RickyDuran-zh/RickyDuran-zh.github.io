@@ -1,0 +1,1445 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon-32x32.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="RickyDuran">
+  <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
+  
+    <meta name="description" content="概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IMX6ULL-核心api和宏(持续更新)">
+<meta property="og:url" content="http://example.com/2026/05/12/IMX6ULL-%E6%A0%B8%E5%BF%83api%E5%92%8C%E5%AE%8F(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/index.html">
+<meta property="og:site_name" content="RickyDuran&#39;s Blog">
+<meta property="og:description" content="概述 常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。  核心api和宏模块注册注销出入口MODULE_DEVICE_TABLE 声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。  1234567# input : type namestatic const struct i2c_device_id mydev_id[">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/imx6ull.png">
+<meta property="article:published_time" content="2026-05-12T14:10:07.000Z">
+<meta property="article:modified_time" content="2026-07-28T09:39:49.403Z">
+<meta property="article:author" content="RickyDuran">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/imx6ull.png">
+  
+  
+  
+  <title>IMX6ULL-核心api和宏(持续更新) - RickyDuran&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>RickyDuran&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="fa-solid fa-house"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="fa-solid fa-box-archive"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="fa-solid fa-tags"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-house"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-box-archive"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-layer-group"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-tags"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-circle-user"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/imx6ull.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="IMX6ULL-核心api和宏(持续更新)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-12 22:10" pubdate>
+          2026年5月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          71 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+<!--
+  首页 Banner 增强内容
+  头像 + 简介 + 社交图标 + 向下滚动提示
+  通过 theme_inject banner 注入
+-->
+
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">IMX6ULL-核心api和宏(持续更新)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>常用的函数和宏，用于遗忘时快速自查。包含涉及到内核和应用层的不同 api。</p>
+</blockquote>
+<h2 id="核心api和宏"><a href="#核心api和宏" class="headerlink" title="核心api和宏"></a>核心api和宏</h2><h3 id="模块注册注销出入口"><a href="#模块注册注销出入口" class="headerlink" title="模块注册注销出入口"></a>模块注册注销出入口</h3><h4 id="MODULE-DEVICE-TABLE"><a href="#MODULE-DEVICE-TABLE" class="headerlink" title="MODULE_DEVICE_TABLE"></a>MODULE_DEVICE_TABLE</h4><blockquote>
+<p>声明当前驱动模块所支持的设备列表。当 udev 检测到新设备时，系统会根据该表自动加载对应的驱动模块。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : type name</span><br><br><span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">i2c_device_id</span> <span class="hljs-title">mydev_id</span>[] =</span> &#123;<br>    &#123; <span class="hljs-string">&quot;device_name&quot;</span>, <span class="hljs-number">0</span> &#125;,<br>    &#123; &#125;<br>&#125;;<br>MODULE_DEVICE_TABLE(i2c, mydev_id);<br></code></pre></td></tr></table></figure>
+<h4 id="module-i2c-driver"><a href="#module-i2c-driver" class="headerlink" title="module_i2c_driver()"></a>module_i2c_driver()</h4><blockquote>
+<p>一个辅助宏，封装了 module_init()和 module_exit()，简化标准 I2C 驱动模板的初始化和退出代码。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : __i2c_driver</span><br><br>module_i2c_driver(my_i2c_driver);<br><span class="hljs-comment">// module_init(my_i2c_driver_init);</span><br><span class="hljs-comment">// module_exit(my_i2c_driver_exit);</span><br></code></pre></td></tr></table></figure>
+<h4 id="module-platform-driver"><a href="#module-platform-driver" class="headerlink" title="module_platform_driver()"></a>module_platform_driver()</h4><blockquote>
+<p>内核辅助宏，用于简化 Platform 驱动模块的初始化和退出代码。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : __platform_driver</span><br><br>module_platform_driver(my_platform_driver);<br></code></pre></td></tr></table></figure>
+
+<h3 id="i2c子系统"><a href="#i2c子系统" class="headerlink" title="i2c子系统"></a>i2c子系统</h3><h4 id="i2c-set-clientdata"><a href="#i2c-set-clientdata" class="headerlink" title="i2c_set_clientdata()"></a>i2c_set_clientdata()</h4><blockquote>
+<p>将自定义的私有数据结构指针保存到 i2c_client(dev 字段中的 driver_data 指针存储) 当中，在驱动的 probe 函数中常被用来保存设备上下文。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : client data</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">pdata</span> =</span> devm_kzalloc(&amp;client-&gt;dev, <span class="hljs-keyword">sizeof</span>(*pdata), GFP_KERNEL);<br>i2c_set_clientdata(client, pdata);<br></code></pre></td></tr></table></figure>
+<h4 id="i2c-get-clientdata"><a href="#i2c-get-clientdata" class="headerlink" title="i2c_get_clientdata()"></a>i2c_get_clientdata()</h4><blockquote>
+<p>从 i2c_client 中取出之前保存的私有数据结构指针。用于驱动的 read、write 或 remove 回调中。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : client</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">pdata</span> =</span> i2c_get_clientdata(client);<br></code></pre></td></tr></table></figure>
+<h4 id="i2c-smbus-read-i2c-block-data"><a href="#i2c-smbus-read-i2c-block-data" class="headerlink" title="i2c_smbus_read_i2c_block_data()"></a>i2c_smbus_read_i2c_block_data()</h4><blockquote>
+<p>从 i2c 设备读取一块连续的数据。它遵循 SMBus 块读取协议。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : client command(寄存器地址) length values</span><br><span class="hljs-meta"># return ： 成功时返回读取的字节数，否则返回负的错误码</span><br><br>u8 buffer[<span class="hljs-number">16</span>];<br><span class="hljs-type">int</span> ret = i2c_smbus_read_i2c_block_data(client, <span class="hljs-number">0x10</span>, <span class="hljs-number">16</span>, buffer);<br></code></pre></td></tr></table></figure>
+<h4 id="i2c-smbus-write-byte-data"><a href="#i2c-smbus-write-byte-data" class="headerlink" title="i2c_smbus_write_byte_data()"></a>i2c_smbus_write_byte_data()</h4><blockquote>
+<p>向 i2c 设备寄存器的指定地址写入一个字节的数据</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : client command(寄存器地址) value</span><br><span class="hljs-meta"># return ： 成功时返回0，否则返回负的错误码</span><br><br><span class="hljs-type">int</span> ret = i2c_smbus_write_byte_data(client, <span class="hljs-number">0x01</span>, <span class="hljs-number">0x55</span>);<br></code></pre></td></tr></table></figure>
+<h4 id="i2c-check-functionality"><a href="#i2c-check-functionality" class="headerlink" title="i2c_check_functionality()"></a>i2c_check_functionality()</h4><blockquote>
+<p>在发起数据传输前，检查 i2c 适配器（硬件控制器）是否支持需要的传输方式。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : i2c_adapter functionality(功能掩码) : I2C_FUNC_SMBUS_BYTE_DATA / I2C_FUNC_I2C</span><br><span class="hljs-meta"># return ： 适配器支持指定功能返回true 否则返回false</span><br><br><span class="hljs-keyword">if</span> (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_SMBUS_BYTE_DATA)) &#123;<br>    dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Required features not supported\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> -ENXIO;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="gpio子系统"><a href="#gpio子系统" class="headerlink" title="gpio子系统"></a>gpio子系统</h3><h4 id="devm-gpid-get"><a href="#devm-gpid-get" class="headerlink" title="devm_gpid_get()"></a>devm_gpid_get()</h4><blockquote>
+<p>从设备树或固件中获取指定的 GPIO 引脚，并返回一个 struct gpio_desc* 描述符。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev  con_id : 用于在设备树中匹配具体GPIO属性的连接标识符  flags : 初始化标志 GPIOD_OUT_HIG / GPIOD_OUT_LOW / GPIOD_IN</span><br><span class="hljs-meta"># output : 成功返回struct gpio_desc * 失败返回ERR_PTR错误码 </span><br>    <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">reset_desc</span>;</span><br>reset_desc = devm_gpiod_get(dev, <span class="hljs-string">&quot;reset&quot;</span>, GPIOD_OUT_HIGH);<br><span class="hljs-keyword">if</span> (IS_ERR(reset_desc)) &#123;<br>    dev_err(dev, <span class="hljs-string">&quot;Failed to get reset GPIO: %ld\n&quot;</span>, PTR_ERR(reset_desc));<br>    <span class="hljs-keyword">return</span> PTR_ERR(reset_desc);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="gpiod-set-value-cansleep"><a href="#gpiod-set-value-cansleep" class="headerlink" title="gpiod_set_value_cansleep()"></a>gpiod_set_value_cansleep()</h4><blockquote>
+<p>设置 GPIO 的引脚值。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : gpio_desc*  value : 0 | 1</span><br>    <br><span class="hljs-comment">// probe 函数中</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">reset_gpio</span> =</span> devm_gpiod_get(dev, <span class="hljs-string">&quot;reset&quot;</span>, GPIOD_OUT_LOW);<br><br><span class="hljs-comment">// 某个工作队列或进程上下文中</span><br>gpiod_set_value_cansleep(reset_gpio, <span class="hljs-number">1</span>);  <span class="hljs-comment">// 拉高复位</span><br>msleep(<span class="hljs-number">10</span>);<br>gpiod_set_value_cansleep(reset_gpio, <span class="hljs-number">0</span>);  <span class="hljs-comment">// 释放复位</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="misc相关"><a href="#misc相关" class="headerlink" title="misc相关"></a>misc相关</h3><h4 id="misc-register"><a href="#misc-register" class="headerlink" title="misc_register()"></a>misc_register()</h4><blockquote>
+<p>向系统注册一个杂项设备。Misc 设备通常用于简单的字符设备，它们共享同一个主设备号(10)，并自动分配次设备号。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : miscdevice* misc</span><br><span class="hljs-meta"># output : 成功返回0 失败返回负的错误码</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">miscdevice</span> <span class="hljs-title">my_misc_dev</span> =</span> &#123;<br>    .minor = MISC_DYNAMIC_MINOR,<br>    .name = <span class="hljs-string">&quot;my_device&quot;</span>,<br>    .fops = &amp;my_fops,<br>&#125;;<br><span class="hljs-type">int</span> ret = misc_register(&amp;my_misc_dev);<br></code></pre></td></tr></table></figure>
+<h4 id="misc-deregister"><a href="#misc-deregister" class="headerlink" title="misc_deregister()"></a>misc_deregister()</h4><blockquote>
+<p>注销之前通过 misc_register() 注册的杂项设备，释放设备号。</p>
+</blockquote>
+<h3 id="打印调试相关"><a href="#打印调试相关" class="headerlink" title="打印调试相关"></a>打印调试相关</h3><h4 id="dev-info-dev-err"><a href="#dev-info-dev-err" class="headerlink" title="dev_info() &#x2F; dev_err()"></a>dev_info() &#x2F; dev_err()</h4><blockquote>
+<p>标准的设备驱动日志输出接口。它们会打印带有设备前缀的信息，便于调试和定位问题。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : device* dev fmt ...</span><br><span class="hljs-meta"># output : 成功返回0 失败返回负的错误码</span><br><br>dev_info(&amp;client-&gt;dev, <span class="hljs-string">&quot;Device initialized successfully\n&quot;</span>);<br>dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Failed to read data: %d\n&quot;</span>, ret);<br></code></pre></td></tr></table></figure>
+<h4 id="printf-fprint"><a href="#printf-fprint" class="headerlink" title="printf &amp;&amp; fprint"></a>printf &amp;&amp; fprint</h4><h4 id="scnprintf-snprintf"><a href="#scnprintf-snprintf" class="headerlink" title="scnprintf() &amp;&amp; snprintf()"></a>scnprintf() &amp;&amp; snprintf()</h4><blockquote>
+<p>将格式化字符串输出到指定缓冲区，并保证结果是 NULL 结尾的。用于安全地拼接字符串，避免了 sprintf 可能导致的缓冲区溢出风险。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : buf size fmt ...</span><br><span class="hljs-meta"># output : 实际写入缓冲区的字符数 若返回值等于size, 说明输出被截断了</span><br><br><span class="hljs-type">char</span> buf[<span class="hljs-number">64</span>];<br><span class="hljs-type">int</span> len = scnprintf(buf, <span class="hljs-keyword">sizeof</span>(buf), <span class="hljs-string">&quot;Value: %d\n&quot;</span>, val);<br></code></pre></td></tr></table></figure>
+<h4 id="IS-ERR-PTR-ERR"><a href="#IS-ERR-PTR-ERR" class="headerlink" title="IS_ERR() &amp;&amp; PTR_ERR()"></a>IS_ERR() &amp;&amp; PTR_ERR()</h4><blockquote>
+<p>用来处理 “返回指针类型的函数” 的错误检测机制。<strong>有效的内核指针地址永远不会落在 -1 ：-4095 这个很小的范围内。</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c">IS_ERR() -&gt;  <span class="hljs-type">bool</span> <span class="hljs-title function_">IS_ERR</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *ptr)</span>; # 判断一个返回的指针是否是有效指针<br>PTR_ERR() -&gt; <span class="hljs-type">long</span> <span class="hljs-title function_">PTR_ERR</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *ptr)</span>; # 还原成真正的错误码并返回<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">reset_gpio</span>;</span><br><br>reset_gpio = devm_gpiod_get(dev, <span class="hljs-string">&quot;reset&quot;</span>, GPIOD_OUT_LOW);<br><br><span class="hljs-comment">// 检查是否获取失败</span><br><span class="hljs-keyword">if</span> (IS_ERR(reset_gpio)) &#123;<br>    <span class="hljs-comment">// 获取失败，打印出具体原因（比如 -ENOENT 表示设备树中没有定义）</span><br>    dev_err(dev, <span class="hljs-string">&quot;Failed to get reset GPIO: %ld\n&quot;</span>, PTR_ERR(reset_gpio));<br>    <span class="hljs-keyword">return</span> PTR_ERR(reset_gpio);<br>&#125;<br><br><span class="hljs-comment">// 获取成功，现在可以安全地设置 GPIO 电平了</span><br>gpiod_set_value_cansleep(reset_gpio, <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="空间缓冲相关"><a href="#空间缓冲相关" class="headerlink" title="空间缓冲相关"></a>空间缓冲相关</h3><h4 id="devm-kzalloc"><a href="#devm-kzalloc" class="headerlink" title="devm_kzalloc()"></a>devm_kzalloc()</h4><blockquote>
+<p>为设备分配内存，自动初始化为零，并自动管理内存生命周期。它是内核中推荐的内存分配方式，因为它将内存与 struct device * 绑定。当设备驱动被卸载或设备被移除时，这块内存会自动释放，不需要手动调用 kfree，从而简化了错误处理和移除函数的代码。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev size flags(GFP_KERNEL 普通内存分配)</span><br><span class="hljs-meta"># output : 成功返回指向已清零内存的指针 失败返回 NULL</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">data</span> =</span> devm_kzalloc(&amp;client-&gt;dev, <span class="hljs-keyword">sizeof</span>(*data), GFP_KERNEL);<br></code></pre></td></tr></table></figure>
+<h4 id="simple-read-from-buffer"><a href="#simple-read-from-buffer" class="headerlink" title="simple_read_from_buffer()"></a>simple_read_from_buffer()</h4><blockquote>
+<p>在内核驱动的 read 回调函数中，安全地将内核缓冲区数据复制到用户空间。它内部处理了拷贝、偏移量跟踪以及边界检查，是一个非常实用的工具函数，可以避免手动实现这些逻辑</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : to(void __user *) count ppos(loff_t *) from available : 内核数据源缓冲区的总大小</span><br><span class="hljs-meta"># output : 成功返回实际复制到用户空间的字节数 失败返回负的错误码</span><br><br><span class="hljs-type">static</span> <span class="hljs-type">ssize_t</span> <span class="hljs-title function_">my_read</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> file *filp, <span class="hljs-type">char</span> __user *buf, <span class="hljs-type">size_t</span> count, <span class="hljs-type">loff_t</span> *f_pos)</span> &#123;<br>    <span class="hljs-keyword">return</span> simple_read_from_buffer(buf, count, f_pos, my_data, <span class="hljs-keyword">sizeof</span>(my_data));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="工具类相关"><a href="#工具类相关" class="headerlink" title="工具类相关"></a>工具类相关</h3><h4 id="container-of"><a href="#container-of" class="headerlink" title="container_of()"></a>container_of()</h4><blockquote>
+<p>通过结构体中某个成员的地址，反推出包含该成员的外层结构体的起始地址。用于将回调参数（通常是某成员指针）转换回该结构体对象。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : ptr ： 指向子成员的指针 type 父结构体的类型名称 member 子成员在父结构体中定义的名称</span><br><span class="hljs-meta"># output : type : 父结构体指针</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> container_of(ptr, type, member) (&#123; \</span><br><span class="hljs-meta">    const typeof( ((type *)0)-&gt;member ) *__mptr = (ptr); \</span><br><span class="hljs-meta">    (type *)( (char *)__mptr - offsetof(type, member) ); &#125;)</span><br><span class="hljs-comment">// 示例</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> &#123;</span><br>    <span class="hljs-type">int</span> id;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">work_struct</span> <span class="hljs-title">work</span>;</span><br>&#125;;<br><span class="hljs-type">void</span> <span class="hljs-title function_">work_handler</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> work_struct *w)</span> &#123;<br>    <span class="hljs-comment">// 通过 work 成员找到包含它的 my_data</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_data</span> *<span class="hljs-title">data</span> =</span> container_of(w, <span class="hljs-keyword">struct</span> my_data, work);<br>    printk(<span class="hljs-string">&quot;ID: %d\n&quot;</span>, data-&gt;id);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="锁相关"><a href="#锁相关" class="headerlink" title="锁相关"></a>锁相关</h3><h3 id="input子系统"><a href="#input子系统" class="headerlink" title="input子系统"></a>input子系统</h3><h4 id="devm-input-allocate-device"><a href="#devm-input-allocate-device" class="headerlink" title="devm_input_allocate_device()"></a>devm_input_allocate_device()</h4><blockquote>
+<p>分配并初始化一个输入设备结构体，设备卸载时自动释放，无需手动调用 input_free_device()。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev</span><br><span class="hljs-meta"># output : 成功返回 input_dev* 失败返回 NULL</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">input_dev</span> *<span class="hljs-title">idev</span>;</span><br><br>idev = devm_input_allocate_device(&amp;client-&gt;dev);<br><span class="hljs-keyword">if</span> (!idev) &#123;<br>    dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Failed to allocate input device\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> -ENOMEM;<br>&#125;<br><br>idev-&gt;name = <span class="hljs-string">&quot;My I2C Touch Sensor&quot;</span>;<br>idev-&gt;id.bustype = BUS_I2C;<br>idev-&gt;dev.parent = &amp;client-&gt;dev;<br></code></pre></td></tr></table></figure>
+<h4 id="input-set-capability"><a href="#input-set-capability" class="headerlink" title="input_set_capability()"></a>input_set_capability()</h4><blockquote>
+<p>声明输入设备能够产生哪种类型的事件, 内核会根据这些设置来分配必要的缓冲区。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : input_dev*  type(事件类型)  code(具体的时间码)</span><br><br><span class="hljs-comment">// 声明这是一个按键设备，能产生电源键和回车键</span><br>input_set_capability(idev, EV_KEY, KEY_POWER);<br>input_set_capability(idev, EV_KEY, KEY_ENTER);<br><br><span class="hljs-comment">// 声明这是一个触摸屏设备</span><br>input_set_capability(idev, EV_ABS, ABS_X);<br>input_set_capability(idev, EV_ABS, ABS_Y);<br>input_set_capability(idev, EV_KEY, BTN_TOUCH);<br><br><span class="hljs-comment">// 设置坐标范围（需要在注册前设置）</span><br>input_set_abs_params(idev, ABS_X, <span class="hljs-number">0</span>, <span class="hljs-number">4095</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>input_set_abs_params(idev, ABS_Y, <span class="hljs-number">0</span>, <span class="hljs-number">4095</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+<h4 id="input-register-device-input-unregister-device"><a href="#input-register-device-input-unregister-device" class="headerlink" title="input_register_device() &amp;&amp; input_unregister_device()"></a>input_register_device() &amp;&amp; input_unregister_device()</h4><blockquote>
+<p>向 input 子系统注册(注销)设备，创建(删除)设备节点 &#x2F;dev&#x2F;input&#x2F;eventX。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : input_dev*</span><br><span class="hljs-meta"># output : 成功返回 0  失败返回错误码</span><br><br><span class="hljs-comment">// 注册</span><br>ret = input_register_device(idev);<br><span class="hljs-keyword">if</span> (ret) &#123;<br>    dev_err(&amp;client-&gt;dev, <span class="hljs-string">&quot;Failed to register input device: %d\n&quot;</span>, ret);<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><br><span class="hljs-comment">// 注销（使用 devm 时通常不需要手动调用）</span><br>input_unregister_device(idev);<br></code></pre></td></tr></table></figure>
+<h4 id="input-event-input-report-key-input-sync"><a href="#input-event-input-report-key-input-sync" class="headerlink" title="input_event() &amp;&amp; input_report_key() &amp;&amp; input_sync()"></a>input_event() &amp;&amp; input_report_key() &amp;&amp; input_sync()</h4><blockquote>
+<p>必须调用 input_sync() 来分隔完整的事件包，否则用户空间收不到事件。可以连续上报多个事件，最后用 input_sync() 提交。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">input_event</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> input_dev *dev, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> type, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> code, <span class="hljs-type">int</span> value)</span>;<br><br><span class="hljs-comment">// 辅助宏 内部封装了 input_event</span><br>input_report_key(dev, code, value)   <span class="hljs-comment">// 等价于 input_event(dev, EV_KEY, code, !!value)</span><br>input_report_abs(dev, code, value)   <span class="hljs-comment">// 等价于 input_event(dev, EV_ABS, code, value)</span><br>input_report_rel(dev, code, value)   <span class="hljs-comment">// 等价于 input_event(dev, EV_REL, code, value)</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">input_sync</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> input_dev *dev)</span>;  <span class="hljs-comment">// 等价于 input_event(dev, EV_SYN, SYN_REPORT, 0)</span><br><br><span class="hljs-comment">// 在中断处理函数或工作队列中</span><br><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">report_key_event</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> input_dev *idev, <span class="hljs-type">int</span> key_code, <span class="hljs-type">int</span> pressed)</span><br>&#123;<br>    input_report_key(idev, key_code, pressed);<br>    input_sync(idev);  <span class="hljs-comment">// 重要：提交事件</span><br>&#125;<br><br><span class="hljs-comment">// 上报电源键按下</span><br>report_key_event(idev, KEY_POWER, <span class="hljs-number">1</span>);  <span class="hljs-comment">// 按下</span><br>msleep(<span class="hljs-number">50</span>);<br>report_key_event(idev, KEY_POWER, <span class="hljs-number">0</span>);  <span class="hljs-comment">// 弹起</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="中断相关"><a href="#中断相关" class="headerlink" title="中断相关"></a>中断相关</h3><h4 id="gpiod-to-irq"><a href="#gpiod-to-irq" class="headerlink" title="gpiod_to_irq()"></a>gpiod_to_irq()</h4><blockquote>
+<p>将 GPIO 描述符转换为对应的硬件中断号, 只有配置为输入的 GPIO 才能用于中断。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : gpio_desc*</span><br><span class="hljs-meta"># output : 成功返回 IRQ 号 失败返回错误码</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">irq_gpio</span>;</span><br><span class="hljs-type">int</span> irq;<br><br><span class="hljs-comment">// 1. 获取 GPIO（配置为输入）</span><br>irq_gpio = devm_gpiod_get(dev, <span class="hljs-string">&quot;irq&quot;</span>, GPIOD_IN);<br><span class="hljs-keyword">if</span> (IS_ERR(irq_gpio))<br>    <span class="hljs-keyword">return</span> PTR_ERR(irq_gpio);<br><br><span class="hljs-comment">// 2. 转换为 IRQ 号</span><br>irq = gpiod_to_irq(irq_gpio);<br><span class="hljs-keyword">if</span> (irq &lt; <span class="hljs-number">0</span>) &#123;<br>    dev_err(dev, <span class="hljs-string">&quot;Failed to get IRQ: %d\n&quot;</span>, irq);<br>    <span class="hljs-keyword">return</span> irq;<br>&#125;<br><br><span class="hljs-comment">// 3. 注册中断处理函数</span><br>ret = devm_request_threaded_irq(dev, irq, <span class="hljs-literal">NULL</span>, handler, <br>                                 IRQF_TRIGGER_FALLING | IRQF_ONESHOT,<br>                                 <span class="hljs-string">&quot;my_device&quot;</span>, dev);<br></code></pre></td></tr></table></figure>
+<h4 id="devm-request-threaded-irq"><a href="#devm-request-threaded-irq" class="headerlink" title="devm_request_threaded_irq()"></a>devm_request_threaded_irq()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev irq irq_handler_t(中断上半部 NULL handler) irq_handler_t(中断下半部 NULL thread_fn) irqflags(IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING | IRQF_TRIGGER_HIGH | IRQF_TRIGGER_LOW | IRQF_ONESHOT ： 线程执行完才能重新使能中断 | IRQF_SHARED) devname(设备名称 显示在 /proc/interrupts) dev_id(传递给中断的私有数据)</span><br><span class="hljs-meta"># output : 成功返回 0  失败返回错误码</span><br><br><span class="hljs-comment">// 上半部：清除硬件中断，唤醒下半部</span><br><span class="hljs-type">static</span> <span class="hljs-type">irqreturn_t</span> <span class="hljs-title function_">my_isr</span><span class="hljs-params">(<span class="hljs-type">int</span> irq, <span class="hljs-type">void</span> *dev_id)</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_device</span> *<span class="hljs-title">dev</span> =</span> dev_id;<br>    <br>    <span class="hljs-comment">// 清除中断标志（必须快）</span><br>    writel(IRQ_BIT, dev-&gt;regs + IRQ_CLEAR);<br>    <br>    <span class="hljs-keyword">return</span> IRQ_WAKE_THREAD;  <span class="hljs-comment">// 唤醒下半部</span><br>&#125;<br><br><span class="hljs-comment">// 下半部：处理实际工作</span><br><span class="hljs-type">static</span> <span class="hljs-type">irqreturn_t</span> <span class="hljs-title function_">my_thread_fn</span><span class="hljs-params">(<span class="hljs-type">int</span> irq, <span class="hljs-type">void</span> *dev_id)</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_device</span> *<span class="hljs-title">dev</span> =</span> dev_id;<br>    <br>    <span class="hljs-comment">// 耗时操作</span><br>    schedule_work(&amp;dev-&gt;work);<br>    <br>    <span class="hljs-keyword">return</span> IRQ_HANDLED;<br>&#125;<br><br><span class="hljs-comment">// 注册</span><br>devm_request_threaded_irq(dev, irq, my_isr, my_thread_fn, <br>                          IRQF_TRIGGER_FALLING | IRQF_ONESHOT,<br>                          <span class="hljs-string">&quot;my_dev&quot;</span>, dev);<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/IMX6ULL/" class="category-chain-item">IMX6ULL</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF/" class="print-no-link">#技术</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>IMX6ULL-核心api和宏(持续更新)</div>
+      <div>http://example.com/2026/05/12/IMX6ULL-核心api和宏(持续更新)/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>RickyDuran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年5月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/05/13/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day2/" title="IMX6ULL-项目开发-Day2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IMX6ULL-项目开发-Day2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/05/09/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day1/" title="IMX6ULL-项目开发-Day1">
+                        <span class="hidden-mobile">IMX6ULL-项目开发-Day1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"RickyDuran-zh/blog-comments","repo-id":"R_kgDOSX8oDA","category":"General","category-id":"DIC_kwDOSX8oDM4C8mNq","theme-light":"light","theme-dark":"light","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'light';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <span>&copy; RickyDuran&rsquo;s Blog</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/like-button.js"></script>
+<script src="/js/reading-progress.js"></script>
+<script src="/js/navbar-scroll.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <!--
+  首页右侧 Widget 信息面板
+  嵌入页面内部，随页面一起滚动
+  仅在大屏非文章页显示
+
+  卡片顺序:
+    1. 博主信息
+    2. 公告 (编辑公告文字请修改下方 ANNOUNCEMENT 变量)
+    3. 最新文章
+    4. 分类
+    5. 标签云
+    6. 归档
+    7. 网站资讯
+
+  头像/名称/简介/社交链接: 修改 _config.fluid.yml 中 about 段落
+-->
+
+<div class="widget-panel" id="widget-panel">
+  <div class="widget-panel-inner">
+
+    <!-- 1. 博主信息卡片 -->
+    <div class="widget-card widget-profile">
+      <img
+        class="widget-avatar"
+        src="/img/rickyduran.png"
+        alt="avatar"
+        onerror="this.style.display='none'"
+      />
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+
+      <!-- 文章 / 标签 / 分类 统计 -->
+      <div class="widget-profile-stats">
+        <a href="/archives" class="widget-stat-item">
+          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-label">文章</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/tags" class="widget-stat-item">
+          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-label">标签</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/categories" class="widget-stat-item">
+          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-label">分类</span>
+        </a>
+      </div>
+
+      <!-- Follow Me 按钮 -->
+      <a href="https://github.com/RickyDuran-zh" target="_blank" rel="noopener" class="widget-follow-btn">
+        <i class="fa-brands fa-github"></i> Follow Me
+      </a>
+
+      
+      <div class="widget-social">
+        
+          
+            <a href="https://github.com/RickyDuran-zh" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
+        
+      </div>
+      
+    </div>
+
+    <!-- 2. 公告 -->
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bell widget-announce-icon"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
+      </div>
+    </div>
+
+    <!-- 3. 最新文章 -->
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-clock"></i> 最新文章
+      </h4>
+      <ul class="widget-list widget-recent-list">
+        
+        
+          <li>
+            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的七月总结</span>
+                <span class="widget-post-date">07-24</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 运算符重载</span>
+                <span class="widget-post-date">07-13</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
+                <span class="widget-post-date">07-10</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式 AI</span>
+                <span class="widget-post-date">07-07</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的六月总结</span>
+                <span class="widget-post-date">07-02</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式音视频</span>
+                <span class="widget-post-date">06-26</span>
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- 4. 分类 -->
+    
+    <div class="widget-card widget-categories">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-layer-group"></i> 分类
+      </h4>
+      <ul class="widget-list">
+        
+          <li>
+            <a href="/categories/IMX6ULL/">
+              <span class="widget-cat-name">IMX6ULL</span>
+              <span class="widget-cat-count">12</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E5%88%B7%E9%A2%98/">
+              <span class="widget-cat-name">刷题</span>
+              <span class="widget-cat-count">7</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E9%9A%8F%E7%AC%94/">
+              <span class="widget-cat-name">随笔</span>
+              <span class="widget-cat-count">4</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/RK3588S2/">
+              <span class="widget-cat-name">RK3588S2</span>
+              <span class="widget-cat-count">3</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/IMX6ULL/OS/">
+              <span class="widget-cat-name">OS</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/xv6/">
+              <span class="widget-cat-name">xv6</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+    
+
+    <!-- 5. 标签云（迷你版） -->
+    
+    <div class="widget-card widget-tags">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-tags"></i> 标签
+      </h4>
+      <div class="widget-tag-cloud">
+        
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+            #技术
+          </a>
+        
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+            #项目开发
+          </a>
+        
+          <a href="/tags/%E7%AE%97%E6%B3%95/" class="widget-tag-item" style="font-size: 0.9199999999999999rem">
+            #算法
+          </a>
+        
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+            #生活
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #Tutorial
+          </a>
+        
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #工作流分享
+          </a>
+        
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #八股
+          </a>
+        
+      </div>
+    </div>
+    
+
+    <!-- 6. 归档 -->
+    <div class="widget-card widget-archives">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-box-archive"></i> 归档
+      </h4>
+      <ul class="widget-list">
+        
+        
+        
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 07 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 06 月</span>
+              <span class="widget-archive-count">10 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 05 月</span>
+              <span class="widget-archive-count">14 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 04 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+      </ul>
+      <a href="/archives" class="widget-more-link">
+        查看全部归档 <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </div>
+
+    <!-- 7. 网站资讯 -->
+    <div class="widget-card widget-site-info">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-chart-simple"></i> 网站资讯
+      </h4>
+      <div class="widget-info-grid">
+        <div class="widget-info-item">
+          <span class="widget-info-value">30</span>
+          <span class="widget-info-label">文章</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">8</span>
+          <span class="widget-info-label">标签</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">10</span>
+          <span class="widget-info-label">分类</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value widget-info-running" id="site-running-days">--</span>
+          <span class="widget-info-label">运行天数</span>
+        </div>
+      </div>
+      
+      <div class="widget-info-footer">
+        <span>最后更新：2026-07-24</span>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var panel = document.getElementById('widget-panel');
+  if (!panel) return;
+
+  // 文章页不显示（已有 TOC 侧边栏）
+  var isPost = document.querySelector('.markdown-body');
+  if (isPost) {
+    panel.remove();
+    return;
+  }
+
+  // 大屏：绝对定位侧边栏；小屏：CSS 负责转为内联布局
+  function checkScreen() {
+    if (window.innerWidth >= 1200) {
+      var container = document.querySelector('.container.nopadding-x-md');
+      if (container && panel.parentNode !== container) {
+        container.style.position = 'relative';
+        container.appendChild(panel);
+      }
+      panel.style.display = 'block';
+      // 重置小屏样式
+      panel.style.position = '';
+      panel.style.width = '';
+      panel.style.right = '';
+      panel.style.top = '';
+      syncContainerHeight();
+    } else {
+      // 小屏：移出容器，放到 main content 后面
+      var mainContent = document.querySelector('.container.nopadding-x-md #board') ||
+                        document.querySelector('.container.nopadding-x-md .list-group');
+      if (mainContent && mainContent.parentNode && panel.parentNode !== mainContent.parentNode) {
+        mainContent.parentNode.insertBefore(panel, mainContent.nextSibling);
+      }
+      panel.style.display = 'block';
+      resetContainerHeight();
+    }
+  }
+
+  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
+  function syncContainerHeight() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container || panel.style.display === 'none') return;
+    requestAnimationFrame(function() {
+      var panelBottom = panel.offsetTop + panel.offsetHeight;
+      var containerHeight = container.offsetHeight;
+      if (panelBottom > containerHeight) {
+        container.style.minHeight = panelBottom + 'px';
+      }
+    });
+  }
+
+  function resetContainerHeight() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (container) {
+      container.style.minHeight = '';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      checkScreen();
+      setTimeout(syncContainerHeight, 500);
+    });
+  } else {
+    checkScreen();
+    setTimeout(syncContainerHeight, 500);
+  }
+  window.addEventListener('resize', checkScreen, { passive: true });
+
+  // 计算网站运行天数（从第一篇文章发布日期算起）
+  (function() {
+    var el = document.getElementById('site-running-days');
+    if (!el) return;
+
+    // 从第一篇文章的日期开始计算
+    var firstPostDate = '2026-04-28';
+    if (!firstPostDate) { el.textContent = '--'; return; }
+
+    var start = new Date(firstPostDate);
+    var now = new Date();
+    var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    if (days >= 365) {
+      var years = Math.floor(days / 365);
+      var remain = days % 365;
+      el.textContent = years + '年' + (remain > 30 ? Math.floor(remain / 30) + '月' : '');
+    } else if (days >= 30) {
+      el.textContent = Math.floor(days / 30) + '月';
+    } else {
+      el.textContent = days + '天';
+    }
+  })();
+})();
+</script>
+
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
