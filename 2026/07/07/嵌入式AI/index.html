@@ -1141,8 +1141,8 @@
           </li>
         
           <li>
-            <a href="/categories/%E6%89%AB%E7%9B%B2/">
-              <span class="widget-cat-name">扫盲</span>
+            <a href="/categories/xv6/">
+              <span class="widget-cat-name">xv6</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1283,6 +1283,36 @@
     panel.remove();
     return;
   }
+
+  // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
+  function placeWidget() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
+    if (window.innerWidth >= 1200) {
+      // 大屏：移入容器末尾 → CSS Flex 并排
+      if (panel.parentNode !== container) {
+        container.appendChild(panel);
+      }
+      container.classList.add('has-widget');
+      panel.style.display = '';
+    } else {
+      // 小屏：移回 body 末尾 → CSS Grid 降级为底部卡片
+      container.classList.remove('has-widget');
+      if (panel.parentNode === container) {
+        document.body.appendChild(panel);
+      }
+      panel.style.display = '';
+    }
+  }
+
+  // DOM 就绪后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', placeWidget);
+  } else {
+    placeWidget();
+  }
+  window.addEventListener('resize', placeWidget, { passive: true });
 
   // 计算网站运行天数
   (function() {
