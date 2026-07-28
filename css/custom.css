@@ -1717,9 +1717,12 @@ body {
 /* 主容器自适应宽度 + Flex 侧边栏 */
 @media (min-width: 1200px) {
   .container.nopadding-x-md {
-    max-width: 1200px;
+    max-width: 1140px;
+    margin: 0 auto;
     padding-top: 2.5rem;
     padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   /* 有 Widget 时启用 Flex 双栏 */
@@ -1744,10 +1747,14 @@ body {
   }
 }
 
-/* 中等屏幕：单列 */
+/* 中等屏幕：单列居中 */
 @media (max-width: 1199px) {
   .container.nopadding-x-md {
+    max-width: 860px;
+    margin: 0 auto;
     padding-top: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   #board, .list-group {
