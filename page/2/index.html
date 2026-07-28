@@ -314,16 +314,6 @@
 
 
 </div>
-<!--
-  首页 Banner 增强内容
-  向下滚动提示箭头
-  通过 theme_inject header 注入
--->
-<div class="banner-scroll-indicator" aria-hidden="true">
-  <span class="banner-scroll-text">探索更多</span>
-  <i class="fa-solid fa-chevron-down banner-scroll-arrow"></i>
-</div>
-
 
   </header>
 
@@ -1376,15 +1366,15 @@
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/IMX6ULL/OS/">
+              <span class="widget-cat-name">OS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
+            <a href="/categories/xv6/">
+              <span class="widget-cat-name">xv6</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1521,79 +1511,45 @@
   if (!panel) return;
 
   // 文章页不显示（已有 TOC 侧边栏）
-  var isPost = document.querySelector('.markdown-body');
-  if (isPost) {
+  if (document.querySelector('.markdown-body')) {
     panel.remove();
     return;
   }
 
-  // 大屏：绝对定位侧边栏；小屏：CSS 负责转为内联布局
-  function checkScreen() {
+  function placePanel() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
     if (window.innerWidth >= 1200) {
-      var container = document.querySelector('.container.nopadding-x-md');
-      if (container && panel.parentNode !== container) {
-        container.style.position = 'relative';
+      // 大屏：作为 flex 子元素，放在 #board 旁边
+      if (panel.parentNode !== container) {
         container.appendChild(panel);
       }
-      panel.style.display = 'block';
-      // 重置小屏样式
-      panel.style.position = '';
-      panel.style.width = '';
-      panel.style.right = '';
-      panel.style.top = '';
-      syncContainerHeight();
+      container.classList.add('has-widget');
+      panel.style.display = '';
     } else {
-      // 小屏：移出容器，放到 main content 后面
-      var mainContent = document.querySelector('.container.nopadding-x-md #board') ||
-                        document.querySelector('.container.nopadding-x-md .list-group');
-      if (mainContent && mainContent.parentNode && panel.parentNode !== mainContent.parentNode) {
-        mainContent.parentNode.insertBefore(panel, mainContent.nextSibling);
+      // 小屏：放在容器后面，CSS Grid 降级为底部内联卡片
+      container.classList.remove('has-widget');
+      panel.style.display = '';
+      if (panel.parentNode === container) {
+        container.parentNode.insertBefore(panel, container.nextSibling);
       }
-      panel.style.display = 'block';
-      resetContainerHeight();
-    }
-  }
-
-  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
-  function syncContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (!container || panel.style.display === 'none') return;
-    requestAnimationFrame(function() {
-      var panelBottom = panel.offsetTop + panel.offsetHeight;
-      var containerHeight = container.offsetHeight;
-      if (panelBottom > containerHeight) {
-        container.style.minHeight = panelBottom + 'px';
-      }
-    });
-  }
-
-  function resetContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (container) {
-      container.style.minHeight = '';
     }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      checkScreen();
-      setTimeout(syncContainerHeight, 500);
-    });
+    document.addEventListener('DOMContentLoaded', placePanel);
   } else {
-    checkScreen();
-    setTimeout(syncContainerHeight, 500);
+    placePanel();
   }
-  window.addEventListener('resize', checkScreen, { passive: true });
+  window.addEventListener('resize', placePanel, { passive: true });
 
-  // 计算网站运行天数（从第一篇文章发布日期算起）
+  // 计算网站运行天数
   (function() {
     var el = document.getElementById('site-running-days');
     if (!el) return;
-
-    // 从第一篇文章的日期开始计算
     var firstPostDate = '2026-04-28';
     if (!firstPostDate) { el.textContent = '--'; return; }
-
     var start = new Date(firstPostDate);
     var now = new Date();
     var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));

@@ -834,19 +834,22 @@ a.print-no-link:hover {
 
 /* ===================================
    首页右侧 Widget 信息面板
-   嵌入页面容器内部，随页面滚动
-   仅在大屏 (xl) 非文章页显示
+   大屏：Flexbox 侧边栏，与内容并排
+   小屏：底部内联卡片
+   文章页不显示（已有 TOC 侧边栏）
    =================================== */
 
 .widget-panel {
   display: none;                    /* JS 按条件显示 */
-  position: absolute;               /* 相对于 .container 定位，嵌入页面流 */
-  top: 3rem;                        /* 与容器 padding-top 对齐 */
-  right: -275px;                    /* 紧贴内容区右侧 */
-  width: 265px;
-  z-index: 10;
-  font-size: 0.88rem;               /* 15px 级，清晰舒适 */
+  width: 280px;
+  flex-shrink: 0;
+  font-size: 0.88rem;
   line-height: 1.6;
+  position: sticky;
+  top: 5rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
 }
 
 .widget-panel-inner {
@@ -1701,37 +1704,48 @@ footer a:hover {
 }
 
 /* ===================================
-   内容区与 Cover 真正隔离
-   banner 在上，内容+侧栏严格在下方，永不重叠
+   内容区与 Cover 独立分离
+   Cover 在上（完整 Banner），内容+侧栏在下方
+   互不重叠，默认视口无需缩放
    =================================== */
 
-/* 给 banner 底部加一条视觉分界线 */
-.header-inner {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
+/* 整体页面流：header + main 自然排列 */
+body {
+  overflow-x: hidden;
 }
 
-/* 内容容器与 banner 完全分离 */
-@media (min-width: 768px) {
+/* 主容器自适应宽度 + Flex 侧边栏 */
+@media (min-width: 1200px) {
   .container.nopadding-x-md {
-    padding-top: 3rem;
-    position: relative;
+    max-width: 1200px;
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
   }
 
-  /* 内容板不再位移，紧贴容器顶部 */
-  #board {
+  /* 有 Widget 时启用 Flex 双栏 */
+  .container.nopadding-x-md.has-widget {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .container.nopadding-x-md.has-widget #board {
+    flex: 1;
+    min-width: 0;
     margin-top: 0;
     transform: none;
   }
 
   /* 归档/分类/标签页同理 */
-  .list-group {
+  .container.nopadding-x-md.has-widget .list-group {
+    flex: 1;
+    min-width: 0;
     transform: none;
   }
 }
 
-/* 移动端间距缩小 */
-@media (max-width: 767px) {
+/* 中等屏幕：单列 */
+@media (max-width: 1199px) {
   .container.nopadding-x-md {
     padding-top: 1.5rem;
   }
@@ -1739,6 +1753,28 @@ footer a:hover {
   #board, .list-group {
     transform: none;
   }
+}
+
+/* 移动端 */
+@media (max-width: 767px) {
+  .container.nopadding-x-md {
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #board, .list-group {
+    transform: none;
+  }
+}
+
+/* ===================================
+   Banner 底部阴影分隔
+   =================================== */
+
+.header-inner {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* ===================================
@@ -2000,65 +2036,6 @@ footer a:hover {
 ::view-transition-old(root) img,
 ::view-transition-new(root) img {
   animation: none;
-}
-
-/* ===================================
-   首页 Banner 增强：向下滚动提示
-   注入位置在 <header> 内部，banner 之后
-   绝对定位浮动在 banner 底部中央
-   =================================== */
-
-header {
-  position: relative;
-}
-
-/* 向下滚动提示 */
-.banner-scroll-indicator {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  opacity: 0.7;
-  animation: bannerScrollPulse 2s ease-in-out infinite;
-  cursor: default;
-}
-
-.banner-scroll-text {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.75);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.banner-scroll-arrow {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-@keyframes bannerScrollPulse {
-  0%, 100% {
-    opacity: 0.5;
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    opacity: 0.9;
-    transform: translateX(-50%) translateY(6px);
-  }
-}
-
-@media (max-width: 767px) {
-  .banner-scroll-indicator {
-    bottom: 1rem;
-  }
-
-  .banner-scroll-text {
-    font-size: 0.68rem;
-  }
 }
 
 /* ===================================
