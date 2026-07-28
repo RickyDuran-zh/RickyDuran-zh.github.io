@@ -871,11 +871,6 @@ a.print-no-link:hover {
 
   .container.nopadding-x-md.has-widget .widget-panel {
     display: block;
-    position: sticky;
-    top: 5rem;
-    align-self: flex-start;
-    max-height: calc(100vh - 6rem);
-    overflow-y: auto;
   }
 }
 
