@@ -891,40 +891,47 @@ a.print-no-link:hover {
 }
 
 /* ---- 主内容区 #board 与侧边栏卡片风格统一 ---- */
+/* 覆盖 Fluid 主题自带的大阴影 (0 12px 15px...) */
 #board {
-  background: var(--board-bg-color, #fff);
-  border: 1px solid var(--line-color, #e8eaed);
-  border-radius: 10px;
-  padding: 1.5rem 1.8rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+  background: var(--board-bg-color, #fff) !important;
+  border: 1px solid var(--line-color, #e8eaed) !important;
+  border-radius: 10px !important;
+  padding: 1.5rem 1.8rem !important;
+  margin-top: 0 !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03) !important;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03) !important;
 }
 
 #board:hover {
-  border-color: rgba(48, 169, 222, 0.18);
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06);
+  border-color: rgba(48, 169, 222, 0.18) !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06) !important;
+  -webkit-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* 归档/分类/标签页的 list-group 也统一 */
 .list-group {
   background: var(--board-bg-color, #fff);
-  border: 1px solid var(--line-color, #e8eaed);
-  border-radius: 10px;
-  padding: 1.5rem 1.8rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--line-color, #e8eaed) !important;
+  border-radius: 10px !important;
+  padding: 1.5rem 1.8rem !important;
+  margin-top: 0 !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03) !important;
 }
 
 /* 暗色模式 */
 [data-user-color-scheme="dark"] #board,
 [data-user-color-scheme="dark"] .list-group {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.07);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18) !important;
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18) !important;
 }
 
 [data-user-color-scheme="dark"] #board:hover {
-  border-color: rgba(48, 169, 222, 0.2);
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.3);
+  border-color: rgba(48, 169, 222, 0.2) !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.3) !important;
+  -webkit-box-shadow: 0 3px 14px rgba(0, 0, 0, 0.3) !important;
 }
 
 .widget-card:hover {
