@@ -628,67 +628,51 @@ a.print-no-link:hover {
 
 @keyframes coverConverge {
   0% {
-    opacity: 0.72;
-    transform: translate3d(0, -34px, 0) scale(1.025);
-    filter: saturate(0.86) brightness(0.82) blur(2px);
-  }
-  58% {
-    opacity: 1;
-    transform: translate3d(0, 3px, 0) scale(1.004);
-    filter: saturate(0.98) brightness(0.97) blur(0);
+    opacity: 0.92;
+    transform: translate3d(0, -22px, 0);
   }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes contentConverge {
   0% {
-    opacity: 0;
-    transform: translate3d(0, 52px, 0) scale(0.992);
-    filter: blur(3px);
-  }
-  62% {
-    opacity: 1;
-    transform: translate3d(0, -3px, 0) scale(1.001);
-    filter: blur(0);
+    opacity: 0.78;
+    transform: translate3d(0, 34px, 0);
   }
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes bannerTextSettle {
   0% {
     opacity: 0;
-    transform: translate3d(0, -14px, 0);
-    letter-spacing: 0.06em;
+    transform: translate3d(0, -8px, 0);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    letter-spacing: inherit;
   }
 }
 
 body > header .header-inner {
   transform-origin: center bottom;
-  animation: coverConverge 1.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: coverConverge 1.35s cubic-bezier(0.2, 0.72, 0.25, 1) both;
   backface-visibility: hidden;
 }
 
 body > header .banner-text {
-  animation: bannerTextSettle 0.82s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: bannerTextSettle 1.05s 0.16s cubic-bezier(0.2, 0.72, 0.25, 1) both;
 }
 
 body > main > .container.nopadding-x-md,
 body > main > .container-fluid.nopadding-x {
   transform-origin: center top;
-  animation: contentConverge 0.96s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: contentConverge 1.28s 0.04s cubic-bezier(0.2, 0.72, 0.25, 1) both;
   backface-visibility: hidden;
 }
 
@@ -705,13 +689,13 @@ body > main > .container-fluid.nopadding-x {
 
 @media (max-width: 767px) {
   body > header .header-inner {
-    animation-duration: 0.88s;
+    animation-duration: 1.08s;
   }
 
   body > main > .container.nopadding-x-md,
   body > main > .container-fluid.nopadding-x {
-    animation-duration: 0.82s;
-    animation-delay: 0.04s;
+    animation-duration: 1.02s;
+    animation-delay: 0.02s;
   }
 }
 
@@ -719,7 +703,8 @@ body > main > .container-fluid.nopadding-x {
   body > header .header-inner,
   body > header .banner-text,
   body > main > .container.nopadding-x-md,
-  body > main > .container-fluid.nopadding-x {
+  body > main > .container-fluid.nopadding-x,
+  .widget-announce-icon {
     animation: none !important;
     transform: none !important;
     filter: none !important;
@@ -1518,39 +1503,21 @@ main {
 
 /* ---- 公告 ---- */
 
-/* 红色铃铛图标 + 摇铃动画 */
+/* 红色喇叭 + 轻微播报动画 */
 .widget-announce-icon {
   color: #ef4444;
-  animation: bell-ring 2s ease-in-out infinite;
-  transform-origin: top center;
+  position: relative;
   display: inline-block;
+  transform-origin: left center;
+  animation: megaphone-call 2.8s ease-in-out infinite;
+  text-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
 }
 
-@keyframes bell-ring {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  5% {
-    transform: rotate(15deg);
-  }
-  15% {
-    transform: rotate(-15deg);
-  }
-  25% {
-    transform: rotate(10deg);
-  }
-  35% {
-    transform: rotate(-10deg);
-  }
-  45% {
-    transform: rotate(5deg);
-  }
-  55% {
-    transform: rotate(-5deg);
-  }
-  65% {
-    transform: rotate(0deg);
-  }
+@keyframes megaphone-call {
+  0%, 12%, 36%, 100% { transform: rotate(0deg) scale(1); }
+  18% { transform: rotate(-7deg) scale(0.97); }
+  24% { transform: rotate(4deg) scale(1.06); }
+  30% { transform: rotate(-2deg) scale(1.02); }
 }
 
 .widget-announcement-text {
