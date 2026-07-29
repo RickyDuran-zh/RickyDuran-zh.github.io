@@ -71,7 +71,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260729-18.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260729-20.css">
 
 
 
@@ -406,44 +406,39 @@
             
             <hr/>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
+              <div class="post-end-tools">
+  <div class="post-end-tags" aria-label="文章标签">
+    
       
-
-<span class="category-chains">
-  
-  
+        <a href="/tags/Tutorial/" class="post-end-tag">#Tutorial</a>
+      
     
-      <span class="category-chain">
-        
-  <a href="/categories/xv6/" class="category-chain-item">xv6</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/xv6/OS/" class="category-chain-item">OS</a>
-  
-  
+  </div>
 
-  
+  <div class="post-share-actions" aria-label="分享文章">
+    <button type="button" class="post-share-btn post-share-wechat" data-share-channel="wechat" aria-label="微信扫码分享">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="post-share-btn post-share-qq" data-share-channel="qq" aria-label="QQ 扫码分享">
+      <i class="fa-brands fa-qq" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
 
-      </span>
-    
-  
-</span>
-
+<div class="post-share-modal" id="post-share-modal" role="dialog" aria-modal="true" aria-labelledby="post-share-title" hidden>
+  <button type="button" class="post-share-backdrop" data-share-close aria-label="关闭分享二维码"></button>
+  <div class="post-share-dialog">
+    <button type="button" class="post-share-close" data-share-close aria-label="关闭">&times;</button>
+    <div class="post-share-brand" id="post-share-brand">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
     </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Tutorial/" class="print-no-link">#Tutorial</a>
-      
+    <h3 id="post-share-title">微信扫码分享</h3>
+    <p>使用手机扫描二维码，打开并分享这篇文章</p>
+    <div class="post-share-qr" id="post-share-qr">
+      <span class="post-share-loading">二维码生成中…</span>
     </div>
-  
+    <div class="post-share-name">xv6实验配置-Mac</div>
+  </div>
 </div>
 
 
@@ -1036,6 +1031,8 @@
 <script src="/js/like-button.js"></script>
 <script src="/js/reading-progress.js"></script>
 <script src="/js/navbar-scroll.js"></script>
+<script src="/js/search-modal-fix.js"></script>
+<script src="/js/post-share.js"></script>
 
 
 
