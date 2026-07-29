@@ -1219,19 +1219,19 @@ main {
 
 @keyframes widget-avatar-flip {
   0% {
-    transform: perspective(700px) rotateY(0deg) scale(1);
+    transform: perspective(700px) rotateX(0deg) scale(1);
   }
   42% {
-    transform: perspective(700px) rotateY(188deg) scale(1.09);
+    transform: perspective(700px) rotateX(188deg) scale(1.09);
   }
   68% {
-    transform: perspective(700px) rotateY(326deg) scale(1.045);
+    transform: perspective(700px) rotateX(326deg) scale(1.045);
   }
   84% {
-    transform: perspective(700px) rotateY(354deg) scale(1.025);
+    transform: perspective(700px) rotateX(354deg) scale(1.025);
   }
   100% {
-    transform: perspective(700px) rotateY(360deg) scale(1);
+    transform: perspective(700px) rotateX(360deg) scale(1);
   }
 }
 
@@ -2211,9 +2211,43 @@ body {
 .list-group-item-title {
   font-size: 0.95rem;
   font-weight: 500;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* 归档文章封面缩略图 */
+.archive-post-cover {
+  position: relative;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 48px;
+  margin-right: 0.85rem;
+  overflow: hidden;
+  border-radius: 7px;
+  background: rgba(48, 169, 222, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(48, 169, 222, 0.08);
+}
+
+.archive-post-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.42s cubic-bezier(0.2, 0.72, 0.24, 1);
+}
+
+.archive-post-item:hover .archive-post-cover img {
+  transform: scale(1.09);
+}
+
+.archive-post-cover-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #7ab8d6;
+  font-size: 1rem;
 }
 
 .list-group-item-action {
@@ -2265,6 +2299,14 @@ body {
 
   .list-group-item-title {
     font-size: 0.88rem;
+  }
+
+  .archive-post-cover {
+    flex-basis: 58px;
+    width: 58px;
+    height: 38px;
+    margin-right: 0.6rem;
+    border-radius: 6px;
   }
 
   /* 移动端不需要左移 */
