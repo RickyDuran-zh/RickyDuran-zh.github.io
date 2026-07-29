@@ -622,9 +622,31 @@ a.print-no-link:hover {
 }
 
 /* ===================================
-   页面载入：仅保留标题淡入
-   Cover 与内容区不再位移，避免刷新时出现压缩感
+   页面载入：Cover 与内容从上下缓慢靠近
+   只改变位移和透明度，不缩放、不改变任何布局尺寸
    =================================== */
+
+@keyframes coverApproach {
+  from {
+    opacity: 0.96;
+    transform: translate3d(0, -18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes surfaceApproach {
+  from {
+    opacity: 0.86;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
 
 @keyframes bannerTextSettle {
   0% {
@@ -637,8 +659,18 @@ a.print-no-link:hover {
   }
 }
 
+body > header .header-inner {
+  animation: coverApproach 1.45s cubic-bezier(0.16, 0.78, 0.24, 1) both;
+}
+
 body > header .banner-text {
   animation: bannerTextSettle 1.05s 0.16s cubic-bezier(0.2, 0.72, 0.25, 1) both;
+}
+
+body > main #board,
+body > main #widget-panel,
+body > main .side-col .sidebar {
+  animation: surfaceApproach 1.35s 0.04s cubic-bezier(0.16, 0.78, 0.24, 1) both;
 }
 
 /* 内容内部保持稳定，不叠加瀑布延迟 */
@@ -653,7 +685,11 @@ body > header .banner-text {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body > header .header-inner,
   body > header .banner-text,
+  body > main #board,
+  body > main #widget-panel,
+  body > main .side-col .sidebar,
   .widget-announce-icon {
     animation: none !important;
     transform: none !important;
@@ -1455,7 +1491,7 @@ main {
 
 /* 红色喇叭 + 轻微播报动画 */
 .widget-announce-icon {
-  color: #ef4444;
+  color: #ef4444 !important;
   position: relative;
   display: inline-block;
   transform-origin: left center;
