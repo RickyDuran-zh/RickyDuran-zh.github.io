@@ -30,8 +30,12 @@
    =================================== */
 
 .index-card {
+  background: var(--board-bg-color, #fff);
+  border: 1px solid var(--line-color, #e8eaed);
   border-radius: 10px;
   overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.035);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -893,15 +897,15 @@ body > main .side-col .sidebar {
   .container.nopadding-x-md.has-widget {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 280px;
-    column-gap: 2rem;
+    column-gap: 1.1rem;
     box-sizing: border-box;
     align-items: flex-start;
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding-top: 2.5rem;
+    padding-top: 1.6rem;
     padding-bottom: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .container.nopadding-x-md.has-widget #board,
@@ -963,6 +967,36 @@ body > main .side-col .sidebar {
   -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03) !important;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
   z-index: auto !important;
+}
+
+/* 首页由每篇文章各自承担卡片外观，移除包住全部文章的外层大面板 */
+#board:has(.index-card) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  overflow: visible !important;
+}
+
+#board:has(.index-card) > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+#board:has(.index-card) > .container > .row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#board:has(.index-card) > .container > .row > .col-12 {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 /* Cover、内容区和侧栏建立独立绘制层，禁止跨区域覆盖 */
@@ -1123,8 +1157,8 @@ main {
 }
 
 .widget-avatar {
-  width: 80px;
-  height: 80px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(48, 169, 222, 0.2);
@@ -1489,21 +1523,24 @@ main {
 
 /* ---- 公告 ---- */
 
-/* 红色喇叭 + 轻微播报动画 */
+/* 红色喇叭 + 更醒目的播报摇晃动画 */
 .widget-announce-icon {
   color: #ef4444 !important;
   position: relative;
   display: inline-block;
-  transform-origin: left center;
-  animation: megaphone-call 2.8s ease-in-out infinite;
-  text-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
+  font-size: 1.05em;
+  transform-origin: 22% 55%;
+  animation: megaphone-call 2.35s cubic-bezier(0.36, 0.02, 0.22, 1) infinite;
+  text-shadow: 0 2px 10px rgba(239, 68, 68, 0.34);
 }
 
 @keyframes megaphone-call {
-  0%, 12%, 36%, 100% { transform: rotate(0deg) scale(1); }
-  18% { transform: rotate(-7deg) scale(0.97); }
-  24% { transform: rotate(4deg) scale(1.06); }
-  30% { transform: rotate(-2deg) scale(1.02); }
+  0%, 10%, 50%, 100% { transform: rotate(0deg) scale(1); }
+  16% { transform: rotate(-16deg) scale(0.96); }
+  23% { transform: rotate(13deg) scale(1.12); }
+  30% { transform: rotate(-11deg) scale(1.04); }
+  37% { transform: rotate(8deg) scale(1.09); }
+  44% { transform: rotate(-3deg) scale(1.02); }
 }
 
 .widget-announcement-text {
