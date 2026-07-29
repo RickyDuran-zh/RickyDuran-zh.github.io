@@ -622,31 +622,9 @@ a.print-no-link:hover {
 }
 
 /* ===================================
-   页面载入：Cover 与内容从上下向中间汇合
-   使用单次整区动画，避免卡片逐个弹出造成廉价感
+   页面载入：仅保留标题淡入
+   Cover 与内容区不再位移，避免刷新时出现压缩感
    =================================== */
-
-@keyframes coverConverge {
-  0% {
-    opacity: 0.92;
-    transform: translate3d(0, -22px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes contentConverge {
-  0% {
-    opacity: 0.78;
-    transform: translate3d(0, 34px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
 
 @keyframes bannerTextSettle {
   0% {
@@ -659,24 +637,11 @@ a.print-no-link:hover {
   }
 }
 
-body > header .header-inner {
-  transform-origin: center bottom;
-  animation: coverConverge 1.35s cubic-bezier(0.2, 0.72, 0.25, 1) both;
-  backface-visibility: hidden;
-}
-
 body > header .banner-text {
   animation: bannerTextSettle 1.05s 0.16s cubic-bezier(0.2, 0.72, 0.25, 1) both;
 }
 
-body > main > .container.nopadding-x-md,
-body > main > .container-fluid.nopadding-x {
-  transform-origin: center top;
-  animation: contentConverge 1.28s 0.04s cubic-bezier(0.2, 0.72, 0.25, 1) both;
-  backface-visibility: hidden;
-}
-
-/* 内容内部保持稳定，只做整体汇合，不再叠加瀑布延迟 */
+/* 内容内部保持稳定，不叠加瀑布延迟 */
 .post-content,
 .index-card,
 .category-lists,
@@ -687,23 +652,8 @@ body > main > .container-fluid.nopadding-x {
   animation: none;
 }
 
-@media (max-width: 767px) {
-  body > header .header-inner {
-    animation-duration: 1.08s;
-  }
-
-  body > main > .container.nopadding-x-md,
-  body > main > .container-fluid.nopadding-x {
-    animation-duration: 1.02s;
-    animation-delay: 0.02s;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  body > header .header-inner,
   body > header .banner-text,
-  body > main > .container.nopadding-x-md,
-  body > main > .container-fluid.nopadding-x,
   .widget-announce-icon {
     animation: none !important;
     transform: none !important;
