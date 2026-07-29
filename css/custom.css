@@ -970,13 +970,15 @@ body > main .side-col .sidebar {
 }
 
 /* 首页由每篇文章各自承担卡片外观，移除包住全部文章的外层大面板 */
-#board:has(.index-card) {
+body main #board:has(.index-card),
+body main #board:has(.index-card):hover {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   padding: 0 !important;
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
+  outline: 0 !important;
   overflow: visible !important;
 }
 
