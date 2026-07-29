@@ -71,7 +71,7 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260729-11.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260729-14.css">
 
 
 
@@ -1266,15 +1266,32 @@
   'use strict';
   var panel = document.getElementById('widget-panel');
   if (!panel) return;
-
-  // 文章页不显示（已有 TOC 侧边栏）
-  if (document.querySelector('.markdown-body')) {
-    panel.remove();
-    return;
-  }
+  var isPostPage = Boolean(document.querySelector('.markdown-body'));
 
   // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
   function placeWidget() {
+    if (isPostPage) {
+      var postSideCols = document.querySelectorAll(
+        'main > .container-fluid.nopadding-x > .row.nomargin-x > .side-col'
+      );
+      var postSide = postSideCols.length
+        ? postSideCols[postSideCols.length - 1]
+        : null;
+      if (!postSide) return;
+
+      var tocSidebar = postSide.querySelector('.sidebar');
+      if (tocSidebar) {
+        tocSidebar.remove();
+      }
+
+      panel.classList.add('widget-panel--post');
+      if (panel.parentNode !== postSide) {
+        postSide.appendChild(panel);
+      }
+      panel.style.display = '';
+      return;
+    }
+
     var container = document.querySelector('.container.nopadding-x-md');
     if (!container) return;
 
