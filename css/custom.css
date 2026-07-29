@@ -622,20 +622,77 @@ a.print-no-link:hover {
 }
 
 /* ===================================
-   页面载入淡入动画
+   页面载入：Cover 与内容从上下向中间汇合
+   使用单次整区动画，避免卡片逐个弹出造成廉价感
    =================================== */
 
-@keyframes contentFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+@keyframes coverConverge {
+  0% {
+    opacity: 0.72;
+    transform: translate3d(0, -34px, 0) scale(1.025);
+    filter: saturate(0.86) brightness(0.82) blur(2px);
   }
-  to {
+  58% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 3px, 0) scale(1.004);
+    filter: saturate(0.98) brightness(0.97) blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
   }
 }
 
+@keyframes contentConverge {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 52px, 0) scale(0.992);
+    filter: blur(3px);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -3px, 0) scale(1.001);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes bannerTextSettle {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0);
+    letter-spacing: 0.06em;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: inherit;
+  }
+}
+
+body > header .header-inner {
+  transform-origin: center bottom;
+  animation: coverConverge 1.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+  backface-visibility: hidden;
+}
+
+body > header .banner-text {
+  animation: bannerTextSettle 0.82s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body > main > .container.nopadding-x-md,
+body > main > .container-fluid.nopadding-x {
+  transform-origin: center top;
+  animation: contentConverge 0.96s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+  backface-visibility: hidden;
+}
+
+/* 内容内部保持稳定，只做整体汇合，不再叠加瀑布延迟 */
 .post-content,
 .index-card,
 .category-lists,
@@ -643,20 +700,31 @@ a.print-no-link:hover {
 #archive,
 #category,
 #tag {
-  animation: contentFadeIn 0.5s ease both;
+  animation: none;
 }
 
-/* 卡片瀑布延迟 */
-.index-card:nth-child(1) { animation-delay: 0.05s; }
-.index-card:nth-child(2) { animation-delay: 0.10s; }
-.index-card:nth-child(3) { animation-delay: 0.15s; }
-.index-card:nth-child(4) { animation-delay: 0.20s; }
-.index-card:nth-child(5) { animation-delay: 0.25s; }
-.index-card:nth-child(6) { animation-delay: 0.30s; }
-.index-card:nth-child(7) { animation-delay: 0.35s; }
-.index-card:nth-child(8) { animation-delay: 0.40s; }
-.index-card:nth-child(9) { animation-delay: 0.45s; }
-.index-card:nth-child(10) { animation-delay: 0.50s; }
+@media (max-width: 767px) {
+  body > header .header-inner {
+    animation-duration: 0.88s;
+  }
+
+  body > main > .container.nopadding-x-md,
+  body > main > .container-fluid.nopadding-x {
+    animation-duration: 0.82s;
+    animation-delay: 0.04s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body > header .header-inner,
+  body > header .banner-text,
+  body > main > .container.nopadding-x-md,
+  body > main > .container-fluid.nopadding-x {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
 
 /* ===================================
    TOC 侧边栏卡片式框架容器
@@ -878,10 +946,21 @@ a.print-no-link:hover {
   .container.nopadding-x-md.has-widget .widget-panel {
     display: block;
     grid-column: 2;
-    position: static;
-    max-height: none;
-    overflow: visible;
+    position: static !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    overscroll-behavior: auto;
+    scrollbar-gutter: auto;
     isolation: isolate;
+  }
+
+  .container.nopadding-x-md.has-widget .widget-panel-inner,
+  .container.nopadding-x-md.has-widget .widget-card,
+  .container.nopadding-x-md.has-widget .widget-list {
+    height: auto;
+    max-height: none !important;
+    overflow: visible !important;
   }
 }
 
@@ -982,20 +1061,22 @@ main {
   }
 
   main .side-col .sidebar {
-    position: static;
+    position: static !important;
     top: auto !important;
     box-sizing: border-box;
     width: 100%;
-    max-height: none;
+    height: auto !important;
+    max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: visible;
+    overflow: visible !important;
     isolation: isolate;
   }
 
   main .side-col .toc-body {
-    max-height: none;
-    overflow: visible;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 }
 
