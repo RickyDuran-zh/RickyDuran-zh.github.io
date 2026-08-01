@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/imx6ull.png">
 <meta property="article:published_time" content="2026-05-12T14:10:07.000Z">
-<meta property="article:modified_time" content="2026-07-28T09:39:49.403Z">
+<meta property="article:modified_time" content="2026-08-01T08:13:44.699Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,14 +71,14 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260729-20.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260801-01.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -493,12 +493,22 @@
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : gpio_desc*</span><br><span class="hljs-meta"># output : 成功返回 IRQ 号 失败返回错误码</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">gpio_desc</span> *<span class="hljs-title">irq_gpio</span>;</span><br><span class="hljs-type">int</span> irq;<br><br><span class="hljs-comment">// 1. 获取 GPIO（配置为输入）</span><br>irq_gpio = devm_gpiod_get(dev, <span class="hljs-string">&quot;irq&quot;</span>, GPIOD_IN);<br><span class="hljs-keyword">if</span> (IS_ERR(irq_gpio))<br>    <span class="hljs-keyword">return</span> PTR_ERR(irq_gpio);<br><br><span class="hljs-comment">// 2. 转换为 IRQ 号</span><br>irq = gpiod_to_irq(irq_gpio);<br><span class="hljs-keyword">if</span> (irq &lt; <span class="hljs-number">0</span>) &#123;<br>    dev_err(dev, <span class="hljs-string">&quot;Failed to get IRQ: %d\n&quot;</span>, irq);<br>    <span class="hljs-keyword">return</span> irq;<br>&#125;<br><br><span class="hljs-comment">// 3. 注册中断处理函数</span><br>ret = devm_request_threaded_irq(dev, irq, <span class="hljs-literal">NULL</span>, handler, <br>                                 IRQF_TRIGGER_FALLING | IRQF_ONESHOT,<br>                                 <span class="hljs-string">&quot;my_device&quot;</span>, dev);<br></code></pre></td></tr></table></figure>
 <h4 id="devm-request-threaded-irq"><a href="#devm-request-threaded-irq" class="headerlink" title="devm_request_threaded_irq()"></a>devm_request_threaded_irq()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta"># input : dev irq irq_handler_t(中断上半部 NULL handler) irq_handler_t(中断下半部 NULL thread_fn) irqflags(IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING | IRQF_TRIGGER_HIGH | IRQF_TRIGGER_LOW | IRQF_ONESHOT ： 线程执行完才能重新使能中断 | IRQF_SHARED) devname(设备名称 显示在 /proc/interrupts) dev_id(传递给中断的私有数据)</span><br><span class="hljs-meta"># output : 成功返回 0  失败返回错误码</span><br><br><span class="hljs-comment">// 上半部：清除硬件中断，唤醒下半部</span><br><span class="hljs-type">static</span> <span class="hljs-type">irqreturn_t</span> <span class="hljs-title function_">my_isr</span><span class="hljs-params">(<span class="hljs-type">int</span> irq, <span class="hljs-type">void</span> *dev_id)</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_device</span> *<span class="hljs-title">dev</span> =</span> dev_id;<br>    <br>    <span class="hljs-comment">// 清除中断标志（必须快）</span><br>    writel(IRQ_BIT, dev-&gt;regs + IRQ_CLEAR);<br>    <br>    <span class="hljs-keyword">return</span> IRQ_WAKE_THREAD;  <span class="hljs-comment">// 唤醒下半部</span><br>&#125;<br><br><span class="hljs-comment">// 下半部：处理实际工作</span><br><span class="hljs-type">static</span> <span class="hljs-type">irqreturn_t</span> <span class="hljs-title function_">my_thread_fn</span><span class="hljs-params">(<span class="hljs-type">int</span> irq, <span class="hljs-type">void</span> *dev_id)</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">my_device</span> *<span class="hljs-title">dev</span> =</span> dev_id;<br>    <br>    <span class="hljs-comment">// 耗时操作</span><br>    schedule_work(&amp;dev-&gt;work);<br>    <br>    <span class="hljs-keyword">return</span> IRQ_HANDLED;<br>&#125;<br><br><span class="hljs-comment">// 注册</span><br>devm_request_threaded_irq(dev, irq, my_isr, my_thread_fn, <br>                          IRQF_TRIGGER_FALLING | IRQF_ONESHOT,<br>                          <span class="hljs-string">&quot;my_dev&quot;</span>, dev);<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
             <hr/>
             <div>
-              <div class="post-end-tools">
+              
+<div
+  id="blog-like-config"
+  data-post-id="post-20260512-defa9e7978"
+  data-api-base=""
+  data-timeout="8000"
+  hidden
+></div>
+
+<div class="post-end-tools">
   <div class="post-end-tags" aria-label="文章标签">
     
       
