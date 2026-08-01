@@ -650,7 +650,8 @@ a.print-no-link:hover {
 
 html,
 body,
-body > header {
+body > header,
+body > main {
   animation: none !important;
   transform: none !important;
 }
@@ -663,8 +664,10 @@ body > header .banner-text {
   animation: none !important;
 }
 
-body > main {
-  animation: contentMeet 1.3s cubic-bezier(0.16, 0.78, 0.24, 1) both;
+/* Keep the page shell fixed; move only the route's content wrapper. */
+body > main > .container.nopadding-x-md,
+body > main > .container-fluid.nopadding-x {
+  animation: contentMeet 1.25s cubic-bezier(0.16, 0.78, 0.24, 1) both;
 }
 
 body > main #board,
@@ -688,6 +691,8 @@ body > main .side-col .sidebar {
   body > header .header-inner,
   body > header .banner-text,
   body > main,
+  body > main > .container.nopadding-x-md,
+  body > main > .container-fluid.nopadding-x,
   body > main #board,
   body > main #widget-panel,
   body > main .side-col .sidebar,
@@ -2376,56 +2381,6 @@ body {
 
 [data-user-color-scheme="dark"] .list-group-item time {
   color: #6a7a8a;
-}
-
-/* ===================================
-   页面切换动画：上下挤压效果
-   使用 CSS View Transitions API
-   点击任意内部链接均有平滑过渡
-   兼容 Chrome 126+, Edge 126+
-   =================================== */
-
-/* 全局启用跨页面过渡 */
-@view-transition {
-  navigation: auto;
-}
-
-/* 旧页面：向上挤压消失 */
-::view-transition-old(root) {
-  animation: squeeze-out 0.25s cubic-bezier(0.4, 0, 0.6, 1) both;
-}
-
-/* 新页面：向下展开出现 */
-::view-transition-new(root) {
-  animation: squeeze-in 0.3s 0.1s cubic-bezier(0, 0, 0.2, 1) both;
-}
-
-@keyframes squeeze-out {
-  0% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(0.3);
-    opacity: 0;
-  }
-}
-
-@keyframes squeeze-in {
-  0% {
-    transform: scaleY(0.3);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-/* 图片/媒体在过渡期间保持稳定 */
-::view-transition-old(root) img,
-::view-transition-new(root) img {
-  animation: none;
 }
 
 /* ===================================
