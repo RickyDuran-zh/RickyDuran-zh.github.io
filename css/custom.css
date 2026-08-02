@@ -648,6 +648,17 @@ a.print-no-link:hover {
   }
 }
 
+@keyframes coverTextReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 html,
 body,
 body > header,
@@ -661,7 +672,7 @@ body > header .header-inner {
 }
 
 body > header .banner-text {
-  animation: none !important;
+  animation: coverTextReveal 0.72s 1.08s cubic-bezier(0.16, 0.78, 0.24, 1) both !important;
 }
 
 /* Keep the page shell fixed; move only the route's content wrapper. */
