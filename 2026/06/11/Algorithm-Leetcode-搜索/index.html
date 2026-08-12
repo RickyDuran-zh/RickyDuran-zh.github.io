@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/algorithm.png">
 <meta property="article:published_time" content="2026-06-11T12:52:38.000Z">
-<meta property="article:modified_time" content="2026-06-18T07:40:36.253Z">
+<meta property="article:modified_time" content="2026-08-06T03:46:53.807Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,14 +71,14 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -357,6 +357,10 @@
       </div>
 
       
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
 </div>
@@ -409,42 +413,54 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    set&lt;string&gt; ans;<br>    <span class="hljs-type">int</span> maxNumber = <span class="hljs-number">0</span>;<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">removeInvalidParentheses</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        string str;<br>        <span class="hljs-built_in">dfs</span>(s,<span class="hljs-number">0</span>,str,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>        <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">v</span><span class="hljs-params">(ans.begin(),ans.end())</span></span>;<br>        <span class="hljs-keyword">return</span> v;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(string&amp; str, <span class="hljs-type">int</span> idx, string&amp; s, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(r &gt; l)  <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span>(l == r &amp;&amp; idx == str.<span class="hljs-built_in">length</span>())&#123;<br>            <span class="hljs-keyword">if</span>(s.<span class="hljs-built_in">length</span>() &gt; maxNumber)&#123;<br>                ans.<span class="hljs-built_in">clear</span>();<br>                maxNumber = s.<span class="hljs-built_in">length</span>();<br>            &#125;<br>            <span class="hljs-keyword">if</span>(s.<span class="hljs-built_in">length</span>() == maxNumber) ans.<span class="hljs-built_in">insert</span>(s);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(str[idx] &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; str[idx] &lt;= <span class="hljs-string">&#x27;z&#x27;</span>)&#123;<br>            s.<span class="hljs-built_in">push_back</span>(str[idx]);<br>            <span class="hljs-built_in">dfs</span>(str,idx<span class="hljs-number">+1</span>,s,l,r);<br>            s.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>        <span class="hljs-keyword">if</span>(str[idx] == <span class="hljs-string">&#x27;(&#x27;</span>)&#123;<br>            s.<span class="hljs-built_in">push_back</span>(str[idx]);<br>            <span class="hljs-built_in">dfs</span>(str,idx<span class="hljs-number">+1</span>,s,l<span class="hljs-number">+1</span>,r);<br>            s.<span class="hljs-built_in">pop_back</span>();<br>            <span class="hljs-built_in">dfs</span>(str,idx<span class="hljs-number">+1</span>,s,l,r);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(str[idx] == <span class="hljs-string">&#x27;)&#x27;</span>)&#123;<br>            s.<span class="hljs-built_in">push_back</span>(str[idx]);<br>            <span class="hljs-built_in">dfs</span>(str,idx<span class="hljs-number">+1</span>,s,l,r<span class="hljs-number">+1</span>);<br>            s.<span class="hljs-built_in">pop_back</span>();<br>            <span class="hljs-built_in">dfs</span>(str,idx<span class="hljs-number">+1</span>,s,l,r);<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>399 除法求值</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">double</span>&gt; <span class="hljs-title">calcEquation</span><span class="hljs-params">(vector&lt;vector&lt;string&gt;&gt;&amp; equations, </span></span><br><span class="hljs-params"><span class="hljs-function">                                 vector&lt;<span class="hljs-type">double</span>&gt;&amp; values, </span></span><br><span class="hljs-params"><span class="hljs-function">                                 vector&lt;vector&lt;string&gt;&gt;&amp; queries)</span> </span>&#123;<br>        <span class="hljs-comment">// 构建图</span><br>        unordered_map&lt;string, vector&lt;pair&lt;string, <span class="hljs-type">double</span>&gt;&gt;&gt; graph;<br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; equations.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            string a = equations[i][<span class="hljs-number">0</span>];<br>            string b = equations[i][<span class="hljs-number">1</span>];<br>            <span class="hljs-type">double</span> val = values[i];<br>            <br>            graph[a].<span class="hljs-built_in">push_back</span>(&#123;b, val&#125;);<br>            graph[b].<span class="hljs-built_in">push_back</span>(&#123;a, <span class="hljs-number">1.0</span> / val&#125;);<br>        &#125;<br>        <br>        <span class="hljs-comment">// 处理查询</span><br>        vector&lt;<span class="hljs-type">double</span>&gt; ans;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; query : queries) &#123;<br>            string start = query[<span class="hljs-number">0</span>];<br>            string end = query[<span class="hljs-number">1</span>];<br>            <br>            <span class="hljs-keyword">if</span> (graph.<span class="hljs-built_in">find</span>(start) == graph.<span class="hljs-built_in">end</span>() || graph.<span class="hljs-built_in">find</span>(end) == graph.<span class="hljs-built_in">end</span>()) &#123;<br>                ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">-1.0</span>);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <br>            <span class="hljs-keyword">if</span> (start == end) &#123;<br>                ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1.0</span>);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <br>            <span class="hljs-comment">// BFS</span><br>            queue&lt;pair&lt;string, <span class="hljs-type">double</span>&gt;&gt; q;<br>            unordered_set&lt;string&gt; visited;<br>            q.<span class="hljs-built_in">push</span>(&#123;start, <span class="hljs-number">1.0</span>&#125;);<br>            visited.<span class="hljs-built_in">insert</span>(start);<br>            <span class="hljs-type">double</span> result = <span class="hljs-number">-1.0</span>;<br>            <br>            <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>                <span class="hljs-keyword">auto</span> [cur, product] = q.<span class="hljs-built_in">front</span>();<br>                q.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-comment">// 终止条件</span><br>                <span class="hljs-keyword">if</span> (cur == end) &#123;<br>                    result = product;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>                <br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; [next, weight] : graph[cur]) &#123;<br>                    <span class="hljs-keyword">if</span> (visited.<span class="hljs-built_in">find</span>(next) == visited.<span class="hljs-built_in">end</span>()) &#123;<br>                        visited.<span class="hljs-built_in">insert</span>(next);<br>                        q.<span class="hljs-built_in">push</span>(&#123;next, product * weight&#125;);<br>                    &#125;<br>                &#125;<br>            &#125;<br>            <br>            ans.<span class="hljs-built_in">push_back</span>(result);<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
             <hr/>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
+              
+<div
+  id="blog-like-config"
+  data-post-id="post-20260611-82fe2f7292"
+  data-api-base="https://rickyduran-blog-likes.2920811635.workers.dev"
+  data-timeout="8000"
+  hidden
+></div>
 
-<span class="category-chains">
-  
-  
+<div class="post-end-tools">
+  <div class="post-end-tags" aria-label="文章标签">
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98/" class="category-chain-item">刷题</a>
-  
-  
-
-      </span>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="post-end-tag">#算法</a>
+      
     
-  
-</span>
+  </div>
 
+  <div class="post-share-actions" aria-label="分享文章">
+    <button type="button" class="post-share-btn post-share-wechat" data-share-channel="wechat" aria-label="微信扫码分享">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="post-share-btn post-share-qq" data-share-channel="qq" aria-label="QQ 扫码分享">
+      <i class="fa-brands fa-qq" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<div class="post-share-modal" id="post-share-modal" role="dialog" aria-modal="true" aria-labelledby="post-share-title" hidden>
+  <button type="button" class="post-share-backdrop" data-share-close aria-label="关闭分享二维码"></button>
+  <div class="post-share-dialog">
+    <button type="button" class="post-share-close" data-share-close aria-label="关闭">&times;</button>
+    <div class="post-share-brand" id="post-share-brand">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
     </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
-      
+    <h3 id="post-share-title">微信扫码分享</h3>
+    <p>使用手机扫描二维码，打开并分享这篇文章</p>
+    <div class="post-share-qr" id="post-share-qr">
+      <span class="post-share-loading">二维码生成中…</span>
     </div>
-  
+    <div class="post-share-name">Algorithm-Leetcode-搜索</div>
+  </div>
 </div>
 
 
@@ -571,7 +587,66 @@
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar" style="margin-left: -1rem">
+
+<div class="widget-panel widget-panel--post" id="post-widget-panel">
+  <div class="widget-panel-inner">
+    <div class="widget-card widget-profile">
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/rickyduran.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+
+      <div class="widget-profile-stats">
+        <a href="/archives" class="widget-stat-item">
+          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-label">文章</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/tags" class="widget-stat-item">
+          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-label">标签</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/categories" class="widget-stat-item">
+          <span class="widget-stat-num">11</span>
+          <span class="widget-stat-label">分类</span>
+        </a>
+      </div>
+
+      <a href="https://github.com/RickyDuran-zh" target="_blank" rel="noopener" class="widget-follow-btn">
+        <i class="fa-brands fa-github"></i> Follow Me
+      </a>
+
+      
+      <div class="widget-social">
+        
+          
+            <a href="https://github.com/RickyDuran-zh" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
+        
+      </div>
+      
+    </div>
+
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
+      </div>
+    </div>
+
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
@@ -582,8 +657,108 @@
 
 
 
-  </aside>
 
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-newspaper"></i> 最新文章
+      </h4>
+      <ul class="widget-list widget-recent-list">
+        
+        
+          <li>
+            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的七月总结</span>
+                <span class="widget-post-date">07-24</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 运算符重载</span>
+                <span class="widget-post-date">07-13</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
+                <span class="widget-post-date">07-10</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式 AI</span>
+                <span class="widget-post-date">07-07</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的六月总结</span>
+                <span class="widget-post-date">07-02</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式音视频</span>
+                <span class="widget-post-date">06-26</span>
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
 
     </div>
   </div>
@@ -877,6 +1052,9 @@
   
 <script src="/js/like-button.js"></script>
 <script src="/js/reading-progress.js"></script>
+<script src="/js/navbar-scroll.js"></script>
+<script src="/js/search-modal-fix.js"></script>
+<script src="/js/post-share.js"></script>
 
 
 
@@ -907,12 +1085,14 @@
 
     <!-- 1. 博主信息卡片 -->
     <div class="widget-card widget-profile">
-      <img
-        class="widget-avatar"
-        src="/img/rickyduran.png"
-        alt="avatar"
-        onerror="this.style.display='none'"
-      />
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/rickyduran.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
       <div class="widget-profile-info">
         <p class="widget-name">RickyDuran</p>
         <p class="widget-bio">To know yourself.</p>
@@ -931,7 +1111,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">11</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -957,7 +1137,7 @@
     <!-- 2. 公告 -->
     <div class="widget-card widget-announcement">
       <h4 class="widget-title">
-        <i class="fa-solid fa-bell widget-announce-icon"></i> 公告
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
       </h4>
       <div class="widget-announcement-text">
         转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
@@ -967,7 +1147,7 @@
     <!-- 3. 最新文章 -->
     <div class="widget-card widget-recent-posts">
       <h4 class="widget-title">
-        <i class="fa-solid fa-clock"></i> 最新文章
+        <i class="fa-solid fa-newspaper"></i> 最新文章
       </h4>
       <ul class="widget-list widget-recent-list">
         
@@ -1003,7 +1183,7 @@
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -1011,7 +1191,7 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
                 <span class="widget-post-date">07-10</span>
               </span>
             </a>
@@ -1069,7 +1249,7 @@
     
     <div class="widget-card widget-categories">
       <h4 class="widget-title">
-        <i class="fa-solid fa-layer-group"></i> 分类
+        <i class="fa-solid fa-folder-open"></i> 分类
       </h4>
       <ul class="widget-list">
         
@@ -1102,15 +1282,15 @@
           </li>
         
           <li>
-            <a href="/categories/Tools/">
-              <span class="widget-cat-name">Tools</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1123,8 +1303,8 @@
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1137,7 +1317,7 @@
     
     <div class="widget-card widget-tags">
       <h4 class="widget-title">
-        <i class="fa-solid fa-tags"></i> 标签
+        <i class="fa-solid fa-hashtag"></i> 标签
       </h4>
       <div class="widget-tag-cloud">
         
@@ -1145,7 +1325,7 @@
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9771428571428571rem">
             #项目开发
           </a>
         
@@ -1180,7 +1360,7 @@
     <!-- 6. 归档 -->
     <div class="widget-card widget-archives">
       <h4 class="widget-title">
-        <i class="fa-solid fa-box-archive"></i> 归档
+        <i class="fa-solid fa-calendar-days"></i> 归档
       </h4>
       <ul class="widget-list">
         
@@ -1224,7 +1404,7 @@
     <!-- 7. 网站资讯 -->
     <div class="widget-card widget-site-info">
       <h4 class="widget-title">
-        <i class="fa-solid fa-chart-simple"></i> 网站资讯
+        <i class="fa-solid fa-chart-pie"></i> 网站资讯
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
@@ -1236,7 +1416,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">11</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1259,72 +1439,48 @@
   'use strict';
   var panel = document.getElementById('widget-panel');
   if (!panel) return;
-
-  // 文章页不显示（已有 TOC 侧边栏）
-  var isPost = document.querySelector('.markdown-body');
-  if (isPost) {
+  var isPostPage = Boolean(document.querySelector('.markdown-body'));
+  if (isPostPage) {
     panel.remove();
     return;
   }
 
-  // 小屏不显示
-  function checkScreen() {
+  // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
+  function placeWidget() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
     if (window.innerWidth >= 1200) {
-      var container = document.querySelector('.container.nopadding-x-md');
-      if (container && panel.parentNode !== container) {
-        container.style.position = 'relative';
+      // 大屏：移入容器末尾 → CSS Flex 并排
+      if (panel.parentNode !== container) {
         container.appendChild(panel);
       }
-      panel.style.display = 'block';
-      syncContainerHeight();
+      container.classList.add('has-widget');
+      panel.style.display = '';
     } else {
-      panel.style.display = 'none';
-      resetContainerHeight();
-    }
-  }
-
-  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
-  function syncContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (!container || panel.style.display === 'none') return;
-    // 等待渲染完成后计算
-    requestAnimationFrame(function() {
-      var panelBottom = panel.offsetTop + panel.offsetHeight;
-      var containerHeight = container.offsetHeight;
-      if (panelBottom > containerHeight) {
-        container.style.minHeight = panelBottom + 'px';
+      // 小屏：放在主内容容器之后、页脚之前
+      container.classList.remove('has-widget');
+      if (panel.previousElementSibling !== container) {
+        container.insertAdjacentElement('afterend', panel);
       }
-    });
-  }
-
-  function resetContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (container) {
-      container.style.minHeight = '';
+      panel.style.display = '';
     }
   }
 
+  // DOM 就绪后执行
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      checkScreen();
-      // DOM 和图片加载后再次同步高度
-      setTimeout(syncContainerHeight, 500);
-    });
+    document.addEventListener('DOMContentLoaded', placeWidget);
   } else {
-    checkScreen();
-    setTimeout(syncContainerHeight, 500);
+    placeWidget();
   }
-  window.addEventListener('resize', checkScreen, { passive: true });
+  window.addEventListener('resize', placeWidget, { passive: true });
 
-  // 计算网站运行天数（从第一篇文章发布日期算起）
+  // 计算网站运行天数
   (function() {
     var el = document.getElementById('site-running-days');
     if (!el) return;
-
-    // 从第一篇文章的日期开始计算
     var firstPostDate = '2026-04-28';
     if (!firstPostDate) { el.textContent = '--'; return; }
-
     var start = new Date(firstPostDate);
     var now = new Date();
     var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));

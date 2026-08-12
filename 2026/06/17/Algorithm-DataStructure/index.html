@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/algorithm.png">
 <meta property="article:published_time" content="2026-06-17T03:34:56.000Z">
-<meta property="article:modified_time" content="2026-06-17T07:16:59.627Z">
+<meta property="article:modified_time" content="2026-08-06T03:46:53.804Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -71,14 +71,14 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -357,6 +357,10 @@
       </div>
 
       
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
 </div>
@@ -393,42 +397,54 @@
 <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="Stack-Queue-数组模拟"><a href="#Stack-Queue-数组模拟" class="headerlink" title="Stack &amp;&amp; Queue(数组模拟)"></a>Stack &amp;&amp; Queue(数组模拟)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Queue</span> &#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] queue;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> l;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> r;<br><br>	<span class="hljs-comment">// 加入操作的总次数上限是多少，一定要明确</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Queue</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>		queue = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[n];<br>		l = <span class="hljs-number">0</span>;<br>		r = <span class="hljs-number">0</span>;<br>	&#125;<br><br>	<span class="hljs-comment">// 调用任何方法之前，先调用这个方法来判断队列内是否有东西</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> boolean <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> l == r;<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title">offer</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> </span>&#123;<br>		queue[r++] = num;<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">poll</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> queue[l++];<br>	&#125;<br>	<span class="hljs-comment">// ?</span><br>	<span class="hljs-comment">// l...r-1 r</span><br>	<span class="hljs-comment">// [l..r)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">head</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> queue[l];<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">tail</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> queue[r - <span class="hljs-number">1</span>];<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> r - l;<br>	&#125;<br><br>&#125;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> &#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] stack;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> size;<br><br>	<span class="hljs-comment">// 同时在栈里的元素个数不会超过n</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Stack</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>		stack = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[n];<br>		size = <span class="hljs-number">0</span>;<br>	&#125;<br><br>	<span class="hljs-comment">// 调用任何方法之前，先调用这个方法来判断栈内是否有东西</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> boolean <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> size == <span class="hljs-number">0</span>;<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> </span>&#123;<br>		stack[size++] = num;<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> stack[--size];<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> stack[size - <span class="hljs-number">1</span>];<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> size;<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Trie-Tree-前缀树"><a href="#Trie-Tree-前缀树" class="headerlink" title="Trie Tree 前缀树"></a>Trie Tree 前缀树</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">TrieNode</span><br>    &#123;<br>        <span class="hljs-keyword">public</span>:<br>            <span class="hljs-type">int</span> pass;<br>            <span class="hljs-type">int</span> end;<br>            TrieNode *nexts[<span class="hljs-number">26</span>];<br>        <span class="hljs-built_in">TrieNode</span>() : <span class="hljs-built_in">pass</span>(<span class="hljs-number">0</span>), <span class="hljs-built_in">end</span>(<span class="hljs-number">0</span>)<br>        &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++)<br>            &#123;<br>                nexts[i] = <span class="hljs-literal">nullptr</span>;<br>            &#125;<br>        &#125;<br>    &#125;;<br><br>    TrieNode* root;<br><br>    <span class="hljs-built_in">Trie</span>() &#123;<br>        root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TrieNode</span>();<br>    &#125; <br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; word)</span></span><br><span class="hljs-function">    </span>&#123;<br>        TrieNode *node = root;<br>        node-&gt;pass++;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> ch : word)<br>        &#123;<br>            <span class="hljs-type">int</span> path = ch - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span>(node-&gt;nexts[path] == <span class="hljs-literal">nullptr</span>)<br>            &#123;<br>                node-&gt;nexts[path] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TrieNode</span>();<br>            &#125;<br>            node = node-&gt;nexts[path];<br>            node-&gt;pass++;<br>        &#125;<br>        node-&gt;end++;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countWordsEqualTo</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; word)</span></span><br><span class="hljs-function">    </span>&#123;<br>        TrieNode *node = root;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> ch : word)<br>        &#123;<br>            <span class="hljs-type">int</span> path = ch - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span>(node-&gt;nexts[path] == <span class="hljs-literal">nullptr</span>)<br>            &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            node = node-&gt;nexts[path];<br>        &#125;<br>        <span class="hljs-keyword">return</span> node-&gt;end;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">countWordsStartingWith</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; pre)</span></span><br><span class="hljs-function">    </span>&#123;<br>        TrieNode *node = root;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> ch : pre)<br>        &#123;<br>            <span class="hljs-type">int</span> path = ch - <span class="hljs-string">&#x27;a&#x27;</span>;<br>            <span class="hljs-keyword">if</span>(node-&gt;nexts[path] == <span class="hljs-literal">nullptr</span>)<br>            &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br>            node = node-&gt;nexts[path];<br>        &#125;<br>        <span class="hljs-keyword">return</span> node-&gt;pass;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">erase</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; word)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">countWordsEqualTo</span>(word) &gt; <span class="hljs-number">0</span>)<br>        &#123;<br>            TrieNode *node = root;<br>            node-&gt;pass--;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> ch : word)<br>            &#123;<br>                <span class="hljs-type">int</span> path = ch - <span class="hljs-string">&#x27;a&#x27;</span>;<br>                <span class="hljs-keyword">if</span>(--node-&gt;nexts[path]-&gt;pass == <span class="hljs-number">0</span>)<br>                &#123;<br>                    <span class="hljs-keyword">delete</span> node-&gt;nexts[path];<br>                    node-&gt;nexts[path] = <span class="hljs-literal">nullptr</span>;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>                node = node-&gt;nexts[path];<br>            &#125;<br>            node-&gt;end--;<br>        &#125;<br>    &#125;<br>    <br>    ~<span class="hljs-built_in">Trie</span>()<br>    &#123;<br>        <span class="hljs-built_in">clear</span>(root);<br>    &#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">clear</span><span class="hljs-params">(TrieNode* node)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(node)<br>        &#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++)<br>            &#123;<br>                <span class="hljs-built_in">clear</span>(node-&gt;nexts[i]);<br>            &#125;<br>            <span class="hljs-keyword">delete</span> node;<br>            node = <span class="hljs-literal">nullptr</span>;<br>        &#125;<br>    &#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    Trie myTrie;<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abc&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abc&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abc&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abc&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abd&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abe&quot;</span>);<br>    myTrie.<span class="hljs-built_in">insert</span>(<span class="hljs-string">&quot;abcd&quot;</span>);<br>    <span class="hljs-type">int</span> count = myTrie.<span class="hljs-built_in">countWordsStartingWith</span>(<span class="hljs-string">&quot;abc&quot;</span>);<br>    cout &lt;&lt; count &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Map-建图的三种方式-邻接表，邻接矩阵，链式前向星"><a href="#Map-建图的三种方式-邻接表，邻接矩阵，链式前向星" class="headerlink" title="Map 建图的三种方式(邻接表，邻接矩阵，链式前向星)"></a>Map 建图的三种方式(邻接表，邻接矩阵，链式前向星)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAXN = <span class="hljs-number">11</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAXM = <span class="hljs-number">21</span>;<br><br><span class="hljs-type">int</span> graph1[MAXN][MAXN];<br><br>vector&lt;vector&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&gt;&gt; graph2;<br><br><span class="hljs-type">int</span> head[MAXN];<br><span class="hljs-type">int</span> next[MAXM];<br><span class="hljs-type">int</span> to[MAXM];<br><span class="hljs-type">int</span> weight[MAXM];<br><span class="hljs-type">int</span> cnt;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>	&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++)<br>		&#123;<br>			graph1[i][j] = <span class="hljs-number">0</span>;<br>		&#125;<br>	&#125;<br>    graph<span class="hljs-number">2.</span><span class="hljs-built_in">clear</span>();<br>    graph<span class="hljs-number">2.</span><span class="hljs-built_in">resize</span>(n<span class="hljs-number">+1</span>);<br><br>    cnt = <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">memset</span>(head, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(<span class="hljs-type">int</span>) * (n + <span class="hljs-number">1</span>));<br>&#125;<br><span class="hljs-comment">//链式前向星加边</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> v,<span class="hljs-type">int</span> w)</span></span><br><span class="hljs-function"></span>&#123;<br>    next[cnt] = head[u];<br>    to[cnt] = v;<br>    weight[cnt] = w;<br>    head[u] = cnt++;<br>&#125;<br><br><span class="hljs-comment">//有向带权图</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">directGraph</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; edges)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        graph1[edge[<span class="hljs-number">0</span>]][edge[<span class="hljs-number">1</span>]] = edge[<span class="hljs-number">2</span>];<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        graph2[edge[<span class="hljs-number">0</span>]].<span class="hljs-built_in">push_back</span>(&#123;edge[<span class="hljs-number">1</span>],edge[<span class="hljs-number">2</span>]&#125;);<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        <span class="hljs-built_in">addEdge</span>(edge[<span class="hljs-number">0</span>],edge[<span class="hljs-number">1</span>],edge[<span class="hljs-number">2</span>]);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//无向带权图</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">undirectGraph</span><span class="hljs-params">(<span class="hljs-type">const</span> vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; edges)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        graph1[edge[<span class="hljs-number">0</span>]][edge[<span class="hljs-number">1</span>]] = edge[<span class="hljs-number">2</span>];<br>        graph1[edge[<span class="hljs-number">1</span>]][edge[<span class="hljs-number">0</span>]] = edge[<span class="hljs-number">2</span>];<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        graph2[edge[<span class="hljs-number">0</span>]].<span class="hljs-built_in">push_back</span>(&#123;edge[<span class="hljs-number">1</span>],edge[<span class="hljs-number">2</span>]&#125;);<br>        graph2[edge[<span class="hljs-number">1</span>]].<span class="hljs-built_in">push_back</span>(&#123;edge[<span class="hljs-number">0</span>],edge[<span class="hljs-number">2</span>]&#125;);<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : edges)<br>    &#123;<br>        <span class="hljs-built_in">addEdge</span>(edge[<span class="hljs-number">0</span>],edge[<span class="hljs-number">1</span>],edge[<span class="hljs-number">2</span>]);<br>        <span class="hljs-built_in">addEdge</span>(edge[<span class="hljs-number">1</span>],edge[<span class="hljs-number">0</span>],edge[<span class="hljs-number">2</span>]);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">traversal</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++)<br>        &#123;<br>            cout &lt;&lt; graph1[i][j] &lt;&lt; <span class="hljs-string">&quot; &quot;</span><br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; edge : graph2[i])<br>        &#123;<br>            cout &lt;&lt; <span class="hljs-string">&quot;(&quot;</span> &lt;&lt; edge.first &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; edge.second &lt;&lt; <span class="hljs-string">&quot;)&quot;</span>;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> ei = head[i]; ei &gt; <span class="hljs-number">0</span>; ei = next[ei])<br>        &#123;<br>            cout &lt;&lt; <span class="hljs-string">&quot;(&quot;</span> &lt;&lt; to[ei] &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; weight[ei] &lt;&lt; <span class="hljs-string">&quot;)&quot;</span>;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
             <hr/>
             <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
+              
+<div
+  id="blog-like-config"
+  data-post-id="post-20260617-03f2392b20"
+  data-api-base="https://rickyduran-blog-likes.2920811635.workers.dev"
+  data-timeout="8000"
+  hidden
+></div>
 
-<span class="category-chains">
-  
-  
+<div class="post-end-tools">
+  <div class="post-end-tags" aria-label="文章标签">
     
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98/" class="category-chain-item">刷题</a>
-  
-  
-
-      </span>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="post-end-tag">#算法</a>
+      
     
-  
-</span>
+  </div>
 
+  <div class="post-share-actions" aria-label="分享文章">
+    <button type="button" class="post-share-btn post-share-wechat" data-share-channel="wechat" aria-label="微信扫码分享">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="post-share-btn post-share-qq" data-share-channel="qq" aria-label="QQ 扫码分享">
+      <i class="fa-brands fa-qq" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<div class="post-share-modal" id="post-share-modal" role="dialog" aria-modal="true" aria-labelledby="post-share-title" hidden>
+  <button type="button" class="post-share-backdrop" data-share-close aria-label="关闭分享二维码"></button>
+  <div class="post-share-dialog">
+    <button type="button" class="post-share-close" data-share-close aria-label="关闭">&times;</button>
+    <div class="post-share-brand" id="post-share-brand">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
     </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
-      
+    <h3 id="post-share-title">微信扫码分享</h3>
+    <p>使用手机扫描二维码，打开并分享这篇文章</p>
+    <div class="post-share-qr" id="post-share-qr">
+      <span class="post-share-loading">二维码生成中…</span>
     </div>
-  
+    <div class="post-share-name">Algorithm-DataStructure</div>
+  </div>
 </div>
 
 
@@ -555,7 +571,66 @@
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar" style="margin-left: -1rem">
+
+<div class="widget-panel widget-panel--post" id="post-widget-panel">
+  <div class="widget-panel-inner">
+    <div class="widget-card widget-profile">
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/rickyduran.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+
+      <div class="widget-profile-stats">
+        <a href="/archives" class="widget-stat-item">
+          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-label">文章</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/tags" class="widget-stat-item">
+          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-label">标签</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/categories" class="widget-stat-item">
+          <span class="widget-stat-num">11</span>
+          <span class="widget-stat-label">分类</span>
+        </a>
+      </div>
+
+      <a href="https://github.com/RickyDuran-zh" target="_blank" rel="noopener" class="widget-follow-btn">
+        <i class="fa-brands fa-github"></i> Follow Me
+      </a>
+
+      
+      <div class="widget-social">
+        
+          
+            <a href="https://github.com/RickyDuran-zh" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
+        
+      </div>
+      
+    </div>
+
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
+      </div>
+    </div>
+
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
@@ -566,8 +641,108 @@
 
 
 
-  </aside>
 
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-newspaper"></i> 最新文章
+      </h4>
+      <ul class="widget-list widget-recent-list">
+        
+        
+          <li>
+            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的七月总结</span>
+                <span class="widget-post-date">07-24</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 运算符重载</span>
+                <span class="widget-post-date">07-13</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
+                <span class="widget-post-date">07-10</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式 AI</span>
+                <span class="widget-post-date">07-07</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的六月总结</span>
+                <span class="widget-post-date">07-02</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">嵌入式音视频</span>
+                <span class="widget-post-date">06-26</span>
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
 
     </div>
   </div>
@@ -861,6 +1036,9 @@
   
 <script src="/js/like-button.js"></script>
 <script src="/js/reading-progress.js"></script>
+<script src="/js/navbar-scroll.js"></script>
+<script src="/js/search-modal-fix.js"></script>
+<script src="/js/post-share.js"></script>
 
 
 
@@ -891,12 +1069,14 @@
 
     <!-- 1. 博主信息卡片 -->
     <div class="widget-card widget-profile">
-      <img
-        class="widget-avatar"
-        src="/img/rickyduran.png"
-        alt="avatar"
-        onerror="this.style.display='none'"
-      />
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/rickyduran.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
       <div class="widget-profile-info">
         <p class="widget-name">RickyDuran</p>
         <p class="widget-bio">To know yourself.</p>
@@ -915,7 +1095,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">11</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -941,7 +1121,7 @@
     <!-- 2. 公告 -->
     <div class="widget-card widget-announcement">
       <h4 class="widget-title">
-        <i class="fa-solid fa-bell widget-announce-icon"></i> 公告
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
       </h4>
       <div class="widget-announcement-text">
         转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
@@ -951,7 +1131,7 @@
     <!-- 3. 最新文章 -->
     <div class="widget-card widget-recent-posts">
       <h4 class="widget-title">
-        <i class="fa-solid fa-clock"></i> 最新文章
+        <i class="fa-solid fa-newspaper"></i> 最新文章
       </h4>
       <ul class="widget-list widget-recent-list">
         
@@ -987,7 +1167,7 @@
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -995,7 +1175,7 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
                 <span class="widget-post-date">07-10</span>
               </span>
             </a>
@@ -1053,7 +1233,7 @@
     
     <div class="widget-card widget-categories">
       <h4 class="widget-title">
-        <i class="fa-solid fa-layer-group"></i> 分类
+        <i class="fa-solid fa-folder-open"></i> 分类
       </h4>
       <ul class="widget-list">
         
@@ -1086,15 +1266,15 @@
           </li>
         
           <li>
-            <a href="/categories/Tools/">
-              <span class="widget-cat-name">Tools</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1107,8 +1287,8 @@
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1121,7 +1301,7 @@
     
     <div class="widget-card widget-tags">
       <h4 class="widget-title">
-        <i class="fa-solid fa-tags"></i> 标签
+        <i class="fa-solid fa-hashtag"></i> 标签
       </h4>
       <div class="widget-tag-cloud">
         
@@ -1129,7 +1309,7 @@
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9771428571428571rem">
             #项目开发
           </a>
         
@@ -1164,7 +1344,7 @@
     <!-- 6. 归档 -->
     <div class="widget-card widget-archives">
       <h4 class="widget-title">
-        <i class="fa-solid fa-box-archive"></i> 归档
+        <i class="fa-solid fa-calendar-days"></i> 归档
       </h4>
       <ul class="widget-list">
         
@@ -1208,7 +1388,7 @@
     <!-- 7. 网站资讯 -->
     <div class="widget-card widget-site-info">
       <h4 class="widget-title">
-        <i class="fa-solid fa-chart-simple"></i> 网站资讯
+        <i class="fa-solid fa-chart-pie"></i> 网站资讯
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
@@ -1220,7 +1400,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">11</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1243,72 +1423,48 @@
   'use strict';
   var panel = document.getElementById('widget-panel');
   if (!panel) return;
-
-  // 文章页不显示（已有 TOC 侧边栏）
-  var isPost = document.querySelector('.markdown-body');
-  if (isPost) {
+  var isPostPage = Boolean(document.querySelector('.markdown-body'));
+  if (isPostPage) {
     panel.remove();
     return;
   }
 
-  // 小屏不显示
-  function checkScreen() {
+  // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
+  function placeWidget() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
     if (window.innerWidth >= 1200) {
-      var container = document.querySelector('.container.nopadding-x-md');
-      if (container && panel.parentNode !== container) {
-        container.style.position = 'relative';
+      // 大屏：移入容器末尾 → CSS Flex 并排
+      if (panel.parentNode !== container) {
         container.appendChild(panel);
       }
-      panel.style.display = 'block';
-      syncContainerHeight();
+      container.classList.add('has-widget');
+      panel.style.display = '';
     } else {
-      panel.style.display = 'none';
-      resetContainerHeight();
-    }
-  }
-
-  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
-  function syncContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (!container || panel.style.display === 'none') return;
-    // 等待渲染完成后计算
-    requestAnimationFrame(function() {
-      var panelBottom = panel.offsetTop + panel.offsetHeight;
-      var containerHeight = container.offsetHeight;
-      if (panelBottom > containerHeight) {
-        container.style.minHeight = panelBottom + 'px';
+      // 小屏：放在主内容容器之后、页脚之前
+      container.classList.remove('has-widget');
+      if (panel.previousElementSibling !== container) {
+        container.insertAdjacentElement('afterend', panel);
       }
-    });
-  }
-
-  function resetContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (container) {
-      container.style.minHeight = '';
+      panel.style.display = '';
     }
   }
 
+  // DOM 就绪后执行
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      checkScreen();
-      // DOM 和图片加载后再次同步高度
-      setTimeout(syncContainerHeight, 500);
-    });
+    document.addEventListener('DOMContentLoaded', placeWidget);
   } else {
-    checkScreen();
-    setTimeout(syncContainerHeight, 500);
+    placeWidget();
   }
-  window.addEventListener('resize', checkScreen, { passive: true });
+  window.addEventListener('resize', placeWidget, { passive: true });
 
-  // 计算网站运行天数（从第一篇文章发布日期算起）
+  // 计算网站运行天数
   (function() {
     var el = document.getElementById('site-running-days');
     if (!el) return;
-
-    // 从第一篇文章的日期开始计算
     var firstPostDate = '2026-04-28';
     if (!firstPostDate) { el.textContent = '--'; return; }
-
     var start = new Date(firstPostDate);
     var now = new Date();
     var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));

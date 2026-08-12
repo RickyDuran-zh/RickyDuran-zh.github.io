@@ -61,14 +61,14 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"supabase":{"url":"https://ssprgbdfxfmasksuivgu.supabase.co","anon_key":"sb_publishable_ZGfnHgku9w3Qi0NSHCbwmg_zixfVT7r"}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -307,6 +307,10 @@
       </div>
 
       
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
 </div>
@@ -328,7 +332,7 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
+<div class="list-group archive-post-list">
   <p class="h4">共计 1 篇文章</p>
   <hr>
   
@@ -337,8 +341,14 @@
       
       <p class="h5">2026</p>
     
-    <a href="/2026/05/08/xv6%E5%AE%9E%E9%AA%8C%E9%85%8D%E7%BD%AE-Mac/" class="list-group-item list-group-item-action">
+    
+    <a href="/2026/05/08/xv6%E5%AE%9E%E9%AA%8C%E9%85%8D%E7%BD%AE-Mac/" class="list-group-item list-group-item-action archive-post-item">
       <time>05-08</time>
+      <span class="archive-post-cover">
+        
+          <img src="/img/xv6.png" alt="" loading="lazy">
+        
+      </span>
       <div class="list-group-item-title">xv6实验配置-Mac</div>
     </a>
   
@@ -454,6 +464,9 @@
   
 <script src="/js/like-button.js"></script>
 <script src="/js/reading-progress.js"></script>
+<script src="/js/navbar-scroll.js"></script>
+<script src="/js/search-modal-fix.js"></script>
+<script src="/js/post-share.js"></script>
 
 
 
@@ -484,12 +497,14 @@
 
     <!-- 1. 博主信息卡片 -->
     <div class="widget-card widget-profile">
-      <img
-        class="widget-avatar"
-        src="/img/rickyduran.png"
-        alt="avatar"
-        onerror="this.style.display='none'"
-      />
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/rickyduran.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
       <div class="widget-profile-info">
         <p class="widget-name">RickyDuran</p>
         <p class="widget-bio">To know yourself.</p>
@@ -508,7 +523,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">11</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -534,7 +549,7 @@
     <!-- 2. 公告 -->
     <div class="widget-card widget-announcement">
       <h4 class="widget-title">
-        <i class="fa-solid fa-bell widget-announce-icon"></i> 公告
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
       </h4>
       <div class="widget-announcement-text">
         转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
@@ -544,7 +559,7 @@
     <!-- 3. 最新文章 -->
     <div class="widget-card widget-recent-posts">
       <h4 class="widget-title">
-        <i class="fa-solid fa-clock"></i> 最新文章
+        <i class="fa-solid fa-newspaper"></i> 最新文章
       </h4>
       <ul class="widget-list widget-recent-list">
         
@@ -580,7 +595,7 @@
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -588,7 +603,7 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
                 <span class="widget-post-date">07-10</span>
               </span>
             </a>
@@ -646,7 +661,7 @@
     
     <div class="widget-card widget-categories">
       <h4 class="widget-title">
-        <i class="fa-solid fa-layer-group"></i> 分类
+        <i class="fa-solid fa-folder-open"></i> 分类
       </h4>
       <ul class="widget-list">
         
@@ -679,15 +694,15 @@
           </li>
         
           <li>
-            <a href="/categories/Tools/">
-              <span class="widget-cat-name">Tools</span>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/CPP/">
-              <span class="widget-cat-name">CPP</span>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -700,8 +715,8 @@
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -714,7 +729,7 @@
     
     <div class="widget-card widget-tags">
       <h4 class="widget-title">
-        <i class="fa-solid fa-tags"></i> 标签
+        <i class="fa-solid fa-hashtag"></i> 标签
       </h4>
       <div class="widget-tag-cloud">
         
@@ -722,7 +737,7 @@
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9771428571428571rem">
             #项目开发
           </a>
         
@@ -757,7 +772,7 @@
     <!-- 6. 归档 -->
     <div class="widget-card widget-archives">
       <h4 class="widget-title">
-        <i class="fa-solid fa-box-archive"></i> 归档
+        <i class="fa-solid fa-calendar-days"></i> 归档
       </h4>
       <ul class="widget-list">
         
@@ -801,7 +816,7 @@
     <!-- 7. 网站资讯 -->
     <div class="widget-card widget-site-info">
       <h4 class="widget-title">
-        <i class="fa-solid fa-chart-simple"></i> 网站资讯
+        <i class="fa-solid fa-chart-pie"></i> 网站资讯
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
@@ -813,7 +828,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">11</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -836,72 +851,48 @@
   'use strict';
   var panel = document.getElementById('widget-panel');
   if (!panel) return;
-
-  // 文章页不显示（已有 TOC 侧边栏）
-  var isPost = document.querySelector('.markdown-body');
-  if (isPost) {
+  var isPostPage = Boolean(document.querySelector('.markdown-body'));
+  if (isPostPage) {
     panel.remove();
     return;
   }
 
-  // 小屏不显示
-  function checkScreen() {
+  // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
+  function placeWidget() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
     if (window.innerWidth >= 1200) {
-      var container = document.querySelector('.container.nopadding-x-md');
-      if (container && panel.parentNode !== container) {
-        container.style.position = 'relative';
+      // 大屏：移入容器末尾 → CSS Flex 并排
+      if (panel.parentNode !== container) {
         container.appendChild(panel);
       }
-      panel.style.display = 'block';
-      syncContainerHeight();
+      container.classList.add('has-widget');
+      panel.style.display = '';
     } else {
-      panel.style.display = 'none';
-      resetContainerHeight();
-    }
-  }
-
-  // 确保容器高度包含 widget 面板，让 footer 始终在面板下方
-  function syncContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (!container || panel.style.display === 'none') return;
-    // 等待渲染完成后计算
-    requestAnimationFrame(function() {
-      var panelBottom = panel.offsetTop + panel.offsetHeight;
-      var containerHeight = container.offsetHeight;
-      if (panelBottom > containerHeight) {
-        container.style.minHeight = panelBottom + 'px';
+      // 小屏：放在主内容容器之后、页脚之前
+      container.classList.remove('has-widget');
+      if (panel.previousElementSibling !== container) {
+        container.insertAdjacentElement('afterend', panel);
       }
-    });
-  }
-
-  function resetContainerHeight() {
-    var container = document.querySelector('.container.nopadding-x-md');
-    if (container) {
-      container.style.minHeight = '';
+      panel.style.display = '';
     }
   }
 
+  // DOM 就绪后执行
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      checkScreen();
-      // DOM 和图片加载后再次同步高度
-      setTimeout(syncContainerHeight, 500);
-    });
+    document.addEventListener('DOMContentLoaded', placeWidget);
   } else {
-    checkScreen();
-    setTimeout(syncContainerHeight, 500);
+    placeWidget();
   }
-  window.addEventListener('resize', checkScreen, { passive: true });
+  window.addEventListener('resize', placeWidget, { passive: true });
 
-  // 计算网站运行天数（从第一篇文章发布日期算起）
+  // 计算网站运行天数
   (function() {
     var el = document.getElementById('site-running-days');
     if (!el) return;
-
-    // 从第一篇文章的日期开始计算
     var firstPostDate = '2026-04-28';
     if (!firstPostDate) { el.textContent = '--'; return; }
-
     var start = new Date(firstPostDate);
     var now = new Date();
     var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
