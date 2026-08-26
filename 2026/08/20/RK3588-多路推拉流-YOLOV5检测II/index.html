@@ -19,24 +19,25 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm  LubanCat-4 RK3588S2 基本配置信息(https:&#x2F;&#x2F;doc.embedfire.com&#x2F;linux&#x2F;rk3588&#x2F;quick_start&#x2F;zh&#x2F;la">
+    <meta name="description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式 AI">
-<meta property="og:url" content="http://example.com/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/index.html">
+<meta property="og:title" content="RK3588-多路推拉流+YOLOV5检测II">
+<meta property="og:url" content="http://example.com/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm  LubanCat-4 RK3588S2 基本配置信息(https:&#x2F;&#x2F;doc.embedfire.com&#x2F;linux&#x2F;rk3588&#x2F;quick_start&#x2F;zh&#x2F;la">
+<meta property="og:description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/2026-7-27/1.png">
-<meta property="article:published_time" content="2026-07-07T11:44:10.000Z">
-<meta property="article:modified_time" content="2026-08-06T03:46:53.818Z">
+<meta property="og:image" content="http://example.com/img/2026-7-27/cover.png">
+<meta property="article:published_time" content="2026-08-20T13:44:29.000Z">
+<meta property="article:modified_time" content="2026-08-24T06:26:42.913Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
+<meta property="article:tag" content="项目开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/2026-7-27/1.png">
+<meta name="twitter:image" content="http://example.com/img/2026-7-27/cover.png">
   
   
   
-  <title>嵌入式 AI - RickyDuran&#39;s Blog</title>
+  <title>RK3588-多路推拉流+YOLOV5检测II - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -303,13 +304,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/2026-7-27/1.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/2026-7-27/cover.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="嵌入式 AI"></span>
+            <span id="subtitle" data-typed-text="RK3588-多路推拉流+YOLOV5检测II"></span>
           
         </div>
 
@@ -320,8 +321,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-07-07 19:44" pubdate>
-          2026年7月7日 晚上
+        <time datetime="2026-08-20 21:44" pubdate>
+          2026年8月20日 晚上
         </time>
       </span>
     
@@ -332,7 +333,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          38 字
         
       </span>
     
@@ -343,7 +344,7 @@
         
         
         
-          19 分钟
+          1 分钟
         
       </span>
     
@@ -386,46 +387,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">嵌入式 AI</h1>
+            <h1 id="seo-header">RK3588-多路推拉流+YOLOV5检测II</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署<br>官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm</p>
+<p>这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。</p>
 </blockquote>
-<h2 id="LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html"><a href="#LubanCat-4-RK3588S2-基本配置信息-https-doc-embedfire-com-linux-rk3588-quick-start-zh-latest-quick-start-lubancat-lubancat4-html" class="headerlink" title="LubanCat-4 RK3588S2 基本配置信息(https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html)"></a>LubanCat-4 RK3588S2 基本配置信息(<a target="_blank" rel="noopener" href="https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html">https://doc.embedfire.com/linux/rk3588/quick_start/zh/latest/quick_start/lubancat/lubancat4.html</a>)</h2><p>电源接口: Type-C5V@4A 直流输入<br>主芯片: RK3588S(四核 A76 +四核 A55、Mali-G610、6T 算力)<br>内存: LPDDR4X-4GB<br>存储: eMMC-32GB</p>
-<h2 id="扫盲"><a href="#扫盲" class="headerlink" title="扫盲"></a>扫盲</h2><p><strong>什么是量化？</strong> 量化指把模型中的浮点参数和操作转换为定点表示。FP32 -&gt; INT8 大幅缩减模型体积 NPU 更适合处理 INT8 运算，提升推理速度，降低功耗。PTQ(训练后量化，直接把训练好的模型进行量化); QAT(在训练过程中就去模拟量化，模型自适应精度损失); 混合精度量化。量化会带来精度损失。</p>
-<h2 id="1-rknn-toolkit2-开发环境搭建"><a href="#1-rknn-toolkit2-开发环境搭建" class="headerlink" title="1 rknn-toolkit2 开发环境搭建"></a>1 rknn-toolkit2 开发环境搭建</h2><blockquote>
-<p>ubuntu20 + miniconda(安装 + 换源) + 安装 toolkit 需要的软件包</p>
-</blockquote>
-<h2 id="2-设备端-NPU-环境准备"><a href="#2-设备端-NPU-环境准备" class="headerlink" title="2 设备端 NPU 环境准备"></a>2 设备端 NPU 环境准备</h2><p>驱动版本确认： RKNPU driver xxx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">dmesg | grep -i rknpu<br><span class="hljs-built_in">cat</span> /sys/kernel/debug/rknpu/version<br></code></pre></td></tr></table></figure>
-<h2 id="3-查看-设置-CPU、NPU、DDR-的频率"><a href="#3-查看-设置-CPU、NPU、DDR-的频率" class="headerlink" title="3 查看 &amp; 设置 CPU、NPU、DDR 的频率"></a>3 查看 &amp; 设置 CPU、NPU、DDR 的频率</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /sys/devices/system/cpu/cpux/cpufreq/scaling_cur_freq <span class="hljs-comment"># 查看 CPU 当前运行的频率 </span><br><span class="hljs-built_in">cat</span> /sys/class/devfreq/fdab0000.npu/cur_freq <span class="hljs-comment"># 查看 NPU 频率</span><br><span class="hljs-built_in">cat</span> /sys/kernel/debug/clk/clk_summary | grep ddr <span class="hljs-comment"># 查看当前 DDR 实际运行频率</span><br></code></pre></td></tr></table></figure>
-<h2 id="4-RKNN-模型转换"><a href="#4-RKNN-模型转换" class="headerlink" title="4 RKNN 模型转换"></a>4 RKNN 模型转换</h2><blockquote>
-<p>a. <strong>模型转换流程</strong> 创建 RKNN 对象 -&gt; 配置 RKNN 模型 -&gt; 加载对应的模型 -&gt; 构建 RKNN 模型 -&gt; 导出 RKNN 模型 -&gt; 释放 RKNN 对象</p>
-</blockquote>
-<blockquote>
-<p>b. <strong>RKNN-ToolKit2 API</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 1 导包并创建对象</span><br><span class="hljs-keyword">from</span> rknn.api <span class="hljs-keyword">import</span> RKNN<br>rknn = RKNN(verbose = <span class="hljs-literal">True</span>, verbose_file = ...) <span class="hljs-comment"># 日志信息重定位到终端或文件</span><br><br><span class="hljs-comment"># 2 调用 config 接口配置要生成的 RKNN 模型</span><br>rknn.config(mean_values, std_values, quantized_algorithm = <span class="hljs-string">&quot;normal&quot;</span>, target_platform = <span class="hljs-string">&quot;rk3588&quot;</span>) <span class="hljs-comment"># 参数众多，对模型进行通道均值，量化图片 RGB2BGR 配置，量化类型</span><br><br><span class="hljs-comment"># 3 加载</span><br>ret = rknn.load_tensorflow()<br>ret = rknn.load_onnx()<br>ret = rknn.load_pytorch(model = <span class="hljs-string">&quot;./xxx.pt&quot;</span>, input_size_list)<br><br><span class="hljs-comment"># 4 构建</span><br>rknn.build(do_quantization = <span class="hljs-literal">True</span>, dataset, rknn_batch_size, auto_hybrid)<br><br><span class="hljs-comment"># 5 导出并释放</span><br>rknn.export_rknn(export_path)<br>rknn.release()<br></code></pre></td></tr></table></figure>
-<h2 id="5-模型转换工具-rknn-convert"><a href="#5-模型转换工具-rknn-convert" class="headerlink" title="5 模型转换工具 rknn_convert"></a>5 模型转换工具 rknn_convert</h2><blockquote>
-<p>常用模型转换工具，只需要编辑对应的 yml 配置文件，就可以通过指令转换模型</p>
-</blockquote>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">models:</span><br>    <span class="hljs-string">name</span><br>    <span class="hljs-string">platform</span><br>    <span class="hljs-string">model_file_path</span><br>    <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
-<p>python -m rknn.api.rknn_convert -t rk3588 -i .&#x2F;model_config.yml -o .&#x2F;output_path</p>
-<h2 id="6-Netron-的基本使用"><a href="#6-Netron-的基本使用" class="headerlink" title="6 Netron 的基本使用"></a>6 Netron 的基本使用</h2><blockquote>
-<p>微软推出的可视化模型结构工具，支持查看多种深度学习框架导出的模型。</p>
-</blockquote>
-<h2 id="7-rknn-toolkit2-模型推理"><a href="#7-rknn-toolkit2-模型推理" class="headerlink" title="7 rknn-toolkit2 模型推理"></a>7 rknn-toolkit2 模型推理</h2><blockquote>
-<p>a. API 介绍</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.load_rknn()<br>ret = rknn.init_runtime(target, device_id, perf_debug, eval_mem, async_mode, core_mask, fallback_prior_device)<br>ret = rknn.inference(inputs, data_format, inputs_pass_through) <span class="hljs-comment"># 模型推理</span><br></code></pre></td></tr></table></figure>
-<h2 id="8-模型量化精度分析-性能、内存评估"><a href="#8-模型量化精度分析-性能、内存评估" class="headerlink" title="8 模型量化精度分析 性能、内存评估"></a>8 模型量化精度分析 性能、内存评估</h2><p>Rknn-toolkit2 提供两种量化方式(Layer, Channel)和三种量化算法(Normal, MMSE, KL-Divergence)。常规量化和混合量化(权重和激活值可以采用不止一种量化精度类型)。<br><img src="/../img/7-16/eval.png" srcset="/img/loading.gif" lazyload alt="性能评估"></p>
-<h2 id="9-模型剪枝"><a href="#9-模型剪枝" class="headerlink" title="9 模型剪枝"></a>9 模型剪枝</h2><p>可以分为有损剪枝和无损剪枝，Rknn-toolkit2 的模型剪枝为无损剪枝。结构化剪枝 + 微调，需要在 PyTorch 训练阶段主动介入。</p>
-<h2 id="10-模型加密"><a href="#10-模型加密" class="headerlink" title="10 模型加密"></a>10 模型加密</h2><p>export_encrypted_rknn_model()  </p>
-<h2 id="11-多-batch-多输入模型"><a href="#11-多-batch-多输入模型" class="headerlink" title="11 多 batch &amp; 多输入模型"></a>11 多 batch &amp; 多输入模型</h2><p>开启多 batch 推理时，内部会调用 rknn_dup_context() 将 context 进行拷贝。</p>
-<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2>
+
                 
               </div>
             
@@ -434,7 +404,7 @@
               
 <div
   id="blog-like-config"
-  data-post-id="post-20260707-eb3b1924be"
+  data-post-id="post-20260820-eadd509653"
   data-api-base="https://rickyduran-blog-likes.2920811635.workers.dev"
   data-timeout="8000"
   hidden
@@ -445,6 +415,8 @@
     
       
         <a href="/tags/%E6%8A%80%E6%9C%AF/" class="post-end-tag">#技术</a>
+      
+        <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="post-end-tag">#项目开发</a>
       
     
   </div>
@@ -471,7 +443,7 @@
     <div class="post-share-qr" id="post-share-qr">
       <span class="post-share-loading">二维码生成中…</span>
     </div>
-    <div class="post-share-name">嵌入式 AI</div>
+    <div class="post-share-name">RK3588-多路推拉流+YOLOV5检测II</div>
   </div>
 </div>
 
@@ -481,8 +453,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>嵌入式 AI</div>
-      <div>http://example.com/2026/07/07/嵌入式AI/</div>
+      <div>RK3588-多路推拉流+YOLOV5检测II</div>
+      <div>http://example.com/2026/08/20/RK3588-多路推拉流-YOLOV5检测II/</div>
     </div>
     <div class="license-meta">
       
@@ -494,7 +466,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年7月7日</div>
+          <div>2026年8月20日</div>
         </div>
       
       
@@ -526,18 +498,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RK3588-多路推拉流+YOLOV5检测</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结">
-                        <span class="hidden-mobile">久违的六月总结</span>
+                      <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式">
+                        <span class="hidden-mobile">C++ Lambda表达式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -618,7 +584,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">34</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -678,6 +644,66 @@
         
         
           <li>
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
             <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
               
               <span class="widget-recent-cover">
@@ -693,7 +719,7 @@
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/07/13/C-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" title="C++ 移动语义" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -701,68 +727,8 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
+                <span class="widget-post-title">C++ 移动语义</span>
                 <span class="widget-post-date">07-13</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
-                <span class="widget-post-date">07-10</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
               </span>
             </a>
           </li>
@@ -1113,7 +1079,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">34</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1165,6 +1131,66 @@
         
         
           <li>
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
             <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
               
               <span class="widget-recent-cover">
@@ -1180,7 +1206,7 @@
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/07/13/C-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" title="C++ 移动语义" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -1188,68 +1214,8 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
+                <span class="widget-post-title">C++ 移动语义</span>
                 <span class="widget-post-date">07-13</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLOV5检测" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测</span>
-                <span class="widget-post-date">07-10</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
               </span>
             </a>
           </li>
@@ -1280,6 +1246,13 @@
           </li>
         
           <li>
+            <a href="/categories/RK3588S2/">
+              <span class="widget-cat-name">RK3588S2</span>
+              <span class="widget-cat-count">4</span>
+            </a>
+          </li>
+        
+          <li>
             <a href="/categories/%E9%9A%8F%E7%AC%94/">
               <span class="widget-cat-name">随笔</span>
               <span class="widget-cat-count">4</span>
@@ -1287,36 +1260,29 @@
           </li>
         
           <li>
-            <a href="/categories/RK3588S2/">
-              <span class="widget-cat-name">RK3588S2</span>
-              <span class="widget-cat-count">3</span>
-            </a>
-          </li>
-        
-          <li>
             <a href="/categories/CPP/">
               <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">3</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
-              <span class="widget-cat-count">1</span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
               <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/IMX6ULL/OS/">
+              <span class="widget-cat-name">OS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1333,11 +1299,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9771428571428571rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1349,16 +1315,16 @@
             #生活
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
           <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
             #工作流分享
-          </a>
-        
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #Language Philosophy
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1378,6 +1344,13 @@
         
         
         
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">4 篇</span>
+            </a>
+          </li>
         
           <li>
             <a href="/archives">
@@ -1420,7 +1393,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">30</span>
+          <span class="widget-info-value">34</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
@@ -1438,7 +1411,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-07-24</span>
+        <span>最后更新：2026-08-20</span>
       </div>
       
     </div>
