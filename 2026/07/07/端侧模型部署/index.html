@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/2026-7-27/1.png">
 <meta property="article:published_time" content="2026-07-07T11:44:10.000Z">
-<meta property="article:modified_time" content="2026-08-26T03:46:27.874Z">
+<meta property="article:modified_time" content="2026-08-27T03:27:40.040Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          6.2k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          45 分钟
+          52 分钟
         
       </span>
     
@@ -420,15 +420,20 @@
 <blockquote>
 <p>a. API 介绍</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.load_rknn(path=<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># 从当前路径加载模型</span><br>ret = rknn.init_runtime(target, device_id, perf_debug, eval_mem, async_mode, core_mask, fallback_prior_device) <span class="hljs-comment"># 初始化运行时环境 支持性能评估和内存评估</span><br>ret = rknn.inference(inputs, data_format, inputs_pass_through) <span class="hljs-comment"># 模型推理</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.load_rknn(path=<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment"># 从当前路径加载模型</span><br>ret = rknn.init_runtime(target, device_id, perf_debug, eval_mem, async_mode, core_mask, fallback_prior_device) <span class="hljs-comment"># 初始化运行时环境 支持性能评估和内存评估 通过target指定开发板芯片 开启连板推理</span><br>ret = rknn.inference(inputs, data_format[<span class="hljs-string">&#x27;nhwc&#x27;</span>], inputs_pass_through) <span class="hljs-comment"># 模型推理</span><br></code></pre></td></tr></table></figure>
 <h2 id="8-模型量化精度分析-性能、内存评估"><a href="#8-模型量化精度分析-性能、内存评估" class="headerlink" title="8 模型量化精度分析 性能、内存评估"></a>8 模型量化精度分析 性能、内存评估</h2><p><strong>什么是量化？</strong> 量化指把模型中的浮点参数和操作转换为定点表示。FP32 -&gt; INT8 大幅缩减模型体积， NPU 更适合处理 INT8 运算，提升推理速度，降低功耗。PTQ(训练后量化，直接把训练好的模型进行量化); QAT(在训练过程中就去模拟量化，模型自适应精度损失); 混合精度量化。量化会带来精度损失。<br>Rknn-toolkit2 提供两种量化方式(Layer, Channel)和三种量化算法(Normal, MMSE-精度最高，暴力迭代, KL-Divergence)。<br>常规量化(模型中的权重和激活值只采用一种量化精度类型。可以调用 rknn.accuracy_analysis() 逐层对比浮点模型和量化模型的输出结果，输出余弦距离和欧式距离，用于分析量化模型精度下降的原因)和混合量化(权重和激活值可以采用不止一种量化精度类型，例如某些层采用 int 16，某些层采用 int 8)。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 常规量化</span><br>rknn.accuracy_analysis(inputs,output_dir,target) <span class="hljs-comment"># 量化精度分析一般直接看输出目录下的 error_analysis.txt</span><br><span class="hljs-comment"># 混合量化</span><br>rknn.hybrid_quantization_step1(dataset, rknn_batch_size, proposal, proposal_dataset_size,...) <span class="hljs-comment"># 生成量化配置文件</span><br>rknn.hybrid_quantization_step2(model_input,data_input,model_quantization_cfg) <span class="hljs-comment"># 根据上一步生成的三个临时文件(.model, .data, .cfg)构建混合量化模型</span><br></code></pre></td></tr></table></figure>
 <p><img src="/../img/7-16/eval.png" srcset="/img/loading.gif" lazyload alt="性能评估"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># 性能评估</span><br>rknn.init_runtime(target=<span class="hljs-string">&#x27;rk3588&#x27;</span>, perf_debug=<span class="hljs-literal">True</span>)<br>rknn.eval_perf(is_print,fix_freq) <span class="hljs-comment"># 输出当前的硬件频率并获取模型的性能评估结果</span><br><span class="hljs-comment"># 内存评估</span><br>rknn.init_runtime(target=<span class="hljs-string">&#x27;rk3588&#x27;</span>, eval_mem=<span class="hljs-literal">True</span>)<br>rknn.eval_memory(is_print) <br></code></pre></td></tr></table></figure>
-<h2 id="9-模型剪枝"><a href="#9-模型剪枝" class="headerlink" title="9 模型剪枝"></a>9 模型剪枝</h2><p>可以分为有损剪枝和无损剪枝，Rknn-toolkit2 的模型剪枝为无损剪枝。结构化剪枝 + 微调，需要在 PyTorch 训练阶段主动介入。</p>
-<h2 id="10-模型加密"><a href="#10-模型加密" class="headerlink" title="10 模型加密"></a>10 模型加密</h2><p>export_encrypted_rknn_model()  </p>
-<h2 id="11-多-batch-多输入模型"><a href="#11-多-batch-多输入模型" class="headerlink" title="11 多 batch &amp; 多输入模型"></a>11 多 batch &amp; 多输入模型</h2><p>开启多 batch 推理时，内部会调用 rknn_dup_context() 将 context 进行拷贝。</p>
-<h2 id="12"><a href="#12" class="headerlink" title="12"></a>12</h2>
+<h2 id="9-模型剪枝-加密"><a href="#9-模型剪枝-加密" class="headerlink" title="9 模型剪枝 &amp;&amp; 加密"></a>9 模型剪枝 &amp;&amp; 加密</h2><p>可以分为有损剪枝和无损剪枝，Rknn-toolkit2 的模型剪枝为无损剪枝，无损剪枝是根据模型的权重的稀疏化程度来去除一些对模型结果不造成影响的权重和 Feature 通道。<br>结构化剪枝 + 微调，需要在 PyTorch 训练阶段主动介入，移除整个卷积通道或网络层(结构化剪枝)。<br>生成完模型后再重新对其做进一步处理，处理过的模型不能再通过 Netron 查看网络结构了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">rknn.export_encrypted_rknn_model(orig_rknn, encrypt_rknn, encrypt_level)  <br></code></pre></td></tr></table></figure>
+<h2 id="10-多-batch-多输入模型-动态-shape-输入"><a href="#10-多-batch-多输入模型-动态-shape-输入" class="headerlink" title="10 多 batch &amp;&amp; 多输入模型 &amp;&amp; 动态 shape 输入"></a>10 多 batch &amp;&amp; 多输入模型 &amp;&amp; 动态 shape 输入</h2><p>开启多 batch 推理时，内部会调用 rknn_dup_context() 将 context 进行拷贝。为了让模型跑的更快。<br><img src="/../img/7-16/1.png" srcset="/img/loading.gif" lazyload alt="多 batch 推理"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python">ret = rknn.build(do_quantization, dataset, rknn_batch_size) <span class="hljs-comment">## rk3588 建议 batch_size 设置为 3 的倍数，建议使用零拷贝接口</span><br></code></pre></td></tr></table></figure>
+<p>多输入神经网络是一种能够同时处理多个不同来源、不同模态或不同特征的数据输入的深度学习模型架构。(简而言之就是多模态 &#x2F; 多个不同的特征向量)<br>动态 shape 输入是指模型输入数据的形状在运行时可以改变，无需为每个尺寸重新转换或加载一个模型文件。在确认模型支持动态 shape 后，设置需要使用的输入形状。设置 rknn.config() 中的 dynamic_input &#x3D; dynamic_input 即可支持推理时输入不同尺寸的数据(在列表中的)。</p>
+<h2 id="11-自动生成部署-C-代码-RKNN-ToolKitLite2-直接用于部署，基于-python-api-适合快速验证"><a href="#11-自动生成部署-C-代码-RKNN-ToolKitLite2-直接用于部署，基于-python-api-适合快速验证" class="headerlink" title="11 自动生成部署 C 代码 &amp;&amp; RKNN-ToolKitLite2(直接用于部署，基于 python api 适合快速验证)"></a>11 自动生成部署 C 代码 &amp;&amp; RKNN-ToolKitLite2(直接用于部署，基于 python api 适合快速验证)</h2><p>RKNN-ToolKit2 2.0.0版本新增 Codegen 接口，用于生成模型部署代码。基于 CAPI 零拷贝接口进行的二次封装。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">ret = rknn.codegen(output_path, inputs, overwrite)<br></code></pre></td></tr></table></figure>
+<p>RKNN-ToolKitLite2 为用户提供<strong>板端模型推理</strong>的 python 接口，方便用户使用 python 进行 AI 应用开发。</p>
+
                 
               </div>
             
