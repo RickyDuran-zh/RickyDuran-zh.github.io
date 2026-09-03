@@ -30,8 +30,9 @@
 <meta property="og:image" content="http://example.com/img/2026-9-2/1.png">
 <meta property="og:image" content="http://example.com/img/2026-9-2/3.png">
 <meta property="og:image" content="http://example.com/img/2026-9-2/2.png">
+<meta property="og:image" content="http://example.com/img/2026-9-2/4.png">
 <meta property="article:published_time" content="2026-09-02T03:41:31.000Z">
-<meta property="article:modified_time" content="2026-09-02T08:10:16.751Z">
+<meta property="article:modified_time" content="2026-09-03T01:52:19.353Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="课程自学">
 <meta name="twitter:card" content="summary_large_image">
@@ -335,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.6k 字
         
       </span>
     
@@ -346,7 +347,7 @@
         
         
         
-          10 分钟
+          14 分钟
         
       </span>
     
@@ -396,7 +397,7 @@
                 
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这一篇博客是关于深入理解计算机系统(CSAPP)课程的学习，没有系统学过 CS，借此机会提高一下内力。</p>
 <h2 id="1-计算机系统漫游"><a href="#1-计算机系统漫游" class="headerlink" title="1 计算机系统漫游"></a>1 计算机系统漫游</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello, world\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这一部分以 hello 程序为例，追踪它的生命周期，呈现出一些概念和组成部分。程序在计算机中被储存为比特流，通过 ASCII 码去区分和表示不同的文本字符。hello 的生命周期从高级 C 语言程序开始(人类可读)，一步步转换成低级的机器语言指令，最终打包成可执行的目标程序。这一过程就被称之为编译，包含预处理、编译、汇编、链接这四个阶段。<br><img src="/../img/2026-9-2/0.png" alt="编译系统"><br><strong>预处理阶段</strong>根据以字符’#’开头的命令，进行一些操作，包括宏定义展开或者读取系统头文件中的内容并插入到当前的程序文本中。<strong>编译阶段</strong>将程序文件翻译成汇编语言。而后再<strong>汇编阶段</strong>将汇编语言翻译成机器语言指令，把这些指令打包成可重定位目标程序。最后<strong>链接阶段</strong>将外部(比如标准库提供好的函数)预编译好的目标文件合并链接到当前程序，得到最终的可执行目标文件。<br>现在 hello 源程序已经被编译成了可执行目标文件并存放在了磁盘上。在 shell(一种命令行解释器)中通过 .&#x2F;hello 可以运行该程序。为了理解这个过程发生了什么，需要引入典型系统的<strong>硬件组织</strong>。如下图，其中主存是由一组 DRAM 芯片组成，从逻辑上来说它是一个线性的字节数组；CPU 的核心由 <strong>PC</strong>(大小为一个字(word)的寄存器，word 是字节块，根据 32 位还是 64 位系统来区分，PC 永远指向下一条机器指令所在的地址)、<strong>ALU</strong>(算术逻辑运算单元，计算新的数据和地址值)、<strong>寄存器文件</strong>(小的存储设备，由一些单个字长的寄存器组成，每个寄存器有唯一的名字)。<br><img src="/../img/2026-9-2/1.png" alt="shell 从键盘上读取字符串并将结果输出到显示器上"><br>上图还展示了计算机系统从磁盘中读取 hello 并加载到主存中(DMA，这一过程通过 DMA 技术加速搬运，不需要 CPU 介入)，CPU 通过 PC 逐步执行各条命令最终将字符串输出到了显示器上。<br><img src="/../img/2026-9-2/3.png" alt="高速缓存"><br>不难发现这个过程揭示了一个重要的问题，系统花费了大量的时间将信息从一个地方挪到另一个地方。而这些大量的复制行为就是系统的开销。加快处理器的运行速度比加快内存运行速度要容易和便宜得多，针对这种处理器和主存之间的差异，采用更小更快的存储设备-高速缓存存储器(cache)作为暂时的集结区域。现在系统通常设计有 L1、L2、L3 三级高速缓存，系统利用高速缓存的<strong>局部性原理</strong>在获得一个很大存储器的同时访问速度也可以做到很快。下图展示了计算机系统中存储设备组成的存储器层次结构。<br><img src="/../img/2026-9-2/2.png" alt="高速缓存"></p>
+<p>这一部分以 hello 程序为例，追踪它的生命周期，呈现出一些概念和组成部分。程序在计算机中被储存为比特流，通过 ASCII 码去区分和表示不同的文本字符。hello 的生命周期从高级 C 语言程序开始(人类可读)，一步步转换成低级的机器语言指令，最终打包成可执行的目标程序。这一过程就被称之为编译，包含预处理、编译、汇编、链接这四个阶段。<br><img src="/../img/2026-9-2/0.png" alt="编译系统"><br><strong>预处理阶段</strong>根据以字符’#’开头的命令，进行一些操作，包括宏定义展开或者读取系统头文件中的内容并插入到当前的程序文本中。<strong>编译阶段</strong>将程序文件翻译成汇编语言。而后再<strong>汇编阶段</strong>将汇编语言翻译成机器语言指令，把这些指令打包成可重定位目标程序。最后<strong>链接阶段</strong>将外部(比如标准库提供好的函数)预编译好的目标文件合并链接到当前程序，得到最终的可执行目标文件。<br>现在 hello 源程序已经被编译成了可执行目标文件并存放在了磁盘上。在 shell(一种命令行解释器)中通过 .&#x2F;hello 可以运行该程序。为了理解这个过程发生了什么，需要引入典型系统的<strong>硬件组织</strong>。如下图，其中主存是由一组 DRAM 芯片组成，从逻辑上来说它是一个线性的字节数组；CPU 的核心由 <strong>PC</strong>(大小为一个字(word)的寄存器，word 是字节块，根据 32 位还是 64 位系统来区分，PC 永远指向下一条机器指令所在的地址)、<strong>ALU</strong>(算术逻辑运算单元，计算新的数据和地址值)、<strong>寄存器文件</strong>(小的存储设备，由一些单个字长的寄存器组成，每个寄存器有唯一的名字)。<br><img src="/../img/2026-9-2/1.png" alt="shell 从键盘上读取字符串并将结果输出到显示器上"><br>上图还展示了计算机系统从磁盘中读取 hello 并加载到主存中(DMA，这一过程通过 DMA 技术加速搬运，不需要 CPU 介入)，CPU 通过 PC 逐步执行各条命令最终将字符串输出到了显示器上。<br><img src="/../img/2026-9-2/3.png" alt="高速缓存"><br>不难发现这个过程揭示了一个重要的问题，系统花费了大量的时间将信息从一个地方挪到另一个地方。而这些大量的复制行为就是系统的开销。加快处理器的运行速度比加快内存运行速度要容易和便宜得多，针对这种处理器和主存之间的差异，采用更小更快的存储设备-高速缓存存储器(cache)作为暂时的集结区域。现在系统通常设计有 L1、L2、L3 三级高速缓存，系统利用高速缓存的<strong>局部性原理</strong>在获得一个很大存储器的同时访问速度也可以做到很快。下图展示了计算机系统中存储设备组成的存储器层次结构。<br><img src="/../img/2026-9-2/2.png" alt="存储器的层次结构"><br>回到 hello 那个程序，当 shell 加载和运行 hello 时，shell 和 hello 都没有直接访问键盘、显示器、磁盘或者主存。事实上他们依赖<strong>操作系统</strong>所提供的服务。操作系统就是应用程序和处理器、主存、I&#x2F;O 设备等底层硬件之间的一个抽象层。操作系统提供：防止硬件被失控的应用程序滥用；向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备。抽象无处不在，下图是操作系统提供的抽象表示。<br><img src="/../img/2026-9-2/4.png" alt="操作系统提供的抽象表示"><br>进程是操作系统对一个正在运行的程序的一种抽象，每个进程都认为自己独占处理器、主存等。实际上进程和进程之间的指令是交错执行的，也就是<strong>并发运行</strong>，因为大多数情况系统中运行的进程数是要多于 CPU 核心数的。操作系统需要跟踪一个进程运行需要的状态信息，这也就是<strong>上下文</strong>包括 PC、寄存器文件的值、主存中的内容等，再通过上下文切换去在不同进程中进行切换。从一个进程到另一个进程的转换是由操作系统的内核(kernel)管理的，<strong>内核是操作系统常驻主存的部分</strong>，内核不是独立的进程而是系统管理全部进程所用代码和数据结构的集合。<br>进程也不是单一的执行控制流，在线程模型中，进程可以存在多个执行流。每个线程都运行在进程的上下文中，共享同样的代码和全局数据，相比于进程它更容易共享数据且一般来说更加高效。</p>
 
                 
               </div>
