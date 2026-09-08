@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
 <meta property="og:description" content="一、GPIO和Input子系统篇 Led、Buzzer、Key1.GPIO子系统 需要注册字符设备(函数接口)1.设备树修改(用户led 彩色led buzzer)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849edge_leds &#123;	compatible &#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/imx6ull.png">
+<meta property="og:image" content="http://example.com/img/posts/shared/imx6ull.png">
 <meta property="article:published_time" content="2026-05-13T02:20:11.000Z">
-<meta property="article:modified_time" content="2026-08-06T03:46:53.811Z">
+<meta property="article:modified_time" content="2026-09-08T08:26:36.878Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/imx6ull.png">
+<meta name="twitter:image" content="http://example.com/img/posts/shared/imx6ull.png">
   
   
   
@@ -304,7 +304,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/imx6ull.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/shared/imx6ull.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -400,7 +400,7 @@
 <h3 id="2-Input子系统-不需要注册字符设备，所以不需要函数接口"><a href="#2-Input子系统-不需要注册字符设备，所以不需要函数接口" class="headerlink" title="2.Input子系统 不需要注册字符设备，所以不需要函数接口"></a>2.Input子系统 不需要注册字符设备，所以不需要函数接口</h3><blockquote>
 <p>驱动不需要自己定义&#x2F;dev&#x2F;key这种私有接口，而是把输入事件上报给 input core，由 input core 统一生成&#x2F;dev&#x2F;input&#x2F;eventX。</p>
 </blockquote>
-<p><img src="/../img/Day2/framework.png" srcset="/img/loading.gif" lazyload alt="input system - framework"></p>
+<p><img src="/../img/posts/2026-05-13/01-input-system-framework.png" srcset="/img/loading.gif" lazyload alt="input system - framework"></p>
 <h4 id="1-设备树修改-key"><a href="#1-设备树修改-key" class="headerlink" title="1.设备树修改(key)"></a>1.设备树修改(key)</h4><blockquote>
 <p>input_dev 代表一个具体的输入设备</p>
 </blockquote>
@@ -416,7 +416,7 @@
 <h3 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3.实验结果"></a>3.实验结果</h3><blockquote>
 <p>暴露给用户层面的接口：<br>&#x2F;dev&#x2F;edge_leds<br>&#x2F;dev&#x2F;edge_buzzer <br>&#x2F;dev&#x2F;input&#x2F;event1</p>
 </blockquote>
-<p><img src="/../img/Day2/exp1.png" srcset="/img/loading.gif" lazyload alt="加载Led、Buzzer、Key模块 probe函数被成功调用"><br><img src="/../img/Day2/exp2.png" srcset="/img/loading.gif" lazyload alt="App运行 顺序测试LED BUZZER KEY"></p>
+<p><img src="/../img/posts/2026-05-13/02-led-buzzer-key.png" srcset="/img/loading.gif" lazyload alt="加载Led、Buzzer、Key模块 probe函数被成功调用"><br><img src="/../img/posts/2026-05-13/03-led-buzzer-key-loop.png" srcset="/img/loading.gif" lazyload alt="App运行 顺序测试LED BUZZER KEY"></p>
 
                 
               </div>
@@ -600,7 +600,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -676,7 +676,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -691,7 +691,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -706,7 +706,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -721,7 +721,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -736,7 +736,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -751,7 +751,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1094,7 +1094,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1163,7 +1163,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1178,7 +1178,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1193,7 +1193,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1208,7 +1208,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1223,7 +1223,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1238,7 +1238,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">

@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
 <meta property="og:description" content="概述 EdgeGuard-6ULL QT 环境搭建，UI 界面显示。显示走 linuxfb 直接刷 &#x2F;dev&#x2F;fb0，触控走原生 evdev + QSocketNotifier 自己解析 input_event，不依赖任何第三方插件。  一、环境搭建1. 交叉编译工具链使用野火提供的 build-gcc.sh 脚本安装 arm-linux-gnueabihf-gcc 8.3.0">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/imx6ull.png">
+<meta property="og:image" content="http://example.com/img/posts/shared/imx6ull.png">
 <meta property="article:published_time" content="2026-05-23T06:49:44.000Z">
-<meta property="article:modified_time" content="2026-08-06T03:46:53.812Z">
+<meta property="article:modified_time" content="2026-09-08T08:26:36.897Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/imx6ull.png">
+<meta name="twitter:image" content="http://example.com/img/posts/shared/imx6ull.png">
   
   
   
@@ -304,7 +304,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/imx6ull.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/shared/imx6ull.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -403,7 +403,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-comment"># set -v</span><br><br>HOST=arm-linux-gnueabihf<br>SCRIPT_PATH=$(<span class="hljs-built_in">pwd</span>)<br><br><span class="hljs-comment">#添加交叉编译工具链路径</span><br><span class="hljs-comment"># CROSS_CHAIN_PREFIX=/opt/arm-gcc/bin/arm-linux-gnueabihf</span><br>CROSS_CHAIN_PREFIX=/opt/gcc-arm-linux-gnueabihf-8.3.0/bin/arm-linux-gnueabihf<br><br><span class="hljs-comment">#修改源码包解压后的名称</span><br>MAJOR_NAME=tslib<br><br><span class="hljs-comment">#修改需要下载的源码前缀和后缀</span><br>OPENSRC_VER_PREFIX=1<br>OPENSRC_VER_SUFFIX=.21<br><br>PACKAGE_NAME=<span class="hljs-variable">$&#123;MAJOR_NAME&#125;</span>-<span class="hljs-variable">$&#123;OPENSRC_VER_PREFIX&#125;</span><span class="hljs-variable">$&#123;OPENSRC_VER_SUFFIX&#125;</span><br><br><span class="hljs-comment">#定义压缩包名称</span><br>COMPRESS_PACKAGE=<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>.tar.bz2<br><br><span class="hljs-comment">#定义编译后安装--生成的文件,文件夹位置路径</span><br>INSTALL_PATH=/opt/<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br><br><span class="hljs-comment">#无需修改--下载地址</span><br>DOWNLOAD_LINK=https://github.com/libts/<span class="hljs-variable">$&#123;MAJOR_NAME&#125;</span>/releases/download/<span class="hljs-variable">$&#123;OPENSRC_VER_PREFIX&#125;</span><span class="hljs-variable">$&#123;OPENSRC_VER_SUFFIX&#125;</span>/<span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span><br><br><span class="hljs-comment">#下载源码包</span><br><span class="hljs-function"><span class="hljs-title">do_download_src</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart download <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>...\033[0m&quot;</span><br><br>   <span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      <span class="hljs-keyword">if</span> [ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>         wget -c <span class="hljs-variable">$&#123;DOWNLOAD_LINK&#125;</span><br>      <span class="hljs-keyword">fi</span><br>   <span class="hljs-keyword">fi</span><br><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><span class="hljs-comment">#解压源码包</span><br><span class="hljs-function"><span class="hljs-title">do_tar_package</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart unpacking the <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span> package ...\033[0m&quot;</span><br>   <span class="hljs-keyword">if</span> [ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      tar -xf <span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span><br>   <span class="hljs-keyword">fi</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>   <span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br>&#125;<br><br><span class="hljs-comment">#配置选项</span><br><span class="hljs-function"><span class="hljs-title">do_configure</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart configure <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>...\033[0m&quot;</span><br><br>   <span class="hljs-built_in">export</span> CC=<span class="hljs-variable">$&#123;CROSS_CHAIN_PREFIX&#125;</span>-gcc<br><br>   ./configure \<br>   --prefix=<span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span> \<br>   --host=<span class="hljs-variable">$&#123;HOST&#125;</span> \<br><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><br><span class="hljs-comment">#编译并且安装</span><br><span class="hljs-function"><span class="hljs-title">do_make_install</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart make and install <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span> ...\033[0m&quot;</span><br>   make &amp;&amp; make install<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><span class="hljs-comment">#删除下载的文件</span><br><span class="hljs-function"><span class="hljs-title">do_delete_file</span></span> () &#123;<br>   <span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;SCRIPT_PATH&#125;</span><br>   <span class="hljs-keyword">if</span> [ -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br>   <span class="hljs-keyword">fi</span><br>&#125;<br><br>do_download_src<br>do_tar_package<br>do_configure<br>do_make_install<br><span class="hljs-comment"># do_delete_file</span><br><br><span class="hljs-built_in">exit</span> $?<br></code></pre></td></tr></table></figure>
 <p>使用野火提供的 build-alsa.sh 脚本一键下载、配置、编译及安装 alsa(让 QT 支持音频相关的功能)，版本 alsa-1.2.2，编译目录指定为 &#x2F;opt&#x2F;alsa-1.2.2。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><br>HOST=arm-linux-gnueabihf<br>SCRIPT_PATH=$(<span class="hljs-built_in">pwd</span>)<br><br><span class="hljs-comment">#修改源码包解压后的名称</span><br>MAJOR_NAME=alsa-lib<br><br><span class="hljs-comment">#修改需要下载的源码前缀和后缀</span><br>OPENSRC_VER_PREFIX=1.2<br>OPENSRC_VER_SUFFIX=.2<br><br>PACKAGE_NAME=<span class="hljs-variable">$&#123;MAJOR_NAME&#125;</span>-<span class="hljs-variable">$&#123;OPENSRC_VER_PREFIX&#125;</span><span class="hljs-variable">$&#123;OPENSRC_VER_SUFFIX&#125;</span><br><br><span class="hljs-comment">#定义压缩包名称</span><br>COMPRESS_PACKAGE=<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>.tar.bz2<br><br><span class="hljs-comment">#定义编译后安装--生成的文件,文件夹位置路径</span><br>INSTALL_PATH=/opt/<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br><br><span class="hljs-comment">#添加交叉编译工具链路径</span><br><span class="hljs-comment"># CROSS_CHAIN_PREFIX=/opt/arm-gcc/bin/arm-linux-gnueabihf</span><br>CROSS_CHAIN_PREFIX=/opt/gcc-arm-linux-gnueabihf-8.3.0/bin/arm-linux-gnueabihf<br><br><span class="hljs-comment">#无需修改--下载地址</span><br>DOWNLOAD_LINK=ftp://ftp.alsa-project.org/pub/lib/<span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span><br><br><span class="hljs-comment">#下载源码包</span><br><span class="hljs-function"><span class="hljs-title">do_download_src</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart download <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>...\033[0m&quot;</span><br><br>   <span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      <span class="hljs-keyword">if</span> [ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>         wget -c <span class="hljs-variable">$&#123;DOWNLOAD_LINK&#125;</span><br>      <span class="hljs-keyword">fi</span><br>   <span class="hljs-keyword">fi</span><br><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><span class="hljs-comment">#解压源码包</span><br><span class="hljs-function"><span class="hljs-title">do_tar_package</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart unpacking the <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span> package ...\033[0m&quot;</span><br>   <span class="hljs-keyword">if</span> [ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      tar -xf <span class="hljs-variable">$&#123;COMPRESS_PACKAGE&#125;</span><br>   <span class="hljs-keyword">fi</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>   <span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br>&#125;<br><br><span class="hljs-comment">#配置选项</span><br><span class="hljs-function"><span class="hljs-title">do_configure</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart configure <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>...\033[0m&quot;</span><br><br>   <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span>/config<br>   <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span>/plugin<br><br>   <span class="hljs-built_in">export</span> CC=<span class="hljs-variable">$&#123;CROSS_CHAIN_PREFIX&#125;</span>-gcc<br><br>   ./configure \<br>   --prefix=<span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span> \<br>   --host=<span class="hljs-variable">$&#123;HOST&#125;</span> \<br>   <span class="hljs-comment"># --enable-static \</span><br>   --enable-shared \<br>   --disable-python \<br>   --with-configdir=<span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span>/config \<br>   --with-plugindir=<span class="hljs-variable">$&#123;INSTALL_PATH&#125;</span>/plugin<br><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><br><span class="hljs-comment">#编译并且安装</span><br><span class="hljs-function"><span class="hljs-title">do_make_install</span></span> () &#123;<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mstart make and install <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span> ...\033[0m&quot;</span><br>   make &amp;&amp; make install<br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\033[1;33mdone...\033[0m&quot;</span><br>&#125;<br><br><span class="hljs-comment">#删除下载的文件</span><br><span class="hljs-function"><span class="hljs-title">do_delete_file</span></span> () &#123;<br>   <span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;SCRIPT_PATH&#125;</span><br>   <span class="hljs-keyword">if</span> [ -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span>&quot;</span> ];<span class="hljs-keyword">then</span><br>      <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f <span class="hljs-variable">$&#123;PACKAGE_NAME&#125;</span><br>   <span class="hljs-keyword">fi</span><br>&#125;<br><br>do_download_src<br>do_tar_package<br>do_configure<br>do_make_install<br><span class="hljs-comment"># do_delete_file</span><br><br><span class="hljs-built_in">exit</span> $?<br></code></pre></td></tr></table></figure>
-<h2 id="二、UI-界面"><a href="#二、UI-界面" class="headerlink" title="二、UI 界面"></a>二、UI 界面</h2><h3 id="1-编译-UI-工程和启动脚本-不赘述页面设计了"><a href="#1-编译-UI-工程和启动脚本-不赘述页面设计了" class="headerlink" title="1. 编译 UI 工程和启动脚本(不赘述页面设计了)"></a>1. 编译 UI 工程和启动脚本(不赘述页面设计了)</h3><p>触摸链路走Qt5 + linuxfb QPA，插件内置了 evdev 解析能力——直接读 &#x2F;dev&#x2F;input&#x2F;event* 并转换为 QMouseEvent&#x2F;QKeyEvent。<br><img src="/../img/Day4/framework2.png" srcset="/img/loading.gif" lazyload alt="触摸输入完整链路"></p>
+<h2 id="二、UI-界面"><a href="#二、UI-界面" class="headerlink" title="二、UI 界面"></a>二、UI 界面</h2><h3 id="1-编译-UI-工程和启动脚本-不赘述页面设计了"><a href="#1-编译-UI-工程和启动脚本-不赘述页面设计了" class="headerlink" title="1. 编译 UI 工程和启动脚本(不赘述页面设计了)"></a>1. 编译 UI 工程和启动脚本(不赘述页面设计了)</h3><p>触摸链路走Qt5 + linuxfb QPA，插件内置了 evdev 解析能力——直接读 &#x2F;dev&#x2F;input&#x2F;event* 并转换为 QMouseEvent&#x2F;QKeyEvent。<br><img src="/../img/posts/2026-05-20/03-touch-framework.png" srcset="/img/loading.gif" lazyload alt="触摸输入完整链路"></p>
 <blockquote>
 <p>编译 UI 工程</p>
 </blockquote>
@@ -413,7 +413,7 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-comment"># Run EdgeGuard UI on imx6ull</span><br><span class="hljs-comment"># Touch handling is built into the app (raw evdev), no tslib needed.</span><br><br><span class="hljs-comment"># --- Touch device discovery ---</span><br><span class="hljs-function"><span class="hljs-title">find_touch_event</span></span>() &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">command</span> -v devscan &gt;/dev/null 2&gt;&amp;1; <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">local</span> ev<br>        ev=$(devscan <span class="hljs-string">&quot;goodix-ts&quot;</span> 2&gt;/dev/null)<br>        [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$ev</span>&quot;</span> ] &amp;&amp; ev=$(devscan <span class="hljs-string">&quot;Goodix Capacitive TouchScreen&quot;</span> 2&gt;/dev/null)<br>        [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$ev</span>&quot;</span> ] &amp;&amp; ev=$(devscan <span class="hljs-string">&quot;iMX6UL Touchscreen Controller&quot;</span> 2&gt;/dev/null)<br>        [ -n <span class="hljs-string">&quot;<span class="hljs-variable">$ev</span>&quot;</span> ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$ev</span>&quot;</span> &amp;&amp; <span class="hljs-built_in">return</span> 0<br>    <span class="hljs-keyword">fi</span><br><br>    <span class="hljs-keyword">if</span> [ -r /proc/bus/input/devices ]; <span class="hljs-keyword">then</span><br>        grep -A1 -i <span class="hljs-string">&quot;goodix\|gt9157\|gt911&quot;</span> /proc/bus/input/devices 2&gt;/dev/null | \<br>            grep <span class="hljs-string">&quot;Handlers=&quot;</span> | grep -o <span class="hljs-string">&#x27;event[0-9]*&#x27;</span> | <span class="hljs-built_in">head</span> -1<br>    <span class="hljs-keyword">fi</span><br>&#125;<br><br>TOUCH_EVENT=$(find_touch_event)<br><span class="hljs-keyword">if</span> [ -n <span class="hljs-string">&quot;<span class="hljs-variable">$TOUCH_EVENT</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Touch device: /dev/input/<span class="hljs-variable">$TOUCH_EVENT</span>&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;No touch device found&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># --- Qt platform (framebuffer only, no tslib) ---</span><br><span class="hljs-built_in">export</span> QT_QPA_PLATFORM=linuxfb:fb=/dev/fb0<br><span class="hljs-built_in">export</span> QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/plugins<br><span class="hljs-built_in">export</span> QT_QPA_FONTDIR=/usr/lib/fonts<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Starting edgeguard-ui...&quot;</span><br><span class="hljs-keyword">if</span> [ -n <span class="hljs-string">&quot;<span class="hljs-variable">$TOUCH_EVENT</span>&quot;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">exec</span> ./edgeguard-ui --status /tmp/edgeguard_status.json --<span class="hljs-built_in">touch</span> <span class="hljs-string">&quot;/dev/input/<span class="hljs-variable">$TOUCH_EVENT</span>&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">exec</span> ./edgeguard-ui --status /tmp/edgeguard_status.json<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
 <h3 id="2-实验结果"><a href="#2-实验结果" class="headerlink" title="2. 实验结果"></a>2. 实验结果</h3><video controls preload="metadata" style="width:100%; max-width:900px; border-radius:12px;" title="UI显示和触摸测试">
-  <source src="/img/Day5/exp.mp4" type="video/mp4">
+  <source src="/img/posts/2026-05-23/ui-touch-test.mp4" type="video/mp4">
   当前浏览器不支持 video 标签。
 </video>
 
@@ -602,7 +602,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -678,7 +678,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -693,7 +693,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -708,7 +708,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -723,7 +723,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -738,7 +738,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -753,7 +753,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1096,7 +1096,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1165,7 +1165,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1180,7 +1180,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1195,7 +1195,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1210,7 +1210,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1225,7 +1225,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1240,7 +1240,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">

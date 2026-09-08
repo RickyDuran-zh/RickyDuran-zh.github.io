@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
 <meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发一些中间件，这篇博客补充一些音视频相关的基础知识。  基础1、视频基础 宏块 - 视频编码处理的基本单元，通常由一个 16x16 亮度像素和附加的一个 8x8 Cb 和一个 8x8 Cr 彩色像素块组成 。   I 帧 &#x2F; P 帧 &#x2F; B 帧 - I 帧(关键帧&#x2F;帧内编码帧)是完整的独立画面，不依赖其他帧就能独立解码显示">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/2026-7-27/2.png">
+<meta property="og:image" content="http://example.com/img/posts/2026-06-26/audio-video.png">
 <meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
-<meta property="article:modified_time" content="2026-08-14T06:15:46.294Z">
+<meta property="article:modified_time" content="2026-09-08T08:26:48.596Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/2026-7-27/2.png">
+<meta name="twitter:image" content="http://example.com/img/posts/2026-06-26/audio-video.png">
   
   
   
@@ -303,7 +303,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/2026-7-27/2.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/2026-06-26/audio-video.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -439,7 +439,7 @@
 <h3 id="4、编解码"><a href="#4、编解码" class="headerlink" title="4、编解码"></a>4、编解码</h3><blockquote>
 <p><strong>H.264</strong> - 采用了 16x16 的分块大小和对视频帧图像进行相似比较和压缩编码。视频压缩可以分为帧内压缩和帧间压缩。帧内压缩是生成 I 帧的算法，仅考虑本帧的数据，压缩率一般不高。帧间压缩则是生成 P 帧和 B 帧的算法。H.264 原始码流是编码后的基本数据流不包含任何封装信息，由 NAL 单元组成，每个 NALU 是一个基本的数据编码单元。RBSP(NAL Payload 有效负载)，提供实际编码数据，去除对解码无意义的字节填充，添加必要的终止位。VCL 和 NAL。</p>
 </blockquote>
-<p><img src="/../img/audio/nal.png" alt="ES 中的基本 NAL 单元"></p>
+<p><img src="/../img/posts/2026-06-26/01-nal-unit.png" alt="ES 中的基本 NAL 单元"></p>
 <blockquote>
 <p><strong>H.265</strong> - HEVC，压缩率高达 1：200。采用了最小 8x8 到最大 64x64 编码宏块，在相同的分辨率下，H265 编码能够以更低的码率进行传输。一样遵循 VCL + VAL，结构上多了一个 VPS。</p>
 </blockquote>
@@ -633,7 +633,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -709,7 +709,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -724,7 +724,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -739,7 +739,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -754,7 +754,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -769,7 +769,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -784,7 +784,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1127,7 +1127,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1196,7 +1196,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/csAPP.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1211,7 +1211,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1226,7 +1226,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1241,7 +1241,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1256,7 +1256,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-8-12/cmake.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
@@ -1271,7 +1271,7 @@
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
