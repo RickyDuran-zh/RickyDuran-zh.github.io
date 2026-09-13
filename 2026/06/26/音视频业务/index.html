@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程v12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;">
+    <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;曝">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嵌入式音视频">
-<meta property="og:url" content="http://example.com/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/index.html">
+<meta property="og:title" content="音视频业务basic understandings">
+<meta property="og:url" content="http://example.com/2026/06/26/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%B8%9A%E5%8A%A1/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程v12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;">
+<meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;曝">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-26/audio-video.png">
 <meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
-<meta property="article:modified_time" content="2026-09-09T13:37:04.020Z">
+<meta property="article:modified_time" content="2026-09-10T13:35:00.948Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,7 +36,7 @@
   
   
   
-  <title>嵌入式音视频 - RickyDuran&#39;s Blog</title>
+  <title>音视频业务basic understandings - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -309,7 +309,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="嵌入式音视频"></span>
+            <span id="subtitle" data-typed-text="音视频业务basic understandings"></span>
           
         </div>
 
@@ -386,7 +386,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">嵌入式音视频</h1>
+            <h1 id="seo-header">音视频业务basic understandings</h1>
             
             
               <div class="markdown-body">
@@ -394,7 +394,7 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。</p>
 </blockquote>
-<h2 id="1、全局地图：一条视频的旅程v"><a href="#1、全局地图：一条视频的旅程v" class="headerlink" title="1、全局地图：一条视频的旅程v"></a>1、全局地图：一条视频的旅程v</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs text">真实光线<br>  -&gt; Sensor 采样<br>  -&gt; RAW Bayer<br>  -&gt; ISP 去马赛克/降噪/曝光/白平衡<br>  -&gt; YUV/RGB 原始帧<br>  -&gt; H.264/H.265 编码<br>  -&gt; MP4/FLV 等容器<br>  -&gt; 文件或 RTSP/RTMP 等协议<br>  -&gt; 解协议/解复用<br>  -&gt; H.264/H.265 码流<br>  -&gt; 解码<br>  -&gt; YUV 原始帧<br>  -&gt; 缩放/颜色转换/推理/叠框/拼接<br>  -&gt; 再编码<br>  -&gt; 再封装<br>  -&gt; 推流服务器和播放器<br></code></pre></td></tr></table></figure>
+<h2 id="1、全局地图：一条视频的旅程"><a href="#1、全局地图：一条视频的旅程" class="headerlink" title="1、全局地图：一条视频的旅程"></a>1、全局地图：一条视频的旅程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs text">真实光线<br>  -&gt; Sensor 采样<br>  -&gt; RAW Bayer<br>  -&gt; ISP 去马赛克/降噪/曝光/白平衡<br>  -&gt; YUV/RGB 原始帧<br>  -&gt; H.264/H.265 编码<br>  -&gt; MP4/FLV 等容器<br>  -&gt; 文件或 RTSP/RTMP 等协议<br>  -&gt; 解协议/解复用<br>  -&gt; H.264/H.265 码流<br>  -&gt; 解码<br>  -&gt; YUV 原始帧<br>  -&gt; 缩放/颜色转换/推理/叠框/拼接<br>  -&gt; 再编码<br>  -&gt; 再封装<br>  -&gt; 推流服务器和播放器<br></code></pre></td></tr></table></figure>
 <p>我们项目的实际链路是中间一段：MP4&#x2F;RTSP -&gt; FFmpeg 解复用 -&gt; h264_mp4toannexb（需要时）-&gt; MPP 硬解码出 NV12 -&gt; 转 BGR -&gt; RKNN 推理叠框 -&gt; 2×2 拼接 -&gt; 转 I420 -&gt; MPP 硬编码 -&gt; FFmpeg 封 FLV -&gt; RTMP 发送。</p>
 <p>遇到问题先判断它属于哪一层：像素格式、编码、容器、传输协议、硬件缓冲区，还是业务推理，不同层的名词不能混用。比如”MP4 解码器”这种说法就不准确——先由 demuxer 解析 MP4 容器取出码流，再由 H.264 decoder 解码。</p>
 <h2 id="2、原始图像：帧、像素格式与内存布局"><a href="#2、原始图像：帧、像素格式与内存布局" class="headerlink" title="2、原始图像：帧、像素格式与内存布局"></a>2、原始图像：帧、像素格式与内存布局</h2><p><strong>Frame</strong> - 视频是一系列按时间显示的静态图像，每一张就是一个 frame。一帧除了像素，还应携带宽高、像素格式、每个平面的地址和 stride、PTS 或采集时间戳、缓冲区所有权——只传一个 <code>void* data</code>，接收方既不知道如何解释这块内存，也不知道它被用到什么时候才安全。</p>
@@ -494,7 +494,7 @@
     <div class="post-share-qr" id="post-share-qr">
       <span class="post-share-loading">二维码生成中…</span>
     </div>
-    <div class="post-share-name">嵌入式音视频</div>
+    <div class="post-share-name">音视频业务basic understandings</div>
   </div>
 </div>
 
@@ -504,8 +504,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>嵌入式音视频</div>
-      <div>http://example.com/2026/06/26/嵌入式音视频/</div>
+      <div>音视频业务basic understandings</div>
+      <div>http://example.com/2026/06/26/音视频业务/</div>
     </div>
     <div class="license-meta">
       
@@ -646,12 +646,12 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1141,12 +1141,12 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1298,7 +1298,7 @@
           <li>
             <a href="/categories/%E5%88%B7%E9%A2%98/">
               <span class="widget-cat-name">刷题</span>
-              <span class="widget-cat-count">7</span>
+              <span class="widget-cat-count">8</span>
             </a>
           </li>
         
@@ -1338,8 +1338,8 @@
           </li>
         
           <li>
-            <a href="/categories/%CB%A2%EF%BF%BD%EF%BF%BD/">
-              <span class="widget-cat-name">ˢ��</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1356,11 +1356,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.12rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.97rem">
             #项目开发
           </a>
         
@@ -1368,31 +1368,27 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.845rem">
             #生活
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
             #Language Philosophy
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
             #Tutorial
           </a>
         
-          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.77rem">
             #工作流分享
           </a>
         
-          <a href="/tags/%EF%BF%BD%E3%B7%A8/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #�㷨
-          </a>
-        
-          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.745rem">
             #课程自学
           </a>
         
-          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.745rem">
             #八股
           </a>
         
@@ -1469,11 +1465,11 @@
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">13</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">

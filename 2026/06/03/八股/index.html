@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言(C&#x2F;C++)Static 关键字驱动inode和cdev之间的关系？inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。 在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。 cdev 是驱动层面的概">
+    <meta name="description" content="概述这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。 语言(C&#x2F;C++)驱动1. 内核模块 什么是内核？为什么要引入内核模块？内核模块的数据组织格式？符号导出？  内核是操作系统的核心，是基于硬件的第一层软件扩充，提供操作系统最基本的功能。Linux 采用宏内核架构，其缺点在于修改或增加">
 <meta property="og:type" content="article">
 <meta property="og:title" content="八股">
 <meta property="og:url" content="http://example.com/2026/06/03/%E5%85%AB%E8%82%A1/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言(C&#x2F;C++)Static 关键字驱动inode和cdev之间的关系？inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。 在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。 cdev 是驱动层面的概">
+<meta property="og:description" content="概述这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。 语言(C&#x2F;C++)驱动1. 内核模块 什么是内核？为什么要引入内核模块？内核模块的数据组织格式？符号导出？  内核是操作系统的核心，是基于硬件的第一层软件扩充，提供操作系统最基本的功能。Linux 采用宏内核架构，其缺点在于修改或增加">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-09-08T08:26:48.580Z">
+<meta property="article:modified_time" content="2026-09-13T07:54:36.323Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          2.8k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          12 分钟
+          24 分钟
         
       </span>
     
@@ -391,11 +391,23 @@
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。</p>
-<h2 id="语言-C-C"><a href="#语言-C-C" class="headerlink" title="语言(C&#x2F;C++)"></a>语言(C&#x2F;C++)</h2><h3 id="Static-关键字"><a href="#Static-关键字" class="headerlink" title="Static 关键字"></a>Static 关键字</h3><h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="inode和cdev之间的关系？"><a href="#inode和cdev之间的关系？" class="headerlink" title="inode和cdev之间的关系？"></a>inode和cdev之间的关系？</h3><p><em>inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。</em></p>
-<p><em>在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。</em></p>
-<p><em>cdev 是驱动层面的概念 代表内核中一个具体的字符设备对象包含了设备号、操作函数集。</em></p>
-<h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体</em></p>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。</p>
+<h2 id="语言-C-C"><a href="#语言-C-C" class="headerlink" title="语言(C&#x2F;C++)"></a>语言(C&#x2F;C++)</h2><h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="1-内核模块"><a href="#1-内核模块" class="headerlink" title="1. 内核模块"></a>1. 内核模块</h3><blockquote>
+<p>什么是内核？为什么要引入内核模块？内核模块的数据组织格式？符号导出？</p>
+</blockquote>
+<p><em>内核是操作系统的核心，是基于硬件的第一层软件扩充，提供操作系统最基本的功能。Linux 采用宏内核架构，其缺点在于修改或增加内核某个功能的时候都需要重新编译一遍内核。因此引入内核模块。</em><br><img src="/../img/posts/2026-06-03/04-kernel.png" alt="内核架构"><br><em>内核模块就是实现了某个功能的一段内核代码，内核运行的过程中可以加载到内核中，从而动态地增加内核的功能。更专业的来说，内核模块(Loadable Kernel Module)，是一种在内核运行时加载一组目标代码来实现某个特定功能的机制。模块本身不被编译入内核镜像，这控制了内核的大小，一旦被加载它就和内核中的其他部分完全一样。</em></p>
+<p><em>.ko 文件在数据组织上是 ELF 格式，一种普通的可重定位目标文件。起始地址处是 ELF 头部(ELF Header)，可以通过 readelf 工具查看详细的头部信息，它记录了程序头表和节区头部头表的偏移地址。节区头部表(Section Header Table)保存了不同节的基本属性结构。可以通过 readelf -S 读取节区头部的详细信息。编译器、链接器、装载器都是依靠它来定位和访问各个节的属性的。</em><br><img src="/../img/posts/2026-06-03/05-elf.png" alt="ELF文件格式示例"><br><em>符号指的是在内核模块中使用 EXPORT_SYMBOL 声明的函数和变量，当模块被装入内核后，所导出的符号都会记录在公关内核符号表上。如果其他模块想要利用我们模块中的符号，就可以导出。modprobe 相当于多次的 insmod，装入指定的模块及其依赖。</em></p>
+<h3 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2. 环境搭建"></a>2. 环境搭建</h3><p><em>设备驱动是具有独立功能的程序，可以被单独编译但无法独立运行。运行时要链接到内核作为内核的一部分在内核空间运行，因此驱动必须要在对应的内核版本上进行编译。需要知道内核版本，并准备好该版本的内核源码，使用交叉编译工具编译内核源码；然后依赖编译的内核源码编译驱动模块以及设备树文件。</em></p>
+<h3 id="3-字符设备驱动"><a href="#3-字符设备驱动" class="headerlink" title="3. 字符设备驱动"></a>3. 字符设备驱动</h3><blockquote>
+<p>什么是字符设备？如何写一个字符设备驱动框架？读写一个设备文件背后执行的操作是什么？</p>
+</blockquote>
+<p><em>字符设备是指以字节&#x2F;字符来读写数据的设备，通常不支持随机存取数据，所以在实现时大多不使用缓存器(流式)。</em><br><img src="/../img/posts/2026-06-03/06-cdev.png" alt="VFS"><br><em>内核将字符设备抽象成 cdev-字符设备对象，记录了设备号、操作函数集。在添加字符设备时，就是将该对象注册到内核中，通过创建一个文件 inode 绑定对象的 cdev。进程打开文件时会通过返回的 fd 创建一个 file 对象，并通过 inode 找到 cdev，将 file 的 f_op 直接指向 cdev 的 f_op。注意 inode 和 file 都能表示对文件的抽象，但 inode 是持久化的，file 则是临时的。下面是 cdev 的具体字段构成：</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">cdev</span> &#123;</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">kobject</span> <span class="hljs-title">kobj</span>;</span> <span class="hljs-comment">// 内核对象</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">module</span> *<span class="hljs-title">owner</span>;</span><br>   <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">file_operations</span> *<span class="hljs-title">ops</span>;</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list_head</span> <span class="hljs-title">list</span>;</span><br>   <span class="hljs-type">dev_t</span> dev;<br>   <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> count;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><em>dev_t 数据类型表示设备号。u32数据类型，高12位是主设备号，低20位是次设备号。两种方式分配设备号：静态和动态。静态分配使用 register_chrdev_region 函数；动态分配使用 alloc_chrdev_region 函数申请设备号。使用 unregister_chrdev_region 函数释放掉设备号。</em></p>
+<p><em>f_op 包含了一系列的函数指针，是一组标准化的调用接口，对上层进行了屏蔽，由下层具体的驱动程序来规定相应的对硬件的操作。使用 cdev_init 将 f_op 关联 cdev，cdev_add 将 cdev 加入到内核的哈希表中。</em></p>
+<p><em>编写驱动时需要注册加载和卸载这两种函数。通过 module_init 和 module_exit 这两个入口和出口函数传参进行注册，传入具体要注册的加载和卸载函数。当使用 insmod&#x2F;modprobe 命令时 init 函数会被调用。当使用 rmmod 命令时 exit 函数会被调用。</em></p>
+<p><img src="/../img/posts/2026-06-03/03-chardev.png" alt="字符设备驱动框架"></p>
+<h3 id="4-设备模型"><a href="#4-设备模型" class="headerlink" title="4. 设备模型"></a>4. 设备模型</h3><h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体</em></p>
 <p><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体</em> </p>
 <p><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible       匹配(match函数)成功后执行probe函数 相关的硬件初始化代码</em></p>
 <h3 id="怎么理解-Pinctrl-子系统和-GPIO-子系统？"><a href="#怎么理解-Pinctrl-子系统和-GPIO-子系统？" class="headerlink" title="怎么理解 Pinctrl 子系统和 GPIO 子系统？"></a>怎么理解 Pinctrl 子系统和 GPIO 子系统？</h3><p><em>管理引脚并自动完成初始化</em></p>
@@ -407,7 +419,6 @@
 <h3 id="fd-文件描述符-？"><a href="#fd-文件描述符-？" class="headerlink" title="fd(文件描述符)？"></a>fd(文件描述符)？</h3><p><em>Linux 的哲学在于一切皆文件。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364617329">https://zhuanlan.zhihu.com/p/364617329</a></em></p>
 <p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/posts/2026-06-03/01-file-descriptor.png" alt="什么是 fd？"></p>
 <h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/posts/2026-06-03/02-process-memory.png" alt="进程在内存中的结构"></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><strong>Makefile: <em><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/makefile/complete/index.html">https://liaoxuefeng.com/books/makefile/complete/index.html</a></em></strong></p>
 
                 
               </div>
@@ -606,12 +617,12 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1101,12 +1112,12 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1258,7 +1269,7 @@
           <li>
             <a href="/categories/%E5%88%B7%E9%A2%98/">
               <span class="widget-cat-name">刷题</span>
-              <span class="widget-cat-count">7</span>
+              <span class="widget-cat-count">8</span>
             </a>
           </li>
         
@@ -1298,8 +1309,8 @@
           </li>
         
           <li>
-            <a href="/categories/%CB%A2%EF%BF%BD%EF%BF%BD/">
-              <span class="widget-cat-name">ˢ��</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1316,11 +1327,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.12rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.97rem">
             #项目开发
           </a>
         
@@ -1328,31 +1339,27 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.845rem">
             #生活
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
             #Language Philosophy
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
             #Tutorial
           </a>
         
-          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.77rem">
             #工作流分享
           </a>
         
-          <a href="/tags/%EF%BF%BD%E3%B7%A8/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #�㷨
-          </a>
-        
-          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.745rem">
             #课程自学
           </a>
         
-          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.745rem">
             #八股
           </a>
         
@@ -1429,11 +1436,11 @@
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">13</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
