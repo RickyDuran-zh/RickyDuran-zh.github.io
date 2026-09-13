@@ -3439,3 +3439,19 @@ body.post-share-open {
     align-self: flex-end;
   }
 }
+
+/* ===================================
+   代码字体：JetBrains Mono
+   中文注释回退到霞鹜文楷
+   =================================== */
+
+code, kbd, pre, samp,
+figure.highlight pre,
+.code-wrapper pre {
+  font-family: "JetBrains Mono", "LXGW WenKai Screen", Consolas, "Courier New", monospace;
+}
+
+/* 归档页日期保持与代码块同一套等宽字体 */
+.list-group-item time {
+  font-family: "JetBrains Mono", "SF Mono", "Fira Code", "Consolas", monospace;
+}
