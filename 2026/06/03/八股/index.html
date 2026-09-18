@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-09-18T01:28:43.573Z">
+<meta property="article:modified_time" content="2026-09-18T02:33:11.025Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -75,7 +75,7 @@
 <link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
 <link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
 <link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
-<link rel="stylesheet" href="/css/custom.css?v=20260918-01.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
 
 
 
@@ -336,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.4k 字
+          6.5k 字
         
       </span>
     
@@ -347,7 +347,7 @@
         
         
         
-          53 分钟
+          54 分钟
         
       </span>
     
@@ -425,8 +425,11 @@
 <h3 id="5-平台设备驱动（完结）"><a href="#5-平台设备驱动（完结）" class="headerlink" title="5. 平台设备驱动（完结）"></a>5. 平台设备驱动（完结）</h3><p><em>第四节讨论的总线和 soc 中的物理总线概念上来说并不严格相等，对于 led、rtc 时钟、按键等不需要特殊时序的设备来说，并没有对应的物理总线，由此引入虚拟总线-平台总线(platform bus)。对应的还有 platform_device、platform_driver，它们分别继承了 device、driver。内核用 platform_bus_type 来描述平台总线，改总线在内核启动时自动进行注册。platform_match api 负责实现了平台总线和平台设备的匹配过程，平台总线提供了四种匹配方式(设备树机制、ACPI 匹配模式、id_table 方式、字符串比较)，虽然五花八门但基本上都是比较一下设备和驱动的某个成员字符串是否相同。</em><br><img src="/../img/posts/2026-06-03/10-platform.png" alt="id_table 匹配方式"><br><em>上图展示了平台总线匹配方式中的 id_table 的匹配机制。简单来说定义平台驱动时需要提供一个 id_table(指向platform_device_id) 的数组,该数组说明了当前驱动可以支持的设备。加载驱动时 match api 如果发现 id_table 非空的话就会去进行字符串的比较(该表和平台设备)。一旦匹配，就会把匹配的项赋值给 id_entry。</em><br><em>platform_device 使用结构体 resource 来抽象表示硬件信息，而软件信息可以利用设备结构体 device 中的成员 platform_data(void)进行保存。在驱动和设备匹配后，probe 的回调函数内部通常会调用 platform_get_resource，dev_get_platdata 等 api 获取平台设备提供的 resource 或软件信息。</em><br><em>编写并注册平台设备和驱动的基本思路：将描述硬件资源相关的信息以及寄存器偏移等软相关的信息抽象并全部塞入平台设备中，注册平台设备；驱动主要负责实现 probe 函数，完成提取资源并注册创建字符设备(以字符设备为例)。</em></p>
 <h3 id="6-设备树"><a href="#6-设备树" class="headerlink" title="6. 设备树"></a>6. 设备树</h3><p><em>linux3.x 以后的版本引入了设备树，用来描述硬件平台的板级细节。DTS 即是所谓的设备树源文件，是一种 ASCII 文本格式的设备树描述，正如它的名字一样，硬件信息以节点的形式被树状组织起来，最顶部的根节点以”&#x2F;{}”表示，一个大括号就表示了一个节点。节点可以进行相互嵌套也可以通过”&amp;”对已有的节点进行追加内容。下面展示了节点的基本格式，其中 unit-address 需要和 reg 属性值保持一致(如果有该属性的话)，同级节点可以取相同的名字。</em></p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Text">node-name@unit-address&#123;<br>    属性1 = …<br>    属性2 = …<br>    属性3 = …<br>    子节点…<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><em>节点包含属性信息，这些属性信息就是要传递到内核的板级硬件描述信息。驱动中存在一些 api 用于获取这些信息。重要的属性包括 compatible, status, #address-cells, #size-cells</em></p>
-<p><em>下面的例子展现了设备树的解析过程，以及它是如何与 Platform 总线联动的，将前面的知识点完整地串联了起来。</em><br><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载 内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体。</em><br><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体。</em><br><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible 匹配(match函数)成功后执行probe函数 相关的硬件初始化代码。</em></p>
+<p><em>节点包含属性信息，这些属性信息就是要传递到内核的板级硬件描述信息。驱动中存在一些 api 用于获取这些信息。重要的属性包括 compatible(设备树中每一个代表了设备的节点都需要有该属性，它是驱动匹配时的重要参考), status, #address-cells, #size-cells(这两个属性决定了子节点 reg 属性的构成)。另外有一个特殊的子节点 chosen，它主要用于给内核传递参数，还可用作 uboot 向 linux 内核传递配置参数的”通道”。</em></p>
+<p><em>下面的例子展现了设备树的解析过程，以及它是如何与 Platform 总线联动的，将前面的知识点完整地串联了起来。</em></p>
+<p><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载 内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体。</em></p>
+<p><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体。</em> </p>
+<p><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible 匹配(match函数)成功后执行probe函数 相关的硬件初始化代码。</em></p>
 <h3 id="怎么理解-Pinctrl-子系统和-GPIO-子系统？"><a href="#怎么理解-Pinctrl-子系统和-GPIO-子系统？" class="headerlink" title="怎么理解 Pinctrl 子系统和 GPIO 子系统？"></a>怎么理解 Pinctrl 子系统和 GPIO 子系统？</h3><p><em>管理引脚并自动完成初始化</em></p>
 <p><em>引脚控制器 管理SoC所有通用输入输出引脚的多路复用(MUX)功能、电气特性、引脚配置</em></p>
 <h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>

@@ -517,6 +517,11 @@ a.print-no-link:hover {
    =================================== */
 
 .markdown-body img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 27rem;   /* 大图限高等比缩放，避免铺满整列喧宾夺主；全景宽图与小图不受影响 */
+  margin: 0 auto;
   border-radius: 6px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
