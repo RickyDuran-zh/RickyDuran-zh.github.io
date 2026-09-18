@@ -160,7 +160,7 @@
 }
 
 /* ===================================
-   代码块增强: Mac圆点 + 语言标签 + 整体美化
+   代码块增强: 极简卡片 + 语言标签
    =================================== */
 
 /* --- 通用代码容器 --- */
@@ -171,37 +171,6 @@ figure.highlight,
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   margin: 1.2rem 0;
   position: relative;
-}
-
-/* --- Mac 风格三色圆点装饰 --- */
-figure.highlight::before,
-.code-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0.7rem;
-  left: 0.9rem;
-  z-index: 3;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ff5f56;
-  box-shadow:
-    18px 0 0 #ffbd2e,
-    36px 0 0 #27c93f;
-  pointer-events: none;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-
-/* 行号模式下圆点位置微调，避开行号列 */
-figure.highlight::before {
-  left: 0.85rem;
-}
-
-/* 悬浮时圆点更亮 */
-figure.highlight:hover::before,
-.code-wrapper:hover::before {
-  opacity: 1;
 }
 
 /* --- 语言标签 badge 美化 --- */
@@ -255,15 +224,15 @@ figure.highlight .gutter {
   padding-right: 0.6rem;
 }
 
-/* 代码区域增加内边距（顶部给圆点留空间） */
+/* 代码区域内边距（顶部与行号列对齐） */
 figure.highlight td.code > pre,
 .code-wrapper > pre {
-  padding-top: 2.2rem !important;
+  padding-top: 1.1rem !important;
   padding-left: 0.8rem;
 }
 
 figure.highlight .gutter pre {
-  padding-top: 2.2rem !important;
+  padding-top: 1.1rem !important;
 }
 
 /* 深色模式代码块 */
