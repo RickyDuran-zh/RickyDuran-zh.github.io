@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。\  单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。 题号42 接雨水(单调栈)238 除了自身以外数组的乘积(前缀) 值得记录42 接雨水 123456789101112131415161718192021222324class Solu">
+    <meta name="description" content="概述 这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。\  单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。 题号42 接雨水(单调栈)155 最小栈238 除了自身以外数组的乘积(前缀)739 每日温度(单调栈) 值得记录42 接雨水 12345678910111213141516171819">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algorithm-Leetcode-前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈">
 <meta property="og:url" content="http://example.com/2026/06/16/Algorithm-Leetcode-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8F%8C%E6%8C%87%E9%92%88-%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。\  单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。 题号42 接雨水(单调栈)238 除了自身以外数组的乘积(前缀) 值得记录42 接雨水 123456789101112131415161718192021222324class Solu">
+<meta property="og:description" content="概述 这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。\  单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。 题号42 接雨水(单调栈)155 最小栈238 除了自身以外数组的乘积(前缀)739 每日温度(单调栈) 值得记录42 接雨水 12345678910111213141516171819">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/shared/algorithm.png">
 <meta property="article:published_time" content="2026-06-16T02:51:13.000Z">
-<meta property="article:modified_time" content="2026-09-18T07:49:56.886Z">
+<meta property="article:modified_time" content="2026-09-21T03:18:07.182Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -336,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.3k 字
         
       </span>
     
@@ -347,7 +347,7 @@
         
         
         
-          10 分钟
+          20 分钟
         
       </span>
     
@@ -399,11 +399,15 @@
 <p>这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。\</p>
 </blockquote>
 <p><em>单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。</em></p>
-<h2 id="题号"><a href="#题号" class="headerlink" title="题号"></a>题号</h2><p>42 接雨水(单调栈)<br>238 除了自身以外数组的乘积(前缀)</p>
+<h2 id="题号"><a href="#题号" class="headerlink" title="题号"></a>题号</h2><p>42 接雨水(单调栈)<br>155 最小栈<br>238 除了自身以外数组的乘积(前缀)<br>739 每日温度(单调栈)</p>
 <h2 id="值得记录"><a href="#值得记录" class="headerlink" title="值得记录"></a>值得记录</h2><p>42 接雨水</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">trap</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; height)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = height.<span class="hljs-built_in">size</span>();<br>        stack&lt;<span class="hljs-type">int</span>&gt; st;<br>        <span class="hljs-type">int</span> volume = <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (!st.<span class="hljs-built_in">empty</span>() &amp;&amp; height[i] &gt; height[st.<span class="hljs-built_in">top</span>()]) &#123;<br>                <span class="hljs-type">int</span> mid = st.<span class="hljs-built_in">top</span>();<br>                st.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-keyword">if</span> (st.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">break</span>;<br>                <br>                <span class="hljs-type">int</span> left = st.<span class="hljs-built_in">top</span>();<br>                <span class="hljs-type">int</span> width = i - left - <span class="hljs-number">1</span>;<br>                <span class="hljs-type">int</span> h = <span class="hljs-built_in">min</span>(height[left], height[i]) - height[mid];<br>                volume += width * h;<br>            &#125;<br>            st.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> volume;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>155 最小栈 <br><em>两个栈。一个栈进行正常操作，另外一个辅助栈同步记录当前栈的最小值。</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MinStack</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    stack&lt;<span class="hljs-type">int</span>&gt; mystack;<br>    stack&lt;<span class="hljs-type">int</span>&gt; minstack;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MinStack</span>() &#123;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> </span>&#123;<br>        mystack.<span class="hljs-built_in">push</span>(value);<br>        <span class="hljs-keyword">if</span> (minstack.<span class="hljs-built_in">empty</span>()) &#123;<br>            minstack.<span class="hljs-built_in">push</span>(value);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            minstack.<span class="hljs-built_in">push</span>(<span class="hljs-built_in">min</span>(value, minstack.<span class="hljs-built_in">top</span>()));<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(!mystack.<span class="hljs-built_in">empty</span>() &amp;&amp; !minstack.<span class="hljs-built_in">empty</span>())&#123;<br>            mystack.<span class="hljs-built_in">pop</span>();<br>            minstack.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> mystack.<span class="hljs-built_in">top</span>();<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getMin</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> minstack.<span class="hljs-built_in">top</span>();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>238 除了自身以外数组的乘积</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">productExceptSelf</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> length = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">answer</span><span class="hljs-params">(length)</span></span>;<br><br>        <span class="hljs-comment">// answer[i] 表示索引 i 左侧所有元素的乘积</span><br>        <span class="hljs-comment">// 因为索引为 &#x27;0&#x27; 的元素左侧没有元素， 所以 answer[0] = 1</span><br>        answer[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; length; i++) &#123;<br>            answer[i] = nums[i - <span class="hljs-number">1</span>] * answer[i - <span class="hljs-number">1</span>];<br>        &#125;<br><br>        <span class="hljs-comment">// R 为右侧所有元素的乘积</span><br>        <span class="hljs-comment">// 刚开始右边没有元素，所以 R = 1</span><br>        <span class="hljs-type">int</span> R = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-comment">// 对于索引 i，左边的乘积为 answer[i]，右边的乘积为 R</span><br>            answer[i] = answer[i] * R;<br>            <span class="hljs-comment">// R 需要包含右边所有的乘积，所以计算下一个结果时需要将当前值乘到 R 上</span><br>            R *= nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> answer;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>739 每日温度<br><em>单调栈：只记录下标，如果加入当前栈的元素大于栈顶元素就释放当前栈顶并更新答案。每个元素来到当前位置看看能不能释放之前的元素，如果不能就等着后面加入的元素来释放。时间复杂度 O(n) 额外空间复杂度 O(n)。</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dailyTemperatures</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; temperatures)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">ans</span><span class="hljs-params">(temperatures.size(),<span class="hljs-number">0</span>)</span></span>;<br>        stack&lt;<span class="hljs-type">int</span>&gt; mystack;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; temperatures.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(mystack.<span class="hljs-built_in">empty</span>()) mystack.<span class="hljs-built_in">push</span>(i);<br>            <span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-keyword">while</span>(!mystack.<span class="hljs-built_in">empty</span>() &amp;&amp; temperatures[i] &gt; temperatures[mystack.<span class="hljs-built_in">top</span>()])&#123;<br>                    <span class="hljs-type">int</span> cur_idx = mystack.<span class="hljs-built_in">top</span>();<br>                    ans[cur_idx] = i - cur_idx;<br>                    mystack.<span class="hljs-built_in">pop</span>();<br>                &#125;<br>                mystack.<span class="hljs-built_in">push</span>(i);<br>            &#125; <br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -597,7 +601,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">37</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1092,7 +1096,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">37</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1254,7 +1258,7 @@
           <li>
             <a href="/categories/%E5%88%B7%E9%A2%98/">
               <span class="widget-cat-name">刷题</span>
-              <span class="widget-cat-count">8</span>
+              <span class="widget-cat-count">7</span>
             </a>
           </li>
         
@@ -1312,11 +1316,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.12rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.97rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1324,27 +1328,27 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.845rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
             #生活
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Language Philosophy
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7949999999999999rem">
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
-          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.77rem">
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
             #工作流分享
           </a>
         
-          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.745rem">
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
             #课程自学
           </a>
         
-          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.745rem">
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
             #八股
           </a>
         
@@ -1393,7 +1397,7 @@
           <li>
             <a href="/archives">
               <span class="widget-archive-month">2026 年 05 月</span>
-              <span class="widget-archive-count">15 篇</span>
+              <span class="widget-archive-count">14 篇</span>
             </a>
           </li>
         
@@ -1417,7 +1421,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">37</span>
+          <span class="widget-info-value">36</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
