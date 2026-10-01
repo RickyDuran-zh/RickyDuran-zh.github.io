@@ -1,0 +1,1562 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="RickyDuran">
+  <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
+  
+    <meta name="description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;曝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="音视频业务basic understandings">
+<meta property="og:url" content="http://example.com/2026/06/26/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%B8%9A%E5%8A%A1/index.html">
+<meta property="og:site_name" content="RickyDuran&#39;s Blog">
+<meta property="og:description" content="概述 第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。  1、全局地图：一条视频的旅程12345678910111213141516真实光线  -&gt; Sensor 采样  -&gt; RAW Bayer  -&gt; ISP 去马赛克&#x2F;降噪&#x2F;曝">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/posts/2026-06-26/audio-video.png">
+<meta property="article:published_time" content="2026-06-26T08:24:50.000Z">
+<meta property="article:modified_time" content="2026-09-25T02:25:23.172Z">
+<meta property="article:author" content="RickyDuran">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/posts/2026-06-26/audio-video.png">
+  
+  
+  
+  <title>音视频业务basic understandings - RickyDuran&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/fonts/lxgw-wenkai-screen/lxgwwenkaigbscreen.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>RickyDuran&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="fa-solid fa-house"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="fa-solid fa-box-archive"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="fa-solid fa-tags"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="fa-solid fa-circle-user"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-house"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-box-archive"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-layer-group"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-tags"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="fa-solid fa-circle-user"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/posts/2026-06-26/audio-video.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="音视频业务basic understandings"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-26 16:24" pubdate>
+          2026年6月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">音视频业务basic understandings</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>第二个项目将在 RK3588 的基础上开发多路视频智能分析的中间件，这篇博客按一条视频从采集到播放的完整链路，把音视频基础知识分层梳理一遍：像素 → 编码 → 封装 → 时间戳 → 协议 → 硬件。</p>
+</blockquote>
+<h2 id="1、全局地图：一条视频的旅程"><a href="#1、全局地图：一条视频的旅程" class="headerlink" title="1、全局地图：一条视频的旅程"></a>1、全局地图：一条视频的旅程</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs text">真实光线<br>  -&gt; Sensor 采样<br>  -&gt; RAW Bayer<br>  -&gt; ISP 去马赛克/降噪/曝光/白平衡<br>  -&gt; YUV/RGB 原始帧<br>  -&gt; H.264/H.265 编码<br>  -&gt; MP4/FLV 等容器<br>  -&gt; 文件或 RTSP/RTMP 等协议<br>  -&gt; 解协议/解复用<br>  -&gt; H.264/H.265 码流<br>  -&gt; 解码<br>  -&gt; YUV 原始帧<br>  -&gt; 缩放/颜色转换/推理/叠框/拼接<br>  -&gt; 再编码<br>  -&gt; 再封装<br>  -&gt; 推流服务器和播放器<br></code></pre></td></tr></table></figure>
+<p>我们项目的实际链路是中间一段：MP4&#x2F;RTSP -&gt; FFmpeg 解复用 -&gt; h264_mp4toannexb（需要时）-&gt; MPP 硬解码出 NV12 -&gt; 转 BGR -&gt; RKNN 推理叠框 -&gt; 2×2 拼接 -&gt; 转 I420 -&gt; MPP 硬编码 -&gt; FFmpeg 封 FLV -&gt; RTMP 发送。</p>
+<p>遇到问题先判断它属于哪一层：像素格式、编码、容器、传输协议、硬件缓冲区，还是业务推理，不同层的名词不能混用。比如”MP4 解码器”这种说法就不准确——先由 demuxer 解析 MP4 容器取出码流，再由 H.264 decoder 解码。</p>
+<h2 id="2、原始图像：帧、像素格式与内存布局"><a href="#2、原始图像：帧、像素格式与内存布局" class="headerlink" title="2、原始图像：帧、像素格式与内存布局"></a>2、原始图像：帧、像素格式与内存布局</h2><p><strong>Frame</strong> - 视频是一系列按时间显示的静态图像，每一张就是一个 frame。一帧除了像素，还应携带宽高、像素格式、每个平面的地址和 stride、PTS 或采集时间戳、缓冲区所有权——只传一个 <code>void* data</code>，接收方既不知道如何解释这块内存，也不知道它被用到什么时候才安全。</p>
+<p><strong>FPS</strong> - 链路上不止一个值：采集、解码、推理、合成、编码、播放各有一个，且可以不同。比如采集 25 fps、每两帧推理一次，推理只有 12.5 fps，但每帧复用最近一次检测结果，输出仍是 25 fps。</p>
+<h3 id="2-1-RGB-与-YUV"><a href="#2-1-RGB-与-YUV" class="headerlink" title="2.1 RGB 与 YUV"></a>2.1 RGB 与 YUV</h3><p><strong>YUV&#x2F;YCbCr</strong> - 指亮度参量和色度参量分开表示的像素格式。利用了人眼对亮度敏感、对颜色不敏感的特征，对色度降采样来省数据：4:4:4 不降采样；4:2:2 水平方向每两个 Y 共用一组 UV；4:2:0 水平垂直都降采样，2×2 的 Y 共享一组 UV。一个为了显示和处理（RGB），一个为了传输和存储（YUV），视频编解码硬件通常也更偏好 YUV。</p>
+<p>数据量感受一下：1920×1080 的 BGR8 一帧 &#x3D; 1920×1080×3 ≈ 5.93 MiB，25 fps 光遍历一次就是约 148 MiB&#x2F;s；换成 8bit 4:2:0，每像素平均 1.5 byte，一帧只有约 2.97 MiB。</p>
+<p><strong>颜色矩阵与范围</strong> - RGB↔YUV 的转换不止一套公式：矩阵有 BT.601（SD）、BT.709（HD）、BT.2020（UHD&#x2F;HDR）；范围有 Full range（0<del>255）和 Limited&#x2F;TV range（亮度 16</del>235、色度 16~240）。矩阵或范围用错会发灰、黑位不对、偏色，不能只看格式名叫 NV12 就推断它们。</p>
+<h3 id="2-2-内存布局与-Stride"><a href="#2-2-内存布局与-Stride" class="headerlink" title="2.2 内存布局与 Stride"></a>2.2 内存布局与 Stride</h3><p><strong>I420&#x2F;YUV420P</strong> - Y + U + V 三平面，U 在 V 前。<br><strong>YV12</strong> - Y + V + U，和 I420 只是 UV 顺序相反。<br><strong>NV12</strong> - Y 平面 + UVUV 交错的第二平面（semi-planar），Rockchip 等视频硬件最常见。<br><strong>NV21</strong> - Y + VUVU，色度顺序与 NV12 相反。</p>
+<p>把 NV12 当成 NV21 会明显偏色，当成 I420 则连平面结构都解释错了。我们项目 MPP 解码输出按 NV12 处理，编码前准备 I420，中间为了 OpenCV 绘图和模型输入转 BGR。</p>
+<p><strong>Stride</strong> - 可见像素宽度之外的行跨度。硬件常要求 16、64 字节对齐，可见宽度 1920 时 stride 可能是 1936、1984 或 2048，缓冲区高度同理。直接假设 stride &#x3D;&#x3D; width 会得到斜屏、颜色错位或边缘绿条；NV12 的 UV 平面起点也要按 stride × height_stride 算，而不是 width × height。</p>
+<h2 id="3、编码与解码：从原始帧到码流"><a href="#3、编码与解码：从原始帧到码流" class="headerlink" title="3、编码与解码：从原始帧到码流"></a>3、编码与解码：从原始帧到码流</h2><p>1080p 4:2:0 一帧约 3 MiB，25 fps 一路就是每秒 70+ MiB，存储和网络都扛不住，所以要压缩。</p>
+<h3 id="3-1-宏块与帧类型"><a href="#3-1-宏块与帧类型" class="headerlink" title="3.1 宏块与帧类型"></a>3.1 宏块与帧类型</h3><p><strong>宏块</strong> - 视频编码处理的基本单元，通常由一个 16×16 亮度像素块和附加的一个 8×8 Cb、一个 8×8 Cr 彩色像素块组成（H.265 改用 8×8 到 64×64 可变大小的 CTU）。</p>
+<p><strong>I 帧</strong> - 帧内编码帧，完整的独立画面，不依赖其他帧就能解码显示。帧内压缩仅考虑本帧数据，压缩率一般不高。<br><strong>P 帧</strong> - 前向预测帧，只记录变化部分，需要参考前面的 I&#x2F;P 帧。<br><strong>B 帧</strong> - 双向预测帧，参考前后的帧，压缩率最高，但会引入解码重排序。<br><strong>IDR</strong> - H.264&#x2F;H.265 中的关键随机访问点，解码器从这里重新开始，不依赖 IDR 之前的参考图像。</p>
+<h3 id="3-2-GOP"><a href="#3-2-GOP" class="headerlink" title="3.2 GOP"></a>3.2 GOP</h3><p><strong>GOP</strong>（Group of Pictures）- 实质就是两个 I 帧的间隔。码率不变时 GOP 越大 P&#x2F;B 帧越多、画质相对越好，但首屏、跳转、丢包恢复变慢；GOP 短则反过来。实时监控常设 1~2 秒一个关键帧，我们项目当前用 gop &#x3D; fps。</p>
+<h3 id="3-3-码率控制"><a href="#3-3-码率控制" class="headerlink" title="3.3 码率控制"></a>3.3 码率控制</h3><p>码率是每秒产生的压缩数据量（kbps），设定应高于该分辨率的最低码率要求、低于网络带宽，不是越大越好。</p>
+<p><strong>CBR</strong> - 固定码率，码率基本恒定并接近目标值，利于带宽规划。<br><strong>VBR</strong> - 动态码率，按画面复杂度调整，简单部分小码率、复杂部分大码率。参数：MaxBitrate、ChangePos、MaxQp、MinQp。<br><strong>AVBR</strong> - 平均可变码率，VBR 的一种，适合静止&#x2F;动态画面频繁切换的场景，多一个 MinStillPercent 参数。</p>
+<p><strong>QP</strong> - 量化参数，直接控制量化步长。QP 每增加 6，量化步长翻倍，细节损失越多、码率越低；MinQp&#x2F;MaxQp 分别限制最好和最差的画质，对应静止和运动画面。</p>
+<p><strong>Profile</strong> - 编码工具集合：66 Baseline 只支持 I&#x2F;P 帧、无交错；77 Main 增加 B 帧和交错；100 High 再加 8×8 预测和自定义量化。同画质下更复杂的工具压得更小。<br><strong>Level</strong> - 解码复杂度上限（宏块处理率、分辨率、码率）。设太高旧设备解不动，与实际内容不符播放器可能直接拒绝。</p>
+<h3 id="3-4-码流结构：NAL"><a href="#3-4-码流结构：NAL" class="headerlink" title="3.4 码流结构：NAL"></a>3.4 码流结构：NAL</h3><p><strong>H.264</strong> - 原始码流（ES）不含任何封装信息，由 NAL 单元组成，每个 NALU 是一个基本编码单元。结构上是 VCL（承载编码数据）+ 非 VCL（参数集、SEI 等补充信息）；NAL 的 payload 是 RBSP，即去除字节填充、加上终止位后的实际编码数据。</p>
+<p><img src="/../img/posts/2026-06-26/01-nal-unit.png" alt="ES 中的基本 NAL 单元"></p>
+<p><strong>SPS&#x2F;PPS</strong> - 解码必需的参数集，描述分辨率、profile、level、参考帧数等（H.265 多一个 VPS）。推流或封装时缺失、格式不符，播放器黑屏或只能从后续关键帧开始。</p>
+<p><strong>Annex B 与 AVCC</strong> - NAL 边界的两种表达。Annex B 用 start code（<code>00 00 01</code> &#x2F; <code>00 00 00 01</code>）分隔，参数集穿插在码流里，裸流和 TS 常见；MP4&#x2F;MOV 用长度前缀，参数集放在容器的 extradata 里。很多硬件解码器更适合 Annex B，FFmpeg 提供 bsf <code>h264_mp4toannexb</code> &#x2F; <code>hevc_mp4toannexb</code> 做转换——bsf 只改码流组织，不做像素级重编码，开销远小于转码。</p>
+<h2 id="4、封装：Container、Demux-与-Mux"><a href="#4、封装：Container、Demux-与-Mux" class="headerlink" title="4、封装：Container、Demux 与 Mux"></a>4、封装：Container、Demux 与 Mux</h2><p><strong>容器</strong> - 把一路或多路音视频流、字幕、元数据组织在一起。容器扩展名不是编码格式，.mp4 里可以装 H.264、H.265、AAC。</p>
+<p><strong>TS 流 &#x2F; PS 流</strong> - 传输流&#x2F;节目流，复合流的一种（一条流里同时包含视频和音频）。ES 是编码后的裸流（H.264、AAC），没有时间信息；编码器把 ES 拆成 packet 并加包头，附上 PTS（显示时间戳）和 DTS（解码时间戳），得到 PES；TS&#x2F;PS 再把视频、音频的 PES 复用成一条流。</p>
+<p><strong>FLV</strong> - Adobe 推出的网络流媒体封装，与 RTMP&#x2F;HTTP-FLV 结合紧密，结构 &#x3D; Header + Tag（video tag &#x2F; audio tag &#x2F; script tag）。</p>
+<p><strong>Demux</strong> - 从容器里取出压缩 packet，FFmpeg 里由 libavformat 负责：avformat_open_input 打开输入 -&gt; avformat_find_stream_info 探测流 -&gt; av_read_frame 逐个读 packet。注意 av_read_frame 名字叫 frame，返回的其实是压缩 packet。</p>
+<p><strong>Mux</strong> - 反向操作，把编码后的 packet 按容器规则写出。推流端流程：alloc_output_context2 -&gt; new_stream -&gt; 填 codec 参数和 extradata -&gt; avio_open 连接 RTMP -&gt; write_header -&gt; 循环 av_interleaved_write_frame -&gt; write_trailer。Mux 不等于编码，我们项目编码由 MPP 完成，FFmpeg 只管封装和协议 I&#x2F;O。</p>
+<h2 id="5、时间戳与音视频同步"><a href="#5、时间戳与音视频同步" class="headerlink" title="5、时间戳与音视频同步"></a>5、时间戳与音视频同步</h2><p><strong>Packet 与 Frame</strong> - packet 是压缩数据单元，frame 是解码后的原始数据。一个 packet 不保证正好出一个 frame：可能暂时不出帧、出多帧，或一帧跨多个 packet，所以不能用”每读一个 packet sleep 一次”控制播放速度——本地文件播放过快多半就是这个原因。</p>
+<p><strong>PTS&#x2F;DTS</strong> - PTS 是显示时间戳，DTS 是解码时间戳。没有 B 帧时两者相同，有 B 帧时解码顺序 ≠ 显示顺序。</p>
+<p><strong>Time base</strong> - 时间戳不是天然以秒为单位：time_base &#x3D; 1&#x2F;90000 时，PTS 加 90000 才是一秒，seconds &#x3D; pts × num &#x2F; den。FFmpeg 用 av_packet_rescale_ts 做时基转换，比手写浮点安全。我们当前版本丢弃了输入原始时间戳、用递增帧号生成 PTS，只适用于固定帧率、无 B 帧的初始版本，接入实时流后必须重建统一的媒体时间轴。</p>
+<p><strong>时钟域</strong> - 测耗时和延迟用单调时钟 steady_clock，system_clock 会受校时影响；多摄同步前先确认各摄像头的时间戳是否来自同一时钟域。</p>
+<p><strong>PCM</strong> - 未压缩的音频采样。比特率 &#x3D; 采样率 × 位深 × 通道数，双声道 48kHz 16bit &#x3D; 1,536,000 bit&#x2F;s。内存布局分 Packed（LRLRLR 交错）和 Planar（LLL + RRR），FFmpeg 格式名后缀 P 表示 planar，如 FLTP。<br><strong>WAV</strong> - 不是编码格式，本质是 PCM 裸数据外面套了个文件头。<br><strong>AAC</strong> - 取代 MP3 的新一代音频编码，更高压缩率、更高品质、更低解码开销，MP4&#x2F;FLV&#x2F;RTMP 生态标配。两种形式：ADIF 能确定音频数据的开始位置，适合文件；ADTS 每帧都带头部（fixed + variable + 裸流 ES），适合流式。</p>
+<p><strong>A&#x2F;V Sync</strong> - 音频和视频要映射到同一播放时间轴，不能谁先到就发谁，通常由音频时钟、视频 PTS 或统一的 master clock 驱动，配合丢帧、补帧或重采样策略。</p>
+<h2 id="6、流媒体协议"><a href="#6、流媒体协议" class="headerlink" title="6、流媒体协议"></a>6、流媒体协议</h2><p><strong>RTSP</strong> - 实时流传输协议，控制用，类似遥控器只下命令不传视频，常见动作 OPTIONS&#x2F;DESCRIBE&#x2F;SETUP&#x2F;PLAY&#x2F;TEARDOWN。<br><strong>RTP</strong> - 实时传输协议，基于 UDP，媒体数据由它承载，带 sequence number 和 timestamp，本身通常不重传；NAL 太大会被拆成多个 RTP 包。<br><strong>RTCP</strong> - RTP 控制协议，周期性发送丢包率、延迟、抖动等质量报告，接收端据此动态调整码率或 FEC 强度。<br><strong>SDP</strong> - 会话描述协议，RTSP DESCRIBE 的响应就是它，描述媒体类型、codec、payload type、时钟率。<br><strong>SIP</strong> - 会话初始协议。<strong>GB&#x2F;T 28181</strong> - 公共安全视频监控联网标准，SIP 控制 + RTP 传输。</p>
+<p>RTSP 的媒体传输可以走 UDP（延迟低、丢包不阻塞，但防火墙和网络设备处理麻烦），或 TCP interleaved（RTP&#x2F;RTCP 复用在 RTSP 的 TCP 连接上，穿透容易且可靠，但丢包重传会累积延迟）。我们当前偏向 rtsp_transport&#x3D;tcp 先保证连通。</p>
+<p><strong>RTMP</strong> - 基于 TCP 的实时消息协议，传统直播链路用 FLV 标签承载 H.264&#x2F;AAC。URL 结构 rtmp:&#x2F;&#x2F;host:port&#x2F;app&#x2F;stream-key；浏览器不能直接播放，需要服务器转 HLS&#x2F;WebRTC。其他协议定位：HLS 是 HTTP 分片，分发友好但延迟较高；WebRTC 交互式低延迟但协议栈复杂；SRT 面向不稳定公网。选协议看延迟、网络、客户端和安全需求，不因为名字流行就加接口。</p>
+<h2 id="7、RK3588-平台组件"><a href="#7、RK3588-平台组件" class="headerlink" title="7、RK3588 平台组件"></a>7、RK3588 平台组件</h2><p><strong>MPP</strong> - Media Process Platform，Rockchip 的硬件编解码库，屏蔽不同芯片的硬件差异，提供统一的视频编解码接口，我们用它做 H.264&#x2F;H.265 硬解和 H.264 硬编码。MPP 输出的是带对齐 stride 的硬件 buffer，高性能做法是保留 MppBuffer&#x2F;DMABUF 身份直接传下游，而不是立刻逐行 memcpy 到普通内存。</p>
+<p><strong>RGA</strong> - 独立的 2D 硬件加速器，做 resize、crop、rotate、颜色转换、blit，正好覆盖 NV12↔RGB 这类活。硬件失败时可以回退 OpenCV，但要计数并告警，否则性能退化会被掩盖。</p>
+<p><strong>RKNN</strong> - Rockchip 的 AI 推理引擎和模型格式，.rknn 模型跑在 NPU 上。要关心输入布局（NCHW&#x2F;NHWC）、量化参数（zero point&#x2F;scale）、core mask 绑核，输入预处理必须和模型转换时一致。多模型并行不保证线性加速，NPU 核、DDR 带宽、RGA、CPU 后处理都可能成为瓶颈。</p>
+<p><strong>DMA-BUF</strong> - 用 fd 表示可跨设备共享的缓冲区，理想链路是 ISP、RGA、NPU、编码器共享同一块底层内存。但有 fd 不等于零拷贝：各模块要支持导入导出、格式和 stride 兼容、cache 同步正确、buffer 生命周期覆盖所有使用者。我们目前属于”用了硬件加速但不是零拷贝”——解码缓冲区逐行 memcpy、BGR 帧 clone 多次、编码前再 memcpy 进 MPP，优化顺序是先建立逐阶段耗时基线，再消重复拷贝和前处理，最后尝试 RKNN tensor memory 和 MPP 输入共享。</p>
+<p><strong>Cache coherency</strong> - CPU 和硬件同时访问 DMA buffer 时要做 cache sync，漏了会偶发旧数据、花屏，且只在高负载下复现。</p>
+<h2 id="8、MIPI-摄像头链路"><a href="#8、MIPI-摄像头链路" class="headerlink" title="8、MIPI 摄像头链路"></a>8、MIPI 摄像头链路</h2><p>Sensor 把光变成数字信号，驱动要管 I2C 寄存器、输入时钟、电源 regulator、reset&#x2F;pwdn GPIO 和曝光增益等 controls。很多 sensor 输出 RAW Bayer（RGGB 等排列，每个像素只采到一个颜色分量），经过 MIPI CSI-2（数据协议，底层是 D-PHY 物理层）送到 ISP 做 demosaic、降噪、AE&#x2F;AWB、gamma、lens shading，最后输出 YUV。RAW10&#x2F;12 指有效位深，内存里的 packing 方式要另查，不能当 16bit 灰度图。</p>
+<p>应用侧通过 V4L2 拿帧：枚举格式 -&gt; 设置 format&#x2F;fps -&gt; 请求 buffer（mmap 或 DMABUF）-&gt; STREAMON -&gt; DQBUF&#x2F;QBUF 循环。media controller 用 graph 描述 sensor、CSI、ISP 之间的拓扑：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">media-ctl -p                                   <span class="hljs-comment"># 查看拓扑</span><br>v4l2-ctl --list-devices                        <span class="hljs-comment"># 列出设备</span><br>v4l2-ctl -d /dev/videoX --list-formats-ext     <span class="hljs-comment"># 查看支持的格式</span><br></code></pre></td></tr></table></figure>
+
+<p>接入前先用 v4l2-ctl 稳定抓帧，再接应用，否则应用层日志会把驱动问题复杂化。另外先确认拿到的是 RAW 还是 ISP 后的 NV12——已经是 NV12 就没必要”先编码再解码”绕一圈。</p>
+<h2 id="9、推理前处理与后处理"><a href="#9、推理前处理与后处理" class="headerlink" title="9、推理前处理与后处理"></a>9、推理前处理与后处理</h2><p><strong>Letterbox</strong> - 直接 resize 到模型输入尺寸会拉伸目标形状；letterbox 保持长宽比再 pad 补齐：scale &#x3D; min(Mw&#x2F;W, Mh&#x2F;H)，pad_x &#x3D; (Mw − W×scale)&#x2F;2。后处理还原坐标时必须先减 padding 再除 scale，顺序反了框就偏移。</p>
+<p><strong>NCHW&#x2F;NHWC 与量化</strong> - 内存布局必须和 RKNN tensor attr 一致，shape 数字相同不代表布局正确。INT8 非对称量化：real &#x3D; (q − zero_point) × scale，后处理要按每个 tensor 的 zp&#x2F;scale 反量化。</p>
+<p><strong>IoU&#x2F;IoM&#x2F;NMS</strong> - IoU 是交集&#x2F;并集，IoM 是交集&#x2F;较小框面积（适合大框包含小框），NMS 按置信度保留框、抑制重叠过高的框。业务上注意框的语义：全身框和头部框大小差异天然很大，IoU 可能很低而 IoM 更合适；比把两种框合并更合理的，常是建立 helmet belongs_to person 这类关系。</p>
+<p><strong>多模型调度</strong> - 每路一个 context &#x2F; 多路共享串行 &#x2F; 绑不同 NPU core &#x2F; 同模型多 context 并发，选哪种先测模型耗时和 NPU 利用率——线程池提交了任务，不代表 NPU 真的在并行。</p>
+<h2 id="10、实时链路思维"><a href="#10、实时链路思维" class="headerlink" title="10、实时链路思维"></a>10、实时链路思维</h2><p><strong>吞吐与延迟</strong> - 吞吐是每秒处理多少帧，延迟是一帧从输入到输出走多久。吞吐高不代表延迟低：队列积压 100 帧的系统照样 25 fps 输出，但你看到的是 4 秒前的画面。给每帧各阶段打时间戳、统计 P50&#x2F;P95&#x2F;P99，延迟问题才能定位到阶段。</p>
+<p><strong>背压</strong> - 下游慢于上游时必须选策略：阻塞上游（不丢帧但延迟涨）、丢最新帧（保留历史，适合离线）、丢最旧帧（优先最新画面，适合实时监控）、按关键帧&#x2F;事件保留。我们推流队列有上限并丢最旧帧，其他阶段也要统一规则。</p>
+<p><strong>内存所有权</strong> - cv::Mat 赋值只加引用计数，clone() 才复制像素；跨线程要明确上游会不会复用缓冲区，从 MPP&#x2F;DMA 内存构造的 Mat 引用计数延长不了硬件 buffer 的生命周期。每个队列都要有容量上限和满队策略——无界队列在网络断开或模型变慢时，表现得就像内存泄漏。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              
+<div
+  id="blog-like-config"
+  data-post-id="post-20260626-a78bc66348"
+  data-api-base="https://rickyduran-blog-likes.2920811635.workers.dev"
+  data-timeout="8000"
+  hidden
+></div>
+
+<div class="post-end-tools">
+  <div class="post-end-tags" aria-label="文章标签">
+    
+      
+        <a href="/tags/%E6%8A%80%E6%9C%AF/" class="post-end-tag">#技术</a>
+      
+    
+  </div>
+
+  <div class="post-share-actions" aria-label="分享文章">
+    <button type="button" class="post-share-btn post-share-wechat" data-share-channel="wechat" aria-label="微信扫码分享">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="post-share-btn post-share-qq" data-share-channel="qq" aria-label="QQ 扫码分享">
+      <i class="fa-brands fa-qq" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<div class="post-share-modal" id="post-share-modal" role="dialog" aria-modal="true" aria-labelledby="post-share-title" hidden>
+  <button type="button" class="post-share-backdrop" data-share-close aria-label="关闭分享二维码"></button>
+  <div class="post-share-dialog">
+    <button type="button" class="post-share-close" data-share-close aria-label="关闭">&times;</button>
+    <div class="post-share-brand" id="post-share-brand">
+      <i class="fa-brands fa-weixin" aria-hidden="true"></i>
+    </div>
+    <h3 id="post-share-title">微信扫码分享</h3>
+    <p>使用手机扫描二维码，打开并分享这篇文章</p>
+    <div class="post-share-qr" id="post-share-qr">
+      <span class="post-share-loading">二维码生成中…</span>
+    </div>
+    <div class="post-share-name">音视频业务basic understandings</div>
+  </div>
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>音视频业务basic understandings</div>
+      <div>http://example.com/2026/06/26/音视频业务/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>RickyDuran</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">久违的六月总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" title="IMX6ULL-项目开发-Day8">
+                        <span class="hidden-mobile">IMX6ULL-项目开发-Day8</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments">
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"RickyDuran-zh/blog-comments","repo-id":"R_kgDOSX8oDA","category":"General","category-id":"DIC_kwDOSX8oDM4C8mNq","theme-light":"light","theme-dark":"light","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'light';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+<div class="widget-panel widget-panel--post" id="post-widget-panel">
+  <div class="widget-panel-inner">
+    <div class="widget-card widget-profile">
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/site/avatar.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+
+      <div class="widget-profile-stats">
+        <a href="/archives" class="widget-stat-item">
+          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-label">文章</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/tags" class="widget-stat-item">
+          <span class="widget-stat-num">9</span>
+          <span class="widget-stat-label">标签</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/categories" class="widget-stat-item">
+          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-label">分类</span>
+        </a>
+      </div>
+
+      <a href="https://github.com/RickyDuran-zh" target="_blank" rel="noopener" class="widget-follow-btn">
+        <i class="fa-brands fa-github"></i> Follow Me
+      </a>
+
+      
+      <div class="widget-social">
+        
+          
+            <a href="https://github.com/RickyDuran-zh" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
+        
+      </div>
+      
+    </div>
+
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
+      </div>
+    </div>
+
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-newspaper"></i> 最新文章
+      </h4>
+      <ul class="widget-list widget-recent-list">
+        
+        
+          <li>
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <span>&copy; RickyDuran&rsquo;s Blog</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/like-button.js"></script>
+<script src="/js/reading-progress.js"></script>
+<script src="/js/navbar-scroll.js"></script>
+<script src="/js/search-modal-fix.js"></script>
+<script src="/js/post-share.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  <!--
+  首页右侧 Widget 信息面板
+  嵌入页面内部，随页面一起滚动
+  仅在大屏非文章页显示
+
+  卡片顺序:
+    1. 博主信息
+    2. 公告 (编辑公告文字请修改下方 ANNOUNCEMENT 变量)
+    3. 最新文章
+    4. 分类
+    5. 标签云
+    6. 归档
+    7. 网站资讯
+
+  头像/名称/简介/社交链接: 修改 _config.fluid.yml 中 about 段落
+-->
+
+<div class="widget-panel" id="widget-panel">
+  <div class="widget-panel-inner">
+
+    <!-- 1. 博主信息卡片 -->
+    <div class="widget-card widget-profile">
+      <span class="widget-avatar-shell">
+        <img
+          class="widget-avatar"
+          src="/img/site/avatar.png"
+          alt="avatar"
+          onerror="this.style.display='none'"
+        />
+      </span>
+      <div class="widget-profile-info">
+        <p class="widget-name">RickyDuran</p>
+        <p class="widget-bio">To know yourself.</p>
+      </div>
+
+      <!-- 文章 / 标签 / 分类 统计 -->
+      <div class="widget-profile-stats">
+        <a href="/archives" class="widget-stat-item">
+          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-label">文章</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/tags" class="widget-stat-item">
+          <span class="widget-stat-num">9</span>
+          <span class="widget-stat-label">标签</span>
+        </a>
+        <span class="widget-stat-divider"></span>
+        <a href="/categories" class="widget-stat-item">
+          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-label">分类</span>
+        </a>
+      </div>
+
+      <!-- Follow Me 按钮 -->
+      <a href="https://github.com/RickyDuran-zh" target="_blank" rel="noopener" class="widget-follow-btn">
+        <i class="fa-brands fa-github"></i> Follow Me
+      </a>
+
+      
+      <div class="widget-social">
+        
+          
+            <a href="https://github.com/RickyDuran-zh" title="GitHub" target="_blank" rel="noopener" class="widget-social-link">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          
+        
+      </div>
+      
+    </div>
+
+    <!-- 2. 公告 -->
+    <div class="widget-card widget-announcement">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-bullhorn widget-announce-icon" aria-hidden="true"></i> 公告
+      </h4>
+      <div class="widget-announcement-text">
+        转码 or 读博 or 出道？不定期碎碎念 (`・ω・´)
+      </div>
+    </div>
+
+    <!-- 3. 最新文章 -->
+    <div class="widget-card widget-recent-posts">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-newspaper"></i> 最新文章
+      </h4>
+      <ul class="widget-list widget-recent-list">
+        
+        
+          <li>
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
+              </span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- 4. 分类 -->
+    
+    <div class="widget-card widget-categories">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-folder-open"></i> 分类
+      </h4>
+      <ul class="widget-list">
+        
+          <li>
+            <a href="/categories/IMX6ULL/">
+              <span class="widget-cat-name">IMX6ULL</span>
+              <span class="widget-cat-count">12</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E5%88%B7%E9%A2%98/">
+              <span class="widget-cat-name">刷题</span>
+              <span class="widget-cat-count">7</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/%E9%9A%8F%E7%AC%94/">
+              <span class="widget-cat-name">随笔</span>
+              <span class="widget-cat-count">5</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/RK3588S2/">
+              <span class="widget-cat-name">RK3588S2</span>
+              <span class="widget-cat-count">4</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/CPP/">
+              <span class="widget-cat-name">CPP</span>
+              <span class="widget-cat-count">3</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/Tools/">
+              <span class="widget-cat-name">Tools</span>
+              <span class="widget-cat-count">2</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
+              <span class="widget-cat-count">1</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+    
+
+    <!-- 5. 标签云（迷你版） -->
+    
+    <div class="widget-card widget-tags">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-hashtag"></i> 标签
+      </h4>
+      <div class="widget-tag-cloud">
+        
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
+            #技术
+          </a>
+        
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
+            #项目开发
+          </a>
+        
+          <a href="/tags/%E7%AE%97%E6%B3%95/" class="widget-tag-item" style="font-size: 0.9199999999999999rem">
+            #算法
+          </a>
+        
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
+            #生活
+          </a>
+        
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Tutorial
+          </a>
+        
+          <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%88%86%E4%BA%AB/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #工作流分享
+          </a>
+        
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #课程自学
+          </a>
+        
+          <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #八股
+          </a>
+        
+      </div>
+    </div>
+    
+
+    <!-- 6. 归档 -->
+    <div class="widget-card widget-archives">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-calendar-days"></i> 归档
+      </h4>
+      <ul class="widget-list">
+        
+        
+        
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 09 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 07 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 06 月</span>
+              <span class="widget-archive-count">10 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 05 月</span>
+              <span class="widget-archive-count">14 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 04 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+      </ul>
+      <a href="/archives" class="widget-more-link">
+        查看全部归档 <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </div>
+
+    <!-- 7. 网站资讯 -->
+    <div class="widget-card widget-site-info">
+      <h4 class="widget-title">
+        <i class="fa-solid fa-chart-pie"></i> 网站资讯
+      </h4>
+      <div class="widget-info-grid">
+        <div class="widget-info-item">
+          <span class="widget-info-value">36</span>
+          <span class="widget-info-label">文章</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">9</span>
+          <span class="widget-info-label">标签</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value">12</span>
+          <span class="widget-info-label">分类</span>
+        </div>
+        <div class="widget-info-item">
+          <span class="widget-info-value widget-info-running" id="site-running-days">--</span>
+          <span class="widget-info-label">运行天数</span>
+        </div>
+      </div>
+      
+      <div class="widget-info-footer">
+        <span>最后更新：2026-09-02</span>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var panel = document.getElementById('widget-panel');
+  if (!panel) return;
+  var isPostPage = Boolean(document.querySelector('.markdown-body'));
+  if (isPostPage) {
+    panel.remove();
+    return;
+  }
+
+  // 将 Widget 移入内容容器，作为 Flex 双栏的侧边栏
+  function placeWidget() {
+    var container = document.querySelector('.container.nopadding-x-md');
+    if (!container) return;
+
+    if (window.innerWidth >= 1200) {
+      // 大屏：移入容器末尾 → CSS Flex 并排
+      if (panel.parentNode !== container) {
+        container.appendChild(panel);
+      }
+      container.classList.add('has-widget');
+      panel.style.display = '';
+    } else {
+      // 小屏：放在主内容容器之后、页脚之前
+      container.classList.remove('has-widget');
+      if (panel.previousElementSibling !== container) {
+        container.insertAdjacentElement('afterend', panel);
+      }
+      panel.style.display = '';
+    }
+  }
+
+  // DOM 就绪后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', placeWidget);
+  } else {
+    placeWidget();
+  }
+  window.addEventListener('resize', placeWidget, { passive: true });
+
+  // 计算网站运行天数
+  (function() {
+    var el = document.getElementById('site-running-days');
+    if (!el) return;
+    var firstPostDate = '2026-04-28';
+    if (!firstPostDate) { el.textContent = '--'; return; }
+    var start = new Date(firstPostDate);
+    var now = new Date();
+    var days = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    if (days >= 365) {
+      var years = Math.floor(days / 365);
+      var remain = days % 365;
+      el.textContent = years + '年' + (remain > 30 ? Math.floor(remain / 30) + '月' : '');
+    } else if (days >= 30) {
+      el.textContent = Math.floor(days / 30) + '月';
+    } else {
+      el.textContent = days + '天';
+    }
+  })();
+})();
+</script>
+
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

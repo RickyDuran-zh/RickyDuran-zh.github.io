@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
 <meta property="og:description" content="概述 EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志   P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion) 目标：拍照并检测物体运动  USB 摄像头连接，硬件确认1234lsusb                 # Bus 001 Device 005: ID 046d:0836 Logitech, Inc.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/imx6ull.png">
+<meta property="og:image" content="http://example.com/img/posts/shared/imx6ull.png">
 <meta property="article:published_time" content="2026-06-13T13:24:39.000Z">
-<meta property="article:modified_time" content="2026-08-01T08:14:02.454Z">
+<meta property="article:modified_time" content="2026-09-25T02:25:23.158Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/imx6ull.png">
+<meta name="twitter:image" content="http://example.com/img/posts/shared/imx6ull.png">
   
   
   
@@ -72,7 +72,11 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
+<link rel="stylesheet" href="/fonts/lxgw-wenkai-screen/lxgwwenkaigbscreen.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
 
 
 
@@ -304,7 +308,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/imx6ull.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/shared/imx6ull.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -395,7 +399,7 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>EdgeGuard-6ULL: 基于 Logitech B525 的摄像头 AI 视觉  P1-P3 开发日志</p>
 </blockquote>
-<p><img src="/../img/Day7/architecture.png" alt="视觉与状态逻辑架构图"></p>
+<p><img src="/../img/posts/2026-06-13/01-architecture.png" alt="视觉与状态逻辑架构图"></p>
 <h3 id="P1-USB摄像头-运动检测-拍照-检测画面变化-Motion"><a href="#P1-USB摄像头-运动检测-拍照-检测画面变化-Motion" class="headerlink" title="P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)"></a>P1 USB摄像头 + 运动检测(拍照 检测画面变化 Motion)</h3><blockquote>
 <p>目标：拍照并检测物体运动</p>
 </blockquote>
@@ -404,15 +408,15 @@
 <h3 id="P2-ncnn-人脸检测"><a href="#P2-ncnn-人脸检测" class="headerlink" title="P2 ncnn 人脸检测"></a>P2 ncnn 人脸检测</h3><blockquote>
 <p>目标：P1 运动触发后 ——&gt; P2 ncnn 神经网络判断画面中是否存在人脸</p>
 </blockquote>
-<p><img src="/../img/Day7/p2.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
+<p><img src="/../img/posts/2026-06-13/02-face-detection-flow.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
 <h4 id="安装部署流程"><a href="#安装部署流程" class="headerlink" title="安装部署流程"></a>安装部署流程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 安装 g++ 交叉编译器（和已有的 gcc 7.5 配套）编译 CPP 文件</span><br><span class="hljs-built_in">sudo</span> apt install -y g++-arm-linux-gnueabihf<br><span class="hljs-comment"># 2 clone ncnn 腾讯 神经网络推理框架 优化神经网络模型在嵌入式等 ARM 设备上占用更少内存的同时更快运行</span><br><span class="hljs-built_in">cd</span> ~<br>git <span class="hljs-built_in">clone</span> https://gitee.com/nihui/ncnn.git<br><span class="hljs-built_in">cd</span> ncnn<br><span class="hljs-built_in">mkdir</span> build-arm &amp;&amp; <span class="hljs-built_in">cd</span> build-arm<br>cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake \<br>      -DCMAKE_BUILD_TYPE=Release \<br>      -DNCNN_VULKAN=OFF \<br>      -DNCNN_BUILD_TOOLS=OFF \<br>      -DNCNN_BUILD_EXAMPLES=OFF \<br>      -DNCNN_BUILD_BENCHMARK=OFF \<br>        ..<br>make -j4<br><span class="hljs-built_in">ls</span> -la src/libncnn.a <span class="hljs-comment"># 静态链接库</span><br><span class="hljs-comment"># 3 获取依赖的头文件 stb_image.h（单头文件 JPEG 解码器）</span><br><span class="hljs-built_in">cd</span> ~<br><span class="hljs-built_in">mkdir</span> stb<br><span class="hljs-built_in">cd</span> stb<br>wget https://raw.githubusercontent.com/nothings/stb/master/stb_image.h<br><span class="hljs-comment"># 4 编译</span><br><span class="hljs-built_in">cd</span> app &amp;&amp; make edgeguard_visiond_face NCNN_DIR=~/ncnn STB_DIR=~/stb<br><span class="hljs-comment"># 5 clone 人脸检测模型</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/edgeguard/models/ <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ./RFB-320.param RFB-320.bin /etc/edgeguard/models/<br><span class="hljs-comment"># 6 重启服务</span><br>systemctl daemon-reload<br>systemctl restart edgeguard-visiond<br></code></pre></td></tr></table></figure>
 <h4 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="实现原理"></a>实现原理</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Text"># face_detect.cpp 新增<br>① face_detect_init()<br>     → 打开 RFB-320.param（网络结构）<br>     → 打开 RFB-320.bin（训练好的权重）<br>     → ncnn::Net::load_param() + load_model()<br>     → 模型常驻内存<br><br>② face_detect_run(jpeg, len, &amp;count)<br>     → stb_image JPEG解码 → RGB像素数组<br>     → ncnn::Mat::from_pixels() 包装<br>     → resize_bilinear() 缩放到 320×240<br>     → 归一化 [0,255] → [-1,1]<br>     → ncnn 神经网络前向推理（~400ms）<br>     → 得到 scores（置信度）+ boxes（边框坐标）<br>     → NMS 去重（IoU&gt;0.4 的框合并）<br>     → 统计 conf≥0.7 的框数 → *count<br></code></pre></td></tr></table></figure>
 <h3 id="P3-人脸识别登陆系统"><a href="#P3-人脸识别登陆系统" class="headerlink" title="P3 人脸识别登陆系统"></a>P3 人脸识别登陆系统</h3><blockquote>
 <p>目标：在 P2 基础上叠加人脸识别，实现“刷脸自动登录</p>
 </blockquote>
-<p><img src="/../img/Day7/p3_architecture.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
+<p><img src="/../img/posts/2026-06-13/03-face-detection-architecture.png" alt="P1 -&gt; P2 人脸检测联动逻辑框图"></p>
 <h4 id="安装部署流程-1"><a href="#安装部署流程-1" class="headerlink" title="安装部署流程"></a>安装部署流程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 clone 人脸识别模型 模型结构和权重 模型来源于 ncnn 官方 assets</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /mnt/mobilefacenet.param mobilefacenet.bin /etc/edgeguard/models/<br><span class="hljs-comment"># 2 编译人脸识别和检测的 visiond 服务以及人脸注册工具</span><br>make edgeguard_visiond_face NCNN_DIR=/home/rickyduran/ncnn JPEG_DIR=/opt/libjpeg-arm<br>make face_register NCNN_DIR=/home/rickyduran/ncnn JPEG_DIR=/opt/libjpeg-arm<br><span class="hljs-comment"># 3 注册人脸</span><br>./face_register rickyduran /tmp/myface.jpg <br><span class="hljs-comment"># 输出: [face_register] SUCCESS — &#x27;rickyduran&#x27; enrolled</span><br><span class="hljs-comment">#       [face_register] database: /etc/edgeguard/face_db.json</span><br></code></pre></td></tr></table></figure>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/Day7/p1_camera.png" alt="P1 Web 界面实时快照显示"></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../img/posts/2026-06-13/04-face-camera.png" alt="P1 Web 界面实时快照显示"></p>
 
                 
               </div>
@@ -596,7 +600,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -608,17 +612,17 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -668,91 +672,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1090,7 +1094,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1103,17 +1107,17 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1155,91 +1159,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1272,41 +1276,41 @@
           <li>
             <a href="/categories/%E9%9A%8F%E7%AC%94/">
               <span class="widget-cat-name">随笔</span>
-              <span class="widget-cat-count">4</span>
+              <span class="widget-cat-count">5</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/RK3588S2/">
               <span class="widget-cat-name">RK3588S2</span>
-              <span class="widget-cat-count">3</span>
+              <span class="widget-cat-count">4</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/CPP/">
               <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">3</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
-              <span class="widget-cat-count">1</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1323,11 +1327,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1335,11 +1339,15 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
             #生活
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
@@ -1347,8 +1355,8 @@
             #工作流分享
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #Language Philosophy
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #课程自学
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1368,6 +1376,20 @@
         
         
         
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 09 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
         
           <li>
             <a href="/archives">
@@ -1410,15 +1432,15 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">30</span>
+          <span class="widget-info-value">36</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">8</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1428,7 +1450,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-07-24</span>
+        <span>最后更新：2026-09-02</span>
       </div>
       
     </div>

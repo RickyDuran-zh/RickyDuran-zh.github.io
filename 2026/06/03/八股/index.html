@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,20 +19,20 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言(C&#x2F;C++)Static 关键字驱动inode和cdev之间的关系？inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。 在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。 cdev 是驱动层面的概">
+    <meta name="description" content="概述这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。 语言(C&#x2F;C++)1 封装、继承、多态的概念？（经纬恒润）封装：把数据和操作数据的函数包在类里，对外只暴露必要接口，隐藏实现细节。好处是降低耦合、提高安全性，比如成员变量私有，只通过 getter&#x2F;setter 访问。 继承">
 <meta property="og:type" content="article">
 <meta property="og:title" content="八股">
 <meta property="og:url" content="http://example.com/2026/06/03/%E5%85%AB%E8%82%A1/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言(C&#x2F;C++)Static 关键字驱动inode和cdev之间的关系？inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。 在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。 cdev 是驱动层面的概">
+<meta property="og:description" content="概述这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。 语言(C&#x2F;C++)1 封装、继承、多态的概念？（经纬恒润）封装：把数据和操作数据的函数包在类里，对外只暴露必要接口，隐藏实现细节。好处是降低耦合、提高安全性，比如成员变量私有，只通过 getter&#x2F;setter 访问。 继承">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/2026-7-27/bagu.png">
+<meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-08-01T08:14:18.128Z">
+<meta property="article:modified_time" content="2026-10-01T03:45:48.205Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/2026-7-27/bagu.png">
+<meta name="twitter:image" content="http://example.com/img/posts/2026-06-03/cover.png">
   
   
   
@@ -71,7 +71,11 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
+<link rel="stylesheet" href="/fonts/lxgw-wenkai-screen/lxgwwenkaigbscreen.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
 
 
 
@@ -303,7 +307,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/2026-7-27/bagu.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/2026-06-03/cover.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -332,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          10k 字
         
       </span>
     
@@ -343,7 +347,7 @@
         
         
         
-          12 分钟
+          88 分钟
         
       </span>
     
@@ -391,23 +395,72 @@
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。</p>
-<h2 id="语言-C-C"><a href="#语言-C-C" class="headerlink" title="语言(C&#x2F;C++)"></a>语言(C&#x2F;C++)</h2><h3 id="Static-关键字"><a href="#Static-关键字" class="headerlink" title="Static 关键字"></a>Static 关键字</h3><h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="inode和cdev之间的关系？"><a href="#inode和cdev之间的关系？" class="headerlink" title="inode和cdev之间的关系？"></a>inode和cdev之间的关系？</h3><p><em>inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。</em></p>
-<p><em>在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。</em></p>
-<p><em>cdev 是驱动层面的概念 代表内核中一个具体的字符设备对象包含了设备号、操作函数集。</em></p>
-<h3 id="理解设备树的解析过程，如何与Platform总线联动？"><a href="#理解设备树的解析过程，如何与Platform总线联动？" class="headerlink" title="理解设备树的解析过程，如何与Platform总线联动？"></a>理解设备树的解析过程，如何与Platform总线联动？</h3><p><em>阶段1：dts → dtb 通过dtc编译工具编译成二进制的设备树文件 便于在内核启动时快速加载</em><br><em>内核接收并展开 dtb uboot 将 dtb 文件所在的内存地址传递给 Linux 内核 内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体</em></p>
-<p><em>阶段2：of_platform_populate函数遍历设备树中的所有节点  并由内核决定是否被创建成一个platform_device结构体</em> </p>
-<p><em>阶段3：Platform总线驱动进行匹配与联动 driver.of_match_table和device.of_node→compatible       匹配(match函数)成功后执行probe函数 相关的硬件初始化代码</em></p>
-<h3 id="怎么理解-Pinctrl-子系统和-GPIO-子系统？"><a href="#怎么理解-Pinctrl-子系统和-GPIO-子系统？" class="headerlink" title="怎么理解 Pinctrl 子系统和 GPIO 子系统？"></a>怎么理解 Pinctrl 子系统和 GPIO 子系统？</h3><p><em>管理引脚并自动完成初始化</em></p>
-<p><em>引脚控制器 管理SoC所有通用输入输出引脚的多路复用(MUX)功能、电气特性、引脚配置</em></p>
-<h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。</p>
+<h2 id="语言-C-C"><a href="#语言-C-C" class="headerlink" title="语言(C&#x2F;C++)"></a>语言(C&#x2F;C++)</h2><h3 id="1-封装、继承、多态的概念？（经纬恒润）"><a href="#1-封装、继承、多态的概念？（经纬恒润）" class="headerlink" title="1 封装、继承、多态的概念？（经纬恒润）"></a>1 封装、继承、多态的概念？（经纬恒润）</h3><p><em>封装：把数据和操作数据的函数包在类里，对外只暴露必要接口，隐藏实现细节。好处是降低耦合、提高安全性，比如成员变量私有，只通过 getter&#x2F;setter 访问。</em></p>
+<p><em>继承：子类复用父类的属性和方法，实现代码复用和层次化设计。比如 Derived : public Base，子类自动拥有父类能力，还能扩展自己的。</em></p>
+<p><em>多态：同一个接口根据对象的实际类型执行不同的实现。父类指针指向子类对象时，调用虚函数会执行子类的版本，运行时的动态绑定。</em></p>
+<h3 id="2-虚函数的实现和底层机制？（经纬恒润）"><a href="#2-虚函数的实现和底层机制？（经纬恒润）" class="headerlink" title="2 虚函数的实现和底层机制？（经纬恒润）"></a>2 虚函数的实现和底层机制？（经纬恒润）</h3><p><em>每个含有虚函数的类，编译器都会为它生成一张虚函数表(vtable，本质上是一个函数指针数组，放在 .rodata 只读数据段);在每个该类的对象里，会隐式插入一个虚表的指针(vptr)指向这张表(头部插入)。调用虚函数时，通过 vptr 找到 vtable，再取对应函数地址调用，这就是动态绑定。</em></p>
+<h3 id="3-map-unordered-map-怎么解决哈希冲突？（经纬恒润）"><a href="#3-map-unordered-map-怎么解决哈希冲突？（经纬恒润）" class="headerlink" title="3 map &#x2F; unordered_map + 怎么解决哈希冲突？（经纬恒润）"></a>3 map &#x2F; unordered_map + 怎么解决哈希冲突？（经纬恒润）</h3><p><em>map 底层是红黑树(平衡二叉搜索树)，有序，增筛改查都是 O(logn)级别，内存开销较小。适用于需要有序遍历的场景。</em></p>
+<p><em>unordered_map 底层是哈希表(数组 + 链表&#x2F;红黑树)，无序，增筛改查平均 O(1) 最坏 O(n)，内存开销较大(桶数组+链表指针)。适用于只做快速查找不关心顺序的场景。</em></p>
+<p><em>哈希冲突：两个不同的 key，经过哈希函数计算出了同一个桶下标。链地址法：每个桶挂一个链表，冲突的 key 塞进同一个链表。实现简单，但链表长时会退化成 O(n)。负载因子(元素数 &#x2F; 桶数)可 &gt; 1。开放定址法：冲突时按照某种探测序列找下一个空槽。线性探测，二次探测，双重哈希。</em></p>
+<h2 id="Linux-系统编程"><a href="#Linux-系统编程" class="headerlink" title="Linux 系统编程"></a>Linux 系统编程</h2><h3 id="1-kill、kill-9"><a href="#1-kill、kill-9" class="headerlink" title="1 kill、kill-9"></a>1 kill、kill-9</h3><p><em>kill <PID> 给指定 PID 发信号，默认发 SIGTERM(15)，表示请求进程正常退出，进程可以捕获并进行清理。killall <name> 表示按进程名杀。pkill <pattern> 表示按模式匹配。kill -9 发 SIGKILL(9) 表示直接处死，进程无法捕获、无法忽略，由内核直接终止。</em></p>
+<h3 id="2-select、poll、epoll？-epoll-的-ET-和-LT？"><a href="#2-select、poll、epoll？-epoll-的-ET-和-LT？" class="headerlink" title="2 select、poll、epoll？ epoll 的 ET 和 LT？"></a>2 select、poll、epoll？ epoll 的 ET 和 LT？</h3><p><em>三者都是 IO 多路复用——用同一个线程同时监控多个 fd，谁就绪就处理谁。区别在于 select、poll 是轮询，epoll 是事件驱动。</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">select</span><span class="hljs-params">(<span class="hljs-type">int</span> nfds, fd_set *readfds, fd_set *writefds,</span></span><br><span class="hljs-params"><span class="hljs-function">           fd_set *exceptfds, <span class="hljs-keyword">struct</span> timeval *timeout)</span></span>;<br></code></pre></td></tr></table></figure>
+<p><em>select。fd_set 表示要监控的 fd 集合，每次调用都要把 fd_set 从用户态拷贝到内核态。内核遍历所有 fd 检查哪个就绪，就绪后修改 fd_set 返回就绪数量，用户态再遍历 fd_set 找到就绪的 fd。性能上的缺点在于，fd 数量限制为 1024；每次调用都要全量拷贝；内核轮询遍历所有 fd，返回到用户态后还要再遍历一次。</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">poll</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pollfd *fds, <span class="hljs-type">nfds_t</span> nfds, <span class="hljs-type">int</span> timeout)</span></span>;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">pollfd</span> &#123;<br>    <span class="hljs-type">int</span>   fd;       <span class="hljs-comment">// 文件描述符</span><br>    <span class="hljs-type">short</span> events;   <span class="hljs-comment">// 关心的事件</span><br>    <span class="hljs-type">short</span> revents;  <span class="hljs-comment">// 实际发生的事件</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><em>poll。poll 用 pollfd 数组代替了 fd_set。同样是每次全量拷贝到内核，内核轮询遍历所有 fd，就绪后修改 revents 字段。没有了 1024 的限制，事件和返回分离(events &#x2F; revents)。但依然是全量拷贝。</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs CPP"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_create</span><span class="hljs-params">(<span class="hljs-type">int</span> size)</span></span>;                          <span class="hljs-comment">// 创建 epoll 实例</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_ctl</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-type">int</span> op, <span class="hljs-type">int</span> fd,              <span class="hljs-comment">// 增删改监控的 fd</span></span></span><br><span class="hljs-params"><span class="hljs-function">              <span class="hljs-keyword">struct</span> epoll_event *event)</span></span>;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">epoll_wait</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-keyword">struct</span> epoll_event *events, <span class="hljs-comment">// 等待事件</span></span></span><br><span class="hljs-params"><span class="hljs-function">               <span class="hljs-type">int</span> maxevents, <span class="hljs-type">int</span> timeout)</span></span>;<br></code></pre></td></tr></table></figure>
+<p><em>epoll(Linux 特有)。epoll 把 fd 挂到内核的红黑树上，只需注册一次，不用每次全量拷贝。内核用回调机制，fd 就绪时主动把 fd 放进就绪链表。epoll_wait 只返回就绪的 fd，直接拿就绪链表。没有 fd 的数量限制；零拷贝；就绪检测走回调 O(1);只返回就绪的 fd，用户态无需再遍历。</em></p>
+<p><em>epoll 的 LT 和 ET 模式。LT 是水平触发，只要缓冲区还有数据，每次 epoll_wait 都会通知。ET 是边沿触发，只有在 fd 状态发生变化时通知一次，不管读没读完都不再通知。</em></p>
+<h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><h3 id="1-内核模块（完结）"><a href="#1-内核模块（完结）" class="headerlink" title="1. 内核模块（完结）"></a>1. 内核模块（完结）</h3><blockquote>
+<p>什么是内核？为什么要引入内核模块？内核模块的数据组织格式？ELF 文件的构成？符号导出？</p>
+</blockquote>
+<p><em>内核是操作系统的核心，是基于硬件的第一层软件扩充，提供操作系统最基本的功能。Linux 采用宏内核架构，其缺点在于修改或增加内核某个功能的时候都需要重新编译一遍内核。因此引入内核模块。</em><br><img src="/../img/posts/2026-06-03/04-kernel.png" alt="内核架构"><br><em>内核模块就是实现了某个功能的一段内核代码，内核运行的过程中可以加载到内核中，从而动态地增加内核的功能。更专业的来说，内核模块(Loadable Kernel Module)，是一种在内核运行时加载一组目标代码来实现某个特定功能的机制。模块本身不被编译入内核镜像，这控制了内核的大小，一旦被加载它就和内核中的其他部分完全一样。</em></p>
+<p><em>.ko 文件在数据组织上是 ELF 格式，一种普通的可重定位目标文件。起始地址处是 ELF 头部(ELF Header)，可以通过 readelf 工具查看详细的头部信息，它记录了程序头表和节区头部头表的偏移地址。节区头部表(Section Header Table)保存了不同节的基本属性结构。可以通过 readelf -S 读取节区头部的详细信息。编译器、链接器、装载器都是依靠它来定位和访问各个节的属性的。</em><br><img src="/../img/posts/2026-06-03/05-elf.png" alt="ELF文件格式示例"><br><em>符号指的是在内核模块中使用 EXPORT_SYMBOL 声明的函数和变量，当模块被装入内核后，所导出的符号都会记录在公关内核符号表上。如果其他模块想要利用我们模块中的符号，就可以导出。modprobe 相当于多次的 insmod，装入指定的模块及其依赖。</em></p>
+<h3 id="2-环境搭建（完结）"><a href="#2-环境搭建（完结）" class="headerlink" title="2. 环境搭建（完结）"></a>2. 环境搭建（完结）</h3><blockquote>
+<p>驱动开发的前期准备？</p>
+</blockquote>
+<p><em>设备驱动是具有独立功能的程序，可以被单独编译但无法独立运行。运行时要链接到内核作为内核的一部分在内核空间运行，因此驱动必须要在对应的内核版本上进行编译。需要知道内核版本(使用 uname -a 查看内核版本)，并准备好该版本的内核源码，使用交叉编译工具编译内核源码(准备好相关的工具)；然后依赖编译的内核源码(顶层 Makefile)编译驱动模块以及设备树文件。通过 scp 或者 NFS 工具传递给开发板。</em></p>
+<h3 id="3-字符设备驱动（完结）"><a href="#3-字符设备驱动（完结）" class="headerlink" title="3. 字符设备驱动（完结）"></a>3. 字符设备驱动（完结）</h3><blockquote>
+<p>什么是字符设备？如何写一个字符设备驱动框架？读写一个设备文件背后执行的操作是什么？</p>
+</blockquote>
+<p><em>字符设备是指以字节&#x2F;字符来读写数据的设备，通常不支持随机存取数据，所以在实现时大多不使用缓存器(流式)。</em><br><img src="/../img/posts/2026-06-03/06-cdev.png" alt="VFS-虚拟文件系统"><br><em>内核将字符设备抽象成 cdev-字符设备对象，记录了设备号、操作函数集。在添加字符设备时，就是将该对象注册到内核中，通过创建一个文件 inode 绑定对象的 cdev。进程打开文件时会通过返回的 fd 创建一个 file 对象，并通过 inode 找到 cdev，将 file 的 f_op 直接指向 cdev 的 f_op。注意 inode 和 file 都能表示对文件的抽象，但 inode 是持久化的，file 则是临时的。下面是 cdev 的具体字段构成：</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">cdev</span> &#123;</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">kobject</span> <span class="hljs-title">kobj</span>;</span> <span class="hljs-comment">// 内核对象</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">module</span> *<span class="hljs-title">owner</span>;</span><br>   <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">file_operations</span> *<span class="hljs-title">ops</span>;</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list_head</span> <span class="hljs-title">list</span>;</span><br>   <span class="hljs-type">dev_t</span> dev;<br>   <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> count;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><em>dev_t 数据类型表示设备号。u32数据类型，高12位是主设备号，低20位是次设备号。两种方式分配设备号：静态和动态。静态分配使用 register_chrdev_region 函数；动态分配使用 alloc_chrdev_region 函数申请设备号。使用 unregister_chrdev_region 函数释放掉设备号。</em></p>
+<p><em>f_op 包含了一系列的函数指针，是一组标准化的调用接口，对下层进行了屏蔽，由下层具体的驱动程序来规定相应的对硬件的操作。使用 cdev_init 将 f_op 关联 cdev，cdev_add 将 cdev 加入到内核的哈希表中。</em></p>
+<p><em>编写驱动时需要注册加载和卸载这两种函数。通过 module_init 和 module_exit 这两个入口和出口函数传参进行注册，传入具体要注册的加载和卸载函数。当使用 insmod&#x2F;modprobe 命令时 init 函数会被调用。当使用 rmmod 命令时 exit 函数会被调用。</em></p>
+<p><img src="/../img/posts/2026-06-03/03-chardev.png" alt="字符设备驱动框架"></p>
+<h3 id="4-设备模型（完结）"><a href="#4-设备模型（完结）" class="headerlink" title="4. 设备模型（完结）"></a>4. 设备模型（完结）</h3><blockquote>
+<p>为什么要引入设备驱动模型？ &#x2F;sys 记录了些什么，你可以获取什么信息，&#x2F;sys 目录的作用是什么？设备驱动模型？</p>
+</blockquote>
+<p><em>硬件资源如果写在驱动里，如果接口变换就需要重新修改驱动。为了避免这种耦合，Linux 引入设备驱动模型分层，将代码分成设备和驱动。设备负责提供硬件资源，驱动则负责使用这些硬件资源，并通过总线关联起来。</em><br><img src="/../img/posts/2026-06-03/07-sys.png" alt="&#x2F;sys目录"><br><em>&#x2F;sys 目录记录了各个设备之间的关系(内核导出到用户空间的)。&#x2F;sys&#x2F;bus 下的每个子目录都是注册好了的总线类型，每个子目录包含 devices 和 drivers 两个文件夹。devices 存放属于该总线类型的所有设备，都是符号链接指向 &#x2F;sys&#x2F;devices 下的真正设备。&#x2F;sys&#x2F;devices 是全局设备结构体系，是内核对系统中所有设备的分层次表达模型。&#x2F;sys&#x2F;class 包含所有注册在 kernel 里面的设备类型，按照设备功能分类的设备模型</em>。<br><img src="/../img/posts/2026-06-03/08-bus.png" alt="“总线-设备-驱动”模型"><br><em>总线连接处理器和设备，它们依赖总线去进行通信。除了 i2c、spi 这些物理总线(它们实实在在的充当了外部输入设备和处理器的 bridge)，还存在虚拟总线(Platform)去管理那些不依赖具体物理总线的设备。总线驱动则负责实现总线的各种行为，内核把它抽象成 bus_type，管理着两个链表记录挂载在该总线上的设备和驱动，并负责他们的匹配。使用 bus_register 和 bus_unregister 来注册和注销总线，新注册的总线可以在 &#x2F;sys&#x2F;bus 目录下观察到。其中 match 这个函数指针必须实现，定义了总线下设备和驱动匹配的规则。</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">bus_type</span> &#123;</span><br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>              *name;<br>    <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute_group</span> **<span class="hljs-title">bus_groups</span>;</span><br>    <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute_group</span> **<span class="hljs-title">dev_groups</span>;</span><br>    <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute_group</span> **<span class="hljs-title">drv_groups</span>;</span><br><br>    <span class="hljs-type">int</span> (*match)(<span class="hljs-keyword">struct</span> device *dev, <span class="hljs-keyword">struct</span> device_driver *drv);<br>    <span class="hljs-type">int</span> (*uevent)(<span class="hljs-keyword">struct</span> device *dev, <span class="hljs-keyword">struct</span> kobj_uevent_env *env);<br>    <span class="hljs-type">int</span> (*probe)(<span class="hljs-keyword">struct</span> device *dev);<br>    <span class="hljs-type">int</span> (*remove)(<span class="hljs-keyword">struct</span> device *dev);<br><br>    <span class="hljs-type">int</span> (*suspend)(<span class="hljs-keyword">struct</span> device *dev, <span class="hljs-type">pm_message_t</span> state);<br>    <span class="hljs-type">int</span> (*resume)(<span class="hljs-keyword">struct</span> device *dev);<br><br>    <span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dev_pm_ops</span> *<span class="hljs-title">pm</span>;</span><br><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">subsys_private</span> *<span class="hljs-title">p</span>;</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><em>内核将设备抽象为 device，驱动抽象为 device_driver。设备含有 of_node 字段(指向 device_node)，设备树使能后，总线会将驱动的 of_match_table 以及设备树的 compatible 属性进行比较，将匹配的节点保存到该变量中。驱动成功配对设备后会执行回调函数 probe 完成设备的初始化操作，在设备从拔出时则会回调 remove。内核将 &#x2F;sys 目录下的文件抽相成 attribute，我们可以读取或者修改这些属性文件进而控制我们的设备。总线、设备、驱动都包含有attribute_group这个结构体，可以利用它进行初始化避免一个一个注册 attribute。</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute</span> &#123;</span><br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>              *name;<br>    <span class="hljs-type">umode_t</span>                 mode;<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute_group</span> &#123;</span><br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span>              *name;<br>    <span class="hljs-type">umode_t</span>                 (*is_visible)(<span class="hljs-keyword">struct</span> kobject *,<br>                        <span class="hljs-keyword">struct</span> attribute *, <span class="hljs-type">int</span>);<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute</span>        **<span class="hljs-title">attrs</span>;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">bin_attribute</span>    **<span class="hljs-title">bin_attrs</span>;</span><br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">device_attribute</span> &#123;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">attribute</span>        <span class="hljs-title">attr</span>;</span><br>    <span class="hljs-type">ssize_t</span> (*show)(<span class="hljs-keyword">struct</span> device *dev, <span class="hljs-keyword">struct</span> device_attribute *attr,<br>            <span class="hljs-type">char</span> *buf);<br>    <span class="hljs-type">ssize_t</span> (*store)(<span class="hljs-keyword">struct</span> device *dev, <span class="hljs-keyword">struct</span> device_attribute *attr,<br>            <span class="hljs-type">const</span> <span class="hljs-type">char</span> *buf, <span class="hljs-type">size_t</span> count);<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><img src="/../img/posts/2026-06-03/09-bus-type.png" alt="总线、设备、驱动的数据结构关系"><br><em>在单片机中如果要读取某个寄存器的值可能需要加入一些新的代码并重新编译，这在 linux 下显然并不现实。linux 提供了诸如 DEVICE_ATTR 宏、device_create_file、device_remove_file(这里以 device 为例)这些 api 去快速注册和注销一个（设备）属性文件。其中 show、store 这两个函数分别对应着用户层的 cat 和 echo 命令。</em><br><em>你可以在 Linux 中很轻易的创建自己的虚拟总线，并在上面挂载设备和驱动。观察 &#x2F;sys 目录的变化以及内核打印的日志信息，你可以清晰的理解总线是怎么管理设备和驱动的，设备和驱动如何进行匹配的，你也可以调用相关的属性文件 api 轻易地创建属于设备和驱动的属性文件，并通过 shell 对这些属性文件进行修改。</em></p>
+<h3 id="5-平台设备驱动（完结）"><a href="#5-平台设备驱动（完结）" class="headerlink" title="5. 平台设备驱动（完结）"></a>5. 平台设备驱动（完结）</h3><p><em>第四节讨论的总线和 soc 中的物理总线概念上来说并不严格相等，对于 led、rtc 时钟、按键等不需要特殊时序的设备来说，并没有对应的物理总线，由此引入虚拟总线-平台总线(platform bus)。对应的还有 platform_device、platform_driver，它们分别继承了 device、driver。内核用 platform_bus_type 来描述平台总线，改总线在内核启动时自动进行注册。platform_match api 负责实现了平台总线和平台设备的匹配过程，平台总线提供了四种匹配方式(设备树机制、ACPI 匹配模式、id_table 方式、字符串比较)，虽然五花八门但基本上都是比较一下设备和驱动的某个成员字符串是否相同。</em><br><img src="/../img/posts/2026-06-03/10-platform.png" alt="id_table 匹配方式"><br><em>上图展示了平台总线匹配方式中的 id_table 的匹配机制。简单来说定义平台驱动时需要提供一个 id_table(指向platform_device_id) 的数组,该数组说明了当前驱动可以支持的设备。加载驱动时 match api 如果发现 id_table 非空的话就会去进行字符串的比较(该表和平台设备)。一旦匹配，就会把匹配的项赋值给 id_entry。</em><br><em>platform_device 使用结构体 resource 来抽象表示硬件信息，而软件信息可以利用设备结构体 device 中的成员 platform_data(void)进行保存。在驱动和设备匹配后，probe 的回调函数内部通常会调用 platform_get_resource，dev_get_platdata 等 api 获取平台设备提供的 resource 或软件信息。</em><br><em>编写并注册平台设备和驱动的基本思路：将描述硬件资源相关的信息以及寄存器偏移等软相关的信息抽象并全部塞入平台设备中，注册平台设备；驱动主要负责实现 probe 函数，完成提取资源并注册创建字符设备(以字符设备为例)。</em></p>
+<h3 id="6-设备树（完结）"><a href="#6-设备树（完结）" class="headerlink" title="6. 设备树（完结）"></a>6. 设备树（完结）</h3><p><em>linux3.x 以后的版本引入了设备树，用来描述硬件平台的板级细节。DTS 即是所谓的设备树源文件，是一种 ASCII 文本格式的设备树描述，正如它的名字一样，硬件信息以节点的形式被树状组织起来，最顶部的根节点以”&#x2F;{}”表示，一个大括号就表示了一个节点。节点可以进行相互嵌套也可以通过”&amp;”对已有的节点进行追加内容。下面展示了节点的基本格式，其中 unit-address 需要和 reg 属性值保持一致(如果有该属性的话)，同级节点可以取相同的名字。</em></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Text">node-name@unit-address&#123;<br>    属性1 = …<br>    属性2 = …<br>    属性3 = …<br>    子节点…<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><em>节点包含属性信息，这些属性信息就是要传递到内核的板级硬件描述信息。驱动中存在一些 api 用于获取这些信息。重要的属性包括 compatible(设备树中每一个代表了设备的节点都需要有该属性，它是驱动匹配时的重要参考), status, #address-cells, #size-cells(这两个属性决定了子节点 reg 属性的构成)。另外有一个特殊的子节点 chosen，它主要用于给内核传递参数，还可用作 uboot 向 linux 内核传递配置参数的”通道”。</em></p>
+<p><em>内核提供了一组函数用于从设备节点获取资源，以 of_ 开头返回指向 device_node 节点的指针。得到节点后通过另外一组 of 函数从 device_node 中获取设备节点的属性信息。</em></p>
+<p><em>下面的例子展现了设备树的解析过程，以及它是如何与 Platform 总线联动的，将前面的知识点完整地串联了起来。</em></p>
+<p><em>阶段1：dts → dtb。通过 dtc 编译工具编译成了二进制的设备树文件，便于在内核启动时快速加载。内核接收并展开 dtb：uboot 将 dtb 文件所在的内存地址传递给 linux 内核，内核解析 dtb 文件将其中的每一个设备节点都转换成一个对应的 device_node 结构体。</em></p>
+<p><em>阶段2：of_platform_populate 函数遍历设备树中的所有节点，并由内核决定是否被创建成一个 platform_device 结构体。</em> </p>
+<p><em>阶段3：Platform 总线驱动进行匹配与联动 driver.of_match_table(指向 of_device_id 数组) 和 device.of_node→compatible 匹配(match函数)成功后执行 probe 函数完成相关的硬件初始化操作(这种匹配方式是设备树匹配要和上一小节中的区分开来)。</em></p>
+<h3 id="7-Pinctrl-子系统-和-GPIO-子系统（完结）"><a href="#7-Pinctrl-子系统-和-GPIO-子系统（完结）" class="headerlink" title="7. Pinctrl 子系统 和 GPIO 子系统（完结）"></a>7. Pinctrl 子系统 和 GPIO 子系统（完结）</h3><p><em>一个芯片引脚通常可以作为多个片上外设的引脚，我们使用某一个外设时通常要先去配置引脚复用和设置引脚的属性。Pinctrl 子系统就是用来帮助我们管理芯片引脚并自动完成引脚初始化的。这一部分在设备树的 iomuxc 节点下，我们可以在 imouxc 节点中追加不同内容，创建 pinctrl 子节点作为不同的初始引脚组。</em></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">pinctrl-names</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 定义引脚状态</span><br>    pinctrl<span class="hljs-number">-0</span> = <span class="hljs-params">&lt;<span class="hljs-variable">&amp;pinctrl_hog_1</span>&gt;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 第 i 中状态的具体引脚配置</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_hog_1:</span> <span class="hljs-title class_">hoggrp-1</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_UART1_RTS_B__GPIO1_IO19   <span class="hljs-number">0x17059</span> /* SD1 CD */</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO05__USDHC1_VSELECT    <span class="hljs-number">0x17059</span> /* SD1 VSELECT */</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        <span class="hljs-number">0x17059</span> /* SD1 RESET */</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 引脚复用宏定义(引脚复用选择寄存器偏移地址和设置值 引脚属性控制寄存器偏移地址 输入选择寄存器的偏移地址和设置值) + pad 属性</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_enet1:</span> <span class="hljs-title class_">enet1grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_ENET1_RX_EN__ENET1_RX_EN  <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            MX6UL_PAD_ENET1_RX_ER__ENET1_RX_ER  <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            /*------------以下省略-----------------*/</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_enet2:</span> <span class="hljs-title class_">enet2grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO07__ENET2_MDC     <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO06__ENET2_MDIO    <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            /*------------以下省略-----------------*/</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_uart1:</span> <span class="hljs-title class_">uart1grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_UART1_TX_DATA__UART1_DCE_TX <span class="hljs-number">0x1b0b1</span></span><br><span class="hljs-params">            MX6UL_PAD_UART1_RX_DATA__UART1_DCE_RX <span class="hljs-number">0x1b0b1</span></span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p><em>在没有使用 GPIO 子系统之前，我们需要获取外设相关寄存器，然后进行手动的读、改、写。引入 GPIO 后，我们可以调用其提供的相关 api 完成对 GPIO 的控制操作。以 GPIO4 为例，下面是其中具体的配置信息。我们只需要在我们自己创建的节点中声明要引用的 pinctrl 子节点，并通过 gpio 子系统配置高或者低电平有效就可以调用 api 实现控制了。of_get_named_gpio、gpio_request、gpio_free、gpio_direction_output。</em></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-symbol">gpio4:</span> <span class="hljs-title class_">gpio@20a8000</span> <span class="hljs-punctuation">&#123;</span><br>   <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;fsl,imx6ul-gpio&quot;</span>, <span class="hljs-string">&quot;fsl,imx35-gpio&quot;</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-attr">reg</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x20a8000</span> <span class="hljs-number">0x4000</span>&gt;</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-attr">interrupts</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;GIC_SPI <span class="hljs-number">72</span> IRQ_TYPE_LEVEL_HIGH&gt;</span>,<br>               <span class="hljs-params">&lt;GIC_SPI <span class="hljs-number">73</span> IRQ_TYPE_LEVEL_HIGH&gt;</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-attr">clocks</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;clks</span> IMX6UL_CLK_GPIO4&gt;</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-attr">gpio-controller</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-meta">#gpio-cells = &lt;2&gt;;</span><br>   <span class="hljs-attr">interrupt-controller</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-meta">#interrupt-cells = &lt;2&gt;;</span><br>   <span class="hljs-attr">gpio-ranges</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-number">0</span> <span class="hljs-number">94</span> <span class="hljs-number">17</span>&gt;</span>, <span class="hljs-params">&lt;<span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-number">17</span> <span class="hljs-number">117</span> <span class="hljs-number">12</span>&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
+<h3 id="8-IIC-子系统（完结）"><a href="#8-IIC-子系统（完结）" class="headerlink" title="8. IIC 子系统（完结）"></a>8. IIC 子系统（完结）</h3><p><em>i2c 使用两根物理总线，SCL 和 SDA，支持一主多从模式。这里需要简单了解一下 i2c 的时序结构：start，stop 的条件，特殊的边沿触发。SCL 高电平期间接收方采样 SDA 数据，低电平期间 SDA 可以发生变化。从设备可以强制拉低 SCL，给自己争取更多时间后，再变化 SDA。每次传输都需要应答位(ACK NACK)，区分不同从设备的方式是根据不同的从设备地址。</em></p>
+<p><em>i2c 的驱动框架包括 i2c 总线驱动和具体到某个设备的驱动，如图所示。</em><br><img src="/../img/posts/2026-06-03/11-i2c.png" alt="i2c驱动框架"></p>
+<p><em>i2c_adapter 是内核中对 i2c 控制器的抽象(soc 内部硬件，负责产生 i2c 总线时序的硬件模块)，用于确认物理 i2c 总线，内部含有访问该总线的算法结构。</em></p>
+<h3 id="8-SPI-子系统（完结）"><a href="#8-SPI-子系统（完结）" class="headerlink" title="8. SPI 子系统（完结）"></a>8. SPI 子系统（完结）</h3><h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
 <p><em>进程的地址空间：mmap系统调用 将文件或者设备映射到进程的虚拟地址空间中 实现更高效的文件访问操作 假如传递的参数重fd&#x3D;-1 其实就是在做匿名的内存映射 只分配内存不映射任何文件。</em></p>
 <p><em>僵尸进程和孤儿进程：僵尸进程是说子进程退出了但是资源并没有被父进程正确地释放 僵尸进程的积累会导致内存不足 孤儿进程是说一个进程的父进程先行退出了 相关概念涉及到进程的状态转换和资源调度。</em></p>
 <p><em>如何创建对象：通过 pipe这个系统调用可以去创建一个特殊的流式字符对象——匿名管道 这个系统调用会返回两个fd 一个指向管道的读口 一个指向管道的写口 进程同时拥有读口和写口 通过配合fork命令和fd的闪转腾挪可以实现进程之间的通信   mount命令可以创建文件系统的对象</em></p>
 <h3 id="fd-文件描述符-？"><a href="#fd-文件描述符-？" class="headerlink" title="fd(文件描述符)？"></a>fd(文件描述符)？</h3><p><em>Linux 的哲学在于一切皆文件。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364617329">https://zhuanlan.zhihu.com/p/364617329</a></em></p>
-<p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/bagu/fd.png" alt="什么是 fd？"></p>
-<h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/bagu/process.png" alt="进程在内存中的结构"></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><strong>Makefile: <em><a target="_blank" rel="noopener" href="https://liaoxuefeng.com/books/makefile/complete/index.html">https://liaoxuefeng.com/books/makefile/complete/index.html</a></em></strong></p>
+<p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/posts/2026-06-03/01-file-descriptor.png" alt="什么是 fd？"></p>
+<h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/posts/2026-06-03/02-process-memory.png" alt="进程在内存中的结构"></p>
 
                 
               </div>
@@ -589,7 +642,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -601,17 +654,17 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -661,91 +714,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1083,7 +1136,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1096,17 +1149,17 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1148,91 +1201,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1265,41 +1318,41 @@
           <li>
             <a href="/categories/%E9%9A%8F%E7%AC%94/">
               <span class="widget-cat-name">随笔</span>
-              <span class="widget-cat-count">4</span>
+              <span class="widget-cat-count">5</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/RK3588S2/">
               <span class="widget-cat-name">RK3588S2</span>
-              <span class="widget-cat-count">3</span>
+              <span class="widget-cat-count">4</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/CPP/">
               <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">3</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
-              <span class="widget-cat-count">1</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1316,11 +1369,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1328,11 +1381,15 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
             #生活
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
@@ -1340,8 +1397,8 @@
             #工作流分享
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #Language Philosophy
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #课程自学
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1361,6 +1418,20 @@
         
         
         
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 09 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
         
           <li>
             <a href="/archives">
@@ -1403,15 +1474,15 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">30</span>
+          <span class="widget-info-value">36</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">8</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1421,7 +1492,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-07-24</span>
+        <span>最后更新：2026-09-02</span>
       </div>
       
     </div>

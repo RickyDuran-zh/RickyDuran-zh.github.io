@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -61,7 +61,11 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
+<link rel="stylesheet" href="/fonts/lxgw-wenkai-screen/lxgwwenkaigbscreen.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
 
 
 
@@ -293,7 +297,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/theme/background.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/site/home-background.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.45)">
       <div class="banner-text text-center fade-in-up">
@@ -339,7 +343,7 @@
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2026/06/03/%E5%85%AB%E8%82%A1/" target="_self">
-          <img src="/img/2026-7-27/bagu.png" alt="八股">
+          <img src="/img/posts/2026-06-03/cover.png" alt="八股">
         </a>
       </div>
     
@@ -356,7 +360,7 @@
       
       <a class="index-excerpt " href="/2026/06/03/%E5%85%AB%E8%82%A1/" target="_self">
         <div>
-          概述这是一辑 OS, 编程语言，以及 Linux 操作系统相关的八股文总结。很多琐碎的知识点实在太容易遗忘了，可以用作为扫盲和拾遗。 语言(C&#x2F;C++)Static 关键字驱动inode和cdev之间的关系？inode 绑定了一个 cdev ——文件到具体设备驱动的映射 实现对字符设备的操作。 在 VFS 中 inode 代表了一个文件的元数据和操作函数集指针。 cdev 是驱动层面的概
+          概述这是一辑 OS, Coding Language(主要是 C&#x2F;C++)，Linux 驱动和应用相关的八股。可以作为扫盲和拾遗(持续连载中)。 语言(C&#x2F;C++)1 封装、继承、多态的概念？（经纬恒润）封装：把数据和操作数据的函数包在类里，对外只暴露必要接口，隐藏实现细节。好处是降低耦合、提高安全性，比如成员变量私有，只通过 getter&#x2F;setter 访问。 继承
         </div>
       </a>
 
@@ -407,8 +411,419 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/02/CSAPP/" target="_self">
+          <img src="/img/posts/2026-09-02/cover.png" alt="CSAPP">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/09/02/CSAPP/" target="_self">
+          CSAPP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/09/02/CSAPP/" target="_self">
+        <div>
+          概述这一篇博客是关于深入理解计算机系统(CSAPP)课程的学习，没有系统学过 CS，借此机会提高一下内力。 1 计算机系统漫游123456#include &lt;stdio.h&gt;int main()&#123;    printf(&quot;hello, world\n&quot;);    return 0;&#125; 这一部分以 hello 程序为例，追踪它的生命周期，呈现出一些概
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-02 11:41" pubdate>
+              2026-09-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CS/" class="category-chain-item">CS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/">#课程自学</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" target="_self">
+          <img src="/img/posts/shared/summary-cover.png" alt="久违的八月总结(等codex额度刷新版)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" target="_self">
+          久违的八月总结(等codex额度刷新版)
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" target="_self">
+        <div>
+          前言等待 codex 额度刷新ing，顺便写写九月总结，又要开学了。(完结) 乱七八糟算是结束了端侧模型部署的技术栈，音视频的项目结束了多路推流和单模型推理。虽然没有进行部署，后续直接上多路推拉流和多模型推理了，另外后面打算考虑结合摄像头驱动开发，不然有点烂大街了。接然宝回来惹，和然宝逛吃逛吃逛吃……会议终于注册完了，该死的系统网站。和 G 君好久未见，打了麻将(可算是让我学会了哈哈哈)，吃了心心
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-31 14:55" pubdate>
+              2026-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%94%9F%E6%B4%BB/">#生活</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" target="_self">
+          <img src="/img/posts/2026-07-10/cover.png" alt="RK3588-多路推拉流+YOLOV5检测II">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" target="_self">
+          RK3588-多路推拉流+YOLOV5检测II
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" target="_self">
+        <div>
+          概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-20 21:44" pubdate>
+              2026-08-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/RK3588S2/" class="category-chain-item">RK3588S2</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/" class="category-chain-item">音视频</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
+            
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">#项目开发</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
+          <img src="/img/posts/shared/cpp.png" alt="C++ Lambda表达式">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
+          C++ Lambda表达式
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
+        <div>
+          概述 这篇博客解析 CPP 中的 Lambda 表达式。(完结)  1 基本介绍首先以最典型的 sort 函数为例，谈一谈 Lambda 表达式的一个典型的使用场景。sort 需要传入一个比较器，然而这个比较函数很可能只用这一次，非常直观的想法是能不能在需要这个行为的地方直接把这个行为写出来——也就是把行为定义在行为发生的位置(Local Behavior Abstraction)，Lambda
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-19 10:53" pubdate>
+              2026-08-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Language-Philosophy/">#Language Philosophy</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/12/CMake-Tutorial/" target="_self">
+          <img src="/img/posts/2026-08-12/cover.png" alt="CMake Tutorial">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/12/CMake-Tutorial/" target="_self">
+          CMake Tutorial
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/08/12/CMake-Tutorial/" target="_self">
+        <div>
+          概述 这篇博客介绍 CMake 的基本用法。CMake 可以自动生成 Makefile 文件，适合于大型项目(依赖很多)的构建。  编写规范(CMakeLists.txt)1234567891011121314151617# 最低版本需求cmake_minimum_required(VERSION 3.10)# 声明工程名称project(project1)# set(变量 值) - 定义变量 将
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-12 16:00" pubdate>
+              2026-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Tutorial/">#Tutorial</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+          <img src="/img/posts/shared/cpp.png" alt="C++ 并发编程">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+          C++ 并发编程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+        <div>
+          概述 这篇博客解析 CPP 中的并发编程。  什么是并发编程？首先区分并发(Concurrent)和并行(Parallel)的区别。并发是指在一段时间内多个任务都在推进，CPU 核心在不同线程上轮转每个线程分配固定的时间片，实际上线程运行是由先后顺序的，只不过时间片很短，看起来是这段时间内多个线程都同时在运行推进。而并行则是多个任务在同一时刻真正同时运行，比如多核 CPU 分别执行不同的任务，这是
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-12 15:36" pubdate>
+              2026-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Language-Philosophy/">#Language Philosophy</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" target="_self">
-          <img src="/img/2026-7-27/rickyduran.png" alt="久违的七月总结">
+          <img src="/img/posts/shared/summary-cover.png" alt="久违的七月总结">
         </a>
       </div>
     
@@ -423,7 +838,7 @@
       
       <a class="index-excerpt " href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" target="_self">
         <div>
-          前言感觉人生就好像在玩刷子游戏，玩着玩着才发现技能树被自己瞎点了一通，区别在于当你发现的时候已经没有时间让你重新构筑 build 了。 乱七八糟第一篇工作终于出了结果(生日当天 EDAS 卡出了bug)，感恩审稿人。也许发篇长文还能考虑申博？哎想换方向，具身智能或者机器人都行，但是换方向好像比较难哎，不管了，只能工作和申博同时进行了。去安徽打研电赛华东赛区决赛啦，第一次打感觉欠缺很多，频谱管控实在
+          前言感觉人生就好像在玩刷子游戏，玩着玩着才发现技能树被自己瞎点了一通，区别在于当你发现的时候已经没有时间让你重新构筑 build 了(完结)。 乱七八糟第一篇工作终于出了结果(生日当天 EDAS 卡出了bug)，感恩审稿人。也许发篇长文还能考虑申博？哎想换方向，具身智能或者机器人都行，但是换方向好像比较难哎，不管了，只能工作和申博同时进行了。去安徽打研电赛华东赛区决赛啦，第一次打感觉欠缺很多，频谱
         </div>
       </a>
 
@@ -474,23 +889,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" target="_self">
-          <img src="/img/2026-7-27/language.png" alt="C++ 运算符重载">
+        <a href="/2026/07/13/C-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" target="_self">
+          <img src="/img/posts/shared/cpp.png" alt="C++ 移动语义">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" target="_self">
-          C++ 运算符重载
+        <a href="/2026/07/13/C-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" target="_self">
+          C++ 移动语义
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" target="_self">
+      <a class="index-excerpt " href="/2026/07/13/C-%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" target="_self">
         <div>
-          概述 这篇博客解析 CPP 中的运算符重载，构造和赋值。  1. 运算符重载运算符重载允许自定义类型定义内置运算符(+, -, *, &#x3D;&#x3D;, [], ()等) 1234567891011121314class Vector2 &#123;public:    float x, y;    Vector2(float x = 0, float y = 0) : x(x), y(y
+          概述 这篇博客解析 CPP 中的移动语义(完结)。  1. 运算符重载首先讨论运算符重载，什么是运算符重载？运算符重载允许自定义类型定义内置运算符(+, -, *, &#x3D;&#x3D;, [], ()等)，下面是一个具体的示例。 123456789101112class Vector2 &#123;public:    float x, y;    Vector2(float x = 0,
         </div>
       </a>
 
@@ -541,23 +956,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" target="_self">
-          <img src="/img/2026-7-27/cover.png" alt="RK3588-多路推拉流+YOLO检测">
+        <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8BI/" target="_self">
+          <img src="/img/posts/2026-07-10/cover.png" alt="RK3588-多路推拉流+YOLOV5检测I">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" target="_self">
-          RK3588-多路推拉流+YOLO检测
+        <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8BI/" target="_self">
+          RK3588-多路推拉流+YOLOV5检测I
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" target="_self">
+      <a class="index-excerpt " href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLOV5%E6%A3%80%E6%B5%8BI/" target="_self">
         <div>
-          概述 这篇博客解析 demo_multhread_decode_infer. 从 RTSP 摄像头拉 H.264 流 → MPP 硬解码 → NPU 跑 YOLO 检测 → 画面画框 → 显示出来。  0 demo_multhread_decode_infer.cppa. 核心代码段先确定有几路视频流，一路视频流启动一个解码线程。分别创建并运行推理线程，最后运行显示线程。一共会并行 2*N + 1
+          概述 这篇博客解析项目 demo_multhread_decode_infer。  0 demo_multhread_decode_infer.cpp这个项目的主要目标: 从 RTSP 摄像头拉取多路 H.264 流 → MPP 硬解码(解码 H.264，得到 NV12 图像数据 - YUV 的一种) → 经过回调函数转换成 BGR 图像 → NPU 跑 YOLOV5 检测 → 后处理 postp
         </div>
       </a>
 
@@ -584,273 +999,12 @@
   <a href="/categories/RK3588S2/" class="category-chain-item">RK3588S2</a>
   
   
-
-      </span>
+    <span>></span>
     
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" target="_self">
-          <img src="/img/2026-7-27/1.png" alt="嵌入式 AI">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" target="_self">
-          嵌入式 AI
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" target="_self">
-        <div>
-          概述 包含环境搭建 -&gt; 模型训练 -&gt; 模型转换 -&gt; 模型部署官方仓库: rknn-toolkit2(RKNN-Toolkit2 模型转换工具，板端运行库), rknn_model_zoo, rknn-lmm  LubanCat-4 RK3588S2 基本配置信息(https://doc.embedfire.com/linux/rk3588/quick_start/zh/la
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-07 19:44" pubdate>
-              2026-07-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RK3588S2/" class="category-chain-item">RK3588S2</a>
+  <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/" class="category-chain-item">音视频</a>
   
   
 
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" target="_self">
-          <img src="/img/June/anti-people.png" alt="久违的六月总结">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" target="_self">
-          久违的六月总结
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" target="_self">
-        <div>
-          前言时间过得好快，现在已经七月份放暑假了，好吧我是研究生了，放不放暑假已经跟我没关系了，难过ing。Anyways，送走了小然，这个暑假要好好自律，好好减肥。跟小然在一块儿真的增重了不少，师兄都说我胖了，只能安慰自己是幸福肥了。 乱七八糟Well, I think I really need to take back my attention which was stolen by TicTok,
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-02 10:10" pubdate>
-              2026-07-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%94%9F%E6%B4%BB/">#生活</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" target="_self">
-          <img src="/img/2026-7-27/2.png" alt="嵌入式音视频">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" target="_self">
-          嵌入式音视频
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" target="_self">
-        <div>
-          概述 第二个项目将在 RK3588 的基础上开发一些中间件，这一辑补充一些音视频相关的基础知识。飞书链接-音视频项目：https://dcn7p0jfzncn.feishu.cn/wiki/VfdAw2DrTi8SsbkbHk7ct0cGnqc?from=from_copylink  订单号： P783047098217319231飞书链接-嵌入式八股：https://dcn7p0jfzncn.f
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-26 16:24" pubdate>
-              2026-06-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/RK3588S2/" class="category-chain-item">RK3588S2</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" target="_self">
-          <img src="/img/imx6ull.png" alt="IMX6ULL-项目开发-Day8">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" target="_self">
-          IMX6ULL-项目开发-Day8
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/" target="_self">
-        <div>
-          概述 EdgeGuard-6ULL: 项目自动化编译和部署
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-26 11:59" pubdate>
-              2026-06-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/IMX6ULL/" class="category-chain-item">IMX6ULL</a>
-  
   
 
       </span>
@@ -874,145 +1028,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/06/17/Algorithm-DataStructure/" target="_self">
-          <img src="/img/algorithm.png" alt="Algorithm-DataStructure">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/17/Algorithm-DataStructure/" target="_self">
-          Algorithm-DataStructure
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/06/17/Algorithm-DataStructure/" target="_self">
-        <div>
-          概述 这一辑主要是一些基本数据结构的实现。  数据结构Stack &amp;&amp; Queue(数组模拟)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475publ
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-17 11:34" pubdate>
-              2026-06-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98/" class="category-chain-item">刷题</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2026/06/16/Algorithm-Leetcode-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8F%8C%E6%8C%87%E9%92%88-%E5%8D%95%E8%B0%83%E6%A0%88/" target="_self">
-          <img src="/img/algorithm.png" alt="Algorithm-Leetcode-前缀和/差分/滑动窗口/双指针/单调栈">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/16/Algorithm-Leetcode-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8F%8C%E6%8C%87%E9%92%88-%E5%8D%95%E8%B0%83%E6%A0%88/" target="_self">
-          Algorithm-Leetcode-前缀和/差分/滑动窗口/双指针/单调栈
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2026/06/16/Algorithm-Leetcode-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-%E5%8F%8C%E6%8C%87%E9%92%88-%E5%8D%95%E8%B0%83%E6%A0%88/" target="_self">
-        <div>
-          概述 这一辑是小技巧，前缀和&#x2F;差分&#x2F;滑动窗口&#x2F;双指针&#x2F;单调栈。单调栈: 在线性的时间复杂度内，找到数组中每个元素左边&#x2F;右边第一个比它大&#x2F;小的元素。  题号42 接雨水(单调栈)238 除了自身以外数组的乘积(前缀) 值得记录42 接雨水 123456789101112131415161718192021222324class Soluti
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-16 10:51" pubdate>
-              2026-06-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%B7%E9%A2%98/" class="category-chain-item">刷题</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -1160,7 +1180,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1173,17 +1193,17 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1225,91 +1245,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1342,41 +1362,41 @@
           <li>
             <a href="/categories/%E9%9A%8F%E7%AC%94/">
               <span class="widget-cat-name">随笔</span>
-              <span class="widget-cat-count">4</span>
+              <span class="widget-cat-count">5</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/RK3588S2/">
               <span class="widget-cat-name">RK3588S2</span>
-              <span class="widget-cat-count">3</span>
+              <span class="widget-cat-count">4</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/CPP/">
               <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">3</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
-              <span class="widget-cat-count">1</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1393,11 +1413,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1405,11 +1425,15 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
             #生活
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
@@ -1417,8 +1441,8 @@
             #工作流分享
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #Language Philosophy
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #课程自学
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1438,6 +1462,20 @@
         
         
         
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 09 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
         
           <li>
             <a href="/archives">
@@ -1480,15 +1518,15 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">30</span>
+          <span class="widget-info-value">36</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">8</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1498,7 +1536,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-07-24</span>
+        <span>最后更新：2026-09-02</span>
       </div>
       
     </div>

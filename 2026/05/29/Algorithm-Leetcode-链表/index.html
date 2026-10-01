@@ -8,8 +8,8 @@
 <head><!-- hexo injector head_begin start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><!-- hexo injector head_begin end -->
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" href="/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/site/apple-touch-icon.png">
+  <link rel="icon" href="/img/site/favicon-32x32.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,20 +19,20 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述(完结) 好久没刷算法题了，新开一个。铁铁我爱刷算法题，至少正反馈强，很多事别说正反馈了连反馈都没有。这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技巧。">
+    <meta name="description" content="概述(完结) 好久没刷算法题了，新开一个。这是唯一能让我找到确定感的事情了，要么 AC 要么 不被 AC。  这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algorithm-Leetcode-链表">
 <meta property="og:url" content="http://example.com/2026/05/29/Algorithm-Leetcode-%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述(完结) 好久没刷算法题了，新开一个。铁铁我爱刷算法题，至少正反馈强，很多事别说正反馈了连反馈都没有。这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技巧。">
+<meta property="og:description" content="概述(完结) 好久没刷算法题了，新开一个。这是唯一能让我找到确定感的事情了，要么 AC 要么 不被 AC。  这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/algorithm.png">
+<meta property="og:image" content="http://example.com/img/posts/shared/algorithm.png">
 <meta property="article:published_time" content="2026-05-29T13:42:17.000Z">
-<meta property="article:modified_time" content="2026-08-01T08:13:22.616Z">
+<meta property="article:modified_time" content="2026-09-25T02:25:23.146Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/algorithm.png">
+<meta name="twitter:image" content="http://example.com/img/posts/shared/algorithm.png">
   
   
   
@@ -71,7 +71,11 @@
 
 
   
-<link rel="stylesheet" href="/css/custom.css?v=20260802-01.css">
+<link rel="stylesheet" href="/fonts/lxgw-wenkai-screen/lxgwwenkaigbscreen.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/400-italic.css">
+<link rel="stylesheet" href="/fonts/jetbrains-mono/700.css">
+<link rel="stylesheet" href="/css/custom.css?v=20260918-03.css">
 
 
 
@@ -303,7 +307,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/algorithm.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/shared/algorithm.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -332,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          3.9k 字
         
       </span>
     
@@ -392,8 +396,9 @@
               <div class="markdown-body">
                 
                 <h2 id="概述-完结"><a href="#概述-完结" class="headerlink" title="概述(完结)"></a>概述(完结)</h2><blockquote>
-<p>好久没刷算法题了，新开一个。铁铁我爱刷算法题，至少正反馈强，很多事别说正反馈了连反馈都没有。这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。<br>第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技巧。这边感觉就是纯考验 coding 能力，比如边界条件上的一些处理，基本上就是在不用其他容器的条件下，用有限的几个指针去调整链表。这里面最繁琐的题目可能就是 k 个一组反转链表了吧，label 是 hard，感觉上就是超多超多模块缝合，写起来还是有点难度，但是也不在 hot 100 里面。</p>
+<p>好久没刷算法题了，新开一个。这是唯一能让我找到确定感的事情了，要么 AC 要么 不被 AC。</p>
 </blockquote>
+<p><em>这是我第二轮刷 Hot 100 了，好多都有点儿遗忘了，有的专题也不熟练，每天刷几道题目倒是不占用太多时间。。。开刷吧，对了我用的是 C++。第一辑是链表专题，链表专题其实很多套路都差不多感觉，很多都是小模块合并。比如快慢指针找中点，反转链表，dummyNode 哑节点, 这些都是常用的技巧。这部分就是纯考验 coding 能力，比如边界条件上的一些处理，基本上就是在不用其他容器的条件下，用有限的几个指针去调整链表。这里面最繁琐的题目可能就是 k 个一组反转链表了吧，感觉上就是超多超多模块缝合，写起来还是有点难度，但是也不在 hot 100 里面。</em></p>
 <h2 id="题号"><a href="#题号" class="headerlink" title="题号"></a>题号</h2><p>2 两数相加<br>19 删除链表的倒数第 N 个结点<br>21 合并两个有序链表<br>23 合并 K 个升序链表<br>141 环形链表<br>142 环形链表 II<br><strong>146 LRU 缓存</strong><br>148 排序链表<br>160 相交链表<br>206 反转链表<br>234 回文链表</p>
 <h2 id="值得记录"><a href="#值得记录" class="headerlink" title="值得记录"></a>值得记录</h2><p>23 合并 K 个升序链表(这题就是小根堆，堆操作每次调整只需要 O(logn) 的时间复杂度，但是 C++ 的语法有点奇怪，不太熟悉模板和比较器的写法)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">mergeKLists</span><span class="hljs-params">(vector&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;<br>        <span class="hljs-type">int</span> size = lists.<span class="hljs-built_in">size</span>();<br>        ListNode* dummyNode = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>();<br>        ListNode* head = dummyNode;<br>        <span class="hljs-keyword">auto</span> cmp = [](ListNode* a, ListNode* b)&#123;<br>            <span class="hljs-keyword">return</span> a-&gt;val &gt; b-&gt;val;<br>        &#125;;<br>        priority_queue&lt;ListNode*,vector&lt;ListNode*&gt;,<span class="hljs-keyword">decltype</span>(cmp)&gt; <span class="hljs-built_in">pq</span>(cmp); <br>        <span class="hljs-keyword">for</span>(ListNode* i : lists)&#123;<br>            <span class="hljs-keyword">if</span>(i) pq.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>        <span class="hljs-keyword">while</span>(!pq.<span class="hljs-built_in">empty</span>())&#123;<br>            ListNode* cur = pq.<span class="hljs-built_in">top</span>();<br>            pq.<span class="hljs-built_in">pop</span>();<br>            dummyNode-&gt;next = cur;<br>            <span class="hljs-keyword">if</span>(cur-&gt;next) pq.<span class="hljs-built_in">push</span>(cur-&gt;next);<br>            dummyNode = dummyNode-&gt;next;<br>        &#125;<br>        ListNode* ans = head-&gt;next;<br>        <span class="hljs-keyword">delete</span> head;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
@@ -584,7 +589,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -596,17 +601,17 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -656,91 +661,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1078,7 +1083,7 @@
       <span class="widget-avatar-shell">
         <img
           class="widget-avatar"
-          src="/img/rickyduran.png"
+          src="/img/site/avatar.png"
           alt="avatar"
           onerror="this.style.display='none'"
         />
@@ -1091,17 +1096,17 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">30</span>
+          <span class="widget-stat-num">36</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">8</span>
+          <span class="widget-stat-num">9</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">10</span>
+          <span class="widget-stat-num">12</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1143,91 +1148,91 @@
         
         
           <li>
-            <a href="/2026/07/24/%E4%B9%85%E8%BF%9D%E7%9A%84%E4%B8%83%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的七月总结" class="widget-recent-link">
+            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/rickyduran.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的七月总结</span>
-                <span class="widget-post-date">07-24</span>
+                <span class="widget-post-title">CSAPP</span>
+                <span class="widget-post-date">09-02</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/13/C-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/" title="C++ 运算符重载" class="widget-recent-link">
+            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/language.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 运算符重载</span>
-                <span class="widget-post-date">07-13</span>
+                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
+                <span class="widget-post-date">08-31</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/10/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81+YOLO%E6%A3%80%E6%B5%8B/" title="RK3588-多路推拉流+YOLO检测" class="widget-recent-link">
+            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/cover.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLO检测</span>
-                <span class="widget-post-date">07-10</span>
+                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
+                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/07/%E5%B5%8C%E5%85%A5%E5%BC%8FAI/" title="嵌入式 AI" class="widget-recent-link">
+            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/1.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式 AI</span>
-                <span class="widget-post-date">07-07</span>
+                <span class="widget-post-title">C++ Lambda表达式</span>
+                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/07/02/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AD%E6%9C%88%E6%80%BB%E7%BB%93/" title="久违的六月总结" class="widget-recent-link">
+            <a href="/2026/08/12/CMake-Tutorial/" title="CMake Tutorial" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/June/anti-people.png" alt="" loading="lazy" />
+                  <img src="/img/posts/2026-08-12/cover.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">久违的六月总结</span>
-                <span class="widget-post-date">07-02</span>
+                <span class="widget-post-title">CMake Tutorial</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
         
           <li>
-            <a href="/2026/06/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E9%9F%B3%E8%A7%86%E9%A2%91/" title="嵌入式音视频" class="widget-recent-link">
+            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <img src="/img/2026-7-27/2.png" alt="" loading="lazy" />
+                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">嵌入式音视频</span>
-                <span class="widget-post-date">06-26</span>
+                <span class="widget-post-title">C++ 并发编程</span>
+                <span class="widget-post-date">08-12</span>
               </span>
             </a>
           </li>
@@ -1260,41 +1265,41 @@
           <li>
             <a href="/categories/%E9%9A%8F%E7%AC%94/">
               <span class="widget-cat-name">随笔</span>
-              <span class="widget-cat-count">4</span>
+              <span class="widget-cat-count">5</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/RK3588S2/">
               <span class="widget-cat-name">RK3588S2</span>
-              <span class="widget-cat-count">3</span>
+              <span class="widget-cat-count">4</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/CPP/">
               <span class="widget-cat-name">CPP</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">3</span>
             </a>
           </li>
         
           <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
-              <span class="widget-cat-count">1</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/IMX6ULL/OS/">
-              <span class="widget-cat-name">OS</span>
-              <span class="widget-cat-count">1</span>
+            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+              <span class="widget-cat-name">音视频</span>
+              <span class="widget-cat-count">2</span>
             </a>
           </li>
         
           <li>
-            <a href="/categories/xv6/">
-              <span class="widget-cat-name">xv6</span>
+            <a href="/categories/CS/">
+              <span class="widget-cat-name">CS</span>
               <span class="widget-cat-count">1</span>
             </a>
           </li>
@@ -1311,11 +1316,11 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.1485714285714286rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
             #技术
           </a>
         
-          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 0.9485714285714285rem">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/" class="widget-tag-item" style="font-size: 1.0057142857142858rem">
             #项目开发
           </a>
         
@@ -1323,11 +1328,15 @@
             #算法
           </a>
         
-          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8342857142857143rem">
+          <a href="/tags/%E7%94%9F%E6%B4%BB/" class="widget-tag-item" style="font-size: 0.8628571428571429rem">
             #生活
           </a>
         
-          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
+            #Language Philosophy
+          </a>
+        
+          <a href="/tags/Tutorial/" class="widget-tag-item" style="font-size: 0.8057142857142857rem">
             #Tutorial
           </a>
         
@@ -1335,8 +1344,8 @@
             #工作流分享
           </a>
         
-          <a href="/tags/Language-Philosophy/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
-            #Language Philosophy
+          <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #课程自学
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1356,6 +1365,20 @@
         
         
         
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 09 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
+              <span class="widget-archive-month">2026 年 08 月</span>
+              <span class="widget-archive-count">5 篇</span>
+            </a>
+          </li>
         
           <li>
             <a href="/archives">
@@ -1398,15 +1421,15 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">30</span>
+          <span class="widget-info-value">36</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">8</span>
+          <span class="widget-info-value">9</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">10</span>
+          <span class="widget-info-value">12</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1416,7 +1439,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-07-24</span>
+        <span>最后更新：2026-09-02</span>
       </div>
       
     </div>
