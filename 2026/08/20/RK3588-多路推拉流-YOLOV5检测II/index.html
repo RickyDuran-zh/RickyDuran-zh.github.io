@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。">
+    <meta name="description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  项目启动12345678910# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Releasecmake --build build -j&quot;$(nproc)&quot;# 2 运行程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RK3588-多路推拉流+YOLOV5检测II">
 <meta property="og:url" content="http://example.com/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。">
+<meta property="og:description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  项目启动12345678910# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Releasecmake --build build -j&quot;$(nproc)&quot;# 2 运行程">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-07-10/cover.png">
 <meta property="article:published_time" content="2026-08-20T13:44:29.000Z">
-<meta property="article:modified_time" content="2026-10-08T01:01:32.452Z">
+<meta property="article:modified_time" content="2026-10-11T02:23:57.208Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -337,7 +337,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          38 字
+          438 字
         
       </span>
     
@@ -348,7 +348,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -399,7 +399,9 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。</p>
 </blockquote>
-
+<h3 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 构建</span><br><span class="hljs-built_in">cd</span> demo_multhread_decode_infer_mulmodel<br>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release<br>cmake --build build -j<span class="hljs-string">&quot;<span class="hljs-subst">$(nproc)</span>&quot;</span><br><br><span class="hljs-comment"># 2 运行程序 将四路本地视频拼接后推流送至 MediaMTX</span><br>./myDemo 4 rtmp://192.168.3.21/edgestream<br><br><span class="hljs-comment"># 3 ffplay 连接 MediaMTX 服务并拉流播放视频</span><br>ffplay rtsp://192.168.3.21:8554/edgestream<br></code></pre></td></tr></table></figure>
+<h3 id="core-dump-核心转储"><a href="#core-dump-核心转储" class="headerlink" title="core dump(核心转储)"></a>core dump(核心转储)</h3><p><em>一个程序运行时的环境集合包，包含崩溃时的堆栈信息，一般会在指定目录下生成一个 core 文件，主要用来调试。</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">ulimit</span> -c <span class="hljs-comment"># 检查系统 core dump 功能是否开启，0 为关闭</span><br><span class="hljs-built_in">ulimit</span> -c unlimited <span class="hljs-comment"># 生成文件大小不受限制</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
