@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-10-12T15:06:30.884Z">
+<meta property="article:modified_time" content="2026-10-13T02:34:04.267Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -336,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k 字
+          13k 字
         
       </span>
     
@@ -347,7 +347,7 @@
         
         
         
-          104 分钟
+          105 分钟
         
       </span>
     
@@ -460,6 +460,7 @@
 <h3 id="9-输入子系统（完结）"><a href="#9-输入子系统（完结）" class="headerlink" title="9. 输入子系统（完结）"></a>9. 输入子系统（完结）</h3><p><em>输入子系统：Input Core + Handlers.</em></p>
 <p><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
 <p><em>输入设备的输入信息被抽象为 input_event，包括了事件产生的时间、输入设备的类型、具体值等。具体的输入设备被抽象为 input_dev，包括用户层输入设备的名称、id号、设备支持的事件类型、支持记录的键值&#x2F;坐标值。使用 input_allocate_device() 申请输入设备、input_free_device() 释放设备。使用 input_register_device() &#x2F; input_unregister_device() 将输入设备注册和注销到输入子系统的核心层。使用 input_event() 进行事件上报，input_sync() 是对它的封装表示上报结束。</em></p>
+<h3 id="10-PWM-子系统（完结）"><a href="#10-PWM-子系统（完结）" class="headerlink" title="10. PWM 子系统（完结）"></a>10. PWM 子系统（完结）</h3><p><em>驱动中使用 pwm_device 代表一个 pwm 设备包含 period(单位是ns)、duty_cycle、polarity。pwm_config() 配置频率和占空比，pwm_set_polarity() 设置 PWM 极性。在设备树添加设置 pwms 和 pwm-names 的属性信息即可。</em></p>
 <h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
 <p><em>进程的地址空间：mmap系统调用 将文件或者设备映射到进程的虚拟地址空间中 实现更高效的文件访问操作 假如传递的参数重fd&#x3D;-1 其实就是在做匿名的内存映射 只分配内存不映射任何文件。</em></p>
 <p><em>僵尸进程和孤儿进程：僵尸进程是说子进程退出了但是资源并没有被父进程正确地释放 僵尸进程的积累会导致内存不足 孤儿进程是说一个进程的父进程先行退出了 相关概念涉及到进程的状态转换和资源调度。</em></p>
