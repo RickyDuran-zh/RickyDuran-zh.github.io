@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-10-13T02:34:04.267Z">
+<meta property="article:modified_time" content="2026-10-21T08:05:27.912Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -347,7 +347,7 @@
         
         
         
-          105 分钟
+          110 分钟
         
       </span>
     
@@ -416,7 +416,8 @@
 <p>什么是内核？为什么要引入内核模块？内核模块的数据组织格式？ELF 文件的构成？符号导出？</p>
 </blockquote>
 <p><em>内核是操作系统的核心，是基于硬件的第一层软件扩充，提供操作系统最基本的功能。Linux 采用宏内核架构，其缺点在于修改或增加内核某个功能的时候都需要重新编译一遍内核。因此引入内核模块。</em><br><img src="/../img/posts/2026-06-03/04-kernel.png" alt="内核架构"><br><em>内核模块就是实现了某个功能的一段内核代码，内核运行的过程中可以加载到内核中，从而动态地增加内核的功能。更专业的来说，内核模块(Loadable Kernel Module)，是一种在内核运行时加载一组目标代码来实现某个特定功能的机制。模块本身不被编译入内核镜像，这控制了内核的大小，一旦被加载它就和内核中的其他部分完全一样。</em></p>
-<p><em>.ko 文件在数据组织上是 ELF 格式，一种普通的可重定位目标文件。起始地址处是 ELF 头部(ELF Header)，可以通过 readelf 工具查看详细的头部信息，它记录了程序头表和节区头部头表的偏移地址。节区头部表(Section Header Table)保存了不同节的基本属性结构。可以通过 readelf -S 读取节区头部的详细信息。编译器、链接器、装载器都是依靠它来定位和访问各个节的属性的。</em><br><img src="/../img/posts/2026-06-03/05-elf.png" alt="ELF文件格式示例"><br><em>符号指的是在内核模块中使用 EXPORT_SYMBOL 声明的函数和变量，当模块被装入内核后，所导出的符号都会记录在公关内核符号表上。如果其他模块想要利用我们模块中的符号，就可以导出。modprobe 相当于多次的 insmod，装入指定的模块及其依赖。</em></p>
+<p><em>.ko 是内核模块的后缀格式，该文件在数据组织上是 ELF(Executable and Linkable Format) 格式，一种普通的可重定位目标文件。起始地址处是 ELF 头部(ELF Header)，可以通过 readelf 工具查看详细的头部信息，它记录了程序头表和节区头部头表的偏移地址。节区头部表(Section Header Table)保存了不同节的基本属性结构。可以通过 readelf -S 读取节区头部的详细信息。编译器、链接器、装载器都是依靠它来定位和访问各个节的属性的。</em><br><img src="/../img/posts/2026-06-03/05-elf.png" alt="ELF文件格式示例"><br><em>通过 insmod 命令，文件系统会将 .ko 模块读到用户空间的一块内存上并执行系统调用 sys_init_module() 去进行解析。</em></p>
+<p><em>符号指的是在内核模块中使用 EXPORT_SYMBOL 声明的函数和变量，当模块被装入内核后，所导出的符号都会记录在公关内核符号表上。如果其他模块想要利用我们模块中的符号，就可以导出。modprobe 相当于多次的 insmod，装入指定的模块及其依赖。</em></p>
 <h3 id="2-环境搭建（完结）"><a href="#2-环境搭建（完结）" class="headerlink" title="2. 环境搭建（完结）"></a>2. 环境搭建（完结）</h3><blockquote>
 <p>驱动开发的前期准备？</p>
 </blockquote>
@@ -461,10 +462,14 @@
 <p><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
 <p><em>输入设备的输入信息被抽象为 input_event，包括了事件产生的时间、输入设备的类型、具体值等。具体的输入设备被抽象为 input_dev，包括用户层输入设备的名称、id号、设备支持的事件类型、支持记录的键值&#x2F;坐标值。使用 input_allocate_device() 申请输入设备、input_free_device() 释放设备。使用 input_register_device() &#x2F; input_unregister_device() 将输入设备注册和注销到输入子系统的核心层。使用 input_event() 进行事件上报，input_sync() 是对它的封装表示上报结束。</em></p>
 <h3 id="10-PWM-子系统（完结）"><a href="#10-PWM-子系统（完结）" class="headerlink" title="10. PWM 子系统（完结）"></a>10. PWM 子系统（完结）</h3><p><em>驱动中使用 pwm_device 代表一个 pwm 设备包含 period(单位是ns)、duty_cycle、polarity。pwm_config() 配置频率和占空比，pwm_set_polarity() 设置 PWM 极性。在设备树添加设置 pwms 和 pwm-names 的属性信息即可。</em></p>
+<h3 id="11-内核-DRM-显示框架（完结）"><a href="#11-内核-DRM-显示框架（完结）" class="headerlink" title="11. 内核 DRM 显示框架（完结）"></a>11. 内核 DRM 显示框架（完结）</h3><p><em>DRM(Direct Rendering Manager, 直接渲染管理器) 是 linux 内核标准的现代化显示子系统框架，替代了传统的 FrameBuffer，是目前主流的显示驱动解决方案。</em></p>
+<h3 id="12-内核触摸驱动（完结）"><a href="#12-内核触摸驱动（完结）" class="headerlink" title="12. 内核触摸驱动（完结）"></a>12. 内核触摸驱动（完结）</h3><p><em>Linux 内核触摸驱动的核心是触摸屏核心层（touchscreen core）和多点触摸核心层（input-mt core）。</em></p>
+<p><em>kernel 将触摸屏的物理属性结构体抽象为 touchscreen_properties 储存了分辨率、坐标方向和翻转状态等。touchscreen_parse_properties() 从设备树中解析触摸屏的属性，自动填充 touchscreen_properties。touchscreen_report_pos() 用于标准化的触摸坐标上报，根据 touchscreen_properties 中的配置修正原始触摸坐标然后上报给输入子系统。</em></p>
+<p><em>input_mt_slot 存储单个触摸点的状态信息，每个触摸点对应一个 slot， input-mt core 通过 slot 管理多个触摸点，实现触摸点的跟踪和识别。input_mt 管理所有多点触摸槽位，存储多点触摸的全局状态。</em></p>
 <h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
 <p><em>进程的地址空间：mmap系统调用 将文件或者设备映射到进程的虚拟地址空间中 实现更高效的文件访问操作 假如传递的参数重fd&#x3D;-1 其实就是在做匿名的内存映射 只分配内存不映射任何文件。</em></p>
 <p><em>僵尸进程和孤儿进程：僵尸进程是说子进程退出了但是资源并没有被父进程正确地释放 僵尸进程的积累会导致内存不足 孤儿进程是说一个进程的父进程先行退出了 相关概念涉及到进程的状态转换和资源调度。</em></p>
-<p><em>如何创建对象：通过 pipe这个系统调用可以去创建一个特殊的流式字符对象——匿名管道 这个系统调用会返回两个fd 一个指向管道的读口 一个指向管道的写口 进程同时拥有读口和写口 通过配合fork命令和fd的闪转腾挪可以实现进程之间的通信   mount命令可以创建文件系统的对象</em></p>
+<p><em>如何创建对象：通过 pipe 这个系统调用可以去创建一个特殊的流式字符对象——匿名管道 这个系统调用会返回两个fd 一个指向管道的读口 一个指向管道的写口 进程同时拥有读口和写口 通过配合 fork 命令和 fd 的闪转腾挪可以实现进程之间的通信   mount 命令可以创建文件系统的对象</em></p>
 <h3 id="fd-文件描述符-？"><a href="#fd-文件描述符-？" class="headerlink" title="fd(文件描述符)？"></a>fd(文件描述符)？</h3><p><em>Linux 的哲学在于一切皆文件。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364617329">https://zhuanlan.zhihu.com/p/364617329</a></em></p>
 <p><em>什么是文件描述符 fd？直觉上来说 fd 就是 files 这个字段指向的指针数组的索引。这篇博客写的超级赞 关于 fd 和 VFS 以及涉及到的一些重要的结构体和 Linux 中的一些机制，比如 container of 宏。</em><br><img src="/../img/posts/2026-06-03/01-file-descriptor.png" alt="什么是 fd？"></p>
 <h3 id="进程在内存中的结构？"><a href="#进程在内存中的结构？" class="headerlink" title="进程在内存中的结构？"></a>进程在内存中的结构？</h3><p><img src="/../img/posts/2026-06-03/02-process-memory.png" alt="进程在内存中的结构"></p>
@@ -661,7 +666,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-num">37</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -671,7 +676,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-num">13</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -719,6 +724,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux 常用命令" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">Linux 常用命令</span>
+                <span class="widget-post-date">10-14</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
@@ -790,21 +812,6 @@
               </span>
               <span class="widget-recent-info">
                 <span class="widget-post-title">CMake Tutorial</span>
-                <span class="widget-post-date">08-12</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 并发编程</span>
                 <span class="widget-post-date">08-12</span>
               </span>
             </a>
@@ -1156,7 +1163,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-num">37</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1166,7 +1173,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-num">13</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1206,6 +1213,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux 常用命令" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">Linux 常用命令</span>
+                <span class="widget-post-date">10-14</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
@@ -1277,21 +1301,6 @@
               </span>
               <span class="widget-recent-info">
                 <span class="widget-post-title">CMake Tutorial</span>
-                <span class="widget-post-date">08-12</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 并发编程</span>
                 <span class="widget-post-date">08-12</span>
               </span>
             </a>
@@ -1376,7 +1385,7 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.2057142857142857rem">
             #技术
           </a>
         
@@ -1428,6 +1437,13 @@
         
           <li>
             <a href="/archives">
+              <span class="widget-archive-month">2026 年 10 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
               <span class="widget-archive-month">2026 年 09 月</span>
               <span class="widget-archive-count">1 篇</span>
             </a>
@@ -1461,13 +1477,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/archives">
-              <span class="widget-archive-month">2026 年 04 月</span>
-              <span class="widget-archive-count">1 篇</span>
-            </a>
-          </li>
-        
       </ul>
       <a href="/archives" class="widget-more-link">
         查看全部归档 <i class="fa-solid fa-chevron-right"></i>
@@ -1481,7 +1490,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">36</span>
+          <span class="widget-info-value">37</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
@@ -1489,7 +1498,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">12</span>
+          <span class="widget-info-value">13</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1499,7 +1508,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-09-02</span>
+        <span>最后更新：2026-10-14</span>
       </div>
       
     </div>

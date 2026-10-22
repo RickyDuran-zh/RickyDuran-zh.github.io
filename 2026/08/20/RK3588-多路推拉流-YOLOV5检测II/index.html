@@ -19,16 +19,16 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  项目启动12345678910# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Releasecmake --build build -j&quot;$(nproc)&quot;# 2 运行程">
+    <meta name="description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  0 前置a 项目启动12345678# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Release # -S 指定源目录 -B 指定 Build 目录(源外构建)cmake --build">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RK3588-多路推拉流+YOLOV5检测II">
 <meta property="og:url" content="http://example.com/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  项目启动12345678910# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Releasecmake --build build -j&quot;$(nproc)&quot;# 2 运行程">
+<meta property="og:description" content="概述 这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。  0 前置a 项目启动12345678# 1 构建cd demo_multhread_decode_infer_mulmodelcmake -S . -B build -DCMAKE_BUILD_TYPE&#x3D;Release # -S 指定源目录 -B 指定 Build 目录(源外构建)cmake --build">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-07-10/cover.png">
 <meta property="article:published_time" content="2026-08-20T13:44:29.000Z">
-<meta property="article:modified_time" content="2026-10-11T02:23:57.208Z">
+<meta property="article:modified_time" content="2026-10-21T08:35:51.637Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="项目开发">
@@ -337,7 +337,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          438 字
+          679 字
         
       </span>
     
@@ -348,7 +348,7 @@
         
         
         
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -399,9 +399,12 @@
                 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。</p>
 </blockquote>
-<h3 id="项目启动"><a href="#项目启动" class="headerlink" title="项目启动"></a>项目启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 构建</span><br><span class="hljs-built_in">cd</span> demo_multhread_decode_infer_mulmodel<br>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release<br>cmake --build build -j<span class="hljs-string">&quot;<span class="hljs-subst">$(nproc)</span>&quot;</span><br><br><span class="hljs-comment"># 2 运行程序 将四路本地视频拼接后推流送至 MediaMTX</span><br>./myDemo 4 rtmp://192.168.3.21/edgestream<br><br><span class="hljs-comment"># 3 ffplay 连接 MediaMTX 服务并拉流播放视频</span><br>ffplay rtsp://192.168.3.21:8554/edgestream<br></code></pre></td></tr></table></figure>
-<h3 id="core-dump-核心转储"><a href="#core-dump-核心转储" class="headerlink" title="core dump(核心转储)"></a>core dump(核心转储)</h3><p><em>一个程序运行时的环境集合包，包含崩溃时的堆栈信息，一般会在指定目录下生成一个 core 文件，主要用来调试。</em></p>
+<h3 id="0-前置"><a href="#0-前置" class="headerlink" title="0 前置"></a>0 前置</h3><h4 id="a-项目启动"><a href="#a-项目启动" class="headerlink" title="a 项目启动"></a>a 项目启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 构建</span><br><span class="hljs-built_in">cd</span> demo_multhread_decode_infer_mulmodel<br>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release <span class="hljs-comment"># -S 指定源目录 -B 指定 Build 目录(源外构建)</span><br>cmake --build build -j<span class="hljs-string">&quot;<span class="hljs-subst">$(nproc)</span>&quot;</span> <span class="hljs-comment"># 并行编译</span><br><span class="hljs-comment"># 2 运行程序 将四路本地视频拼接后推流送至 MediaMTX</span><br>./myDemo 4 rtmp://192.168.3.21/edgestream<br><span class="hljs-comment"># 3 ffplay 连接 MediaMTX 服务并拉流播放视频(pc 端播放)</span><br>ffplay rtsp://192.168.3.21:8554/edgestream<br></code></pre></td></tr></table></figure>
+<h4 id="b-RK3588-驱动环境准备"><a href="#b-RK3588-驱动环境准备" class="headerlink" title="b RK3588 驱动环境准备"></a>b RK3588 驱动环境准备</h4><p><em>由于涉及 mipi 摄像头和 mipi 屏幕驱动的开发，需要提前准备编译好的 RK3588 的内核源码，比较稳定的方式是从百度网盘下载野火的 sdk 源码压缩包。虚拟机进行交叉编译，再传给开发板。</em><br><img src="/../img/posts/2026-10-21/1.png" alt="kernel 目录"></p>
+<h4 id="c-core-dump-核心转储"><a href="#c-core-dump-核心转储" class="headerlink" title="c core dump(核心转储)"></a>c core dump(核心转储)</h4><p><em>程序异常终止（如发生段错误 Segmentation Fault: 空指针解引用、越界访问数组或以释放的内存）时，操作系统将进程当时的内存状态、寄存器值、调用堆栈等信息写入磁盘生成的文件，相当于是”案发现场的快照”，主要用来调试。</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">ulimit</span> -c <span class="hljs-comment"># 检查系统 core dump 功能是否开启，0 为关闭</span><br><span class="hljs-built_in">ulimit</span> -c unlimited <span class="hljs-comment"># 生成文件大小不受限制</span><br></code></pre></td></tr></table></figure>
+<h4 id="d-ui-环境"><a href="#d-ui-环境" class="headerlink" title="d ui 环境"></a>d ui 环境</h4><p><em>LCD MIPI 七寸屏，分辨率 1024 * 600，30Pin FPC 接口。</em><br><img src="/../img/posts/2026-10-21/2.png" alt="MIPI 设备树插件开启"></p>
+
                 
               </div>
             
@@ -596,7 +599,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-num">37</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -606,7 +609,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-num">13</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -654,6 +657,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux 常用命令" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">Linux 常用命令</span>
+                <span class="widget-post-date">10-14</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
@@ -725,21 +745,6 @@
               </span>
               <span class="widget-recent-info">
                 <span class="widget-post-title">CMake Tutorial</span>
-                <span class="widget-post-date">08-12</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 并发编程</span>
                 <span class="widget-post-date">08-12</span>
               </span>
             </a>
@@ -1091,7 +1096,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">36</span>
+          <span class="widget-stat-num">37</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1101,7 +1106,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">12</span>
+          <span class="widget-stat-num">13</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1141,6 +1146,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux 常用命令" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">Linux 常用命令</span>
+                <span class="widget-post-date">10-14</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
@@ -1212,21 +1234,6 @@
               </span>
               <span class="widget-recent-info">
                 <span class="widget-post-title">CMake Tutorial</span>
-                <span class="widget-post-date">08-12</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/12/C-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="C++ 并发编程" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ 并发编程</span>
                 <span class="widget-post-date">08-12</span>
               </span>
             </a>
@@ -1311,7 +1318,7 @@
       </h4>
       <div class="widget-tag-cloud">
         
-          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.177142857142857rem">
+          <a href="/tags/%E6%8A%80%E6%9C%AF/" class="widget-tag-item" style="font-size: 1.2057142857142857rem">
             #技术
           </a>
         
@@ -1363,6 +1370,13 @@
         
           <li>
             <a href="/archives">
+              <span class="widget-archive-month">2026 年 10 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
               <span class="widget-archive-month">2026 年 09 月</span>
               <span class="widget-archive-count">1 篇</span>
             </a>
@@ -1396,13 +1410,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/archives">
-              <span class="widget-archive-month">2026 年 04 月</span>
-              <span class="widget-archive-count">1 篇</span>
-            </a>
-          </li>
-        
       </ul>
       <a href="/archives" class="widget-more-link">
         查看全部归档 <i class="fa-solid fa-chevron-right"></i>
@@ -1416,7 +1423,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">36</span>
+          <span class="widget-info-value">37</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
@@ -1424,7 +1431,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">12</span>
+          <span class="widget-info-value">13</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1434,7 +1441,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-09-02</span>
+        <span>最后更新：2026-10-14</span>
       </div>
       
     </div>
