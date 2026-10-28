@@ -4,11 +4,38 @@
   
   
   <entry>
+    <title>网络共享ssh开发板</title>
+    <link href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/"/>
+    <url>/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/</url>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><em>最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。</em></p><h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p><em>原理：PC 充当一个”路由器”，通过网线给板卡分配 ip 号，两者处于同一个局域网之下，PC 可以通过 ssh 连接板卡。板卡访问外网的请求数据包会传给 PC，再由 PC 假装是由自己的 IP 地址出发去请求外网的应答，最后应答回来再将数据包给板卡。这样的一个过程就是把 PC 当作和外网 ping 通的一个桥梁。PC 就是这样一个 NAT 网关。</em></p><p><em>1 开启网络共享功能(ICS)</em><br><img src="/../img/posts/2026-10-28/1.png" alt="网络共享"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CLI">win + R -&gt; ncpa.cpl <br></code></pre></td></tr></table></figure><p><em>2 配置 IP 地址</em><br><img src="/../img/posts/2026-10-28/2.png" alt="IP 地址"><br><em>PC 会自动把以太网接口设置成如图这样。此时 PC 相当于板卡的网关，板卡通过 DHCP 获取 IP 地址，此时就已经建立了通信</em></p><p><em>3 ssh 连接</em><br><img src="/../img/posts/2026-10-28/3.png" alt="ssh 连接"><br><em>在板卡上查看 ifconfig 配置信息获取 eth0 的 ip 地址，mobaxterm 中配置连接。</em></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+      <tag>工作流分享</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux 常用命令</title>
     <link href="/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <url>/2026/10/14/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>突然感觉自己对好多常用的命令都不是很熟悉，比如指令后面跟着的一些具体参数以及方便查看当前系统性能的一些命令，这一辑具体解析一下这些命令。</p></blockquote><h2 id="压缩、解压文件"><a href="#压缩、解压文件" class="headerlink" title="压缩、解压文件"></a>压缩、解压文件</h2><p><em>很多文件的后缀格式是 .tar.gz，这本质上是两步过程，先用 tar 打包，再用 gzip 压缩，一个是打包工具另外一个是压缩工具。</em></p><p><em>-c create  -x extract  -z gzip 压缩或解压 -f 指定文件。</em></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">tar -czf xxx.tar.gz xxx/<br>tar -xzf xxx.tar.gz <br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>突然感觉自己对好多常用的命令都不是很熟悉，比如指令后面跟着的一些具体参数以及方便查看当前系统性能的一些命令，这一辑具体解析一下这些命令。</p></blockquote><h2 id="压缩、解压文件"><a href="#压缩、解压文件" class="headerlink" title="压缩、解压文件"></a>压缩、解压文件</h2><p><em>很多文件的后缀格式是 .tar.gz，这本质上是两步过程，先用 tar 打包，再用 gzip 压缩，一个是打包工具另外一个是压缩工具。</em></p><p><em>-c create  -x extract  -z gzip 压缩或解压 -f 指定文件。</em></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">tar -czf xxx.tar.gz xxx/<br>tar -xzf xxx.tar.gz <br></code></pre></td></tr></table></figure><h2 id="摄像头相关"><a href="#摄像头相关" class="headerlink" title="摄像头相关"></a>摄像头相关</h2><p><em>鲁班猫 4 系列板卡有三个 MIPI-CSI 接口，最多支持三摄。单摄的默认节点是 &#x2F;dev&#x2F;video11，以下是关于 v4l2 框架相关涉及到的一些命令。</em></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 查看摄像头节点</span><br>v4l2-ctl --list-devices<br><span class="hljs-comment">#查看摄像头支持的格式和分辨率</span><br>v4l2-ctl --list-formats-ext --device=/dev/video11 <br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -83,7 +110,7 @@
     <link href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/"/>
     <url>/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/</url>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。</p></blockquote><h3 id="0-前置"><a href="#0-前置" class="headerlink" title="0 前置"></a>0 前置</h3><h4 id="a-项目启动"><a href="#a-项目启动" class="headerlink" title="a 项目启动"></a>a 项目启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 构建</span><br><span class="hljs-built_in">cd</span> demo_multhread_decode_infer_mulmodel<br>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release <span class="hljs-comment"># -S 指定源目录 -B 指定 Build 目录(源外构建)</span><br>cmake --build build -j<span class="hljs-string">&quot;<span class="hljs-subst">$(nproc)</span>&quot;</span> <span class="hljs-comment"># 并行编译</span><br><span class="hljs-comment"># 2 运行程序 将四路本地视频拼接后推流送至 MediaMTX</span><br>./myDemo 4 rtmp://192.168.3.21/edgestream<br><span class="hljs-comment"># 3 ffplay 连接 MediaMTX 服务并拉流播放视频(pc 端播放)</span><br>ffplay rtsp://192.168.3.21:8554/edgestream<br></code></pre></td></tr></table></figure><h4 id="b-RK3588-驱动环境准备"><a href="#b-RK3588-驱动环境准备" class="headerlink" title="b RK3588 驱动环境准备"></a>b RK3588 驱动环境准备</h4><p><em>由于涉及 mipi 摄像头和 mipi 屏幕驱动的开发，需要提前准备编译好的 RK3588 的内核源码，比较稳定的方式是从百度网盘下载野火的 sdk 源码压缩包。虚拟机进行交叉编译，再传给开发板。</em><br><img src="/../img/posts/2026-10-21/1.png" alt="kernel 目录"></p><h4 id="c-core-dump-核心转储"><a href="#c-core-dump-核心转储" class="headerlink" title="c core dump(核心转储)"></a>c core dump(核心转储)</h4><p><em>程序异常终止（如发生段错误 Segmentation Fault: 空指针解引用、越界访问数组或以释放的内存）时，操作系统将进程当时的内存状态、寄存器值、调用堆栈等信息写入磁盘生成的文件，相当于是”案发现场的快照”，主要用来调试。</em></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">ulimit</span> -c <span class="hljs-comment"># 检查系统 core dump 功能是否开启，0 为关闭</span><br><span class="hljs-built_in">ulimit</span> -c unlimited <span class="hljs-comment"># 生成文件大小不受限制</span><br></code></pre></td></tr></table></figure><h4 id="d-ui-环境"><a href="#d-ui-环境" class="headerlink" title="d ui 环境"></a>d ui 环境</h4><p><em>LCD MIPI 七寸屏，分辨率 1024 * 600，30Pin FPC 接口。</em><br><img src="/../img/posts/2026-10-21/2.png" alt="MIPI 设备树插件开启"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>这篇博客在 I 的基础上进行拓展，同时进行多个模型的推理并进行 RTSP 推流。</p></blockquote><h3 id="0-前置"><a href="#0-前置" class="headerlink" title="0 前置"></a>0 前置</h3><h3 id="1-驱动层-V4L2"><a href="#1-驱动层-V4L2" class="headerlink" title="1 驱动层 - V4L2"></a>1 驱动层 - V4L2</h3><p><em>Pipeline: 光线通过镜头打在 sensor(IMX415) 的感光阵列上，转化为电信号。芯片内部经过 ADC 后输出 Bayer 格式的 RAW 数据。RAW 数据量庞大通过 MIPI-CSI 这样的高速接口传到 RK3588 芯片内部。接着直接送入 ISP(Image Signal Processor)进行校正、去马赛克、降噪锐化等等运算输出 YUV 或 RGB 格式的图像。驱动层 V4L2 子系统屏蔽了硬件层面的差异，无论何种厂商的 sensor 都抽象为 &#x2F;dev&#x2F;videox 节点，并在内核维护了内存缓冲区。ISP 每处理好一帧画面就放进缓冲区提供给应用层进行消费。最后应用层通过 open 设备以及 ioctl 接口取帧并进行数据处理。</em></p><p><em>RKCIF(Rockchip Camera Interface)对应了 RK3588 的 VICAP 硬件单元，职责是从 MIPI CSI 接口接收 Sensor 的原始数据，并精心初步的分发。RKISP(Rockchip Signal Processor)对应 RK3588 的 ISP 硬件，职责是把 RAW 数据洗好看。</em></p><p><em>数据流向：Sensor-&gt;MIPI CSI-&gt;RKCIF-&gt;RKISP-&gt;应用层(NV12&#x2F;YUV)。</em></p><h4 id="a-项目启动"><a href="#a-项目启动" class="headerlink" title="a 项目启动"></a>a 项目启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 1 构建</span><br><span class="hljs-built_in">cd</span> demo_multhread_decode_infer_mulmodel<br>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release <span class="hljs-comment"># -S 指定源目录 -B 指定 Build 目录(源外构建)</span><br>cmake --build build -j<span class="hljs-string">&quot;<span class="hljs-subst">$(nproc)</span>&quot;</span> <span class="hljs-comment"># 并行编译</span><br><span class="hljs-comment"># 2 运行程序 将四路本地视频拼接后推流送至 MediaMTX</span><br>./myDemo 4 rtmp://192.168.3.21/edgestream<br><span class="hljs-comment"># 3 ffplay 连接 MediaMTX 服务并拉流播放视频(pc 端播放)</span><br>ffplay rtsp://192.168.3.21:8554/edgestream<br></code></pre></td></tr></table></figure><h4 id="b-RK3588-驱动环境准备"><a href="#b-RK3588-驱动环境准备" class="headerlink" title="b RK3588 驱动环境准备"></a>b RK3588 驱动环境准备</h4><p><em>由于涉及 mipi 摄像头和 mipi 屏幕驱动的开发，需要提前准备编译好的 RK3588 的内核源码，比较稳定的方式是从百度网盘下载野火的 sdk 源码压缩包。虚拟机进行交叉编译，再传给开发板。</em><br><img src="/../img/posts/2026-10-21/1.png" alt="kernel 目录"></p><h4 id="c-core-dump-核心转储"><a href="#c-core-dump-核心转储" class="headerlink" title="c core dump(核心转储)"></a>c core dump(核心转储)</h4><p><em>程序异常终止（如发生段错误 Segmentation Fault: 空指针解引用、越界访问数组或以释放的内存）时，操作系统将进程当时的内存状态、寄存器值、调用堆栈等信息写入磁盘生成的文件，相当于是”案发现场的快照”，主要用来调试。</em></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">ulimit</span> -c <span class="hljs-comment"># 检查系统 core dump 功能是否开启，0 为关闭</span><br><span class="hljs-built_in">ulimit</span> -c unlimited <span class="hljs-comment"># 生成文件大小不受限制</span><br></code></pre></td></tr></table></figure><h4 id="d-ui-环境"><a href="#d-ui-环境" class="headerlink" title="d ui 环境"></a>d ui 环境</h4><p><em>LCD MIPI 七寸屏，分辨率 1024 * 600，30Pin FPC 接口。</em><br><img src="/../img/posts/2026-10-21/2.png" alt="MIPI 设备树插件开启"></p>]]></content>
     
     
     <categories>
@@ -341,7 +368,7 @@
     <link href="/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/"/>
     <url>/2026/06/26/IMX6ULL-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-Day8/</url>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>EdgeGuard-6ULL: 项目自动化编译和部署</p></blockquote><p><img src="/../img/posts/2026-06-26/02-project-deployment.png" alt="项目开发与部署全链路"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>EdgeGuard-6ULL: 项目自动化编译、部署以及优化。</p></blockquote><p><img src="/../img/posts/2026-06-26/02-project-deployment.png" alt="项目开发与部署全链路"></p><h3 id="1-MPU6050-FIFO-流式接口"><a href="#1-MPU6050-FIFO-流式接口" class="headerlink" title="1 MPU6050 FIFO 流式接口"></a>1 MPU6050 FIFO 流式接口</h3><p><em>给原有的 MPU6050 增加一条连续的数据流通道：sensor 200Hz 采样并写入硬件 FIFO，驱动每 100ms 批量搬运到内核缓冲区。应用层通过 poll() + read() 取走数据。</em></p>]]></content>
     
     
     <categories>
