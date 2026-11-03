@@ -27,7 +27,7 @@
 <meta property="og:description" content="概述 突然感觉自己对好多常用的命令都不是很熟悉，比如指令后面跟着的一些具体参数以及方便查看当前系统性能的一些命令，这一辑具体解析一下这些命令。  压缩、解压文件很多文件的后缀格式是 .tar.gz，这本质上是两步过程，先用 tar 打包，再用 gzip 压缩，一个是打包工具另外一个是压缩工具。 -c create  -x extract  -z gzip 压缩或解压 -f 指定文件。 12tar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-14T13:48:46.000Z">
-<meta property="article:modified_time" content="2026-10-28T13:03:58.119Z">
+<meta property="article:modified_time" content="2026-10-29T02:30:33.503Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
@@ -334,7 +334,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          397 字
+          395 字
         
       </span>
     
@@ -399,7 +399,7 @@
 <h2 id="压缩、解压文件"><a href="#压缩、解压文件" class="headerlink" title="压缩、解压文件"></a>压缩、解压文件</h2><p><em>很多文件的后缀格式是 .tar.gz，这本质上是两步过程，先用 tar 打包，再用 gzip 压缩，一个是打包工具另外一个是压缩工具。</em></p>
 <p><em>-c create  -x extract  -z gzip 压缩或解压 -f 指定文件。</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">tar -czf xxx.tar.gz xxx/<br>tar -xzf xxx.tar.gz <br></code></pre></td></tr></table></figure>
-<h2 id="摄像头相关"><a href="#摄像头相关" class="headerlink" title="摄像头相关"></a>摄像头相关</h2><p><em>鲁班猫 4 系列板卡有三个 MIPI-CSI 接口，最多支持三摄。单摄的默认节点是 &#x2F;dev&#x2F;video11，以下是关于 v4l2 框架相关涉及到的一些命令。</em></p>
+<h2 id="摄像头"><a href="#摄像头" class="headerlink" title="摄像头"></a>摄像头</h2><p><em>鲁班猫 4 系列板卡有三个 MIPI-CSI 接口，最多支持三摄。单摄的默认节点是 &#x2F;dev&#x2F;video11，以下是关于 v4l2 框架相关涉及到的一些命令。</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># 查看摄像头节点</span><br>v4l2-ctl --list-devices<br><span class="hljs-comment">#查看摄像头支持的格式和分辨率</span><br>v4l2-ctl --list-formats-ext --device=/dev/video11 <br></code></pre></td></tr></table></figure>
                 
               </div>
@@ -501,9 +501,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板">
+                      <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网络共享ssh开发板</span>
+                        <span class="hidden-mobile">网络共享ssh开发板 + vnc 远程桌面</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -653,17 +653,15 @@
         
         
           <li>
-            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板" class="widget-recent-link">
+            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <span class="widget-recent-cover-placeholder">
-                    <i class="fa-solid fa-file-lines"></i>
-                  </span>
+                  <img src="/img/posts/2026-10-28/0.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">网络共享ssh开发板</span>
+                <span class="widget-post-title">网络共享ssh开发板 + vnc 远程桌面</span>
                 <span class="widget-post-date">10-28</span>
               </span>
             </a>
@@ -1144,17 +1142,15 @@
         
         
           <li>
-            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板" class="widget-recent-link">
+            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <span class="widget-recent-cover-placeholder">
-                    <i class="fa-solid fa-file-lines"></i>
-                  </span>
+                  <img src="/img/posts/2026-10-28/0.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">网络共享ssh开发板</span>
+                <span class="widget-post-title">网络共享ssh开发板 + vnc 远程桌面</span>
                 <span class="widget-post-date">10-28</span>
               </span>
             </a>

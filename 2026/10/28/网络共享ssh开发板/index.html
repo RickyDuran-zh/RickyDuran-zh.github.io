@@ -19,27 +19,25 @@
   <meta name="author" content="RickyDuran">
   <meta name="keywords" content="Linux, Life, Coding, Music, Movies, Books">
   
-    <meta name="description" content="概述最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。 具体步骤原理：PC 充当一个”路由器”，通过网线给板卡分配 ip 号，两者处于同一个局域网之下，PC 可以通过 ssh 连接板卡。板卡访问外网的请求数据包会传给 PC，再由 PC 假">
+    <meta name="description" content="概述最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。另外实验室新购买了一批 Lubancat5，在我们的平台项目中需要观察 UI 界面，于是通过 VNC 实现远程桌面便于后续开发。 网络共享原理：PC 充当一个”路由器”，通过网线给板卡">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络共享ssh开发板">
+<meta property="og:title" content="网络共享ssh开发板 + vnc 远程桌面">
 <meta property="og:url" content="http://example.com/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/index.html">
 <meta property="og:site_name" content="RickyDuran&#39;s Blog">
-<meta property="og:description" content="概述最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。 具体步骤原理：PC 充当一个”路由器”，通过网线给板卡分配 ip 号，两者处于同一个局域网之下，PC 可以通过 ssh 连接板卡。板卡访问外网的请求数据包会传给 PC，再由 PC 假">
+<meta property="og:description" content="概述最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。另外实验室新购买了一批 Lubancat5，在我们的平台项目中需要观察 UI 界面，于是通过 VNC 实现远程桌面便于后续开发。 网络共享原理：PC 充当一个”路由器”，通过网线给板卡">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/posts/2026-10-28/1.png">
-<meta property="og:image" content="http://example.com/img/posts/2026-10-28/2.png">
-<meta property="og:image" content="http://example.com/img/posts/2026-10-28/3.png">
+<meta property="og:image" content="http://example.com/img/posts/2026-10-28/0.png">
 <meta property="article:published_time" content="2026-10-28T04:31:48.000Z">
-<meta property="article:modified_time" content="2026-10-28T13:02:49.290Z">
+<meta property="article:modified_time" content="2026-11-03T06:35:01.640Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="工作流分享">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/posts/2026-10-28/1.png">
+<meta name="twitter:image" content="http://example.com/img/posts/2026-10-28/0.png">
   
   
   
-  <title>网络共享ssh开发板 - RickyDuran&#39;s Blog</title>
+  <title>网络共享ssh开发板 + vnc 远程桌面 - RickyDuran&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -310,13 +308,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/site/banners/banner-post-default.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/posts/2026-10-28/0.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网络共享ssh开发板"></span>
+            <span id="subtitle" data-typed-text="网络共享ssh开发板 + vnc 远程桌面"></span>
           
         </div>
 
@@ -339,7 +337,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          410 字
+          1.8k 字
         
       </span>
     
@@ -350,7 +348,7 @@
         
         
         
-          4 分钟
+          15 分钟
         
       </span>
     
@@ -393,17 +391,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">网络共享ssh开发板</h1>
+            <h1 id="seo-header">网络共享ssh开发板 + vnc 远程桌面</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><em>最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。</em></p>
-<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p><em>原理：PC 充当一个”路由器”，通过网线给板卡分配 ip 号，两者处于同一个局域网之下，PC 可以通过 ssh 连接板卡。板卡访问外网的请求数据包会传给 PC，再由 PC 假装是由自己的 IP 地址出发去请求外网的应答，最后应答回来再将数据包给板卡。这样的一个过程就是把 PC 当作和外网 ping 通的一个桥梁。PC 就是这样一个 NAT 网关。</em></p>
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><em>最近实验室的路由器坏了，短时间内修不好。我之前都是通过 wlan ssh 远程开发板在 Mobaxterm 中进行开发的，被迫重新想了一个办法，现在通过网线+网络共享的方式实现 ssh，而且速度更快连接更加稳定。另外实验室新购买了一批 Lubancat5，在我们的平台项目中需要观察 UI 界面，于是通过 VNC 实现远程桌面便于后续开发。</em></p>
+<h2 id="网络共享"><a href="#网络共享" class="headerlink" title="网络共享"></a>网络共享</h2><p><em>原理：PC 充当一个”路由器”，通过网线给板卡分配 ip 号，两者处于同一个网段之下，PC 可以通过 ssh 连接板卡。板卡访问外网的请求数据包会传给 PC，再由 PC 假装是由自己的 IP 地址出发去请求外网的应答，最后应答回来再将数据包给板卡。这样的一个过程就是把 PC 当作和外网 ping 通的一个桥梁。PC 就是这样一个 NAT 网关。</em></p>
 <p><em>1 开启网络共享功能(ICS)</em><br><img src="/../img/posts/2026-10-28/1.png" alt="网络共享"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CLI">win + R -&gt; ncpa.cpl <br></code></pre></td></tr></table></figure>
 <p><em>2 配置 IP 地址</em><br><img src="/../img/posts/2026-10-28/2.png" alt="IP 地址"><br><em>PC 会自动把以太网接口设置成如图这样。此时 PC 相当于板卡的网关，板卡通过 DHCP 获取 IP 地址，此时就已经建立了通信</em></p>
-<p><em>3 ssh 连接</em><br><img src="/../img/posts/2026-10-28/3.png" alt="ssh 连接"><br><em>在板卡上查看 ifconfig 配置信息获取 eth0 的 ip 地址，mobaxterm 中配置连接。</em></p>
+<p><em>3 ssh 连接</em></p>
+<p><img src="/../img/posts/2026-10-28/4.png" alt="arp -a 查询ip"><br><img src="/../img/posts/2026-10-28/3.png" alt="ssh 连接"><br><em>在 pc 上通过 arp -a 命令观察挂载在对应网段的板卡设备 ip，mobaxterm 中配置 ssh 连接。</em></p>
+<h2 id="VNC-远程桌面"><a href="#VNC-远程桌面" class="headerlink" title="VNC 远程桌面"></a>VNC 远程桌面</h2><p><em>原理：VNC(Virtual Network Console,虚拟网络控制台)，可以远程控制板卡，捕获板卡的桌面环境。使用 x11vnc 远程共享一个 Xorg 桌面，关键在于需要指定正确的 DISPLAY 和 Xauthority(捕获哪一个桌面以及捕获的权限凭证)。</em></p>
+<p><em>1 配置 VNC 服务</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">sudo</span> apt install x11vnc <span class="hljs-comment"># 安装 VNC 服务端软件，直接共享当前正在使用的物理桌面</span><br><span class="hljs-built_in">ls</span> /tmp/.X11-unix/ <span class="hljs-comment"># X0 代表 DISPLAY:0</span><br>ps -ef | grep <span class="hljs-string">&#x27;[X]org&#x27;</span> <span class="hljs-comment"># 获取 Xauthority</span><br></code></pre></td></tr></table></figure>
+<p><img src="/../img/posts/2026-10-28/5.png" alt="查看进程获取 Xauthority"></p>
+<p><em>2 配置 GDM 自动登陆并使用 Xorg(避免输入密码后切换用户 Session)</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">sudo</span> vim /etc/gdm3/custom.conf<br><br><span class="hljs-comment">#### 修改配置 ####</span><br>[daemon]<br><br>WaylandEnable=<span class="hljs-literal">false</span><br><br>AutomaticLoginEnable=<span class="hljs-literal">true</span><br>AutomaticLogin=<span class="hljs-built_in">cat</span><br><span class="hljs-comment">#################</span><br><br><span class="hljs-built_in">sudo</span> reboot<br></code></pre></td></tr></table></figure>
+<p><img src="/../img/posts/2026-10-28/6.png" alt="禁用Wayland，强制使用Xorg，配置自动登录"></p>
+<p><em>3 配置 x11vnc systemed 开机自启</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-built_in">mkdir</span> -p ~/.vnc<br>x11vnc -storepasswd ~/.vnc/passwd <span class="hljs-comment"># 创建链接密码</span><br><span class="hljs-built_in">sudo</span> vim /etc/systemd/system/x11vnc.service <span class="hljs-comment"># 创建 Systemd 服务配置</span><br><br><span class="hljs-comment">#### Systemd 服务配置 ####</span><br>[Unit]<br>Description=x11vnc <span class="hljs-keyword">for</span> <span class="hljs-built_in">cat</span> X11 desktop<br><br>After=display-manager.service network.target<br>Wants=display-manager.service<br><br>[Service]<br>Type=simple<br><br>ExecStartPre=/bin/sh -c <span class="hljs-string">&#x27;until [ -S /tmp/.X11-unix/X0 ] &amp;&amp; [ -r /run/user/1000/gdm/Xauthority ]; do sleep 1; done&#x27;</span><br><br>ExecStart=/usr/bin/x11vnc \<br>    -display :0 \<br>    -auth /run/user/1000/gdm/Xauthority \<br>    -rfbauth /home/cat/.vnc/passwd \<br>    -rfbport 5900 \<br>    -forever \<br>    -shared \<br>    -noxdamage \<br>    -repeat \<br>    -listen 0.0.0.0<br><br>Restart=on-failure<br>RestartSec=3<br><br>[Install]<br>WantedBy=graphical.target<br><span class="hljs-comment">#############################</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> x11vnc.service<br><span class="hljs-built_in">sudo</span> systemctl restart x11vnc.service<br></code></pre></td></tr></table></figure>
+<p><em>指定当前 Xorg 桌面以及 X11 认证文件。最后在 mobax 中启动 VNC会话即可。</em><br><img src="/../img/posts/2026-10-28/7.png" alt="mobax启动VNC会话，也可以使用其他viewer软件"></p>
 
                 
               </div>
@@ -452,7 +461,7 @@
     <div class="post-share-qr" id="post-share-qr">
       <span class="post-share-loading">二维码生成中…</span>
     </div>
-    <div class="post-share-name">网络共享ssh开发板</div>
+    <div class="post-share-name">网络共享ssh开发板 + vnc 远程桌面</div>
   </div>
 </div>
 
@@ -462,7 +471,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网络共享ssh开发板</div>
+      <div>网络共享ssh开发板 + vnc 远程桌面</div>
       <div>http://example.com/2026/10/28/网络共享ssh开发板/</div>
     </div>
     <div class="license-meta">
@@ -653,17 +662,15 @@
         
         
           <li>
-            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板" class="widget-recent-link">
+            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <span class="widget-recent-cover-placeholder">
-                    <i class="fa-solid fa-file-lines"></i>
-                  </span>
+                  <img src="/img/posts/2026-10-28/0.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">网络共享ssh开发板</span>
+                <span class="widget-post-title">网络共享ssh开发板 + vnc 远程桌面</span>
                 <span class="widget-post-date">10-28</span>
               </span>
             </a>
@@ -1144,17 +1151,15 @@
         
         
           <li>
-            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板" class="widget-recent-link">
+            <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
-                  <span class="widget-recent-cover-placeholder">
-                    <i class="fa-solid fa-file-lines"></i>
-                  </span>
+                  <img src="/img/posts/2026-10-28/0.png" alt="" loading="lazy" />
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">网络共享ssh开发板</span>
+                <span class="widget-post-title">网络共享ssh开发板 + vnc 远程桌面</span>
                 <span class="widget-post-date">10-28</span>
               </span>
             </a>
