@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-11-03T03:32:40.415Z">
+<meta property="article:modified_time" content="2026-11-04T15:34:44.222Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -336,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k 字
+          14k 字
         
       </span>
     
@@ -347,7 +347,7 @@
         
         
         
-          110 分钟
+          117 分钟
         
       </span>
     
@@ -466,6 +466,11 @@
 <h3 id="12-内核触摸驱动（完结）"><a href="#12-内核触摸驱动（完结）" class="headerlink" title="12. 内核触摸驱动（完结）"></a>12. 内核触摸驱动（完结）</h3><p><em>Linux 内核触摸驱动的核心是触摸屏核心层（touchscreen core）和多点触摸核心层（input-mt core）。</em></p>
 <p><em>kernel 将触摸屏的物理属性结构体抽象为 touchscreen_properties 储存了分辨率、坐标方向和翻转状态等。touchscreen_parse_properties() 从设备树中解析触摸屏的属性，自动填充 touchscreen_properties。touchscreen_report_pos() 用于标准化的触摸坐标上报，根据 touchscreen_properties 中的配置修正原始触摸坐标然后上报给输入子系统。</em></p>
 <p><em>input_mt_slot 存储单个触摸点的状态信息，每个触摸点对应一个 slot， input-mt core 通过 slot 管理多个触摸点，实现触摸点的跟踪和识别。input_mt 管理所有多点触摸槽位，存储多点触摸的全局状态。</em></p>
+<h3 id="13-V4L2"><a href="#13-V4L2" class="headerlink" title="13. V4L2"></a>13. V4L2</h3><h2 id="镜像构建和部署"><a href="#镜像构建和部署" class="headerlink" title="镜像构建和部署"></a>镜像构建和部署</h2><p><em>一个完整的 linux 系统通常包含：Uboot，kernel，设备树以及根文件系统。Uboot 主要用于嵌入式系统的引导加载程序(Universal Boot Loader)，可分为两个阶段 boot + loader，boot 阶段启动系统，初始化硬件设备，建立内存空间映射。loader 阶段将操作系统内核文件加载到内存，然后跳转到内核所在的地址运行。内核主要作为应用层和硬件层中间的一层抽象，包含进程管理、内存管理、系统调用、设备驱动等功能。DTB 设备树文件可以被内核和 BootLoader 识别解析，BootLoader 启动内核时会先读取 DTB 到内存，在提供给内核使用。</em></p>
+<h3 id="1-设备树插件制作-如何打Patch？"><a href="#1-设备树插件制作-如何打Patch？" class="headerlink" title="1 设备树插件制作 &amp;&amp; 如何打Patch？"></a>1 设备树插件制作 &amp;&amp; 如何打Patch？</h3><p>**</p>
+<p><em>.patch 是一个文本文件，描述修改的内容。打补丁是驱动开发中相当频繁的动作，因为当你修改了内核的某些文件时，你并不希望把整个内核源码全部发给其他人，而是写一个 Patch，让他打上补丁即可。这里以 imx415.c 为例说明，假设我在它的基础上进行了一些魔改，那么我就可以写一个补丁保存与原版的代码差异。然后在内核源码中(这里是 ~&#x2F;kernel)中执行以下命令，这样就相当于打了补丁，把修改覆盖到了对应的源码中。</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">git apply --check /补丁路径/0001-xxx.patch<br>git apply /补丁路径/0001-xxx.patch<br></code></pre></td></tr></table></figure>
+<p><em>源码目录下的 drivers&#x2F;media&#x2F;i2c&#x2F;Kconfig 记录了编译相关的配置信息。~&#x2F;kernel&#x2F;.config 决定了编译的具体配置，&#x3D;y 表示编译进内核，&#x3D;m 表示编译成模块。源码中 CONFIG_VIDEO_IMX415&#x3D;y 表示 imx415 的驱动被编译进了内核，也就是说每次修改驱动都需要重新编译内核并对当前的内核镜像进行替换。</em><br><img src="/../img/posts/2026-11-4/0.png" alt="Kconfig"></p>
 <h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
 <p><em>进程的地址空间：mmap系统调用 将文件或者设备映射到进程的虚拟地址空间中 实现更高效的文件访问操作 假如传递的参数重fd&#x3D;-1 其实就是在做匿名的内存映射 只分配内存不映射任何文件。</em></p>
 <p><em>僵尸进程和孤儿进程：僵尸进程是说子进程退出了但是资源并没有被父进程正确地释放 僵尸进程的积累会导致内存不足 孤儿进程是说一个进程的父进程先行退出了 相关概念涉及到进程的状态转换和资源调度。</em></p>
