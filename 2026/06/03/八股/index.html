@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-11-05T14:33:14.720Z">
+<meta property="article:modified_time" content="2026-11-17T05:37:00.939Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -336,7 +336,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          18k 字
         
       </span>
     
@@ -347,7 +347,7 @@
         
         
         
-          129 分钟
+          150 分钟
         
       </span>
     
@@ -451,29 +451,37 @@
 <p><em>Linux 4.4 后引入了动态设备树(Dyanmic DeviceTree)-设备树插件。可以理解为主设备树的补丁可以动态加载到内核中被识别，这样就不需要重新编译整个设备树了。以下是设备树插件的一个基本模板。</em></p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-keyword">/dts-v1/</span><span class="hljs-punctuation">;</span> <span class="hljs-meta"># 指定 dts 版本</span><br><span class="hljs-keyword">/plugin/</span><span class="hljs-punctuation">;</span> <span class="hljs-meta"># 表示允许使用未定义的引用</span><br><br> / <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-title class_">fragment@0</span> <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">target-path</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/&quot;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-title class_">__overlay__</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-comment">/*在此添加要插入的节点*/</span><br>                .......<br>            <span class="hljs-punctuation">&#125;;</span><br>        <span class="hljs-punctuation">&#125;;</span><br><br>        <span class="hljs-title class_">fragment@1</span> <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">target</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;</span>XXXXX&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-title class_">__overlay__</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-comment">/*在此添加要插入的节点*/</span><br>                .......<br>            <span class="hljs-punctuation">&#125;;</span><br>        <span class="hljs-punctuation">&#125;;</span><br>    .......<br> <span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
 <p><em>下图是一个设备树插件的加载过程。设备树插件放在源码目录 &#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;overlays 下，修改 Makefile 来添加我们新增的设备树插件，然后就可以进行设备树插件的编译了。设备树插件拷贝到 &#x2F;boot&#x2F;dtb&#x2F;overlay&#x2F; 目录下。然后在 &#x2F;boot&#x2F;uEnv&#x2F;uEnv.txt 中按照格式添加我们的设备树插件，reboot 后系统会重新加载我们的编译的设备树插件。</em><br><img src="/../img/posts/2026-11-4/1.png" alt="设备树插件加载"></p>
-<h3 id="7-Pinctrl-子系统-和-GPIO-子系统（完结）"><a href="#7-Pinctrl-子系统-和-GPIO-子系统（完结）" class="headerlink" title="7. Pinctrl 子系统 和 GPIO 子系统（完结）"></a>7. Pinctrl 子系统 和 GPIO 子系统（完结）</h3><p><em>一个芯片引脚通常可以作为多个片上外设的引脚，我们使用某一个外设时通常要先去配置引脚复用和设置引脚的属性。Pinctrl 子系统就是用来帮助我们管理芯片引脚并自动完成引脚初始化的。这一部分在设备树的 iomuxc 节点下，我们可以在 imouxc 节点中追加不同内容，创建 Pinctrl 子节点作为不同的初始引脚组。简而言之，Pinctrl 子系统专注于引脚功能复用、电气属性配置和底层资源分配。</em></p>
+<h3 id="7-Pinctrl-子系统-和-GPIO-子系统（完结）"><a href="#7-Pinctrl-子系统-和-GPIO-子系统（完结）" class="headerlink" title="7. Pinctrl 子系统 和 GPIO 子系统（完结）"></a>7. Pinctrl 子系统 和 GPIO 子系统（完结）</h3><p><em>一个芯片引脚通常可以作为多个片上外设的引脚，我们使用某一个外设时通常要先去配置引脚复用和设置引脚的属性。Pinctrl 子系统就是用来帮助我们管理芯片引脚并自动完成引脚初始化的。具体来说在 imx6ull 上 Pinctrl 子系统在设备树的 iomuxc 节点下，我们可以在 imouxc 节点中追加不同内容，创建 Pinctrl 子节点作为不同的初始引脚组。简而言之，Pinctrl 子系统专注于引脚功能复用、电气属性配置和底层资源分配。</em></p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">pinctrl-names</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 定义引脚状态</span><br>    pinctrl<span class="hljs-number">-0</span> = <span class="hljs-params">&lt;<span class="hljs-variable">&amp;pinctrl_hog_1</span>&gt;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 第 i 中状态的具体引脚配置</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_hog_1:</span> <span class="hljs-title class_">hoggrp-1</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_UART1_RTS_B__GPIO1_IO19   <span class="hljs-number">0x17059</span> /* SD1 CD */</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO05__USDHC1_VSELECT    <span class="hljs-number">0x17059</span> /* SD1 VSELECT */</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        <span class="hljs-number">0x17059</span> /* SD1 RESET */</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 引脚复用宏定义(引脚复用选择寄存器偏移地址和设置值 引脚属性控制寄存器偏移地址 输入选择寄存器的偏移地址和设置值) + pad 属性</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_enet1:</span> <span class="hljs-title class_">enet1grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_ENET1_RX_EN__ENET1_RX_EN  <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            MX6UL_PAD_ENET1_RX_ER__ENET1_RX_ER  <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            /*------------以下省略-----------------*/</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_enet2:</span> <span class="hljs-title class_">enet2grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO07__ENET2_MDC     <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            MX6UL_PAD_GPIO1_IO06__ENET2_MDIO    <span class="hljs-number">0x1b0b0</span></span><br><span class="hljs-params">            /*------------以下省略-----------------*/</span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">    pinctrl_uart1:</span> <span class="hljs-title class_">uart1grp</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">fsl,pins</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;</span><br><span class="hljs-params">            MX6UL_PAD_UART1_TX_DATA__UART1_DCE_TX <span class="hljs-number">0x1b0b1</span></span><br><span class="hljs-params">            MX6UL_PAD_UART1_RX_DATA__UART1_DCE_RX <span class="hljs-number">0x1b0b1</span></span><br><span class="hljs-params">        &gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 <p><img src="/../img/posts/2026-11-4/2.png" alt="Pinctrl 子系统描述"><br><em>内核将 pinctrl 控制器驱动抽象为 pinctrl_desc(由芯片厂商的工程师写代码初始化该结构体，并调用 pinctrl_register() 把它交给核心层)。在核心层注册后生成 pinctrl_dev，它是具体的运行示例(动态分配)，而前者则主要是静态的配置信息。核心层(Pin Controller core)需要去执行具体操作时，会通过 pinctrl_dev 的指针找到 desc，然后调用挂载的 ops 函数去操作硬件。</em></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinctrl_desc</span> &#123;</span><br><span class="hljs-type">const</span> <span class="hljs-type">char</span> *name;                      <span class="hljs-comment">//引脚控制器名称</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinctrl_pin_desc</span> *<span class="hljs-title">pins</span>;</span>   <span class="hljs-comment">//描述一个pin控制器的引脚,</span><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> npins;                    <span class="hljs-comment">//描述该控制器有多少个引脚</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinctrl_ops</span> *<span class="hljs-title">pctlops</span>;</span>     <span class="hljs-comment">//引脚操作函数，有描述引脚，获取引脚等，全局控制函数</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinmux_ops</span> *<span class="hljs-title">pmxops</span>;</span>       <span class="hljs-comment">//引脚复用相关的操作函数</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinconf_ops</span> *<span class="hljs-title">confops</span>;</span>     <span class="hljs-comment">//引脚配置相关</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">module</span> *<span class="hljs-title">owner</span>;</span>                  <span class="hljs-comment">//所属内核模块，防止驱动被意外卸载</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CONFIG_GENERIC_PINCONF</span><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> num_custom_params;        <span class="hljs-comment">//自定义引脚配置参数数量</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pinconf_generic_params</span> *<span class="hljs-title">custom_params</span>;</span> <span class="hljs-comment">//自定义参数集合</span><br><span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pin_config_item</span> *<span class="hljs-title">custom_conf_items</span>;</span>    <span class="hljs-comment">//配置项映射</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>&#125;;<br></code></pre></td></tr></table></figure>
-<p><em>在没有使用 GPIO 子系统之前，我们需要获取外设相关寄存器，然后进行手动的读、改、写。引入 GPIO 后，我们可以调用其提供的相关 api 完成对 GPIO 的控制操作。以 GPIO4 为例，下面是其中具体的配置信息。我们只需要在我们自己创建的节点中声明要引用的 pinctrl 子节点，并通过 gpio 子系统配置高或者低电平有效就可以调用 api 实现控制了。of_get_named_gpio、gpio_request、gpio_free、gpio_direction_output。简而言之，GPIO 子系统基于 Pinctrl 的配置结果，实现通用输入与输出引脚的电平控制与方向管理。GPIO 子系统是基于 Pinctrl 子系统的上层应用子系统，专注于完成引脚方向配置、电平读写、中断申请。</em><br><img src="/../img/posts/2026-11-4/3.png" alt="GPIO 子系统描述"><br>**</p>
+<p><em>在没有使用 GPIO 子系统之前，我们需要获取外设相关寄存器，然后进行手动的读、改、写。引入 GPIO 后，我们可以调用其提供的相关 api 完成对 GPIO 的控制操作。以 GPIO4 为例，下面是其中具体的配置信息。我们只需要在我们自己创建的节点中声明要引用的 pinctrl 子节点，并通过 GPIO 子系统配置高或者低电平有效就可以调用 api 实现控制了。简而言之，GPIO 子系统基于 Pinctrl 的配置结果，实现通用输入与输出引脚的电平控制与方向管理，它基于 Pinctrl 子系统的上层应用子系统，专注于完成引脚方向配置、电平读写、中断申请。</em><br><img src="/../img/posts/2026-11-4/3.png" alt="GPIO 子系统描述"><br><em>gpio_device 是对 GPIO 控制器的软件抽象，它包含了指向底层硬件的操作结构 gpio_chip(通常由 SoC 厂商编写，包含了控制器的硬件信息和相关的操作函数指针) 的指针，它的关键作用在于管理生命周期。它的内部还维护着一个 gpio_desc 的数组，可以理解为是单个引脚的”状态描述符”或者”句柄”，上层驱动通过获取这个”句柄”来操作具体的引脚。</em></p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-symbol">gpio4:</span> <span class="hljs-title class_">gpio@20a8000</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;fsl,imx6ul-gpio&quot;</span>, <span class="hljs-string">&quot;fsl,imx35-gpio&quot;</span><span class="hljs-punctuation">;</span><br><span class="hljs-attr">reg</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x20a8000</span> <span class="hljs-number">0x4000</span>&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-attr">interrupts</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;GIC_SPI <span class="hljs-number">72</span> IRQ_TYPE_LEVEL_HIGH&gt;</span>,<br>            <span class="hljs-params">&lt;GIC_SPI <span class="hljs-number">73</span> IRQ_TYPE_LEVEL_HIGH&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-attr">clocks</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;clks</span> IMX6UL_CLK_GPIO4&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-attr">gpio-controller</span><span class="hljs-punctuation">;</span><br><span class="hljs-meta">#gpio-cells = &lt;2&gt;;</span><br><span class="hljs-attr">interrupt-controller</span><span class="hljs-punctuation">;</span><br><span class="hljs-meta">#interrupt-cells = &lt;2&gt;;</span><br><span class="hljs-attr">gpio-ranges</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-number">0</span> <span class="hljs-number">94</span> <span class="hljs-number">17</span>&gt;</span>, <span class="hljs-params">&lt;<span class="hljs-variable">&amp;iomuxc</span> <span class="hljs-number">17</span> <span class="hljs-number">117</span> <span class="hljs-number">12</span>&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-punctuation">&#125;;</span><br><br>rgb_led<span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-meta">#address-cells = &lt;1&gt;;rtmp:<span class="hljs-comment">//192.168.3.21/edgestream</span></span><br>    <span class="hljs-meta">#size-cells = &lt;1&gt;;</span><br>    <span class="hljs-attr">pinctrl-names</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;fire,rgb-led&quot;</span><span class="hljs-punctuation">;</span><br>    pinctrl<span class="hljs-number">-0</span> = <span class="hljs-params">&lt;<span class="hljs-variable">&amp;pinctrl_rgb_led</span>&gt;</span><span class="hljs-punctuation">;</span><br>    rgb_led_<span class="hljs-attr">red</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;gpio1</span> <span class="hljs-number">4</span> GPIO_ACTIVE_LOW&gt;</span><span class="hljs-punctuation">;</span><br>    rgb_led_<span class="hljs-attr">green</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;gpio4</span> <span class="hljs-number">20</span> GPIO_ACTIVE_LOW&gt;</span><span class="hljs-punctuation">;</span><br>    rgb_led_<span class="hljs-attr">blue</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;gpio4</span> <span class="hljs-number">19</span> GPIO_ACTIVE_LOW&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">status</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;okay&quot;</span><span class="hljs-punctuation">;</span><br><span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
 <h3 id="8-IIC-子系统（完结）"><a href="#8-IIC-子系统（完结）" class="headerlink" title="8. IIC 子系统（完结）"></a>8. IIC 子系统（完结）</h3><p><em>i2c 使用两根物理总线，SCL 和 SDA，支持一主多从模式。这里需要简单了解一下 i2c 的时序结构：start，stop 的条件，特殊的边沿触发。SCL 高电平期间接收方采样 SDA 数据，低电平期间 SDA 可以发生变化。从设备可以强制拉低 SCL，给自己争取更多时间后，再变化 SDA。每次传输都需要应答位(ACK NACK)，区分不同从设备的方式是根据不同的从设备地址。</em></p>
 <p><em>i2c 的驱动框架包括 i2c 总线驱动和具体到某个设备的驱动，如图所示。</em><br><img src="/../img/posts/2026-06-03/11-i2c.png" alt="i2c驱动框架"></p>
 <p><em>i2c_adapter 是内核中对 i2c 控制器的抽象(soc 内部硬件，负责产生 i2c 总线时序的硬件模块)，用于确认物理 i2c 总线，内部含有访问该总线的算法结构。</em></p>
-<h3 id="8-中断子系统（完结）"><a href="#8-中断子系统（完结）" class="headerlink" title="8. 中断子系统（完结）"></a>8. 中断子系统（完结）</h3><p><em>设备树中 #interrupts-cells 规定了位于该节点下的”子中断控制器”将使用几个参数来描述子控制器的信息；interrupts&#x3D;<xxx xxx xxx> 就是具体的中断描述信息。包括中断类型(SPI 共享中断、PPI 私有中断、SGI 软件中断)，中断编号(PPI 中断范围 0-15 SPI 中断范围 0-987)，指定的中断触发方式；interrupt-controller 声明该节点是一个中断控制器。</em></p>
-<p><em>中断子系统提供了如下相关的api:irq_of_parse_and_map()用于解析设备树的中断部分并获取中断号；request_irq 申请中断绑定处理函数；free_irq 中断注销函数；xxx_irq_handler(Interrupt Service Routine)具体的中断服务函数实现。</em></p>
-<p><em>关于中断的两点：中断不能互相嵌套，中断服务函数应该尽量短，不允许调用 sleep 之类的阻塞代码。但有的情况下中断产生后需要较长时间来处理，不允许嵌套的条件下引入了中断的上下半部机制，比较耗时的部分放在中断的下半部。实现中断的方式有软中断、tasklet、工作队列。具体来说软中断由软件发送中断指令产生，kernel 中使用一个枚举变量列出了所有可用的软中断。open_softirq()是软中断的注册函数，其中进行了对 softirq_vec 的赋值，可以理解为软中断的中断向量表，所谓的注册软中断函数就是根据中断号将中断服务函数的地址写入数组对应的位置。raise_softirq()触发软中断执行具体的服务函数。tasklet 基于软中断实现，如果对效率没有特殊要求推荐使用，相较于软中断更简单需要考虑的东西更少。驱动中使用 tasklet_struct 表示一个 tasklet，使用 tasklet_init 进行初始化，使用 tasklet_schedule 触发。与以上两者不同的是工作队列，它运行在内核线程，运行被重新调度和睡眠，如果中断的下半部分能够接受被重新调度和睡眠就可以使用工作队列。使用的时候我们不需要关心队列以及队列工作的内核线程，我们只需要定义工作并初始化，工作被抽象为 work_struct 结构体，使用 INIT_WORK()宏初始化结构体，schedule_work 启动工作相应的内核线程会执行工作结构体指定的处理函数。</em></p>
-<h3 id="9-输入子系统（完结）"><a href="#9-输入子系统（完结）" class="headerlink" title="9. 输入子系统（完结）"></a>9. 输入子系统（完结）</h3><p><em>输入子系统：Input Core + Handlers.</em></p>
-<p><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
+<h3 id="9-中断子系统（完结）"><a href="#9-中断子系统（完结）" class="headerlink" title="9. 中断子系统（完结）"></a>9. 中断子系统（完结）</h3><p><em>中断子系统的作用简单来说就是外设主动通知，内核异步响应，下图展示了中断子系统的硬件描述。</em><br><img src="/../img/posts/2026-11-4/4.png" alt="中断硬件拓扑结构"><br><em>ARM 多核处理器最常用的中断控制器是 GIC，主要作用是接受硬件中断信号，通过设置策略分发给对应的 CPU 处理。RK3588 的中断控制器是 GIC-600，它主要基于 GIV-v3 的架构，包含 Distributor、CPU interface、Redistributor、ITS。Distributor 负责 SPI 的管理，具有仲裁和分发的功能，会将中断发送给 Redistributor。CPU interface 为链接到 GIC 的处理器提供结构，它可以开启或关闭发往 CPU 的中断请求，只有优先级高于中断优先级掩码的中断请求才能被发送到 CPU。Redistributor管理 SGI，PPI，LPI 中断，然后将中断发送给 CPU interface。</em><br><img src="/../img/posts/2026-11-4/5.png" alt="GIC V3.0"><br><em>设备树中 #interrupts-cells 规定了位于该节点下的”子中断控制器”将使用几个参数来描述子控制器的信息；interrupts&#x3D;<xxx xxx xxx> 就是具体的中断描述信息。包括中断类型(SPI 共享中断、PPI 私有外设中断、SGI 软件中断)；中断编号(INDID，SGI、PPI、SPI 有着不同的中断 ID 范围)；指定的中断触发方式。interrupt-controller 声明该节点是一个中断控制器。</em></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs DTS"><span class="hljs-symbol">gic:</span> <span class="hljs-title class_">interrupt-controller@fd400000</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;arm,gic-v3&quot;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-meta">#interrupt-cells = &lt;3&gt;;</span><br>    <span class="hljs-meta">#address-cells = &lt;2&gt;;</span><br>    <span class="hljs-meta">#size-cells = &lt;2&gt;;</span><br>    <span class="hljs-attr">ranges</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">interrupt-controller</span><span class="hljs-punctuation">;</span><br><br>    <span class="hljs-attr">reg</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x0</span> <span class="hljs-number">0xfd400000</span> <span class="hljs-number">0</span> <span class="hljs-number">0x10000</span>&gt;</span>, <span class="hljs-comment">/* GICD */</span><br>        <span class="hljs-params">&lt;<span class="hljs-number">0x0</span> <span class="hljs-number">0xfd460000</span> <span class="hljs-number">0</span> <span class="hljs-number">0xc0000</span>&gt;</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">/* GICR */</span><br>    <span class="hljs-attr">interrupts</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;GIC_PPI <span class="hljs-number">9</span> IRQ_TYPE_LEVEL_HIGH&gt;</span><span class="hljs-punctuation">;</span><br><span class="hljs-symbol">    its:</span> <span class="hljs-title class_">interrupt-controller@fd440000</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;arm,gic-v3-its&quot;</span><span class="hljs-punctuation">;</span><br>        <span class="hljs-attr">msi-controller</span><span class="hljs-punctuation">;</span><br>        <span class="hljs-meta">#msi-cells = &lt;1&gt;;</span><br>        <span class="hljs-attr">reg</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x0</span> <span class="hljs-number">0xfd440000</span> <span class="hljs-number">0x0</span> <span class="hljs-number">0x20000</span>&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
+<p><em>中断子系统提供了如下相关的 api: irq_of_parse_and_map()用于解析设备树的中断部分并获取中断号；request_irq 申请中断绑定处理函数；free_irq 中断注销函数；xxx_irq_handler(Interrupt Service Routine)具体的中断服务函数实现；gpiod_to_irq 将 GPIO 描述符转换为内核对应的中断号。</em></p>
+<p><em>关于中断的两点：中断不能互相嵌套，中断服务函数应该尽量短，不允许调用 sleep 之类的阻塞代码(原子操作)。但有的情况下中断产生后需要较长时间来处理，不允许嵌套的条件下引入了中断的上下半部机制，比较耗时的部分放在中断的下半部。顶半部快速完成必要操作(屏蔽中断、保存上下文、清除中断标志)触发底半部机制。顶半部执行完毕后，CPU 恢复被中断的任务，底半部由内核调度器统筹安排，在合适的时机执行。</em></p>
+<p><em>实现底半部机制的方式有软中断、tasklet、工作队列。具体来说软中断由软件发送中断指令产生，它是最底层的底半部机制，运行在硬中断处理完毕后延迟处理一些非紧急的中断后续操作。Kernel 中使用一个枚举变量列出了所有可用的软中断，open_softirq()是软中断的注册函数，其中进行了对 softirq_vec 的赋值，可以理解为软中断的中断向量表，所谓的注册软中断函数就是根据中断号将中断服务函数的地址写入数组对应的位置。raise_softirq() 用于触发软中断执行，将指定编号的软中断加入调度队列，等待内核调度。注意：软中断的处理函数不能调用阻塞函数。</em></p>
+<p><em>tasklet 基于软中断实现，如果对效率没有特殊要求推荐使用，相较于软中断更简单需要考虑的东西更少(简单易用、串行执行、最常用)。驱动中使用 tasklet_struct 表示一个 tasklet，使用 tasklet_init() 进行初始化；使用 tasklet_schedule() 调度 tasklet 执行，将 tasklet 加入软中断队列；使用 tasklet_kill 终止 tasklet 执行。它同样不能调用阻塞函数。</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tasklet_struct</span> &#123;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tasklet_struct</span> *<span class="hljs-title">next</span>;</span>  <span class="hljs-comment">// 链表指针，用于链接多个tasklet</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> state;          <span class="hljs-comment">// tasklet状态，0：未触发；TASKLET_STATE_SCHED：已触发待执行</span><br>    <span class="hljs-type">atomic_t</span> count;               <span class="hljs-comment">// 引用计数，0：可执行；非0：不可执行</span><br>    <span class="hljs-type">void</span> (*func)(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>);  <span class="hljs-comment">// tasklet处理函数</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> data;           <span class="hljs-comment">// 传递给处理函数的参数</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><em>与以上两者不同的是工作队列，它的核心在于把延迟处理的任务交给内核线程完成，允许被重新调度和睡眠，所以支持调用阻塞函数。使用的时候我们不需要关心队列以及队列工作的内核线程，我们只需要定义工作并初始化，工作任务被抽象为 work_struct 结构体，用于描述工作任务。使用 INIT_WORK() 宏初始化工作任务，schedule_work() 将工作任务提交到默认工作队列。</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">work_struct</span> &#123;</span><br>    <span class="hljs-type">atomic_long_t</span> data;           <span class="hljs-comment">// 传递给处理函数的参数</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list_head</span> <span class="hljs-title">entry</span>;</span>       <span class="hljs-comment">// 链表指针，用于链接到工作队列</span><br>    <span class="hljs-type">work_func_t</span> func;             <span class="hljs-comment">// 工作处理函数</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">workqueue_struct</span> *<span class="hljs-title">wq</span>;</span>  <span class="hljs-comment">// 所属的工作队列</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list_head</span> <span class="hljs-title">pending</span>;</span>     <span class="hljs-comment">// 挂起链表</span><br>    ...<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="10-并发与竞争、IO（完结）"><a href="#10-并发与竞争、IO（完结）" class="headerlink" title="10. 并发与竞争、IO（完结）"></a>10. 并发与竞争、IO（完结）</h3><p><em>竞争的根源是并发执行流无保护争抢共享资源，解决竞态的本质是划定临界区、隔离并发访问。Linux 提供了多级并发控制机制来解决这种竞态问题：原子操作、自旋锁、互斥锁、信号量。内核将 atomic_t 作为原子类型的抽象，内部封装了一个整型变量，不允许直接访问必须借助相关的 api 接口调用。自旋锁则是一种基于忙等待的内核同步机制，线程会原地循环检测锁状态直到锁被释放然后立即获取锁并执行临界区的代码。简单来说：一个简单变量用原子操作；极短且不能睡眠的临界区考虑自旋锁；可以睡眠的进程上下文通常优先用互斥锁；限制资源数量时考虑计数信号量。</em></p>
+<p><em>IO 操作的核心本质是数据交互和传输，可以分为阻塞和非阻塞两种模式。阻塞模式下，进程等待 IO 就绪期间处于休眠状态(进程放弃 CPU，内核监听 IO 状态，直到就绪后唤醒等待队列中的进程)，这个过程不消耗 CPU，无需额外的轮询。非阻塞模式下，进程发起 IO 请求，无论条件是否满足都会立刻返回结果，如果返回错误标识可以轮询继续发起请求或者处理其他任务，但为了避免轮询 CPU 占用过高一般会配合 poll&#x2F;select&#x2F;epoll 等事件监听机制使用。无论是哪种模式，IO 就绪是核心触发条件，它通常指硬件设备已经准备好数据、内核缓冲区有可用空间。</em></p>
+<p><em>阻塞模式下，init_waitqueue_head() 用于初始化等待队列头，用于管理休眠的进程；可以通过 wait_event() 和 wake_up() 系列 api 休眠或唤醒进程(可以分为是否可中断)。非阻塞模式下，驱动层实现的 poll 回调函数用于响应用户空间的 poll 请求，检测 IO 状态，返回就绪的 IO 事件。</em></p>
+<p><em>除了上述两种机制，内核还提供了异步通知机制。内核在 IO 事件就绪时主动向应用层发送信号，通知应用程序处理 IO 操作，核心是进程注册 IO 事件通知然后正常执行其他任务，无需主动检测 IO 状态，当内核检测到 IO 事件就绪时，主动向进程发送指定信号，进程捕获信号再去处理对应操作。</em></p>
+<h3 id="11-输入子系统（完结）"><a href="#11-输入子系统（完结）" class="headerlink" title="11. 输入子系统（完结）"></a>11. 输入子系统（完结）</h3><p><em>输入子系统：Input Core + Handlers.</em><br><img src="/../img/posts/2026-11-4/6.png" alt="输入子系统框架"><br><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
 <p><em>输入设备的输入信息被抽象为 input_event，包括了事件产生的时间、输入设备的类型、具体值等。具体的输入设备被抽象为 input_dev，包括用户层输入设备的名称、id号、设备支持的事件类型、支持记录的键值&#x2F;坐标值。使用 input_allocate_device() 申请输入设备、input_free_device() 释放设备。使用 input_register_device() &#x2F; input_unregister_device() 将输入设备注册和注销到输入子系统的核心层。使用 input_event() 进行事件上报，input_sync() 是对它的封装表示上报结束。</em></p>
-<h3 id="10-PWM-子系统（完结）"><a href="#10-PWM-子系统（完结）" class="headerlink" title="10. PWM 子系统（完结）"></a>10. PWM 子系统（完结）</h3><p><em>驱动中使用 pwm_device 代表一个 pwm 设备包含 period(单位是ns)、duty_cycle、polarity。pwm_config() 配置频率和占空比，pwm_set_polarity() 设置 PWM 极性。在设备树添加设置 pwms 和 pwm-names 的属性信息即可。</em></p>
-<h3 id="11-内核-DRM-显示框架（完结）"><a href="#11-内核-DRM-显示框架（完结）" class="headerlink" title="11. 内核 DRM 显示框架（完结）"></a>11. 内核 DRM 显示框架（完结）</h3><p><em>DRM(Direct Rendering Manager, 直接渲染管理器) 是 linux 内核标准的现代化显示子系统框架，替代了传统的 FrameBuffer，是目前主流的显示驱动解决方案。</em></p>
-<h3 id="12-内核触摸驱动（完结）"><a href="#12-内核触摸驱动（完结）" class="headerlink" title="12. 内核触摸驱动（完结）"></a>12. 内核触摸驱动（完结）</h3><p><em>Linux 内核触摸驱动的核心是触摸屏核心层（touchscreen core）和多点触摸核心层（input-mt core）。</em></p>
+<h3 id="12-PWM-子系统（完结）"><a href="#12-PWM-子系统（完结）" class="headerlink" title="12. PWM 子系统（完结）"></a>12. PWM 子系统（完结）</h3><p><em>驱动中使用 pwm_device 代表一个 pwm 设备包含 period(单位是ns)、duty_cycle、polarity。pwm_config() 配置频率和占空比，pwm_set_polarity() 设置 PWM 极性。在设备树添加设置 pwms 和 pwm-names 的属性信息即可。</em></p>
+<h3 id="13-内核-DRM-显示框架（完结）"><a href="#13-内核-DRM-显示框架（完结）" class="headerlink" title="13. 内核 DRM 显示框架（完结）"></a>13. 内核 DRM 显示框架（完结）</h3><p><em>DRM(Direct Rendering Manager, 直接渲染管理器) 是 linux 内核标准的现代化显示子系统框架，替代了传统的 FrameBuffer，是目前主流的显示驱动解决方案。</em></p>
+<h3 id="14-内核触摸驱动（完结）"><a href="#14-内核触摸驱动（完结）" class="headerlink" title="14. 内核触摸驱动（完结）"></a>14. 内核触摸驱动（完结）</h3><p><em>Linux 内核触摸驱动的核心是触摸屏核心层（touchscreen core）和多点触摸核心层（input-mt core）。</em></p>
 <p><em>kernel 将触摸屏的物理属性结构体抽象为 touchscreen_properties 储存了分辨率、坐标方向和翻转状态等。touchscreen_parse_properties() 从设备树中解析触摸屏的属性，自动填充 touchscreen_properties。touchscreen_report_pos() 用于标准化的触摸坐标上报，根据 touchscreen_properties 中的配置修正原始触摸坐标然后上报给输入子系统。</em></p>
 <p><em>input_mt_slot 存储单个触摸点的状态信息，每个触摸点对应一个 slot， input-mt core 通过 slot 管理多个触摸点，实现触摸点的跟踪和识别。input_mt 管理所有多点触摸槽位，存储多点触摸的全局状态。</em></p>
-<h3 id="13-V4L2"><a href="#13-V4L2" class="headerlink" title="13. V4L2"></a>13. V4L2</h3><h2 id="镜像构建和部署"><a href="#镜像构建和部署" class="headerlink" title="镜像构建和部署"></a>镜像构建和部署</h2><p><em>一个完整的 linux 系统通常包含：Uboot，kernel，设备树以及根文件系统。Uboot 主要用于嵌入式系统的引导加载程序(Universal Boot Loader)，可分为两个阶段 boot + loader，boot 阶段启动系统，初始化硬件设备，建立内存空间映射。loader 阶段将操作系统内核文件加载到内存，然后跳转到内核所在的地址运行。内核主要作为应用层和硬件层中间的一层抽象，包含进程管理、内存管理、系统调用、设备驱动等功能。DTB 设备树文件可以被内核和 BootLoader 识别解析，BootLoader 启动内核时会先读取 DTB 到内存，在提供给内核使用。</em></p>
-<h3 id="1-设备树插件制作-如何打Patch？"><a href="#1-设备树插件制作-如何打Patch？" class="headerlink" title="1 设备树插件制作 &amp;&amp; 如何打Patch？"></a>1 设备树插件制作 &amp;&amp; 如何打Patch？</h3><p>**</p>
-<p><em>.patch 是一个文本文件，描述修改的内容。打补丁是驱动开发中相当频繁的动作，因为当你修改了内核的某些文件时，你并不希望把整个内核源码全部发给其他人，而是写一个 Patch，让他打上补丁即可。这里以 imx415.c 为例说明，假设我在它的基础上进行了一些魔改，那么我就可以写一个补丁保存与原版的代码差异。然后在内核源码中(这里是 ~&#x2F;kernel)中执行以下命令，这样就相当于打了补丁，把修改覆盖到了对应的源码中。</em></p>
+<h3 id="15-V4L2"><a href="#15-V4L2" class="headerlink" title="15. V4L2"></a>15. V4L2</h3><h2 id="镜像构建和部署"><a href="#镜像构建和部署" class="headerlink" title="镜像构建和部署"></a>镜像构建和部署</h2><p><em>一个完整的 linux 系统通常包含：Uboot，kernel，设备树以及根文件系统。Uboot 主要用于嵌入式系统的引导加载程序(Universal Boot Loader)，可分为两个阶段 boot + loader，boot 阶段启动系统，初始化硬件设备，建立内存空间映射。loader 阶段将操作系统内核文件加载到内存，然后跳转到内核所在的地址运行。内核主要作为应用层和硬件层中间的一层抽象，包含进程管理、内存管理、系统调用、设备驱动等功能。DTB 设备树文件可以被内核和 BootLoader 识别解析，BootLoader 启动内核时会先读取 DTB 到内存，在提供给内核使用。</em></p>
+<h3 id="1-设备树插件制作-如何打Patch？"><a href="#1-设备树插件制作-如何打Patch？" class="headerlink" title="1 设备树插件制作 &amp;&amp; 如何打Patch？"></a>1 设备树插件制作 &amp;&amp; 如何打Patch？</h3><p><em>.patch 是一个文本文件，描述修改的内容。打补丁是驱动开发中相当频繁的动作，因为当你修改了内核的某些文件时，你并不希望把整个内核源码全部发给其他人，而是写一个 Patch，让他打上补丁即可。这里以 imx415.c 为例说明，假设我在它的基础上进行了一些魔改，那么我就可以写一个补丁保存与原版的代码差异。然后在内核源码中(这里是 ~&#x2F;kernel)中执行以下命令，这样就相当于打了补丁，把修改覆盖到了对应的源码中。</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Bash">git apply --check /补丁路径/0001-xxx.patch<br>git apply /补丁路径/0001-xxx.patch<br></code></pre></td></tr></table></figure>
 <p><em>源码目录下的 drivers&#x2F;media&#x2F;i2c&#x2F;Kconfig 记录了编译相关的配置信息。~&#x2F;kernel&#x2F;.config 决定了编译的具体配置，&#x3D;y 表示编译进内核，&#x3D;m 表示编译成模块。源码中 CONFIG_VIDEO_IMX415&#x3D;y 表示 imx415 的驱动被编译进了内核，也就是说每次修改驱动都需要重新编译内核并对当前的内核镜像进行替换。</em><br><img src="/../img/posts/2026-11-4/0.png" alt="Kconfig"></p>
 <h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><h3 id="进程？"><a href="#进程？" class="headerlink" title="进程？"></a>进程？</h3><p><em>进程：</em><br><em>pid和如何创建进程：pid存储在什么位置？一个直观的设计想法是存储在某一块只读内存上，我们可以通过一个指针指向这块内存读出进程号。但unix的系统设计则是pid由内核管理和记录 所以如果我们需要知道pid 就需要向OS申请 也就是通过系统调用得到pid 引出了fork execve这两个非常重要的系统调用 这当然是在unix系统下的具体实践。</em></p>
@@ -676,7 +684,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">38</span>
+          <span class="widget-stat-num">39</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -686,7 +694,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">14</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -734,6 +742,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-date">11-07</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
@@ -808,21 +833,6 @@
               <span class="widget-recent-info">
                 <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
                 <span class="widget-post-date">08-20</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ Lambda表达式</span>
-                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
@@ -1173,7 +1183,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">38</span>
+          <span class="widget-stat-num">39</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1183,7 +1193,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">14</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1223,6 +1233,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-date">11-07</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
@@ -1301,21 +1328,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ Lambda表达式</span>
-                <span class="widget-post-date">08-19</span>
-              </span>
-            </a>
-          </li>
-        
       </ul>
     </div>
 
@@ -1330,7 +1342,7 @@
           <li>
             <a href="/categories/IMX6ULL/">
               <span class="widget-cat-name">IMX6ULL</span>
-              <span class="widget-cat-count">12</span>
+              <span class="widget-cat-count">11</span>
             </a>
           </li>
         
@@ -1447,6 +1459,13 @@
         
           <li>
             <a href="/archives">
+              <span class="widget-archive-month">2026 年 11 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
               <span class="widget-archive-month">2026 年 10 月</span>
               <span class="widget-archive-count">2 篇</span>
             </a>
@@ -1480,13 +1499,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/archives">
-              <span class="widget-archive-month">2026 年 05 月</span>
-              <span class="widget-archive-count">14 篇</span>
-            </a>
-          </li>
-        
       </ul>
       <a href="/archives" class="widget-more-link">
         查看全部归档 <i class="fa-solid fa-chevron-right"></i>
@@ -1500,7 +1512,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">38</span>
+          <span class="widget-info-value">39</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
@@ -1508,7 +1520,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">13</span>
+          <span class="widget-info-value">14</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1518,7 +1530,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-10-28</span>
+        <span>最后更新：2026-11-07</span>
       </div>
       
     </div>

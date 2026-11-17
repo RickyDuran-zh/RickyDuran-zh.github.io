@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/shared/algorithm.png">
 <meta property="article:published_time" content="2026-06-07T06:16:38.000Z">
-<meta property="article:modified_time" content="2026-11-05T06:33:29.886Z">
+<meta property="article:modified_time" content="2026-11-06T03:39:19.349Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -421,8 +421,8 @@
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">wordBreak</span><span class="hljs-params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;<br>        unordered_set&lt;string&gt; dictset;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> <span class="hljs-type">word</span> : wordDict)&#123;<br>            dictset.<span class="hljs-built_in">insert</span>(<span class="hljs-type">word</span>);<br>        &#125;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(s.size()<span class="hljs-number">+1</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++)&#123;<br>                <span class="hljs-keyword">if</span>(dp[j] &amp;&amp; dictset.<span class="hljs-built_in">find</span>(s.<span class="hljs-built_in">substr</span>(j,i - j)) != dictset.<span class="hljs-built_in">end</span>())&#123;<br>                    dp[i] = <span class="hljs-literal">true</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>121 买股票的最佳时机</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 递推关系 dp[i] = max(dp[i-1], prices[i] - minPrice[0..i-1]) 实际可以把空间复杂度优化到 O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-type">int</span> minPrice = INT_MAX;<br>        <span class="hljs-type">int</span> maxProfit = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> price : prices) &#123;<br>            minPrice = <span class="hljs-built_in">min</span>(minPrice, price);<br>            maxProfit = <span class="hljs-built_in">max</span>(maxProfit, price - minPrice);<br>        &#125;<br>        <span class="hljs-keyword">return</span> maxProfit;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<p>198 打家劫舍</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">// 递推关系 dp[i] = max(nums[i] + dp[i + 2], dp[i + 1])</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> size = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> dp[size];<br>        dp[size - <span class="hljs-number">1</span>] = nums[size - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span>(size &gt;= <span class="hljs-number">2</span>) dp[size - <span class="hljs-number">2</span>] = <span class="hljs-built_in">max</span>(nums[size - <span class="hljs-number">1</span>], nums[size - <span class="hljs-number">2</span>]);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = size - <span class="hljs-number">3</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(nums[i] + dp[i + <span class="hljs-number">2</span>], dp[i + <span class="hljs-number">1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>198 打家劫舍<br><em>dp[i] &#x3D; max(dp[i-1], dp[i-2] + nums[i-1])。dp[i] 表示偷前 i 个房子能获取的最大金额。</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>];<br><br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">1</span>] = nums[<span class="hljs-number">0</span>];<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>], dp[i<span class="hljs-number">-2</span>] + nums[i<span class="hljs-number">-1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>221 最大正方形<br><em>dp[i][j] 表示以 (i, j) 为【右下角】的、全由 ‘1’ 组成的最大正方形的【边长】</em></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maximalSquare</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">char</span>&gt;&gt;&amp; matrix)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (matrix.<span class="hljs-built_in">empty</span>() || matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-type">int</span> m = matrix.<span class="hljs-built_in">size</span>(), n = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>));<br>        <span class="hljs-type">int</span> maxSide = <span class="hljs-number">0</span>;<br>        <br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (matrix[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span>) &#123;<br>                        dp[i][j] = <span class="hljs-number">1</span>;  <span class="hljs-comment">// 边界直接为 1</span><br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        dp[i][j] = <span class="hljs-built_in">min</span>(&#123;dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>], dp[i<span class="hljs-number">-1</span>][j], dp[i][j<span class="hljs-number">-1</span>]&#125;) + <span class="hljs-number">1</span>;<br>                    &#125;<br>                    maxSide = <span class="hljs-built_in">max</span>(maxSide, dp[i][j]);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <br>        <span class="hljs-keyword">return</span> maxSide * maxSide;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <p>279 完全平方数(其实本质是一个完全背包问题。物品是完全平方数 1 4 9 16 … ; size 都是 1;背包容量是 n 。目标是用最少的物品填满背包)</p>
@@ -634,7 +634,7 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">38</span>
+          <span class="widget-stat-num">39</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -644,7 +644,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">14</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -692,6 +692,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-date">11-07</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
@@ -766,21 +783,6 @@
               <span class="widget-recent-info">
                 <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
                 <span class="widget-post-date">08-20</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ Lambda表达式</span>
-                <span class="widget-post-date">08-19</span>
               </span>
             </a>
           </li>
@@ -1131,7 +1133,7 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">38</span>
+          <span class="widget-stat-num">39</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
@@ -1141,7 +1143,7 @@
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">13</span>
+          <span class="widget-stat-num">14</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1181,6 +1183,23 @@
       </h4>
       <ul class="widget-list widget-recent-list">
         
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-date">11-07</span>
+              </span>
+            </a>
+          </li>
         
           <li>
             <a href="/2026/10/28/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%ABssh%E5%BC%80%E5%8F%91%E6%9D%BF/" title="网络共享ssh开发板 + vnc 远程桌面" class="widget-recent-link">
@@ -1259,21 +1278,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/2026/08/19/C-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="C++ Lambda表达式" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/cpp.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">C++ Lambda表达式</span>
-                <span class="widget-post-date">08-19</span>
-              </span>
-            </a>
-          </li>
-        
       </ul>
     </div>
 
@@ -1288,7 +1292,7 @@
           <li>
             <a href="/categories/IMX6ULL/">
               <span class="widget-cat-name">IMX6ULL</span>
-              <span class="widget-cat-count">12</span>
+              <span class="widget-cat-count">11</span>
             </a>
           </li>
         
@@ -1405,6 +1409,13 @@
         
           <li>
             <a href="/archives">
+              <span class="widget-archive-month">2026 年 11 月</span>
+              <span class="widget-archive-count">1 篇</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/archives">
               <span class="widget-archive-month">2026 年 10 月</span>
               <span class="widget-archive-count">2 篇</span>
             </a>
@@ -1438,13 +1449,6 @@
             </a>
           </li>
         
-          <li>
-            <a href="/archives">
-              <span class="widget-archive-month">2026 年 05 月</span>
-              <span class="widget-archive-count">14 篇</span>
-            </a>
-          </li>
-        
       </ul>
       <a href="/archives" class="widget-more-link">
         查看全部归档 <i class="fa-solid fa-chevron-right"></i>
@@ -1458,7 +1462,7 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">38</span>
+          <span class="widget-info-value">39</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
@@ -1466,7 +1470,7 @@
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">13</span>
+          <span class="widget-info-value">14</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1476,7 +1480,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-10-28</span>
+        <span>最后更新：2026-11-07</span>
       </div>
       
     </div>
