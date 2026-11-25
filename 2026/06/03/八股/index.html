@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/posts/2026-06-03/cover.png">
 <meta property="article:published_time" content="2026-06-03T12:30:49.000Z">
-<meta property="article:modified_time" content="2026-11-17T05:37:00.939Z">
+<meta property="article:modified_time" content="2026-11-25T07:11:45.935Z">
 <meta property="article:author" content="RickyDuran">
 <meta property="article:tag" content="八股">
 <meta name="twitter:card" content="summary_large_image">
@@ -473,7 +473,7 @@
 <p><em>IO 操作的核心本质是数据交互和传输，可以分为阻塞和非阻塞两种模式。阻塞模式下，进程等待 IO 就绪期间处于休眠状态(进程放弃 CPU，内核监听 IO 状态，直到就绪后唤醒等待队列中的进程)，这个过程不消耗 CPU，无需额外的轮询。非阻塞模式下，进程发起 IO 请求，无论条件是否满足都会立刻返回结果，如果返回错误标识可以轮询继续发起请求或者处理其他任务，但为了避免轮询 CPU 占用过高一般会配合 poll&#x2F;select&#x2F;epoll 等事件监听机制使用。无论是哪种模式，IO 就绪是核心触发条件，它通常指硬件设备已经准备好数据、内核缓冲区有可用空间。</em></p>
 <p><em>阻塞模式下，init_waitqueue_head() 用于初始化等待队列头，用于管理休眠的进程；可以通过 wait_event() 和 wake_up() 系列 api 休眠或唤醒进程(可以分为是否可中断)。非阻塞模式下，驱动层实现的 poll 回调函数用于响应用户空间的 poll 请求，检测 IO 状态，返回就绪的 IO 事件。</em></p>
 <p><em>除了上述两种机制，内核还提供了异步通知机制。内核在 IO 事件就绪时主动向应用层发送信号，通知应用程序处理 IO 操作，核心是进程注册 IO 事件通知然后正常执行其他任务，无需主动检测 IO 状态，当内核检测到 IO 事件就绪时，主动向进程发送指定信号，进程捕获信号再去处理对应操作。</em></p>
-<h3 id="11-输入子系统（完结）"><a href="#11-输入子系统（完结）" class="headerlink" title="11. 输入子系统（完结）"></a>11. 输入子系统（完结）</h3><p><em>输入子系统：Input Core + Handlers.</em><br><img src="/../img/posts/2026-11-4/6.png" alt="输入子系统框架"><br><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
+<h3 id="11-输入子系统（完结）"><a href="#11-输入子系统（完结）" class="headerlink" title="11. 输入子系统（完结）"></a>11. 输入子系统（完结）</h3><p><em>输入子系统：Input Core + Handlers.</em><br><img src="/../img/posts/2026-11-4/6.png" alt="输入子系统"><br><em>计算机的输入设备很多，linux 为了能够将所有的输入设备进行统一的管理，设计了输入子系统。在驱动和应用之前增加了两层抽象，Input Core 和 Handlers，各个输入设备的驱动只需要上报产生的输入事件即可。输入设备驱动负责实现对硬件设备的读写访问，设置中断，将硬件产生的事件转为 Input Core 定义的规范提交给 Handlers。Input Core 为驱动提供接口并通知 Handlers 对事件进行处理。</em></p>
 <p><em>输入设备的输入信息被抽象为 input_event，包括了事件产生的时间、输入设备的类型、具体值等。具体的输入设备被抽象为 input_dev，包括用户层输入设备的名称、id号、设备支持的事件类型、支持记录的键值&#x2F;坐标值。使用 input_allocate_device() 申请输入设备、input_free_device() 释放设备。使用 input_register_device() &#x2F; input_unregister_device() 将输入设备注册和注销到输入子系统的核心层。使用 input_event() 进行事件上报，input_sync() 是对它的封装表示上报结束。</em></p>
 <h3 id="12-PWM-子系统（完结）"><a href="#12-PWM-子系统（完结）" class="headerlink" title="12. PWM 子系统（完结）"></a>12. PWM 子系统（完结）</h3><p><em>驱动中使用 pwm_device 代表一个 pwm 设备包含 period(单位是ns)、duty_cycle、polarity。pwm_config() 配置频率和占空比，pwm_set_polarity() 设置 PWM 极性。在设备树添加设置 pwms 和 pwm-names 的属性信息即可。</em></p>
 <h3 id="13-内核-DRM-显示框架（完结）"><a href="#13-内核-DRM-显示框架（完结）" class="headerlink" title="13. 内核 DRM 显示框架（完结）"></a>13. 内核 DRM 显示框架（完结）</h3><p><em>DRM(Direct Rendering Manager, 直接渲染管理器) 是 linux 内核标准的现代化显示子系统框架，替代了传统的 FrameBuffer，是目前主流的显示驱动解决方案。</em></p>
@@ -684,17 +684,17 @@
 
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">39</span>
+          <span class="widget-stat-num">42</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">9</span>
+          <span class="widget-stat-num">11</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">14</span>
+          <span class="widget-stat-num">18</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -744,7 +744,7 @@
         
         
           <li>
-            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+            <a href="/2026/11/25/%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%83%A8%E5%B1%9E/" title="镜像构建与部属" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -754,7 +754,56 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-title">镜像构建与部属</span>
+                <span class="widget-post-date">11-25</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/20/System-Call-mmap/" title="System Call: mmap" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-11-20/0.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">System Call: mmap</span>
+                <span class="widget-post-date">11-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/20/MCU-RTOS%20%E5%AD%A6%E4%B9%A0/" title="MCU + RTOS 学习" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">MCU + RTOS 学习</span>
+                <span class="widget-post-date">11-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-%E9%94%81/" title="内核机制解析-锁" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">内核机制解析-锁</span>
                 <span class="widget-post-date">11-07</span>
               </span>
             </a>
@@ -788,51 +837,6 @@
               <span class="widget-recent-info">
                 <span class="widget-post-title">Linux 常用命令</span>
                 <span class="widget-post-date">10-14</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">CSAPP</span>
-                <span class="widget-post-date">09-02</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
-                <span class="widget-post-date">08-31</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
-                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
@@ -1183,17 +1187,17 @@
       <!-- 文章 / 标签 / 分类 统计 -->
       <div class="widget-profile-stats">
         <a href="/archives" class="widget-stat-item">
-          <span class="widget-stat-num">39</span>
+          <span class="widget-stat-num">42</span>
           <span class="widget-stat-label">文章</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/tags" class="widget-stat-item">
-          <span class="widget-stat-num">9</span>
+          <span class="widget-stat-num">11</span>
           <span class="widget-stat-label">标签</span>
         </a>
         <span class="widget-stat-divider"></span>
         <a href="/categories" class="widget-stat-item">
-          <span class="widget-stat-num">14</span>
+          <span class="widget-stat-num">18</span>
           <span class="widget-stat-label">分类</span>
         </a>
       </div>
@@ -1235,7 +1239,7 @@
         
         
           <li>
-            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-SpinLock/" title="SpinLock" class="widget-recent-link">
+            <a href="/2026/11/25/%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%83%A8%E5%B1%9E/" title="镜像构建与部属" class="widget-recent-link">
               
               <span class="widget-recent-cover">
                 
@@ -1245,7 +1249,56 @@
                 
               </span>
               <span class="widget-recent-info">
-                <span class="widget-post-title">SpinLock</span>
+                <span class="widget-post-title">镜像构建与部属</span>
+                <span class="widget-post-date">11-25</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/20/System-Call-mmap/" title="System Call: mmap" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <img src="/img/posts/2026-11-20/0.png" alt="" loading="lazy" />
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">System Call: mmap</span>
+                <span class="widget-post-date">11-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/20/MCU-RTOS%20%E5%AD%A6%E4%B9%A0/" title="MCU + RTOS 学习" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">MCU + RTOS 学习</span>
+                <span class="widget-post-date">11-20</span>
+              </span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/2026/11/07/%E5%86%85%E6%A0%B8%E6%9C%BA%E5%88%B6%E8%A7%A3%E6%9E%90-%E9%94%81/" title="内核机制解析-锁" class="widget-recent-link">
+              
+              <span class="widget-recent-cover">
+                
+                  <span class="widget-recent-cover-placeholder">
+                    <i class="fa-solid fa-file-lines"></i>
+                  </span>
+                
+              </span>
+              <span class="widget-recent-info">
+                <span class="widget-post-title">内核机制解析-锁</span>
                 <span class="widget-post-date">11-07</span>
               </span>
             </a>
@@ -1279,51 +1332,6 @@
               <span class="widget-recent-info">
                 <span class="widget-post-title">Linux 常用命令</span>
                 <span class="widget-post-date">10-14</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/09/02/CSAPP/" title="CSAPP" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/2026-09-02/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">CSAPP</span>
-                <span class="widget-post-date">09-02</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/31/%E4%B9%85%E8%BF%9D%E7%9A%84%E5%85%AB%E6%9C%88%E6%80%BB%E7%BB%93(%E7%AD%89codex%E9%A2%9D%E5%BA%A6%E5%88%B7%E6%96%B0%E7%89%88)/" title="久违的八月总结(等codex额度刷新版)" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/shared/summary-cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">久违的八月总结(等codex额度刷新版)</span>
-                <span class="widget-post-date">08-31</span>
-              </span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/2026/08/20/RK3588-%E5%A4%9A%E8%B7%AF%E6%8E%A8%E6%8B%89%E6%B5%81-YOLOV5%E6%A3%80%E6%B5%8BII/" title="RK3588-多路推拉流+YOLOV5检测II" class="widget-recent-link">
-              
-              <span class="widget-recent-cover">
-                
-                  <img src="/img/posts/2026-07-10/cover.png" alt="" loading="lazy" />
-                
-              </span>
-              <span class="widget-recent-info">
-                <span class="widget-post-title">RK3588-多路推拉流+YOLOV5检测II</span>
-                <span class="widget-post-date">08-20</span>
               </span>
             </a>
           </li>
@@ -1375,6 +1383,13 @@
           </li>
         
           <li>
+            <a href="/categories/Linux/">
+              <span class="widget-cat-name">Linux</span>
+              <span class="widget-cat-count">3</span>
+            </a>
+          </li>
+        
+          <li>
             <a href="/categories/Tools/">
               <span class="widget-cat-name">Tools</span>
               <span class="widget-cat-count">2</span>
@@ -1382,15 +1397,8 @@
           </li>
         
           <li>
-            <a href="/categories/Linux/">
-              <span class="widget-cat-name">Linux</span>
-              <span class="widget-cat-count">2</span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/categories/RK3588S2/%E9%9F%B3%E8%A7%86%E9%A2%91/">
-              <span class="widget-cat-name">音视频</span>
+            <a href="/categories/Kernel/">
+              <span class="widget-cat-name">Kernel</span>
               <span class="widget-cat-count">2</span>
             </a>
           </li>
@@ -1435,8 +1443,16 @@
             #工作流分享
           </a>
         
+          <a href="/tags/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" class="widget-tag-item" style="font-size: 0.7771428571428571rem">
+            #技术学习
+          </a>
+        
           <a href="/tags/%E8%AF%BE%E7%A8%8B%E8%87%AA%E5%AD%A6/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
             #课程自学
+          </a>
+        
+          <a href="/tags/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
+            #技术解析
           </a>
         
           <a href="/tags/%E5%85%AB%E8%82%A1/" class="widget-tag-item" style="font-size: 0.7485714285714286rem">
@@ -1460,7 +1476,7 @@
           <li>
             <a href="/archives">
               <span class="widget-archive-month">2026 年 11 月</span>
-              <span class="widget-archive-count">1 篇</span>
+              <span class="widget-archive-count">4 篇</span>
             </a>
           </li>
         
@@ -1512,15 +1528,15 @@
       </h4>
       <div class="widget-info-grid">
         <div class="widget-info-item">
-          <span class="widget-info-value">39</span>
+          <span class="widget-info-value">42</span>
           <span class="widget-info-label">文章</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">9</span>
+          <span class="widget-info-value">11</span>
           <span class="widget-info-label">标签</span>
         </div>
         <div class="widget-info-item">
-          <span class="widget-info-value">14</span>
+          <span class="widget-info-value">18</span>
           <span class="widget-info-label">分类</span>
         </div>
         <div class="widget-info-item">
@@ -1530,7 +1546,7 @@
       </div>
       
       <div class="widget-info-footer">
-        <span>最后更新：2026-11-07</span>
+        <span>最后更新：2026-11-25</span>
       </div>
       
     </div>
